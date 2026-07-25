@@ -31,3 +31,10 @@ outputs/
 
 # Claude Code local config
 .claude/
+
+# Superpowers brainstorm state (server pid, tokens, etc.)
+.superpowers/
+
+# Compressed archives
+*.7z
+*.zip

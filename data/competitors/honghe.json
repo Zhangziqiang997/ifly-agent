@@ -9,142 +9,177 @@
       "category": "显示",
       "name": "屏幕尺寸",
       "spec": "86英寸",
-      "value": 86,
-      "unit": "inch",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-002",
       "category": "显示",
       "name": "屏幕分辨率",
       "spec": "3840×2160（4K）",
-      "value": 3840,
-      "unit": "pixel_width",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-003",
       "category": "显示",
       "name": "屏幕亮度",
       "spec": "550cd/m²",
-      "value": 550,
-      "unit": "cd_m2",
-      "comparator": "gte"
+      "indicators": [
+        {"name": "亮度", "value": 550, "unit": "cd_m2", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-004",
       "category": "触控",
       "name": "触控技术",
       "spec": "电容触控，支持50点触控",
-      "value": 50,
-      "unit": "touch_points",
-      "comparator": "gte"
+      "indicators": [
+        {"name": "触控点数", "value": 50, "unit": "touch_points", "comparator": "gte"},
+        {"name": "触控技术", "value": "电容", "unit": "type", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-005",
       "category": "触控",
       "name": "笔锋书写",
       "spec": "支持普通笔迹书写，2048级压感",
-      "value": 2048,
-      "unit": "pressure_level",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "压感级别", "value": 2048, "unit": "pressure_level", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-006",
       "category": "摄像",
       "name": "内置摄像头",
       "spec": "4800万像素（5K），130°超广角，AI自动追踪",
-      "value": 5120,
-      "unit": "pixel_width",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "摄像头像素", "value": 4800, "unit": "mp", "comparator": "eq"},
+        {"name": "视频分辨率", "value": 5120, "unit": "px", "comparator": "eq"},
+        {"name": "视场角", "value": 130, "unit": "degree", "comparator": "eq"},
+        {"name": "AI追踪", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-007",
       "category": "音频",
       "name": "内置音响",
       "spec": "2×20W立体声 + 8阵列麦克风",
-      "value": 40,
-      "unit": "watt",
-      "comparator": "gte"
+      "indicators": [
+        {"name": "扬声器功率", "value": 40, "unit": "watt", "comparator": "gte"},
+        {"name": "麦克风阵列", "value": 8, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-008",
       "category": "护眼",
       "name": "护眼认证",
       "spec": "通过德国莱茵TÜV低蓝光认证",
-      "value_type": "certification",
-      "value": "TUV_blue_light",
-      "unit": "cert",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "TÜV低蓝光认证", "value": true, "unit": "cert", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": true
     },
     {
       "id": "HONGHE-009",
       "category": "无线",
       "name": "无线投屏",
       "spec": "支持Android/iOS/Windows三平台无线投屏",
-      "value_type": "feature",
-      "value": "wireless_projection_3platform",
-      "unit": "feature",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "投屏平台数", "value": 3, "unit": "platform_count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-010",
       "category": "软件",
       "name": "教学白板软件",
       "spec": "鸿合π交互教学软件，支持多屏互动与课堂评测",
-      "value_type": "feature",
-      "value": "honghe_pi_teaching",
-      "unit": "feature",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "多屏互动", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "课堂评测", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-011",
       "category": "物理",
       "name": "整机厚度",
       "spec": "≤22mm（含壁挂支架）",
-      "value": 22,
-      "unit": "mm",
-      "comparator": "lte"
+      "indicators": [
+        {"name": "整机厚度", "value": 22, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-012",
       "category": "连接",
       "name": "接口配置",
       "spec": "前置USB 3.0×2、Type-C×1（45W充电）、HDMI IN×2",
-      "value_type": "ports",
-      "value": "usb3_x2_typec45w_hdmi_in_x2",
-      "unit": "ports",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "前置USB3.0", "value": 2, "unit": "count", "comparator": "gte"},
+        {"name": "前置Type-C", "value": 1, "unit": "count", "comparator": "gte"},
+        {"name": "Type-C充电功率", "value": 45, "unit": "watt", "comparator": "gte"},
+        {"name": "前置HDMI IN", "value": 2, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-013",
       "category": "认证",
       "name": "整机可靠性认证",
       "spec": "通过IP5X防尘认证 + 10万小时无故障运行认证（MTBF）",
-      "value_type": "certification",
-      "value": "ip5x_mtbf_100k",
-      "unit": "cert",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "IP5X防尘", "value": true, "unit": "cert", "comparator": "eq"},
+        {"name": "MTBF", "value": 100000, "unit": "hour", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
     },
     {
       "id": "HONGHE-014",
       "category": "计算",
       "name": "内置OPS电脑",
       "spec": "Intel Core i7-1260P / 16GB DDR5 / 1TB SSD / Windows 11",
-      "value_type": "computing_module",
-      "value": "i7_1260p_16g_1tb_win11",
-      "unit": "spec",
-      "comparator": "gte"
+      "indicators": [
+        {"name": "CPU", "value": "i7-1260P", "unit": "spec", "comparator": "eq"},
+        {"name": "内存", "value": 16, "unit": "gb", "comparator": "gte"},
+        {"name": "硬盘", "value": 1024, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     },
     {
       "id": "HONGHE-015",
       "category": "特色",
       "name": "AI课堂分析",
       "spec": "内置AI课堂行为分析引擎，实时统计学生举手/发言/专注度",
-      "value_type": "feature",
-      "value": "ai_classroom_analytics",
-      "unit": "feature",
-      "comparator": "eq"
+      "indicators": [
+        {"name": "AI课堂分析", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
     }
   ]
 }

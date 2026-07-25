@@ -1,0 +1,49 @@
+{
+  "generated_at": "2026-07-25 14:46:12",
+  "model": "deepseek-v4-flash",
+  "item_count": 6,
+  "results": [
+    {
+      "seq": 1,
+      "match": true,
+      "deviation": "positive",
+      "explanation": "屏幕尺寸≥86英寸、UHD超高清、3840x2160分辨率、16:9比例均满足或超出要求",
+      "suggestion": null
+    },
+    {
+      "seq": 3,
+      "match": false,
+      "deviation": "negative_real",
+      "explanation": "仅提供显示面板参数，未提及电容触控、50点触控及响应时间≤4ms等触控特性",
+      "suggestion": "建议在投标方案中补充iFLYTEK触控模组或注明此配置需选配触控模块"
+    },
+    {
+      "seq": 4,
+      "match": false,
+      "deviation": "negative_real",
+      "explanation": "未提供内置摄像头像素、视场角、AI自动追踪及远程巡课等信息",
+      "suggestion": "建议说明此型号未内置摄像头，可提供外接摄像头方案或推荐其他集成摄像头型号"
+    },
+    {
+      "seq": 5,
+      "match": false,
+      "deviation": "negative_real",
+      "explanation": "未提及扬声器声道数、额定总功率、麦克风阵列及拾音距离等参数",
+      "suggestion": "建议补充外接音频设备或明确此型号不含内置音频系统，可配合iFLYTEK音频扩展模块"
+    },
+    {
+      "seq": 11,
+      "match": false,
+      "deviation": "negative_real",
+      "explanation": "未提供IP5X防尘认证及MTBF≥100000小时信息",
+      "suggestion": "建议提供产品认证资料或说明此型号未进行相关测试，可提供同类认证产品规格"
+    },
+    {
+      "seq": 12,
+      "match": false,
+      "deviation": "negative_real",
+      "explanation": "未提及内置AI课堂行为分析引擎及实时统计学生行为功能",
+      "suggestion": "建议说明此型号为显示设备，AI分析需配合iFLYTEK智慧课堂软件及服务器实现，建议整合方案"
+    }
+  ]
+}
