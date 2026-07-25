@@ -137,6 +137,69 @@ v0.1 (07.24)        v0.2 (07.25 AM)       v0.3 (07.25 PM)      v1.0 (07.26 目�
 
 ---
 
+### [06] [并行数据提取] 2026-07-25
+
+**我（项目经理）输入了什么**：
+> "依然不够，先处理一家，对着一家使用多个 subagent 并行，并且使用 haiku。你要基于文件的内容来分配。"
+
+**AI 输出了什么**：
+> AI 分析了希沃 3 个文件的大小（4.8K / 34K / 128K），将 128K 的回复宝典拆成 3 段，部署了 5 个 Haiku sub-agent 并行扫描：
+> - Agent A: 希沃9.md（4.8K，HTML 表格）
+> - Agent B: 希沃白板5（34K，软件功能表）
+> - Agent C/D/E: 回复宝典第 1-500/501-1000/1001-1511 行
+> 4 分钟内完成扫描，提取 79 条参数声明。Agent B 正确返回"纯软件，无硬件参数"。
+
+**我做了什么判断 / 修改**：
+> 1. 人工判断 Agent A 的提取物（希沃9.md）不可用——那是招标文件而非希沃产品规格
+> 2. 人工从 Agent C/D/E 的 79 条声明中精筛 15 条核心硬件参数
+> 3. 在此基础上追加鸿合+海康+讯飞并行提取（3 个另一个并行 agent），60 条参数 → 各精筛 15 条
+
+**结果**：4 家厂商各 15 条真实参数全部入库（honghe.json / haikang.json / xiwo.json / xunfei.json）
+
+**额度消耗**：8 个 Haiku agent，预估 ~$0.08
+
+---
+
+### [07] [Bug 诊断] 2026-07-25
+
+**我（项目经理）输入了什么**：
+> "现在的 bug 是 AI 判断不准。比如防眩玻璃，讯飞也有，但 AI 判为 negative_wording。"
+
+**AI 输出了什么**：
+> AI 在 debug 中发现 `find_best_match` 的致命缺陷：
+> - "防眩玻璃"的 bid indicator 有 `unit='pct'`，讯飞"亮度与色域"也有 `unit='pct'`
+> - 旧逻辑按 unit 匹配："pct = pct → 就是它！"——**把防眩玻璃匹配到了亮度**
+> - AI 给了连根拔起的修复方案：用 keyword_overlap 给所有参数打分排序，再加 category 加分和 indicator unit overlap 加成
+
+**我做了什么判断 / 修改**：
+> 认可方案。AI 实施后，防眩玻璃正确匹配到讯飞护眼参数，Type-C 正确匹配到接口参数。匹配准确率从"随机的"提升到"基本合理"。
+
+**结果**：`find_best_match` 重写为 scoring 版本，5 条 AI 判定参数中有 4 条匹配到了正确的讯飞参数
+
+**额度消耗**：2 轮对话，预估 ~$0.05
+
+---
+
+### [08] [Prompt 工程] 2026-07-25
+
+**我（项目经理）输入了什么**：
+> "AI 不知道讯飞还有什么能力。你给它一条错配的参数，它就对着那一条判断。"
+
+**AI 输出了什么**：
+> AI 提出两个改动：
+> 1. 在 Prompt 开头附上完整的讯飞 15 条参数目录（"iFLYTEK product parameter catalog"）
+> 2. 明确告诉 AI："The best-match parameter below may be WRONG. Use the full catalog to find the true match."
+> AI 还加了一个类比："这就像考试时你告诉 AI 参考答案在第 3 页，但答案其实在第 7 页——你应该给它整本参考书，而不是指定某一页。"
+
+**我做了什么判断 / 修改**：
+> 批准方案。加了一个安全边界：catalog 中每条参数只截 spec 前 150 字，防止 Prompt 过长。
+
+**结果**：AI 判定质量明显提升——#4 触控识别到"电容 vs 红外"的技术差异，#5 摄像头精确指出"135° vs 145°差 10°"
+
+**额度消耗**：2 轮对话，预估 ~$0.04
+
+---
+
 ## 四、迭代日志（简表）
 
 | 日期 | 时间 | 变更 | 触发 | 影响 |
@@ -146,6 +209,10 @@ v0.1 (07.24)        v0.2 (07.25 AM)       v0.3 (07.25 PM)      v1.0 (07.26 目�
 | 07.25 | AM | 数据模型：单值→参数组 | AI 发现复合参数问题 | PRD、技术方案 |
 | 07.25 | PM | 讯飞数据到位 | PM 补充 | 数据层 |
 | 07.25 | PM | SPEC 工作流重构 | 指导老师要求 | 全部文档结构 |
+| 07.25 | PM | 三层引擎 6 个 Python 文件全部实现 | SPEC→代码 | src/ |
+| 07.25 | PM | 8 个 Haiku agent 并行提取 4 家真实参数 | 数据真实化需求 | data/competitors/ |
+| 07.25 | PM | find_best_match 重写 + AI Prompt 迭代 | AI 诊断+人确认 | parser.py, advisor.py |
+| 07.25 | PM | 样例招标文件对齐海康控标（55%置信度） | 真实数据入库 | sample-bid.json |
 | 07.26 | — | （待追加） | — | — |
 | 07.27 | — | （待追加） | — | — |
 
@@ -153,15 +220,36 @@ v0.1 (07.24)        v0.2 (07.25 AM)       v0.3 (07.25 PM)      v1.0 (07.26 目�
 
 ## 五、开发问题记录
 
-> 每次 Bug / 报错 / 踩坑都往这里追加，格式：`[日期] 问题描述 → AI 诊断 → 修复方案 → 结果`
+### [Bug-01] 2026-07-25 — find_best_match 参数匹配错乱
 
-（待 07.25 下午开发启动后追加）
+**问题**："防眩玻璃"匹配到讯飞"亮度与色域"（完全无关），"Type-C"匹配到"屏幕尺寸"
 
-<!-- 
-示例格式：
-### [Bug-01] 2026-07-25
-**问题**：xxx 报错
-**AI 诊断**：xxx
-**修复**：xxx
-**结果**：✅ 已解决 / ⚠️ 暂用 workaround
--->
+**AI 诊断**：旧算法按 `indicators[].unit` 匹配——防眩玻璃有 `unit='pct'`，亮度也有 `unit='pct'`，就认定是同一个参数的匹配。"pct = pct → 就是它！"的逻辑在 boolean feature 类型上尤其脆弱。
+
+**修复**：重写为 keyword_overlap scoring + category bonus + unit overlap bonus。先给所有讯飞参数打分排序，再依次尝试 match。`compare_indicators` 加了 name 检查——boolean feature 必须名称匹配才接受。
+
+**结果**：✅ 防眩玻璃→护眼参数（正确），Type-C→接口参数（正确）
+
+---
+
+### [Bug-02] 2026-07-25 — sample-bid.json indicators 和真实数据 unit 名不统一
+
+**问题**：样例招标里的 `unit: 'platform_count'` 在真实 JSON 中不存在，导致 7/12 条参数成为 anomaly
+
+**AI 诊断**：unit 字段在 Mock→真实数据迁移中产生了 naming drift
+
+**修复**：统一使用真实竞品 JSON 中实际出现的 unit name（`inch / px / pct / mm / count / mp / degree / ms / touch_points / gb / watt / feature / cert`）
+
+**结果**：✅ anomaly 从 7 条降到 1 条
+
+---
+
+### [Bug-03] 2026-07-25 — GitHub Secret Scanning 阻断 Push
+
+**问题**：push 被拒 `GH013: Repository rule violations`，GitHub 检测到 commit 历史中有 `sk-` 开头的 API Key
+
+**AI 诊断**：key 被写入了 plan 文档中的示例命令（`export DEEPSEEK_API_KEY="sk-9d227..."`）。虽然已经用 placeholder 替换了最新版本，但历史 commit 里还残留。
+
+**修复**：(1) 提取 config.py，所有代码从 `.env` 文件读取 key (2) `.env` 加入 gitignore (3) soft reset 合并历史，单次干净 commit
+
+**结果**：✅ push 成功，后续安全无虞
