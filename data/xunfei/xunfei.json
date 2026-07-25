@@ -1,194 +1,23 @@
 {
   "vendor": "科大讯飞（iFLYTEK）",
-  "product": "讯飞智慧黑板 iFLY-EB860",
+  "product": "讯飞智慧黑板 (旗舰款)",
   "category": "智慧黑板",
-  "updated": "2026-07",
+  "source_file": "讯飞数据.docx",
   "params": [
-    {
-      "id": "XUNFEI-001",
-      "category": "显示",
-      "name": "屏幕尺寸",
-      "spec": "86英寸超高清显示面板",
-      "indicators": [
-        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-002",
-      "category": "显示",
-      "name": "屏幕分辨率",
-      "spec": "4K超高清（3840×2160），支持HDR10",
-      "indicators": [
-        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "eq"},
-        {"name": "HDR10", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-003",
-      "category": "显示",
-      "name": "屏幕亮度",
-      "spec": "520cd/m²，智能环境光自适应调节",
-      "indicators": [
-        {"name": "亮度", "value": 520, "unit": "cd_m2", "comparator": "gte"},
-        {"name": "环境光自适应", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-004",
-      "category": "触控",
-      "name": "触控技术",
-      "spec": "红外触控，支持20点同时触控书写",
-      "indicators": [
-        {"name": "触控点数", "value": 20, "unit": "touch_points", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-005",
-      "category": "触控",
-      "name": "笔锋书写",
-      "spec": "支持毛笔/钢笔/马克笔等多笔触效果，2048级压感",
-      "indicators": [
-        {"name": "压感级别", "value": 2048, "unit": "pressure_level", "comparator": "eq"},
-        {"name": "多笔触效果", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-006",
-      "category": "摄像",
-      "name": "内置摄像头",
-      "spec": "1300万像素超广角摄像头，支持AI人脸识别与行为分析",
-      "indicators": [
-        {"name": "摄像头像素", "value": 1300, "unit": "mp", "comparator": "eq"},
-        {"name": "视频分辨率", "value": 1920, "unit": "px", "comparator": "eq"},
-        {"name": "AI人脸识别", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-007",
-      "category": "音频",
-      "name": "内置音响",
-      "spec": "2×15W高品质扬声器 + 4阵列麦克风，支持远场语音唤醒",
-      "indicators": [
-        {"name": "扬声器功率", "value": 30, "unit": "watt", "comparator": "gte"},
-        {"name": "麦克风阵列", "value": 4, "unit": "count", "comparator": "gte"},
-        {"name": "远场语音唤醒", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-008",
-      "category": "护眼",
-      "name": "护眼认证",
-      "spec": "通过德国莱茵TÜV低蓝光认证 + 无频闪认证 + 国家眼科工程中心护眼评测",
-      "indicators": [
-        {"name": "TÜV低蓝光认证", "value": true, "unit": "cert", "comparator": "eq"},
-        {"name": "无频闪认证", "value": true, "unit": "cert", "comparator": "eq"},
-        {"name": "国家眼科中心认证", "value": true, "unit": "cert", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": true
-    },
-    {
-      "id": "XUNFEI-009",
-      "category": "无线",
-      "name": "无线投屏",
-      "spec": "支持手机/平板/PC屏幕镜像与反向控制功能，兼容Android/iOS/Windows/Mac全平台",
-      "indicators": [
-        {"name": "投屏平台数", "value": 4, "unit": "platform_count", "comparator": "gte"},
-        {"name": "反向触控", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-010",
-      "category": "软件",
-      "name": "教学白板软件",
-      "spec": "讯飞智慧课堂教学系统，集成AI语音板书转写、课堂互动评测、学情数据分析",
-      "indicators": [
-        {"name": "AI语音转写", "value": true, "unit": "feature", "comparator": "eq"},
-        {"name": "课堂互动评测", "value": true, "unit": "feature", "comparator": "eq"},
-        {"name": "学情分析", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-011",
-      "category": "物理",
-      "name": "整机厚度",
-      "spec": "≤25mm（含壁挂支架），超窄边框设计",
-      "indicators": [
-        {"name": "整机厚度", "value": 25, "unit": "mm", "comparator": "lte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-012",
-      "category": "连接",
-      "name": "接口配置",
-      "spec": "前置USB 3.0×2、Type-C×1（65W快充+视频传输）、HDMI IN×1、HDMI OUT×1、RJ45×1",
-      "indicators": [
-        {"name": "前置USB3.0", "value": 2, "unit": "count", "comparator": "gte"},
-        {"name": "前置Type-C", "value": 1, "unit": "count", "comparator": "gte"},
-        {"name": "Type-C充电功率", "value": 65, "unit": "watt", "comparator": "gte"},
-        {"name": "Type-C视频传输", "value": true, "unit": "feature", "comparator": "eq"},
-        {"name": "前置HDMI IN", "value": 1, "unit": "count", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-013",
-      "category": "AI",
-      "name": "语音交互",
-      "spec": "内置讯飞星火大模型引擎，支持语音指令操控、课堂语音转写、多语种实时翻译",
-      "indicators": [
-        {"name": "语音指令操控", "value": true, "unit": "feature", "comparator": "eq"},
-        {"name": "课堂语音转写", "value": true, "unit": "feature", "comparator": "eq"},
-        {"name": "多语种翻译", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-014",
-      "category": "计算",
-      "name": "内置OPS电脑",
-      "spec": "Intel Core i5-12450H / 16GB DDR4 / 512GB SSD / Windows 11",
-      "indicators": [
-        {"name": "CPU", "value": "i5-12450H", "unit": "spec", "comparator": "eq"},
-        {"name": "内存", "value": 16, "unit": "gb", "comparator": "gte"},
-        {"name": "硬盘", "value": 512, "unit": "gb", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "XUNFEI-015",
-      "category": "生态",
-      "name": "教育平台对接",
-      "spec": "无缝对接讯飞教育云平台，支持区/校级教学数据看板、AI精准教学分析报告",
-      "indicators": [
-        {"name": "教育云平台对接", "value": true, "unit": "feature", "comparator": "eq"},
-        {"name": "AI精准教学分析", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    }
+    {"id": "XF-001", "category": "显示", "name": "屏幕尺寸与分辨率", "spec": "整机屏幕需采用UHD超高清A规LED液晶屏，屏幕显示尺寸≥86英寸，显示比例16:9，屏幕图像分辨率≥3840*2160。", "indicators": [{"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "gte"}, {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-002", "category": "显示", "name": "亮度与色域", "spec": "整机屏体亮度≥350cd/m²，色彩覆盖率≥85%NTSC，对比度≥4000:1，可视角度≥178°。", "indicators": [{"name": "亮度", "value": 350, "unit": "cd_m2", "comparator": "gte"}, {"name": "NTSC色域", "value": 85, "unit": "pct", "comparator": "gte"}, {"name": "对比度", "value": 4000, "unit": "count", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-003", "category": "显示", "name": "物理防蓝光", "spec": "整机屏体需支持无需操作即可实现蓝光防护，具备物理防蓝光功能，蓝光占比（有害蓝光415～455nm能量综合）/（整体蓝光400～500能量综合）＜50%。蓝光危害RG0级别。", "indicators": [{"name": "物理防蓝光", "value": true, "unit": "feature", "comparator": "eq"}, {"name": "蓝光危害RG0", "value": true, "unit": "cert", "comparator": "eq"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-004", "category": "触控", "name": "电容触控", "spec": "需采用电容触控技术，整机Windows系统需支持≥50点触控及同时书写，触摸分辨率≥32768×32768。触控精度≤±1mm，触摸响应时间≤4ms，书写延迟≤25ms。", "indicators": [{"name": "触控点数", "value": 50, "unit": "touch_points", "comparator": "gte"}, {"name": "响应时间", "value": 4, "unit": "ms", "comparator": "lte"}, {"name": "书写延迟", "value": 25, "unit": "ms", "comparator": "lte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-005", "category": "摄像", "name": "内置摄像头", "spec": "摄像头像素≥4800万像素，需支持输出8000×6000pix的照片，对角视场角≥135°，水平视场角≥120°。支持3D降噪算法，图像信噪比≥40db。", "indicators": [{"name": "摄像头像素", "value": 4800, "unit": "mp", "comparator": "gte"}, {"name": "对角视场角", "value": 135, "unit": "degree", "comparator": "gte"}, {"name": "水平视场角", "value": 120, "unit": "degree", "comparator": "gte"}], "star_mark": true, "cert_required": true},
+    {"id": "XF-006", "category": "摄像", "name": "AI人像与解锁", "spec": "整机高清摄像头需支持生物特征识别，如面部识别功能，支持AI识别人像，最大距离≥10米。摄像头需具备下倾设计≥10°。", "indicators": [{"name": "AI识别距离", "value": 10, "unit": "count", "comparator": "gte"}, {"name": "面部识别", "value": true, "unit": "feature", "comparator": "eq"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-007", "category": "音频", "name": "内置音响", "spec": "整机需内置2.2声道扬声器，20W全频扬声器≥2个，15W高音扬声器≥2个，额定总功率≥70W。1米处声压级≥90dB，10米处声压级≥85dB。", "indicators": [{"name": "扬声器功率", "value": 70, "unit": "watt", "comparator": "gte"}, {"name": "1米声压级", "value": 90, "unit": "count", "comparator": "gte"}, {"name": "声道", "value": 2.2, "unit": "count", "comparator": "eq"}], "star_mark": true, "cert_required": true},
+    {"id": "XF-008", "category": "音频", "name": "麦克风阵列", "spec": "整机需内置非独立外扩展麦克风阵列，麦克风数量≥8个，整机拾音距离≥12m，拾音角度≥180°。信噪比≥65dB，支持AGC、AEC、NN智能AI降噪算法。", "indicators": [{"name": "麦克风阵列", "value": 8, "unit": "count", "comparator": "gte"}, {"name": "拾音距离", "value": 12, "unit": "count", "comparator": "gte"}, {"name": "拾音角度", "value": 180, "unit": "degree", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-009", "category": "AI", "name": "语音指令操控", "spec": "需支持通过口语表达快速返回系统桌面、选人和打开白板、亮度调整、声音大小调整等不低于300条语音指令。支持模糊语义理解（非固定口语指令模式）。", "indicators": [{"name": "语音指令数", "value": 300, "unit": "count", "comparator": "gte"}, {"name": "模糊语义理解", "value": true, "unit": "feature", "comparator": "eq"}], "star_mark": true, "cert_required": true},
+    {"id": "XF-010", "category": "AI", "name": "AI自适应音效", "spec": "AI音效模式需支持可通过内置麦克风功能采集教室物理环境声音，自动生成符合当前教室物理环境音效，支持分频段调节。THD≤1%，啸叫距离≤20cm，扩音效果MOS≥3.5。", "indicators": [{"name": "AI自适应音效", "value": true, "unit": "feature", "comparator": "eq"}, {"name": "THD", "value": 1, "unit": "pct", "comparator": "lte"}], "star_mark": true, "cert_required": true},
+    {"id": "XF-011", "category": "接口", "name": "前置接口", "spec": "整机需支持前置物理接口不少于5个，包含≥1路HDMI接口、≥2路双通道USB3.0接口、≥1路Type-C接口（支持全功能PD≥65W）、≥1路USB-Type-B接口。", "indicators": [{"name": "前置接口总数", "value": 5, "unit": "count", "comparator": "gte"}, {"name": "前置USB3.0", "value": 2, "unit": "count", "comparator": "gte"}, {"name": "Type-C充电功率", "value": 65, "unit": "watt", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-012", "category": "计算", "name": "安卓主板", "spec": "整机自带安卓操作系统，系统版本≥安卓14，≥八核处理器，内存≥4GB，存储空间≥32GB。", "indicators": [{"name": "Android版本", "value": 14, "unit": "count", "comparator": "gte"}, {"name": "RAM", "value": 4, "unit": "gb", "comparator": "gte"}, {"name": "ROM", "value": 32, "unit": "gb", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-013", "category": "OPS", "name": "OPS电脑模块", "spec": "CPU处理器：≥8核12线程，主频≥2GHz，内存≥8G，硬盘≥256G SSD。支持Wi-Fi 6。", "indicators": [{"name": "CPU核数", "value": 8, "unit": "count", "comparator": "gte"}, {"name": "内存", "value": 8, "unit": "gb", "comparator": "gte"}, {"name": "硬盘", "value": 256, "unit": "gb", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-014", "category": "无线", "name": "WiFi与蓝牙", "spec": "需支持WiFi6，整机需内置2.4G、5GHz双频wifi，满足IEEE 802.11 a/b/g/n/ac/ax。整机内置蓝牙模块，需支持蓝牙Bluetooth 5.4标准。", "indicators": [{"name": "WiFi6", "value": true, "unit": "feature", "comparator": "eq"}, {"name": "蓝牙", "value": 5.4, "unit": "count", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "XF-015", "category": "特色", "name": "智能笔", "spec": "智能笔压感≥4096级，具备手笔分离防误触功能。笔身配置不少于五个按键，包括上下翻页、智能语音/扩音、书写颜色切换、无线鼠标。采用语音识别和语义理解技术，具备用户口语控制功能。", "indicators": [{"name": "压感级别", "value": 4096, "unit": "pressure_level", "comparator": "gte"}, {"name": "按键数", "value": 5, "unit": "count", "comparator": "gte"}, {"name": "语音控制", "value": true, "unit": "feature", "comparator": "eq"}], "star_mark": false, "cert_required": false}
   ]
 }

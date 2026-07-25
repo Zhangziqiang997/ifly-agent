@@ -1,185 +1,23 @@
 {
   "vendor": "鸿合（HiteVision）",
-  "product": "智慧黑板 HB-C860A",
+  "product": "智慧黑板 HB-H868S",
   "category": "智慧黑板",
-  "updated": "2026-07",
+  "source_file": "鸿合-智慧黑板HB-H868S.md",
   "params": [
-    {
-      "id": "HONGHE-001",
-      "category": "显示",
-      "name": "屏幕尺寸",
-      "spec": "86英寸",
-      "indicators": [
-        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-002",
-      "category": "显示",
-      "name": "屏幕分辨率",
-      "spec": "3840×2160（4K）",
-      "indicators": [
-        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-003",
-      "category": "显示",
-      "name": "屏幕亮度",
-      "spec": "550cd/m²",
-      "indicators": [
-        {"name": "亮度", "value": 550, "unit": "cd_m2", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-004",
-      "category": "触控",
-      "name": "触控技术",
-      "spec": "电容触控，支持50点触控",
-      "indicators": [
-        {"name": "触控点数", "value": 50, "unit": "touch_points", "comparator": "gte"},
-        {"name": "触控技术", "value": "电容", "unit": "type", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-005",
-      "category": "触控",
-      "name": "笔锋书写",
-      "spec": "支持普通笔迹书写，2048级压感",
-      "indicators": [
-        {"name": "压感级别", "value": 2048, "unit": "pressure_level", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-006",
-      "category": "摄像",
-      "name": "内置摄像头",
-      "spec": "4800万像素（5K），130°超广角，AI自动追踪",
-      "indicators": [
-        {"name": "摄像头像素", "value": 4800, "unit": "mp", "comparator": "eq"},
-        {"name": "视频分辨率", "value": 5120, "unit": "px", "comparator": "eq"},
-        {"name": "视场角", "value": 130, "unit": "degree", "comparator": "eq"},
-        {"name": "AI追踪", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-007",
-      "category": "音频",
-      "name": "内置音响",
-      "spec": "2×20W立体声 + 8阵列麦克风",
-      "indicators": [
-        {"name": "扬声器功率", "value": 40, "unit": "watt", "comparator": "gte"},
-        {"name": "麦克风阵列", "value": 8, "unit": "count", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-008",
-      "category": "护眼",
-      "name": "护眼认证",
-      "spec": "通过德国莱茵TÜV低蓝光认证",
-      "indicators": [
-        {"name": "TÜV低蓝光认证", "value": true, "unit": "cert", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": true
-    },
-    {
-      "id": "HONGHE-009",
-      "category": "无线",
-      "name": "无线投屏",
-      "spec": "支持Android/iOS/Windows三平台无线投屏",
-      "indicators": [
-        {"name": "投屏平台数", "value": 3, "unit": "platform_count", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-010",
-      "category": "软件",
-      "name": "教学白板软件",
-      "spec": "鸿合π交互教学软件，支持多屏互动与课堂评测",
-      "indicators": [
-        {"name": "多屏互动", "value": true, "unit": "feature", "comparator": "eq"},
-        {"name": "课堂评测", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-011",
-      "category": "物理",
-      "name": "整机厚度",
-      "spec": "≤22mm（含壁挂支架）",
-      "indicators": [
-        {"name": "整机厚度", "value": 22, "unit": "mm", "comparator": "lte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-012",
-      "category": "连接",
-      "name": "接口配置",
-      "spec": "前置USB 3.0×2、Type-C×1（45W充电）、HDMI IN×2",
-      "indicators": [
-        {"name": "前置USB3.0", "value": 2, "unit": "count", "comparator": "gte"},
-        {"name": "前置Type-C", "value": 1, "unit": "count", "comparator": "gte"},
-        {"name": "Type-C充电功率", "value": 45, "unit": "watt", "comparator": "gte"},
-        {"name": "前置HDMI IN", "value": 2, "unit": "count", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-013",
-      "category": "认证",
-      "name": "整机可靠性认证",
-      "spec": "通过IP5X防尘认证 + 10万小时无故障运行认证（MTBF）",
-      "indicators": [
-        {"name": "IP5X防尘", "value": true, "unit": "cert", "comparator": "eq"},
-        {"name": "MTBF", "value": 100000, "unit": "hour", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": true
-    },
-    {
-      "id": "HONGHE-014",
-      "category": "计算",
-      "name": "内置OPS电脑",
-      "spec": "Intel Core i7-1260P / 16GB DDR5 / 1TB SSD / Windows 11",
-      "indicators": [
-        {"name": "CPU", "value": "i7-1260P", "unit": "spec", "comparator": "eq"},
-        {"name": "内存", "value": 16, "unit": "gb", "comparator": "gte"},
-        {"name": "硬盘", "value": 1024, "unit": "gb", "comparator": "gte"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    },
-    {
-      "id": "HONGHE-015",
-      "category": "特色",
-      "name": "AI课堂分析",
-      "spec": "内置AI课堂行为分析引擎，实时统计学生举手/发言/专注度",
-      "indicators": [
-        {"name": "AI课堂分析", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false,
-      "cert_required": false
-    }
+    {"id": "HH-001", "category": "显示", "name": "屏幕尺寸", "spec": "整机屏幕采用86英寸液晶显示器。", "indicators": [{"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "eq"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-002", "category": "显示", "name": "分辨率", "spec": "分辨率≥3840×2160。显示比例16:9，屏幕采用A规屏。", "indicators": [{"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-003", "category": "显示", "name": "色域覆盖率", "spec": "整机色域覆盖率（NTSC）≥72%，整机背光系统支持DC调光方式，多级亮度调节。灰度等级≥256级。", "indicators": [{"name": "NTSC色域", "value": 72, "unit": "pct", "comparator": "gte"}], "star_mark": true, "cert_required": true},
+    {"id": "HH-004", "category": "显示", "name": "钢化玻璃", "spec": "钢化玻璃表面硬度≥9H。整机钢化玻璃厚度≤3.2mm。", "indicators": [{"name": "玻璃硬度", "value": 9, "unit": "count", "comparator": "gte"}, {"name": "玻璃厚度", "value": 3.2, "unit": "mm", "comparator": "lte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-005", "category": "触控", "name": "触控点数", "spec": "支持20点或以上触控。", "indicators": [{"name": "触控点数", "value": 20, "unit": "touch_points", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-006", "category": "触控", "name": "触摸响应", "spec": "触摸响应时间≤4ms。触摸最小识别物≤3mm。触摸精度±1.5mm。", "indicators": [{"name": "响应时间", "value": 4, "unit": "ms", "comparator": "lte"}, {"name": "最小识别物", "value": 3, "unit": "mm", "comparator": "lte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-007", "category": "摄像", "name": "内置摄像头", "spec": "整机内置非独立摄像头，可拍摄≥1900万像素数的照片。水平视场角≥120度，支持4K分辨率下画面畸变矫正。", "indicators": [{"name": "摄像头像素", "value": 1900, "unit": "mp", "comparator": "gte"}, {"name": "水平视场角", "value": 120, "unit": "degree", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-008", "category": "摄像", "name": "AI人像识别", "spec": "整机内置高清摄像头，可用于远程巡课，并且可以AI识别人像，清点人数，随机抽人等功能。", "indicators": [{"name": "AI人像识别", "value": true, "unit": "feature", "comparator": "eq"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-009", "category": "音频", "name": "内置音响", "spec": "整机内置2.2声道扬声器，额定总功率≥60W。整机内置非独立外扩展的不少于4阵列麦克风，拾音角度≥180°，拾音距离≥12m。", "indicators": [{"name": "扬声器功率", "value": 60, "unit": "watt", "comparator": "gte"}, {"name": "麦克风阵列", "value": 4, "unit": "count", "comparator": "gte"}, {"name": "拾音距离", "value": 12, "unit": "count", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-010", "category": "护眼", "name": "低蓝光护眼", "spec": "整机采用硬件低蓝光背光技术，蓝光占比（有害蓝光415～455nm能量综合）/（整体蓝光400～500能量综合）＜50%，通过无频闪、低蓝光认证。", "indicators": [{"name": "硬件低蓝光", "value": true, "unit": "feature", "comparator": "eq"}, {"name": "无频闪认证", "value": true, "unit": "cert", "comparator": "eq"}, {"name": "低蓝光认证", "value": true, "unit": "cert", "comparator": "eq"}], "star_mark": false, "cert_required": true},
+    {"id": "HH-011", "category": "护眼", "name": "纸质护眼模式", "spec": "整机全通道支持纸质护眼模式，可实现画面纹理的实时调整；支持纸质纹理：牛皮纸、素描纸、宣纸、水彩纸。", "indicators": [{"name": "纸质护眼模式", "value": true, "unit": "feature", "comparator": "eq"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-012", "category": "接口", "name": "接口配置", "spec": "输入接口具备不少于2路HDMI、1路RS232；前置输入接口具备不少于3路USB接口（包含1路Type-C、2路USB）。", "indicators": [{"name": "前置USB", "value": 3, "unit": "count", "comparator": "gte"}, {"name": "HDMI IN", "value": 2, "unit": "count", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-013", "category": "OPS", "name": "整机主板", "spec": "整机采用≥12核驱动芯片，8核CPU、4核GPU。内存（RAM）≥4G，存储（ROM）≥32G。", "indicators": [{"name": "CPU核数", "value": 8, "unit": "count", "comparator": "gte"}, {"name": "RAM", "value": 4, "unit": "gb", "comparator": "gte"}, {"name": "ROM", "value": 32, "unit": "gb", "comparator": "gte"}], "star_mark": true, "cert_required": true},
+    {"id": "HH-014", "category": "OPS", "name": "OPS电脑模块", "spec": "CPU核心数≥8核，线程数≥12线程，最高主频≥2.0GHz。内存：8GB或以上。硬盘：256GB或以上固态硬盘。", "indicators": [{"name": "CPU核数", "value": 8, "unit": "count", "comparator": "gte"}, {"name": "内存", "value": 8, "unit": "gb", "comparator": "gte"}, {"name": "硬盘", "value": 256, "unit": "gb", "comparator": "gte"}], "star_mark": false, "cert_required": false},
+    {"id": "HH-015", "category": "无线", "name": "WiFi与蓝牙", "spec": "整机内置双无线网卡，可实现Wi-Fi无线上网连接、AP无线热点发射。整机支持蓝牙不低于Bluetooth5.2标准。Wi-Fi和AP热点工作距离≥12m。", "indicators": [{"name": "WiFi", "value": true, "unit": "feature", "comparator": "eq"}, {"name": "蓝牙", "value": 5.2, "unit": "count", "comparator": "gte"}], "star_mark": false, "cert_required": false}
   ]
 }
