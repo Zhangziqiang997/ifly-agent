@@ -1,0 +1,206 @@
+[
+  {
+    "seq": 3,
+    "name": "防眩钢化玻璃",
+    "bid_req": "屏幕采用>=3.2mm防眩钢化玻璃，表面硬度>=莫氏8级，透光率>=93%，雾度<=8%",
+    "bid_indicators": [
+      {
+        "name": "玻璃厚度",
+        "value": 3.2,
+        "unit": "mm",
+        "comparator": "gte"
+      },
+      {
+        "name": "莫氏硬度",
+        "value": 8,
+        "unit": "count",
+        "comparator": "gte"
+      },
+      {
+        "name": "透光率",
+        "value": 93,
+        "unit": "pct",
+        "comparator": "gte"
+      }
+    ],
+    "xunfei_name": "亮度与色域",
+    "xunfei_spec": "整机屏体亮度≥350cd/m²，色彩覆盖率≥85%NTSC，对比度≥4000:1，可视角度≥178°。",
+    "xunfei_indicators": [
+      {
+        "name": "亮度",
+        "value": 350,
+        "unit": "cd_m2",
+        "comparator": "gte"
+      },
+      {
+        "name": "NTSC色域",
+        "value": 85,
+        "unit": "pct",
+        "comparator": "gte"
+      },
+      {
+        "name": "对比度",
+        "value": 4000,
+        "unit": "count",
+        "comparator": "gte"
+      }
+    ],
+    "reason": "numeric: 1/4 partial, needs AI"
+  },
+  {
+    "seq": 4,
+    "name": "触控性能",
+    "bid_req": "红外触控技术支持>=40点触控，最小识别物<=3mm，响应时间<=4ms",
+    "bid_indicators": [
+      {
+        "name": "触控点数",
+        "value": 40,
+        "unit": "touch_points",
+        "comparator": "gte"
+      },
+      {
+        "name": "最小识别物",
+        "value": 3,
+        "unit": "mm",
+        "comparator": "lte"
+      },
+      {
+        "name": "响应时间",
+        "value": 4,
+        "unit": "ms",
+        "comparator": "lte"
+      }
+    ],
+    "xunfei_name": "电容触控",
+    "xunfei_spec": "需采用电容触控技术，整机Windows系统需支持≥50点触控及同时书写，触摸分辨率≥32768×32768。触控精度≤±1mm，触摸响应时间≤4ms，书写延迟≤25ms。",
+    "xunfei_indicators": [
+      {
+        "name": "触控点数",
+        "value": 50,
+        "unit": "touch_points",
+        "comparator": "gte"
+      },
+      {
+        "name": "响应时间",
+        "value": 4,
+        "unit": "ms",
+        "comparator": "lte"
+      },
+      {
+        "name": "书写延迟",
+        "value": 25,
+        "unit": "ms",
+        "comparator": "lte"
+      }
+    ],
+    "reason": "numeric: 2/3 partial, needs AI"
+  },
+  {
+    "seq": 5,
+    "name": "内置摄像头",
+    "bid_req": "内置摄像头>=1600万像素，对角视场角>=145度，水平视场角>=120度，支持输出4K图片和视频",
+    "bid_indicators": [
+      {
+        "name": "摄像头像素",
+        "value": 1600,
+        "unit": "mp",
+        "comparator": "gte"
+      },
+      {
+        "name": "对角视场角",
+        "value": 145,
+        "unit": "degree",
+        "comparator": "gte"
+      },
+      {
+        "name": "水平视场角",
+        "value": 120,
+        "unit": "degree",
+        "comparator": "gte"
+      }
+    ],
+    "xunfei_name": "内置摄像头",
+    "xunfei_spec": "摄像头像素≥4800万像素，需支持输出8000×6000pix的照片，对角视场角≥135°，水平视场角≥120°。支持3D降噪算法，图像信噪比≥40db。",
+    "xunfei_indicators": [
+      {
+        "name": "摄像头像素",
+        "value": 4800,
+        "unit": "mp",
+        "comparator": "gte"
+      },
+      {
+        "name": "对角视场角",
+        "value": 135,
+        "unit": "degree",
+        "comparator": "gte"
+      },
+      {
+        "name": "水平视场角",
+        "value": 120,
+        "unit": "degree",
+        "comparator": "gte"
+      }
+    ],
+    "reason": "numeric: 2/3 partial, needs AI"
+  },
+  {
+    "seq": 9,
+    "name": "Type-C全功能",
+    "bid_req": "Type-C接口支持外接电脑HDMI信号接入显示，可调用整机内置摄像头/麦克风/扬声器，支持反向触控",
+    "bid_indicators": [
+      {
+        "name": "Type-C视频输入",
+        "value": true,
+        "unit": "feature",
+        "comparator": "eq"
+      }
+    ],
+    "xunfei_name": "屏幕尺寸与分辨率",
+    "xunfei_spec": "整机屏幕需采用UHD超高清A规LED液晶屏，屏幕显示尺寸≥86英寸，显示比例16:9，屏幕图像分辨率≥3840*2160。",
+    "xunfei_indicators": [
+      {
+        "name": "屏幕尺寸",
+        "value": 86,
+        "unit": "inch",
+        "comparator": "gte"
+      },
+      {
+        "name": "水平分辨率",
+        "value": 3840,
+        "unit": "px",
+        "comparator": "gte"
+      }
+    ],
+    "reason": "no match found"
+  },
+  {
+    "seq": 12,
+    "name": "物联传感器",
+    "bid_req": "整机具有物联传感器，可监控教室温度、湿度，并支持上传到云端",
+    "bid_indicators": [
+      {
+        "name": "温湿度监测",
+        "value": true,
+        "unit": "feature",
+        "comparator": "eq"
+      }
+    ],
+    "xunfei_name": "屏幕尺寸与分辨率",
+    "xunfei_spec": "整机屏幕需采用UHD超高清A规LED液晶屏，屏幕显示尺寸≥86英寸，显示比例16:9，屏幕图像分辨率≥3840*2160。",
+    "xunfei_indicators": [
+      {
+        "name": "屏幕尺寸",
+        "value": 86,
+        "unit": "inch",
+        "comparator": "gte"
+      },
+      {
+        "name": "水平分辨率",
+        "value": 3840,
+        "unit": "px",
+        "comparator": "gte"
+      }
+    ],
+    "reason": "no match found"
+  }
+]

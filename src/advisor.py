@@ -66,22 +66,34 @@ def batch_analyze(uncertain_items: list, xunfei_params: list = None) -> list:
     if not uncertain_items:
         return []
 
+    # Build xunfei capability summary for AI context
+    xf_context = ""
+    if xunfei_params:
+        xf_parts = []
+        for p in xunfei_params:
+            xf_parts.append(f"- [{p.get('category', '')}] {p.get('name', '')}: {p.get('spec', '')[:150]}")
+        xf_context = "iFLYTEK product parameter catalog:\n" + "\n".join(xf_parts) + "\n\n"
+
     prompt_parts = []
     for i, item in enumerate(uncertain_items):
         prompt_parts.append(
             f"[{i}] seq={item['seq']}\n"
             f"Bidding requirement: {item['bid_req']}\n"
-            f"iFLYTEK parameter: {item['xunfei_spec']}"
+            f"Best-match iFLYTEK parameter: {item['xunfei_name']} — {item['xunfei_spec']}"
         )
     prompt = (
-        "Analyze the following bidding requirements against iFLYTEK product parameters.\n"
-        "For each item, judge:\n"
-        "- positive: iFLYTEK meets or exceeds the requirement\n"
-        "- negative_wording: iFLYTEK has the capability but description differs\n"
-        "- negative_real: iFLYTEK genuinely cannot meet the requirement\n"
-        "For negative items, provide a suggestion for response strategy (revise wording, challenge argument, or channel coordination).\n\n"
+        "You are a bidding parameter analysis expert for iFLYTEK smart blackboard.\n\n"
+        + xf_context +
+        "Below are bidding requirements to compare against iFLYTEK. "
+        "For each item, the 'Best-match iFLYTEK parameter' is the programmatic match attempt — "
+        "it may be WRONG. Use the full iFLYTEK catalog above to find the true matching parameter.\n\n"
+        "Judge each item:\n"
+        "- positive: iFLYTEK meets or exceeds the requirement (check the catalog for matching capabilities)\n"
+        "- negative_wording: iFLYTEK has the capability but the spec text describes it differently\n"
+        "- negative_real: iFLYTEK genuinely cannot meet this requirement\n\n"
+        "For negative items, provide a practical suggestion (revise wording, challenge the necessity, or coordinate with channel).\n\n"
         + "\n---\n".join(prompt_parts) +
-        "\n\nReturn a JSON array with one object per item (use the item index)."
+        "\n\nReturn a JSON array, one object per item: {seq, match: bool, deviation: string, explanation: string, suggestion: string|null}"
     )
 
     if not API_KEY:

@@ -172,16 +172,44 @@ def quick_match(bid_item: dict, our_param: dict) -> tuple:
 
 def find_best_match(bid_item: dict, our_params: list) -> tuple:
     """Find the best matching param in our_params for bid_item.
+    Uses keyword overlap scoring to prevent false matches (e.g. glass -> brightness).
     Returns (status, matched_param_or_None, detail).
     """
-    best_status, best_param, best_detail = ("uncertain", None, "no match found")
+    # Score all params by keyword overlap against bid item
+    bid_text = bid_item.get('name', '') + ' ' + bid_item.get('requirement', '')
+    scored = []
     for p in our_params:
+        p_text = p.get('name', '') + ' ' + p.get('spec', '')
+        score = keyword_overlap(bid_text, p_text)
+        # Bonus: same category
+        if p.get('category') == bid_item.get('category'):
+            score += 0.3
+        # Bonus: indicator unit overlap
+        bid_units = {i.get('unit') for i in bid_item.get('indicators', [])}
+        p_units = {i.get('unit') for i in p.get('indicators', [])}
+        if bid_units and p_units:
+            overlap = len(bid_units & p_units) / max(len(bid_units), 1)
+            score += overlap * 0.2
+        scored.append((score, p))
+
+    scored.sort(key=lambda x: x[0], reverse=True)
+
+    # Try each param from best match down
+    best_uncertain = None
+    for score, p in scored:
         status, detail = quick_match(bid_item, p)
         if status == 'positive':
             return (status, p, detail)
-        if status == 'uncertain' and best_status == 'uncertain':
-            if p.get('category') == bid_item.get('category'):
-                best_status, best_param, best_detail = (status, p, detail)
-    if best_param is None and our_params:
-        best_param = our_params[0]
-    return (best_status, best_param, best_detail)
+        if status == 'uncertain' and best_uncertain is None:
+            best_uncertain = (status, p, detail)
+        if status == 'negative' and best_uncertain is None:
+            best_uncertain = (status, p, detail)
+
+    if best_uncertain:
+        return best_uncertain
+
+    # Absolute fallback: top-scoring param
+    if scored:
+        _, top_p = scored[0]
+        return ('uncertain', top_p, 'low confidence match, needs AI')
+    return ('uncertain', None, 'no match found')
