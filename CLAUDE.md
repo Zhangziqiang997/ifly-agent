@@ -88,8 +88,8 @@
 
 ## 六、项目文件结构
 
-> 📍 遵循 **SPEC → PLAN → EXECUTE → CONFIRM** 工作流。  
-> 完整产品规格见 [`docs/01-PRD.md`](./docs/01-PRD.md)，Demo 范围见 [`docs/02-PLAN.md`](./docs/02-PLAN.md)。
+> 📍 遵循 **产品 → 设计 → 开发 → 路演** 标准软件工程阶段工作流。  
+> 10 份文档按阶段顺序编号（01-02 产品 / 03-06 设计 / 07-09 开发 / 10 路演）。
 
 ```
 参数智能体/
@@ -97,12 +97,16 @@
 ├── README.md                    # 快速入门
 ├── .gitignore
 ├── docs/
-│   ├── 01-PRD.md                # SPEC — 产品规格书（完整能力定义）
-│   ├── 02-PLAN.md               # PLAN — 实施计划（Demo 范围/取舍/时间线）
-│   ├── 03-technical-design.md   # 技术方案（三层架构/数据模型/API）
-│   ├── 04-team-division.md      # 团队分工 & 4天任务分配
-│   ├── 05-execution-log.md      # EXECUTE+CONFIRM — 执行日志（迭代+AI协作+决策）
-│   └── 06-roadshow.md           # 路演材料（故事线/脚本/操作步骤/Q&A）
+│   ├── 01-team-schedule.md        # 产品 — 团队分工 & 排期计划（甘特图）
+│   ├── 02-PRD.md                  # 产品 — 产品需求文档（用户/场景/价值）
+│   ├── 03-competitive-research.md # 产品 — 竞品调研报告（市场格局/独有特征）
+│   ├── 04-technical-design.md     # 设计 — 技术方案设计（架构/算法/选型）
+│   ├── 05-SPEC.md                 # 设计 — 功能规格书（模块/数据格式/API）
+│   ├── 06-ai-task-plan.md         # 设计 — AI 任务实施计划（6 Tasks 清单）
+│   ├── 07-test-cases.md           # 设计 — 测试用例（L1/L2/L3/端到端/UI）
+│   ├── 08-code-review.md          # 开发 — AI 代码审查报告（6维度评分）
+│   ├── 09-execution-log.md        # 开发 — 执行日志（迭代+AI协作+决策+Bug）
+│   └── 10-roadshow.md             # 路演 — 路演材料（故事线/脚本/Q&A）
 ├── data/
 │   ├── competitors/             # 竞品参数库（JSON）— 希沃/鸿合/海康
 │   ├── xunfei/                  # 讯飞参数库（JSON）
