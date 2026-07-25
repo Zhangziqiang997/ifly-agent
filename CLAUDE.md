@@ -88,28 +88,26 @@
 
 ## 六、项目文件结构
 
-> 📍 完整文档导航请读 [`docs/00-INDEX.md`](./docs/00-INDEX.md)，那是评委和团队的第一入口。
+> 📍 遵循 **SPEC → PLAN → EXECUTE → CONFIRM** 工作流。  
+> 完整产品规格见 [`docs/01-PRD.md`](./docs/01-PRD.md)，Demo 范围见 [`docs/02-PLAN.md`](./docs/02-PLAN.md)。
 
 ```
 参数智能体/
-├── CLAUDE.md                    # ← 本文件，项目总指引
+├── CLAUDE.md                    # ← 本文件，项目总指引（AI 入口）
 ├── README.md                    # 快速入门
 ├── .gitignore
 ├── docs/
-│   ├── 00-INDEX.md              # 📍 文档索引 + 路演故事线（评委第一入口）
-│   ├── 01-PRD.md                # 产品需求文档（真实数据版）
-│   ├── 02-technical-design.md   # 技术方案设计
-│   ├── 03-ai-collaboration.md   # ⭐ AI 协作记录（路演核心素材，持续追加）
-│   ├── 04-team-division.md      # 团队分工 & 时间线
-│   ├── 05-meeting-notes.md      # PM 讨论纪要 & 决策记录
-│   ├── 06-data-mapping.md       # 数据设计文档（69个真实文件 → JSON 的映射方案）
-│   ├── 07-iteration-log.md      # 迭代日志（版本演进 & 变更追溯）
-│   └── 08-roadshow-script.md    # 路演脚本（10分钟逐秒编排）
+│   ├── 01-PRD.md                # SPEC — 产品规格书（完整能力定义）
+│   ├── 02-PLAN.md               # PLAN — 实施计划（Demo 范围/取舍/时间线）
+│   ├── 03-technical-design.md   # 技术方案（三层架构/数据模型/API）
+│   ├── 04-team-division.md      # 团队分工 & 4天任务分配
+│   ├── 05-execution-log.md      # EXECUTE+CONFIRM — 执行日志（迭代+AI协作+决策）
+│   └── 06-roadshow.md           # 路演材料（故事线/脚本/操作步骤/Q&A）
 ├── data/
 │   ├── competitors/             # 竞品参数库（JSON）— 希沃/鸿合/海康
 │   ├── xunfei/                  # 讯飞参数库（JSON）
 │   └── samples/                 # 样例招标文件
-├── 知识库3/                     # 真实数据源（69个文件，含 docx/xlsx/pdf/md）
+├── 知识库3/                     # 真实数据源（69个文件，gitignore 排除）
 ├── src/                         # 源代码
 ├── presentations/               # 路演 PPT & 项目说明卡
 └── outputs/                     # 生成产物（截图、录屏等）
