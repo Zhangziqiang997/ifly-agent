@@ -34,6 +34,7 @@ outputs/
 
 # Superpowers brainstorm state (server pid, tokens, etc.)
 .superpowers/
+.worktrees/
 
 # Compressed archives
 *.7z
