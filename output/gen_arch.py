@@ -34,12 +34,20 @@ L('  <text x="40" y="46" fill="#ffffff" font-size="22" font-weight="700">参数�
 L('  <text x="40" y="70" fill="#48cae4" font-size="13">招投标参数智能比对系统 — 由确定到模糊，能算清的绝不交给大模型</text>')
 L('  <line x1="40" y1="84" x2="1160" y2="84" stroke="#00b4d8" stroke-width="1" opacity="0.4"/>')
 
-# ============ INPUT (left) ============
-L('  <rect x="40" y="300" width="150" height="120" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>')
-L('  <text x="115" y="330" fill="#00b4d8" font-size="11" text-anchor="middle" letter-spacing="0.05em">输 入</text>')
-L('  <text x="115" y="358" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="700">招标文件</text>')
-L('  <text x="115" y="380" fill="#caf0f8" font-size="11" text-anchor="middle">多条参数要求</text>')
-L('  <text x="115" y="400" fill="#48cae4" font-size="10" text-anchor="middle" class="mono">亮度 &#8805; 500cd/m2</text>')
+# ============ INPUT (left, top) ============
+L('  <rect x="40" y="150" width="150" height="90" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>')
+L('  <text x="115" y="176" fill="#00b4d8" font-size="11" text-anchor="middle" letter-spacing="0.05em">输 入</text>')
+L('  <text x="115" y="202" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="700">招标文件</text>')
+L('  <text x="115" y="224" fill="#48cae4" font-size="10" text-anchor="middle" class="mono">PDF / Word / Excel</text>')
+
+# ============ DOC PARSE (left, middle) — MinerU ============
+L('  <rect x="40" y="280" width="150" height="160" rx="2" fill="#0d1f3c" stroke="#06d6a0" stroke-width="1.5"/>')
+L('  <text x="115" y="306" fill="#06d6a0" font-size="11" text-anchor="middle" letter-spacing="0.05em">文 档 解 析</text>')
+L('  <text x="115" y="326" fill="#ffffff" font-size="12" text-anchor="middle" font-weight="700">MinerU</text>')
+L('  <text x="50" y="352" fill="#caf0f8" font-size="10">1. 识别版面结构</text>')
+L('  <text x="50" y="374" fill="#caf0f8" font-size="10">2. 提取表格→Markdown</text>')
+L('  <text x="50" y="396" fill="#caf0f8" font-size="10">3. 归一化为 JSON</text>')
+L('  <text x="115" y="424" fill="#06d6a0" font-size="10" text-anchor="middle">每条参数带名称/数值/单位</text>')
 
 # ============ CORE (three stacked layers) ============
 CX = 250      # core container x
@@ -98,8 +106,11 @@ L(f'  <rect x="{ox+90}" y="285" width="14" height="8" rx="1" fill="#f77f00"/>')
 L(f'  <rect x="{ox+165}" y="285" width="14" height="8" rx="1" fill="#e63946"/>')
 
 # ============ FLOW ARROWS ============
-# input -> core (into layer1 area)
-L(f'  <polyline points="190,360 220,360 220,225 {lx},225" fill="none" stroke="#00b4d8" stroke-width="1.5" marker-end="url(#ar)"/>')
+# input -> doc parse (down)
+L('  <polyline points="115,240 115,280" fill="none" stroke="#00b4d8" stroke-width="1.5" marker-end="url(#ar)"/>')
+# doc parse -> core (into layer1)
+L(f'  <polyline points="190,360 220,360 220,225 {lx},225" fill="none" stroke="#06d6a0" stroke-width="1.5" marker-end="url(#ar-g)"/>')
+L('  <text x="196" y="352" fill="#06d6a0" font-size="10">结构化数据</text>')
 # layer1 -> layer2 (down)
 L(f'  <polyline points="{lx+lw//2},300 {lx+lw//2},320" fill="none" stroke="#48cae4" stroke-width="1.5" marker-end="url(#ar)"/>')
 L(f'  <text x="{lx+lw//2+10}" y="314" fill="#48cae4" font-size="10">数值判定</text>')
