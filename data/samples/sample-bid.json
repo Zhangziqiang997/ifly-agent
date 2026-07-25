@@ -4,106 +4,104 @@
   "items": [
     {
       "seq": 1, "category": "显示", "name": "屏幕尺寸",
-      "requirement": "整机屏幕>=86英寸UHD超高清LED液晶屏，显示比例16:9，分辨率>=3840x2160",
+      "requirement": "整机屏幕采用86英寸UHD超高清LED液晶屏，显示比例16:9，分辨率3840*2160",
       "indicators": [
-        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "gte"},
-        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "gte"}
-      ],
-      "star_mark": false, "triangle_mark": false
+        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "eq"},
+        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "eq"}
+      ]
     },
     {
-      "seq": 2, "category": "显示", "name": "屏幕亮度",
-      "requirement": "屏体亮度>=500cd/m2，对比度>=4000:1",
+      "seq": 2, "category": "显示", "name": "色域与色准",
+      "requirement": "整机色域覆盖率（NTSC）>=85%，可视角度>=178°，色准△E<=1",
       "indicators": [
-        {"name": "亮度", "value": 500, "unit": "cd_m2", "comparator": "gte"}
-      ],
-      "star_mark": false, "triangle_mark": false
+        {"name": "NTSC色域", "value": 85, "unit": "pct", "comparator": "gte"},
+        {"name": "色准ΔE", "value": 1, "unit": "count", "comparator": "lte"}
+      ]
     },
     {
-      "seq": 3, "category": "触控", "name": "触控技术",
-      "requirement": "采用电容触控技术，支持50点或以上触控，触摸响应时间<=4ms",
+      "seq": 3, "category": "显示", "name": "防眩钢化玻璃",
+      "requirement": "屏幕采用>=3.2mm防眩钢化玻璃，表面硬度>=莫氏8级，透光率>=93%，雾度<=8%",
       "indicators": [
-        {"name": "触控点数", "value": 50, "unit": "touch_points", "comparator": "gte"}
-      ],
-      "star_mark": true, "triangle_mark": false
+        {"name": "玻璃厚度", "value": 3.2, "unit": "mm", "comparator": "gte"},
+        {"name": "莫氏硬度", "value": 8, "unit": "count", "comparator": "gte"},
+        {"name": "透光率", "value": 93, "unit": "pct", "comparator": "gte"}
+      ]
     },
     {
-      "seq": 4, "category": "摄像", "name": "内置摄像头",
-      "requirement": "内置摄像头像素>=4800万，水平视场角>=120度，支持AI自动追踪和远程巡课",
+      "seq": 4, "category": "触控", "name": "触控性能",
+      "requirement": "红外触控技术支持>=40点触控，最小识别物<=3mm，响应时间<=4ms",
       "indicators": [
-        {"name": "摄像头像素", "value": 4800, "unit": "mp", "comparator": "gte"},
-        {"name": "视场角", "value": 120, "unit": "degree", "comparator": "gte"},
-        {"name": "AI追踪", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": true, "triangle_mark": false
+        {"name": "触控点数", "value": 40, "unit": "touch_points", "comparator": "gte"},
+        {"name": "最小识别物", "value": 3, "unit": "mm", "comparator": "lte"},
+        {"name": "响应时间", "value": 4, "unit": "ms", "comparator": "lte"}
+      ]
     },
     {
-      "seq": 5, "category": "音频", "name": "内置音响",
-      "requirement": "内置2.2声道扬声器，额定总功率>=60W，内置>=8阵列麦克风，拾音距离>=12m",
+      "seq": 5, "category": "摄像", "name": "内置摄像头",
+      "requirement": "内置摄像头>=1600万像素，对角视场角>=145度，水平视场角>=120度，支持输出4K图片和视频",
       "indicators": [
-        {"name": "扬声器功率", "value": 60, "unit": "watt", "comparator": "gte"},
-        {"name": "麦克风阵列", "value": 8, "unit": "count", "comparator": "gte"}
-      ],
-      "star_mark": false, "triangle_mark": true
+        {"name": "摄像头像素", "value": 1600, "unit": "mp", "comparator": "gte"},
+        {"name": "对角视场角", "value": 145, "unit": "degree", "comparator": "gte"},
+        {"name": "水平视场角", "value": 120, "unit": "degree", "comparator": "gte"}
+      ]
     },
     {
-      "seq": 6, "category": "护眼", "name": "护眼认证",
-      "requirement": "通过德国莱茵TUV低蓝光认证，蓝光危害达到RG0级别",
+      "seq": 6, "category": "音频", "name": "麦克风阵列",
+      "requirement": "内置>=8阵列麦克风，拾音距离>=12米，拾音角度>=180°，音频CPU>=4核，采样率>=192K",
       "indicators": [
-        {"name": "TUV低蓝光认证", "value": true, "unit": "cert", "comparator": "eq"}
-      ],
-      "star_mark": false, "triangle_mark": false
+        {"name": "麦克风阵列", "value": 8, "unit": "count", "comparator": "gte"},
+        {"name": "拾音距离", "value": 12, "unit": "count", "comparator": "gte"},
+        {"name": "音频CPU核数", "value": 4, "unit": "count", "comparator": "eq"}
+      ]
     },
     {
-      "seq": 7, "category": "无线", "name": "无线投屏",
-      "requirement": "支持多终端无线投屏功能，兼容主流操作系统，支持不少于4个终端同时投屏",
+      "seq": 7, "category": "护眼", "name": "物理防蓝光",
+      "requirement": "屏体具备物理防蓝光功能，蓝光占比<50%，支持纸质护眼模式（牛皮纸/素描纸/宣纸/水彩纸/水纹纸）",
       "indicators": [
-        {"name": "投屏平台数", "value": 3, "unit": "platform_count", "comparator": "gte"}
-      ],
-      "star_mark": false, "triangle_mark": false
+        {"name": "物理防蓝光", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "蓝光占比", "value": 50, "unit": "pct", "comparator": "lt"},
+        {"name": "纸质护眼模式", "value": true, "unit": "feature", "comparator": "eq"}
+      ]
     },
     {
-      "seq": 8, "category": "物理", "name": "整机厚度",
-      "requirement": "整机厚度<=90mm，宽度>=4200mm，高度>=1200mm",
+      "seq": 8, "category": "接口", "name": "前置与侧置接口",
+      "requirement": "前置>=3路双通道USB3.0、>=1路全功能Type-C、>=1路HDMI。侧置1路HDMI IN、1路RS232",
       "indicators": [
-        {"name": "整机厚度", "value": 90, "unit": "mm", "comparator": "lte"}
-      ],
-      "star_mark": false, "triangle_mark": false
+        {"name": "前置USB3.0", "value": 3, "unit": "count", "comparator": "gte"},
+        {"name": "前置Type-C", "value": 1, "unit": "count", "comparator": "gte"},
+        {"name": "前置HDMI IN", "value": 1, "unit": "count", "comparator": "gte"}
+      ]
     },
     {
-      "seq": 9, "category": "连接", "name": "接口配置",
-      "requirement": "前置USB3.0>=2路、Type-C>=1路（支持充电和数据传输），HDMI IN>=1路",
+      "seq": 9, "category": "接口", "name": "Type-C全功能",
+      "requirement": "Type-C接口支持外接电脑HDMI信号接入显示，可调用整机内置摄像头/麦克风/扬声器，支持反向触控",
       "indicators": [
-        {"name": "前置USB3.0", "value": 2, "unit": "count", "comparator": "gte"},
-        {"name": "前置Type-C", "value": 1, "unit": "count", "comparator": "gte"}
-      ],
-      "star_mark": false, "triangle_mark": true
+        {"name": "Type-C视频输入", "value": true, "unit": "feature", "comparator": "eq"}
+      ]
     },
     {
-      "seq": 10, "category": "计算", "name": "OPS电脑",
-      "requirement": "CPU>=8核12线程，内存>=16GB，硬盘>=512GB SSD",
+      "seq": 10, "category": "OPS", "name": "OPS电脑",
+      "requirement": "CPU>=6核12线程，主频>=3.3GHz，内存>=8GB，硬盘>=256G SSD",
       "indicators": [
-        {"name": "内存", "value": 16, "unit": "gb", "comparator": "gte"},
-        {"name": "硬盘", "value": 512, "unit": "gb", "comparator": "gte"}
-      ],
-      "star_mark": false, "triangle_mark": false
+        {"name": "CPU核数", "value": 6, "unit": "count", "comparator": "gte"},
+        {"name": "内存", "value": 8, "unit": "gb", "comparator": "gte"},
+        {"name": "硬盘", "value": 256, "unit": "gb", "comparator": "gte"}
+      ]
     },
     {
-      "seq": 11, "category": "认证", "name": "防尘认证",
-      "requirement": "通过IP5X防尘认证，MTBF>=100000小时",
+      "seq": 11, "category": "无线", "name": "蓝牙与WiFi",
+      "requirement": "蓝牙>=5.4标准，工作距离>=15米，支持WiFi 6",
       "indicators": [
-        {"name": "IP5X防尘", "value": true, "unit": "cert", "comparator": "eq"},
-        {"name": "MTBF", "value": 100000, "unit": "hour", "comparator": "gte"}
-      ],
-      "star_mark": true, "triangle_mark": false
+        {"name": "蓝牙", "value": 5.4, "unit": "count", "comparator": "gte"},
+        {"name": "WiFi6", "value": true, "unit": "feature", "comparator": "eq"}
+      ]
     },
     {
-      "seq": 12, "category": "特色", "name": "AI课堂分析",
-      "requirement": "内置AI课堂行为分析引擎，实时统计学生举手/发言/专注度",
+      "seq": 12, "category": "特色", "name": "物联传感器",
+      "requirement": "整机具有物联传感器，可监控教室温度、湿度，并支持上传到云端",
       "indicators": [
-        {"name": "AI课堂分析", "value": true, "unit": "feature", "comparator": "eq"}
-      ],
-      "star_mark": false, "triangle_mark": false
+        {"name": "温湿度监测", "value": true, "unit": "feature", "comparator": "eq"}
+      ]
     }
   ]
 }

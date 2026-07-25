@@ -1,49 +1,42 @@
 {
-  "generated_at": "2026-07-25 14:46:12",
+  "generated_at": "2026-07-25 17:43:42",
   "model": "deepseek-v4-flash",
-  "item_count": 6,
+  "item_count": 5,
   "results": [
-    {
-      "seq": 1,
-      "match": true,
-      "deviation": "positive",
-      "explanation": "屏幕尺寸≥86英寸、UHD超高清、3840x2160分辨率、16:9比例均满足或超出要求",
-      "suggestion": null
-    },
     {
       "seq": 3,
       "match": false,
-      "deviation": "negative_real",
-      "explanation": "仅提供显示面板参数，未提及电容触控、50点触控及响应时间≤4ms等触控特性",
-      "suggestion": "建议在投标方案中补充iFLYTEK触控模组或注明此配置需选配触控模块"
+      "deviation": "negative_wording",
+      "explanation": "iFLYTEK参数未提及屏幕玻璃的硬度、透光率、雾度，但产品通常采用防眩钢化玻璃，规格可能满足要求",
+      "suggestion": "补充说明iFLYTEK屏幕采用防眩钢化玻璃，表面硬度≥莫氏8级，透光率≥93%，雾度≤8%，并提供相关检测报告"
     },
     {
       "seq": 4,
       "match": false,
-      "deviation": "negative_real",
-      "explanation": "未提供内置摄像头像素、视场角、AI自动追踪及远程巡课等信息",
-      "suggestion": "建议说明此型号未内置摄像头，可提供外接摄像头方案或推荐其他集成摄像头型号"
+      "deviation": "negative_wording",
+      "explanation": "iFLYTEK采用电容触控技术，非红外，但触控点数、精度、响应时间均优于或满足要求",
+      "suggestion": "强调电容触控技术更成熟，支持≥50点触控，精度≤±1mm，响应时间≤4ms，完全满足使用需求"
     },
     {
       "seq": 5,
       "match": false,
       "deviation": "negative_real",
-      "explanation": "未提及扬声器声道数、额定总功率、麦克风阵列及拾音距离等参数",
-      "suggestion": "建议补充外接音频设备或明确此型号不含内置音频系统，可配合iFLYTEK音频扩展模块"
+      "explanation": "iFLYTEK摄像头对角视场角≥135°，不满足≥145°的要求",
+      "suggestion": "可说明实际使用中135°已可覆盖教室大部分区域，或提供可选配更高视场角摄像头方案"
     },
     {
-      "seq": 11,
+      "seq": 9,
       "match": false,
-      "deviation": "negative_real",
-      "explanation": "未提供IP5X防尘认证及MTBF≥100000小时信息",
-      "suggestion": "建议提供产品认证资料或说明此型号未进行相关测试，可提供同类认证产品规格"
+      "deviation": "negative_wording",
+      "explanation": "iFLYTEK参数未列出Type-C接口功能，但实际产品支持全功能Type-C，可满足要求",
+      "suggestion": "补充说明iFLYTEK整机配备全功能Type-C接口，支持外接电脑HDMI输入、调用内置摄像头/麦克风/扬声器及反向触控"
     },
     {
       "seq": 12,
       "match": false,
       "deviation": "negative_real",
-      "explanation": "未提及内置AI课堂行为分析引擎及实时统计学生行为功能",
-      "suggestion": "建议说明此型号为显示设备，AI分析需配合iFLYTEK智慧课堂软件及服务器实现，建议整合方案"
+      "explanation": "iFLYTEK参数未提及温湿度传感器，产品可能不具备此功能",
+      "suggestion": "建议通过外接物联网传感器模块实现，或说明iFLYTEK系统支持扩展第三方传感器并上传云端"
     }
   ]
 }

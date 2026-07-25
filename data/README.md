@@ -11,15 +11,15 @@
 
 ```
 data/
-├── competitors/            # 竞品参数库（每个 JSON 一个厂商）
-│   ├── xiwo.json           # 希沃 — Mock 数据，待替换为真实参数
-│   ├── honghe.json         # 鸿合 — Mock 数据，待替换为真实参数
-│   ├── wenxiang.json       # 文香 — Mock 数据（真实竞品为海康威视，此文件仅供开发测试）
-│   └── haikang.json        # 海康 — ⬜ 待产品组创建（从知识库3/海康/ 提取）
+├── competitors/            # 竞品参数库（引擎自动加载目录下所有 .json）
+│   ├── xiwo.json           # 希沃 — 15 条真实参数（来源：6.5代机回复宝典）
+│   ├── honghe.json         # 鸿合 — 15 条真实参数（来源：HB-H868S.md）
+│   └── haikang.json        # 海康 — 15 条真实参数（来源：DS-D5186BCER.md）
 ├── xunfei/
-│   └── xunfei.json         # 讯飞 — Mock 数据，待替换为真实参数
+│   └── xunfei.json         # 讯飞 — 15 条真实参数（来源：讯飞数据.docx）
 ├── samples/
-│   └── sample-bid.json     # 样例招标文件 — ⬜ 待产品组创建
+│   ├── sample-bid.json     # 样例招标文件（12条，海康控标，Demo演示用）
+│   └── demo-result.json    # 预生成降级数据（AI API不可用时自动读取）
 └── README.md               # ← 本文件，Schema 规范
 ```
 
