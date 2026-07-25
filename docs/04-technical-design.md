@@ -24,146 +24,79 @@
 
 ![系统架构图](../output/arch-three-layer.svg)
 
-> 上图展示了完整的三层对比架构：Streamlit UI → engine.py 总调度 → [L2 控标识别 → L1 程序粗筛 → L3 AI 精判] → JSON 数据层。  
-> **执行顺序**：L2 先横向查表判定控标方，L1 再纵向逐条匹配讯飞参数，最后 L3 对 uncertain 项批量调 AI。
+> 一份招标文件进来，依次经过三层处理：**数值比对**（程序算清约 80% 的硬指标）→ **控标方识别**（查表统计判定这份标偏向哪家）→ **语义精判**（大模型处理说法不同、确实不满足的疑难项），最终输出控标方判定、逐条偏离标记和应对建议。设计原则是由易到难、由确定到模糊，能用确定方法解决的绝不交给大模型——又快、又省、又可解释。
 
-### 文件职责
+### 模块职责
 
-| 文件 | 行数 | 核心函数 | 依赖 |
-|------|------|---------|------|
-| `config.py` | 4 | 环境变量加载 | `.env` |
-| `data_loader.py` | 35 | `load_competitors()`, `load_xunfei()`, `load_bid()` | 文件系统 |
-| `parser.py` | 216 | `find_best_match()`, `quick_match()`, `extract_numeric()`, `compare_indicators()`, `keyword_overlap()` | 无 |
-| `matcher.py` | 45 | `identify_controller()` | parser |
-| `advisor.py` | 127 | `batch_analyze()` | config, DeepSeek API |
-| `engine.py` | 90 | `run_analysis()` | 全部模块 |
-| `app.py` | 150 | `page_upload()`, `page_compare()` | engine |
-| **总计** | **~667** | **14 个函数** | |
+| 模块 | 职责 | 是否用大模型 |
+|------|------|:---:|
+| 数据管理 | 加载竞品库、讯飞产品库、招标样例，统一为标准结构 | 否 |
+| 数值比对 | 单位对齐、数值大小判断，消化约 80% 的硬指标 | 否 |
+| 控标方识别 | 独有特征统计，判定控标方与置信度 | 否 |
+| 语义精判 | 处理说法差异、生成偏离结论与应对建议 | 是 |
+| 流程编排 | 串联三层，汇总分析报告 | — |
+| 交互界面 | 上传、控标结果展示、逐条对比、建议查看 | — |
 
 ### 关键技术决策
 
 | 决策 | 方案 | 理由 |
 |------|------|------|
-| AI 调用 | 批量打包 1 次请求 | 避免 N+1，12 条仅 1 次 API 调用 |
-| 降级设计 | 成功缓存 → 失败读缓存 | API 不可用时系统不崩溃 |
-| 参数匹配 | keyword_overlap 评分 + category/unit 加成 | 修复 unit-only 错配 Bug |
-| Prompt 工程 | 15 条讯飞全量目录注入 | 避免 AI 被错配参数误导 |
-| 数据解耦 | data_loader 抽象层 | 换存储只改 loader，引擎不动 |
+| 大模型调用 | 疑难项打包成一次请求 | 一份标书只调一次，又快又省 |
+| 断网降级 | 自动读取上次成功结果 | 大模型不可用时演示不中断 |
+| 参数匹配 | 关键词相似度 + 类别/单位加权打分 | 避免把"防眩玻璃"错配到"亮度"这类问题 |
+| 提示词设计 | 附上讯飞完整参数目录作参考 | 避免大模型只盯一条错配参数下结论 |
+| 数据解耦 | 数据读取独立成层 | 未来换存储方式，分析逻辑不受影响 |
 
 ---
 
 ## 3. 核心算法：三层对比
 
-### 3.1 第一层：程序粗筛（Parser + Quick Match）
+一份招标文件进来，我们要回答三个业务问题，对应三层处理：
 
-**目的**：把能直接比的都处理掉，减少 AI 调用。
+| 层 | 回答的问题 | 用什么手段 |
+|----|-----------|-----------|
+| 第一层 | 每条参数，讯飞到底满不满足？ | 数值计算 |
+| 第二层 | 这份标是照着哪家竞品写的？ | 特征统计 |
+| 第三层 | 说法不同的、不满足的，怎么应对？ | 大模型理解 |
 
-```python
-def quick_match(bid_item, our_item):
-    """
-    返回：
-    - "positive": 明确正偏离
-    - "negative": 明确负偏离
-    - "uncertain": 需要AI精判
-    """
-    # Step 1: 尝试提取数值
-    bid_val, bid_unit = extract_value(bid_item.requirement)
-    our_val, our_unit = extract_value(our_item.spec)
+三层由易到难、由确定到模糊，能用确定方法解决的绝不交给大模型——既快又省，判断过程也可解释、可复核。
 
-    if bid_val is not None and our_val is not None:
-        # 单位归一化
-        our_val = normalize_unit(our_val, our_unit, bid_unit)
-        if our_val >= bid_val:
-            return "positive", our_val - bid_val
-        else:
-            return "uncertain", None  # 数值不满足，但可能是说法问题
+### 3.0 前置：文档解析
 
-    # Step 2: 关键词匹配
-    if keyword_overlap(bid_item.requirement, our_item.spec) > 0.7:
-        return "positive", None
+三层比对的前提是先把招标文件（PDF / Word / Excel）里的参数**抠成结构化数据**。这一步用 MinerU：先识别版面（哪块是正文、哪块是参数表格），再把表格和文字提取为 Markdown，最后归一化成每条参数带"名称 / 数值 / 单位"的 JSON。有了这份干净的结构化数据，后面三层才能逐条比对。
 
-    # Step 3: 兜底 → 送AI
-    return "uncertain", None
-```
+### 3.1 第一层：数值比对
 
-**辅助函数**（纯规则，不调 AI）：
+招标参数里绝大多数是硬指标：亮度不低于 500cd/m²、厚度不超过 28mm、分辨率 4K。这类要求本质是一次数值大小比较，交给程序处理最可靠。
 
-| 函数 | 功能 | 示例 |
-|------|------|------|
-| `extract_value()` | 从文本提取数值+单位 | "≥5K" → (5, "K") |
-| `normalize_unit()` | 单位统一 | "3840×2160" ↔ "4K" ↔ "四倍高清" |
-| `keyword_overlap()` | 关键词重合率 | "无线投屏" vs "屏幕镜像" → 0.3 → 送 AI |
+难点不在"比大小"，而在**把不同写法的同一个指标对齐**。招标文件写"4K"，讯飞规格写"3840×2160"，说的是同一件事；"1300 万像素"和"13MP"也是同一个数。程序先把两边的数值和单位从文本里抠出来，统一到同一口径，再按招标要求的方向（不低于 / 不超过 / 等于）判断。
 
-### 3.2 第二层：控标方识别（横向对比）
+- 能对齐、且满足 → **正偏离**，讯飞达标甚至超出
+- 能对齐、但不满足 → 数值上不达标，标记为待定，交给第三层复核（可能只是说法问题）
+- 对不齐（纯功能描述，比如"支持无线投屏"，没有数字可比） → 交给第三层用语义判断
 
-**目的**：判定招标文件是照着哪家写的。
+这一层把标书里能用数字说清的部分（约八成）直接消化掉，不消耗任何大模型额度。
 
-```python
-def identify_controller(bid_params, competitor_dbs):
-    """
-    competitor_dbs = {
-        "希沃": [param1, param2, ...],
-        "鸿合": [param1, param2, ...],
-        "文香": [param1, param2, ...],
-    }
-    """
-    scores = {"希沃": 0, "鸿合": 0, "文香": 0}
-    anomalies = []
+### 3.2 第二层：控标方识别
 
-    for bid_param in bid_params:
-        satisfied_by = []
+这一层回答"这份标是照着谁写的"。原理是找**独有特征**——某条参数放到三家竞品库里比一遍，如果**只有一家满足**，那这条就是这家的独有特征，是控标的强信号。
 
-        for comp_name, comp_params in competitor_dbs.items():
-            # 同样走 quick_match，只判断是否满足
-            result, _ = quick_match(bid_param, find_matching(comp_params, bid_param))
-            if result == "positive":
-                satisfied_by.append(comp_name)
+逐条统计每家命中的独有特征数，命中最多的那家就是控标方，命中占比就是置信度。比如 12 条参数里有 6 条是海康独有，就判定海康控标、置信度约五成。
 
-        if len(satisfied_by) == 1:
-            # 独有特征！
-            scores[satisfied_by[0]] += 1
-        elif len(satisfied_by) == 0:
-            anomalies.append(bid_param)  # 数据库里谁都不满足
+这一步是纯粹的查表和计数，没有任何模糊判断，因此用程序完成，毫秒级出结果、零额度消耗。如果每条都去问大模型，一份标书 12 条参数 × 3 家就是 36 次调用，既慢又浪费。
 
-    total_hits = sum(scores.values())
-    if total_hits > 0:
-        controller = max(scores, key=scores.get)
-        confidence = scores[controller] / len(bid_params)
-    else:
-        controller = "无法判定"
-        confidence = 0
+若某条参数三家都不满足，说明它可能指向了库外的第四家，单独标为异常项，计算置信度时排除，避免干扰判断。
 
-    return {
-        "controller": controller,
-        "confidence": confidence,
-        "scores": scores,
-        "anomalies": anomalies
-    }
-```
+### 3.3 第三层：AI 语义精判
 
-**为什么这关不需要 AI？**
-- 本质就是"查表+计数"，SQL 一条 GROUP BY 就能干的事
-- 如果每条都调 AI，额度撑不住（12条×3家 = 36次调用/份标书）
-- 程序跑：毫秒级，0 额度消耗
+前两层解决的是"数字能算清"的部分，剩下两类交给大模型：
 
-### 3.3 第三层：AI 语义精判（纵向对比）
+1. **说法不同、意思相同**——招标写"无线投屏"，讯飞规格写"屏幕镜像"，字面对不上但功能一致。这类需要语义理解，判断为"说辞可改"，并给出改写建议。
+2. **确实不满足**——讯飞规格里真没有对应能力。这类要生成应对话术：从教学实用性、生态完整性、法规标准三个角度质疑该参数的必要性，或建议走渠道协调。
 
-**目的**：处理说法不同但意思相同的参数，并生成人话建议。
+为保证大模型判得准，调用时会把讯飞的完整参数目录一并给它作参考，避免它只盯着某一条错配的参数下结论。所有待判参数打包成一次请求发出，而不是逐条调用，一份标书的语义判断通常一次就能返回，成本可忽略。
 
-**触发条件**（OR 关系）：
-1. `quick_match()` 返回 `"uncertain"`
-2. 需要生成应对建议（所有 🔴 负偏离项）
-
-**Prompt 设计原则**：
-- 结构化输出（JSON），避免 AI 自由发挥导致解析失败
-- 限制输出长度（token 消耗可控）
-- 内置招投标领域知识（偏离类型、应对策略分类）
-
-**每条 AI 调用预估消耗**：
-- Prompt: ~200 tokens
-- Response: ~150 tokens
-- 总计: ~350 tokens ≈ $0.005
-- $20 可处理约 4000 条，绰绰有余
+大模型不可用时（超时、限流），系统自动读取上一次成功分析的缓存结果，保证演示不中断。
 
 ---
 

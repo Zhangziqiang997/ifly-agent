@@ -1,135 +1,83 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 820" width="960" height="820">
-<style>
-  text { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", "Microsoft JhengHei", "SimHei", sans-serif; }
-</style>
-<defs>
-  <marker id="a-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/></marker>
-  <marker id="a-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/></marker>
-  <marker id="a-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#ea580c"/></marker>
-  <marker id="a-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/></marker>
-  <marker id="a-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/></marker>
-  <marker id="a-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0d9488"/></marker>
-  <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/></filter>
-</defs>
-<rect width="960" height="820" fill="#ffffff"/>
-<text x="480" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#111827">参数智能体 — 系统架构图</text>
-<text x="480" y="48" text-anchor="middle" font-size="11" fill="#6b7280">AI 驱动的招投标参数智能比对与决策辅助系统 | 文档解析 + 三层对比 + AI 语义精判</text>
-<circle cx="48" cy="88" r="10" fill="none" stroke="#6b7280" stroke-width="1.5"/>
-<path d="M 33 109 Q 33 99, 48 99 Q 63 99, 63 109" fill="none" stroke="#6b7280" stroke-width="1.5"/>
-<text x="48" y="125" text-anchor="middle" font-size="11" fill="#6b7280">用户</text>
-<rect x="90" y="68" width="140" height="46" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>
-<text x="160" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#166534">招标文件上传</text>
-<text x="160" y="103" text-anchor="middle" font-size="10" fill="#6b7280">PDF / Word / Excel</text>
-<line x1="65" y1="91" x2="82" y2="91" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>
-<rect x="250" y="62" width="694" height="58" rx="8" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>
-<text x="266" y="80" font-size="11" font-weight="600" fill="#0f766e">MinerU — 文档解析引擎 (视觉 Pipeline + VLM 双后端)</text>
-<rect x="266" y="92" width="118" height="20" rx="4" fill="#ccfbf1" stroke="#99f6e4" stroke-width="0.5"/>
-<text x="325.0" y="100" text-anchor="middle" font-size="8" fill="#0f766e">1. 布局检测</text>
-<text x="325.0" y="109" text-anchor="middle" font-size="7" fill="#6b7280">DocLayout-YOLO</text>
-<rect x="392" y="92" width="118" height="20" rx="4" fill="#ccfbf1" stroke="#99f6e4" stroke-width="0.5"/>
-<text x="451.0" y="100" text-anchor="middle" font-size="8" fill="#0f766e">2. OCR 提取</text>
-<text x="451.0" y="109" text-anchor="middle" font-size="7" fill="#6b7280">PaddleOCR / VLM</text>
-<rect x="518" y="92" width="118" height="20" rx="4" fill="#ccfbf1" stroke="#99f6e4" stroke-width="0.5"/>
-<text x="577.0" y="100" text-anchor="middle" font-size="8" fill="#0f766e">3. 公式识别</text>
-<text x="577.0" y="109" text-anchor="middle" font-size="7" fill="#6b7280">Unimernet → LaTeX</text>
-<rect x="644" y="92" width="118" height="20" rx="4" fill="#ccfbf1" stroke="#99f6e4" stroke-width="0.5"/>
-<text x="703.0" y="100" text-anchor="middle" font-size="8" fill="#0f766e">4. 表格识别</text>
-<text x="703.0" y="109" text-anchor="middle" font-size="7" fill="#6b7280">PP-StructureV2</text>
-<rect x="770" y="92" width="118" height="20" rx="4" fill="#ccfbf1" stroke="#99f6e4" stroke-width="0.5"/>
-<text x="829.0" y="100" text-anchor="middle" font-size="8" fill="#0f766e">5. 排序拼装</text>
-<text x="829.0" y="109" text-anchor="middle" font-size="7" fill="#6b7280">→ Markdown / JSON</text>
-<line x1="236" y1="91" x2="242" y2="91" stroke="#0d9488" stroke-width="1.5" marker-end="url(#a-teal)"/>
-<rect x="90" y="150" width="850" height="72" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="6,3"/>
-<text x="104" y="166" font-size="11" fill="#94a3b8">Streamlit Web UI (src/app.py)</text>
-<rect x="120" y="174" width="395" height="38" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<text x="317" y="192" text-anchor="middle" font-size="12" fill="#111827">Page 1: 上传 &amp; 控标结果</text>
-<text x="317" y="206" text-anchor="middle" font-size="9" fill="#6b7280">文件上传 · 置信度卡片 · 厂商得分图</text>
-<rect x="535" y="174" width="380" height="38" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>
-<text x="725" y="192" text-anchor="middle" font-size="12" fill="#111827">Page 2: 参数对比表 &amp; 应对建议</text>
-<text x="725" y="206" text-anchor="middle" font-size="9" fill="#6b7280">逐条对比 · 筛选器 · 偏离标记 · 建议卡片</text>
-<line x1="480" y1="114" x2="480" y2="120" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>
-<line x1="480" y1="144" x2="480" y2="150" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>
-<rect x="320" y="250" width="320" height="46" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2" filter="url(#shadow)"/>
-<text x="480" y="270" text-anchor="middle" font-size="14" font-weight="600" fill="#1d4ed8">engine.py — run_analysis()</text>
-<text x="480" y="286" text-anchor="middle" font-size="10" fill="#6b7280">总调度器: 加载数据 → 调度三层引擎 → 汇总 JSON 输出</text>
-<line x1="480" y1="222" x2="480" y2="250" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>
-<rect x="16" y="324" width="928" height="156" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-<text x="56" y="344" font-size="11" font-weight="600" fill="#64748b">核心分析引擎 (三层对比)</text>
-<rect x="36" y="354" width="275" height="126" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>
-<text x="173.5" y="378" text-anchor="middle" font-size="13" font-weight="600" fill="#c2410c">Layer 2 · 控标识别</text>
-<text x="173.5" y="396" text-anchor="middle" font-size="9" fill="#9a3412">src/matcher.py — 49 行</text>
-<line x1="48" y1="404" x2="299" y2="404" stroke="#fed7aa" stroke-width="1"/>
-<text x="52" y="418" font-size="10" fill="#431407">identify_controller()</text>
-<text x="52" y="432" font-size="10" fill="#431407">→ 招标参数 x 3家竞品逐一查表</text>
-<text x="52" y="446" font-size="10" fill="#431407">→ 仅1家满足 = 独有特征命中</text>
-<text x="52" y="460" font-size="10" fill="#431407">→ 统计 → 控标方 + 置信度</text>
-<rect x="335" y="354" width="275" height="126" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>
-<text x="472.5" y="378" text-anchor="middle" font-size="13" font-weight="600" fill="#1d4ed8">Layer 1 · 程序粗筛</text>
-<text x="472.5" y="396" text-anchor="middle" font-size="9" fill="#1e3a5f">src/parser.py — 216 行</text>
-<line x1="347" y1="404" x2="598" y2="404" stroke="#bfdbfe" stroke-width="1"/>
-<text x="351" y="418" font-size="10" fill="#1e3a5f">find_best_match() 评分排序</text>
-<text x="351" y="432" font-size="10" fill="#1e3a5f">→ extract_numeric() 数值提取</text>
-<text x="351" y="446" font-size="10" fill="#1e3a5f">→ compare_indicators() 指标匹配</text>
-<text x="351" y="460" font-size="10" fill="#1e3a5f">→ keyword_overlap() 相似度兜底</text>
-<rect x="634" y="354" width="275" height="126" rx="8" fill="#faf5ff" stroke="#c4b5fd" stroke-width="1.5"/>
-<text x="771.5" y="378" text-anchor="middle" font-size="13" font-weight="600" fill="#6d28d9">Layer 3 · AI 语义精判</text>
-<text x="771.5" y="396" text-anchor="middle" font-size="9" fill="#4c1d95">src/advisor.py — 127 行</text>
-<line x1="646" y1="404" x2="897" y2="404" stroke="#ddd6fe" stroke-width="1"/>
-<text x="650" y="418" font-size="10" fill="#4c1d95">batch_analyze() 批量打包</text>
-<text x="650" y="432" font-size="10" fill="#4c1d95">→ 全量讯飞目录注入 Prompt</text>
-<text x="650" y="446" font-size="10" fill="#4c1d95">→ DeepSeek API (1次请求)</text>
-<text x="650" y="460" font-size="10" fill="#4c1d95">→ 失败降级: 读本地缓存 JSON</text>
-<rect x="833" y="360" width="68" height="16" rx="4" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>
-<text x="867" y="371" text-anchor="middle" font-size="8" fill="#7c3aed">DeepSeek API</text>
-<path d="M 315 424 L 331 424" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#a-orange)"/>
-<text x="323.0" y="418" text-anchor="middle" font-size="9" fill="#ea580c">筛选后</text>
-<path d="M 614 424 L 630 424" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a-blue)"/>
-<text x="622.0" y="418" text-anchor="middle" font-size="9" fill="#2563eb">uncertain</text>
-<path d="M 480 296 L 480 306 L 472.5 306 L 472.5 346" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#a-blue)"/>
-<path d="M 420 296 L 420 306 L 173.5 306 L 173.5 346" stroke="#ea580c" stroke-width="1.5" fill="none" marker-end="url(#a-orange)"/>
-<path d="M 540 296 L 540 306 L 771.5 306 L 771.5 346" stroke="#7c3aed" stroke-width="1.5" fill="none" marker-end="url(#a-purple)"/>
-<rect x="16" y="510" width="928" height="70" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
-<text x="56" y="526" font-size="11" font-weight="600" fill="#64748b">数据层 (src/data_loader.py + config.py / .env)</text>
-<rect x="36" y="538" width="210" height="32" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
-<text x="141.0" y="551" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">competitors/</text>
-<text x="141.0" y="565" text-anchor="middle" font-size="8" fill="#6b7280">xiwo · honghe · haikang (各15条)</text>
-<rect x="262" y="538" width="210" height="32" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
-<text x="367.0" y="551" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">xunfei/</text>
-<text x="367.0" y="565" text-anchor="middle" font-size="8" fill="#6b7280">xunfei.json (15条)</text>
-<rect x="488" y="538" width="210" height="32" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1"/>
-<text x="593.0" y="551" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">samples/</text>
-<text x="593.0" y="565" text-anchor="middle" font-size="8" fill="#6b7280">sample-bid.json · demo-result.json</text>
-<rect x="714" y="538" width="210" height="32" rx="6" fill="#fef2f2" stroke="#fca5a5" stroke-width="1"/>
-<text x="819.0" y="551" text-anchor="middle" font-size="10" font-weight="600" fill="#991b1b">config.py + .env</text>
-<text x="819.0" y="565" text-anchor="middle" font-size="8" fill="#6b7280">API_KEY · MODEL · 环境变量</text>
-<path d="M 460 296 L 460 306 L 80 306 L 80 506" stroke="#16a34a" stroke-width="1" fill="none" marker-end="url(#a-green)" stroke-dasharray="4,2"/>
-<text x="90" y="300" font-size="9" fill="#16a34a">读写 JSON</text>
-<rect x="16" y="596" width="928" height="24" rx="6" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>
-<text x="480" y="612" text-anchor="middle" font-size="10" fill="#0369a1">执行顺序: MinerU解析 → L2(横向查表) → L1(纵向匹配) → L3(AI精判)  |  总计 ~667 行 Python · 14 个函数  |  端到端耗时 ~5s</text>
-<rect x="16" y="632" width="928" height="36" rx="6" fill="#fafafa" stroke="#e5e7eb" stroke-width="1"/>
-<text x="32" y="646" font-size="10" font-weight="600" fill="#0f766e">MinerU 技术路线</text>
-<text x="32" y="661" font-size="10" fill="#6b7280">Pipeline后端(标准文档): DocLayout-YOLO布局检测 → PaddleOCR文本提取 → Unimernet公式→LaTeX → PP-StructureV2表格→HTML → 阅读顺序排序 → Markdown/JSON</text>
-<text x="740" y="661" font-size="10" fill="#6b7280">| VLM后端: InternVL2 端到端解析</text>
-<rect x="16" y="684" width="928" height="120" rx="6" fill="#fafafa" stroke="#e5e7eb" stroke-width="1"/>
-<text x="32" y="702" font-size="10" font-weight="600" fill="#374151">图例</text>
-<line x1="80" y1="716" x2="108" y2="716" stroke="#0d9488" stroke-width="1.5" marker-end="url(#a-teal)"/>
-<text x="116" y="714" font-size="10" fill="#374151">文档解析流</text>
-<text x="116" y="728" font-size="9" fill="#6b7280">MinerU: 视觉Pipeline + VLM</text>
-<line x1="370" y1="716" x2="398" y2="716" stroke="#ea580c" stroke-width="1.5" marker-end="url(#a-orange)"/>
-<text x="406" y="714" font-size="10" fill="#374151">控标识别流</text>
-<text x="406" y="728" font-size="9" fill="#6b7280">L2: 12条x3家=36次查表</text>
-<line x1="660" y1="716" x2="688" y2="716" stroke="#2563eb" stroke-width="1.5" marker-end="url(#a-blue)"/>
-<text x="696" y="714" font-size="10" fill="#374151">程序匹配流</text>
-<text x="696" y="728" font-size="9" fill="#6b7280">L1: ~80%参数直接出结论</text>
-<line x1="80" y1="756" x2="108" y2="756" stroke="#7c3aed" stroke-width="1.5" marker-end="url(#a-purple)"/>
-<text x="116" y="754" font-size="10" fill="#374151">AI 语义流</text>
-<text x="116" y="768" font-size="9" fill="#6b7280">L3: 批量打包1次请求 + 降级</text>
-<line x1="370" y1="756" x2="398" y2="756" stroke="#16a34a" stroke-width="1.5" marker-end="url(#a-green)"/>
-<text x="406" y="754" font-size="10" fill="#374151">数据读写</text>
-<text x="406" y="768" font-size="9" fill="#6b7280">JSON 文件 / 绿色虚线</text>
-<line x1="660" y1="756" x2="688" y2="756" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>
-<text x="696" y="754" font-size="10" fill="#374151">用户交互</text>
-<text x="696" y="768" font-size="9" fill="#6b7280">Streamlit UI 请求/响应</text>
-<text x="32" y="794" font-size="9" fill="#6b7280">MinerU 双后端架构 | Pipeline 后端(快): PaddleOCR + DocLayout-YOLO | VLM 后端(强): InternVL2 端到端 | pip install mineru → magic-pdf 命令行 / Python API</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720">
+  <style>
+    text { font-family: "Microsoft YaHei", "PingFang SC", "SimHei", sans-serif; }
+    .mono { font-family: "Courier New", "Consolas", monospace; }
+  </style>
+  <defs>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#112240" stroke-width="0.5"/>
+    </pattern>
+    <marker id="ar" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#00b4d8"/>
+    </marker>
+    <marker id="ar-g" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#06d6a0"/>
+    </marker>
+    <marker id="ar-o" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">
+      <polygon points="0 0, 9 3.5, 0 7" fill="#f77f00"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="720" fill="#0a1628"/>
+  <rect width="1200" height="720" fill="url(#grid)" opacity="0.6"/>
+  <text x="40" y="46" fill="#ffffff" font-size="22" font-weight="700">参数智能体 · 三层对比分析架构</text>
+  <text x="40" y="70" fill="#48cae4" font-size="13">招投标参数智能比对系统 — 由确定到模糊，能算清的绝不交给大模型</text>
+  <line x1="40" y1="84" x2="1160" y2="84" stroke="#00b4d8" stroke-width="1" opacity="0.4"/>
+  <rect x="40" y="300" width="150" height="120" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>
+  <text x="115" y="330" fill="#00b4d8" font-size="11" text-anchor="middle" letter-spacing="0.05em">输 入</text>
+  <text x="115" y="358" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="700">招标文件</text>
+  <text x="115" y="380" fill="#caf0f8" font-size="11" text-anchor="middle">多条参数要求</text>
+  <text x="115" y="400" fill="#48cae4" font-size="10" text-anchor="middle" class="mono">亮度 &#8805; 500cd/m2</text>
+  <rect x="250" y="110" width="620" height="560" rx="2" fill="none" stroke="#00b4d8" stroke-width="1" stroke-dasharray="6,3" opacity="0.5"/>
+  <text x="266" y="132" fill="#48cae4" font-size="11" letter-spacing="0.08em">三 层 对 比 引 擎 · 串 行 流 水 线</text>
+  <rect x="280" y="150" width="560" height="150" rx="2" fill="#0d1f3c" stroke="#06d6a0" stroke-width="1.5"/>
+  <circle cx="306" cy="180" r="15" fill="#06d6a0" opacity="0.15" stroke="#06d6a0" stroke-width="1"/>
+  <text x="306" y="185" fill="#06d6a0" font-size="15" text-anchor="middle" font-weight="700">1</text>
+  <text x="332" y="178" fill="#ffffff" font-size="15" font-weight="700">第一层 · 数值比对</text>
+  <text x="332" y="198" fill="#48cae4" font-size="11">纯程序计算，不用大模型</text>
+  <text x="300" y="228" fill="#caf0f8" font-size="12">· 单位对齐：4K = 3840&#215;2160，13MP = 1300万像素</text>
+  <text x="300" y="250" fill="#caf0f8" font-size="12">· 数值大小比较，按招标要求方向判定满足与否</text>
+  <text x="300" y="272" fill="#06d6a0" font-size="12" font-weight="700">约 80% 参数在此层直接出结论</text>
+  <rect x="280" y="320" width="560" height="150" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>
+  <circle cx="306" cy="350" r="15" fill="#00b4d8" opacity="0.15" stroke="#00b4d8" stroke-width="1"/>
+  <text x="306" y="355" fill="#00b4d8" font-size="15" text-anchor="middle" font-weight="700">2</text>
+  <text x="332" y="348" fill="#ffffff" font-size="15" font-weight="700">第二层 · 控标方识别</text>
+  <text x="332" y="368" fill="#48cae4" font-size="11">查表统计，不用大模型</text>
+  <text x="300" y="398" fill="#caf0f8" font-size="12">· 每条参数比对三家竞品：希沃 / 鸿合 / 海康</text>
+  <text x="300" y="420" fill="#caf0f8" font-size="12">· 仅一家满足 = 独有特征，统计各家命中数</text>
+  <text x="300" y="442" fill="#00b4d8" font-size="12" font-weight="700">命中最多者 = 控标方 + 置信度</text>
+  <rect x="280" y="490" width="560" height="150" rx="2" fill="#0d1f3c" stroke="#f77f00" stroke-width="1.5"/>
+  <circle cx="306" cy="520" r="15" fill="#f77f00" opacity="0.15" stroke="#f77f00" stroke-width="1"/>
+  <text x="306" y="525" fill="#f77f00" font-size="15" text-anchor="middle" font-weight="700">3</text>
+  <text x="332" y="518" fill="#ffffff" font-size="15" font-weight="700">第三层 · 语义精判</text>
+  <text x="332" y="538" fill="#48cae4" font-size="11">大模型理解 · DeepSeek</text>
+  <text x="300" y="568" fill="#caf0f8" font-size="12">· 说法不同意思相同 → 说辞可改，给改写建议</text>
+  <text x="300" y="590" fill="#caf0f8" font-size="12">· 确实不满足 → 生成质疑话术 / 渠道协调建议</text>
+  <text x="300" y="612" fill="#f77f00" font-size="12" font-weight="700">只处理前两层无法确定的疑难项</text>
+  <rect x="910" y="150" width="250" height="150" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>
+  <text x="1035" y="180" fill="#00b4d8" font-size="11" text-anchor="middle" letter-spacing="0.05em">输 出 · 分 析 报 告</text>
+  <line x1="926" y1="192" x2="1144" y2="192" stroke="#00b4d8" stroke-width="0.5" opacity="0.5"/>
+  <text x="930" y="218" fill="#caf0f8" font-size="12">&#9679; 控标方判定 + 置信度</text>
+  <text x="930" y="244" fill="#caf0f8" font-size="12">&#9679; 逐条正 / 负偏离标记</text>
+  <text x="930" y="270" fill="#caf0f8" font-size="12">&#9679; 负偏离应对建议</text>
+  <rect x="930" y="285" width="14" height="8" rx="1" fill="#06d6a0"/>
+  <rect x="1000" y="285" width="14" height="8" rx="1" fill="#f77f00"/>
+  <rect x="1075" y="285" width="14" height="8" rx="1" fill="#e63946"/>
+  <polyline points="190,360 220,360 220,225 280,225" fill="none" stroke="#00b4d8" stroke-width="1.5" marker-end="url(#ar)"/>
+  <polyline points="560,300 560,320" fill="none" stroke="#48cae4" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="570" y="314" fill="#48cae4" font-size="10">数值判定</text>
+  <polyline points="560,470 560,490" fill="none" stroke="#48cae4" stroke-width="1.5" marker-end="url(#ar)"/>
+  <text x="570" y="484" fill="#48cae4" font-size="10">疑难项下沉</text>
+  <polyline points="840,225 890,225 890,200 910,200" fill="none" stroke="#06d6a0" stroke-width="1.5" marker-end="url(#ar-g)"/>
+  <polyline points="840,395 890,395 890,235 910,235" fill="none" stroke="#00b4d8" stroke-width="1.5" marker-end="url(#ar)"/>
+  <polyline points="840,565 895,565 895,265 910,265" fill="none" stroke="#f77f00" stroke-width="1.5" marker-end="url(#ar-o)"/>
+  <rect x="40" y="666" width="14" height="8" rx="1" fill="#06d6a0"/>
+  <text x="60" y="674" fill="#caf0f8" font-size="11">正偏离(满足)</text>
+  <rect x="160" y="666" width="14" height="8" rx="1" fill="#f77f00"/>
+  <text x="180" y="674" fill="#caf0f8" font-size="11">说辞可改</text>
+  <rect x="270" y="666" width="14" height="8" rx="1" fill="#e63946"/>
+  <text x="290" y="674" fill="#caf0f8" font-size="11">真不满足</text>
+  <rect x="920" y="660" width="240" height="44" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1"/>
+  <line x1="920" y1="676" x2="1160" y2="676" stroke="#00b4d8" stroke-width="0.5"/>
+  <text x="1040" y="672" text-anchor="middle" fill="#48cae4" font-size="9" letter-spacing="0.08em">SYSTEM ARCHITECTURE</text>
+  <text x="1040" y="695" text-anchor="middle" fill="#caf0f8" font-size="12" font-weight="700">三层对比分析引擎 v1.0</text>
 </svg>

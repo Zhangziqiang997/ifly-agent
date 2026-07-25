@@ -1,223 +1,132 @@
-W, H = 960, 820
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""参数智能体 — 三层对比架构图 (Style 3 Blueprint)"""
 
 lines = []
-def L(s):
-    lines.append(s)
+def L(s): lines.append(s)
 
-L('<?xml version="1.0" encoding="UTF-8"?>')
+W, H = 1200, 720
 L(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">')
-L('<style>')
-L('  text { font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", "Microsoft JhengHei", "SimHei", sans-serif; }')
-L('</style>')
-L('<defs>')
-L('  <marker id="a-blue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/></marker>')
-L('  <marker id="a-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#16a34a"/></marker>')
-L('  <marker id="a-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#ea580c"/></marker>')
-L('  <marker id="a-purple" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/></marker>')
-L('  <marker id="a-gray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/></marker>')
-L('  <marker id="a-teal" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0d9488"/></marker>')
-L('  <filter id="shadow" x="-5%" y="-5%" width="115%" height="115%"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/></filter>')
-L('</defs>')
-L(f'<rect width="{W}" height="{H}" fill="#ffffff"/>')
+L('  <style>')
+L('    text { font-family: "Microsoft YaHei", "PingFang SC", "SimHei", sans-serif; }')
+L('    .mono { font-family: "Courier New", "Consolas", monospace; }')
+L('  </style>')
+L('  <defs>')
+L('    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">')
+L('      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#112240" stroke-width="0.5"/>')
+L('    </pattern>')
+L('    <marker id="ar" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">')
+L('      <polygon points="0 0, 9 3.5, 0 7" fill="#00b4d8"/>')
+L('    </marker>')
+L('    <marker id="ar-g" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">')
+L('      <polygon points="0 0, 9 3.5, 0 7" fill="#06d6a0"/>')
+L('    </marker>')
+L('    <marker id="ar-o" markerWidth="9" markerHeight="7" refX="8" refY="3.5" orient="auto">')
+L('      <polygon points="0 0, 9 3.5, 0 7" fill="#f77f00"/>')
+L('    </marker>')
+L('  </defs>')
+# background
+L(f'  <rect width="{W}" height="{H}" fill="#0a1628"/>')
+L(f'  <rect width="{W}" height="{H}" fill="url(#grid)" opacity="0.6"/>')
 
-# ══════════ TITLE ══════════
-L('<text x="480" y="30" text-anchor="middle" font-size="18" font-weight="600" fill="#111827">参数智能体 — 系统架构图</text>')
-L('<text x="480" y="48" text-anchor="middle" font-size="11" fill="#6b7280">AI 驱动的招投标参数智能比对与决策辅助系统 | 文档解析 + 三层对比 + AI 语义精判</text>')
+# ---- Title ----
+L('  <text x="40" y="46" fill="#ffffff" font-size="22" font-weight="700">参数智能体 · 三层对比分析架构</text>')
+L('  <text x="40" y="70" fill="#48cae4" font-size="13">招投标参数智能比对系统 — 由确定到模糊，能算清的绝不交给大模型</text>')
+L('  <line x1="40" y1="84" x2="1160" y2="84" stroke="#00b4d8" stroke-width="1" opacity="0.4"/>')
 
-# ══════════ LAYER 0: USER + INPUT ══════════
-L('<circle cx="48" cy="88" r="10" fill="none" stroke="#6b7280" stroke-width="1.5"/>')
-L('<path d="M 33 109 Q 33 99, 48 99 Q 63 99, 63 109" fill="none" stroke="#6b7280" stroke-width="1.5"/>')
-L('<text x="48" y="125" text-anchor="middle" font-size="11" fill="#6b7280">用户</text>')
+# ============ INPUT (left) ============
+L('  <rect x="40" y="300" width="150" height="120" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>')
+L('  <text x="115" y="330" fill="#00b4d8" font-size="11" text-anchor="middle" letter-spacing="0.05em">输 入</text>')
+L('  <text x="115" y="358" fill="#ffffff" font-size="14" text-anchor="middle" font-weight="700">招标文件</text>')
+L('  <text x="115" y="380" fill="#caf0f8" font-size="11" text-anchor="middle">多条参数要求</text>')
+L('  <text x="115" y="400" fill="#48cae4" font-size="10" text-anchor="middle" class="mono">亮度 &#8805; 500cd/m2</text>')
 
-# Upload input box
-L('<rect x="90" y="68" width="140" height="46" rx="8" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5"/>')
-L('<text x="160" y="88" text-anchor="middle" font-size="12" font-weight="600" fill="#166534">招标文件上传</text>')
-L('<text x="160" y="103" text-anchor="middle" font-size="10" fill="#6b7280">PDF / Word / Excel</text>')
-L('<line x1="65" y1="91" x2="82" y2="91" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>')
+# ============ CORE (three stacked layers) ============
+CX = 250      # core container x
+CW = 620      # core container width
+L(f'  <rect x="{CX}" y="110" width="{CW}" height="560" rx="2" fill="none" stroke="#00b4d8" stroke-width="1" stroke-dasharray="6,3" opacity="0.5"/>')
+L(f'  <text x="{CX+16}" y="132" fill="#48cae4" font-size="11" letter-spacing="0.08em">三 层 对 比 引 擎 · 串 行 流 水 线</text>')
 
-# ══════════ LAYER 1: MinerU DOC PARSER ══════════
-L('<rect x="250" y="62" width="694" height="58" rx="8" fill="#f0fdfa" stroke="#5eead4" stroke-width="1.5"/>')
-L('<text x="266" y="80" font-size="11" font-weight="600" fill="#0f766e">MinerU — 文档解析引擎 (视觉 Pipeline + VLM 双后端)</text>')
+lx = CX + 30
+lw = CW - 60
 
-# 5 pipeline stages
-pw = 118
-ps = 8
-px_start = 266
-py = 92
-stages = [
-    ("1. 布局检测", "DocLayout-YOLO"),
-    ("2. OCR 提取", "PaddleOCR / VLM"),
-    ("3. 公式识别", "Unimernet → LaTeX"),
-    ("4. 表格识别", "PP-StructureV2"),
-    ("5. 排序拼装", "→ Markdown / JSON"),
-]
-for i, (title, sub) in enumerate(stages):
-    x = px_start + i * (pw + ps)
-    L(f'<rect x="{x}" y="{py}" width="{pw}" height="20" rx="4" fill="#ccfbf1" stroke="#99f6e4" stroke-width="0.5"/>')
-    L(f'<text x="{x+pw/2}" y="{py+8}" text-anchor="middle" font-size="8" fill="#0f766e">{title}</text>')
-    L(f'<text x="{x+pw/2}" y="{py+17}" text-anchor="middle" font-size="7" fill="#6b7280">{sub}</text>')
+# --- Layer 1: 数值比对 ---
+y1 = 150
+L(f'  <rect x="{lx}" y="{y1}" width="{lw}" height="150" rx="2" fill="#0d1f3c" stroke="#06d6a0" stroke-width="1.5"/>')
+L(f'  <circle cx="{lx+26}" cy="{y1+30}" r="15" fill="#06d6a0" opacity="0.15" stroke="#06d6a0" stroke-width="1"/>')
+L(f'  <text x="{lx+26}" y="{y1+35}" fill="#06d6a0" font-size="15" text-anchor="middle" font-weight="700">1</text>')
+L(f'  <text x="{lx+52}" y="{y1+28}" fill="#ffffff" font-size="15" font-weight="700">第一层 · 数值比对</text>')
+L(f'  <text x="{lx+52}" y="{y1+48}" fill="#48cae4" font-size="11">纯程序计算，不用大模型</text>')
+L(f'  <text x="{lx+20}" y="{y1+78}" fill="#caf0f8" font-size="12">· 单位对齐：4K = 3840&#215;2160，13MP = 1300万像素</text>')
+L(f'  <text x="{lx+20}" y="{y1+100}" fill="#caf0f8" font-size="12">· 数值大小比较，按招标要求方向判定满足与否</text>')
+L(f'  <text x="{lx+20}" y="{y1+122}" fill="#06d6a0" font-size="12" font-weight="700">约 80% 参数在此层直接出结论</text>')
 
-L('<line x1="236" y1="91" x2="242" y2="91" stroke="#0d9488" stroke-width="1.5" marker-end="url(#a-teal)"/>')
+# --- Layer 2: 控标方识别 ---
+y2 = 320
+L(f'  <rect x="{lx}" y="{y2}" width="{lw}" height="150" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>')
+L(f'  <circle cx="{lx+26}" cy="{y2+30}" r="15" fill="#00b4d8" opacity="0.15" stroke="#00b4d8" stroke-width="1"/>')
+L(f'  <text x="{lx+26}" y="{y2+35}" fill="#00b4d8" font-size="15" text-anchor="middle" font-weight="700">2</text>')
+L(f'  <text x="{lx+52}" y="{y2+28}" fill="#ffffff" font-size="15" font-weight="700">第二层 · 控标方识别</text>')
+L(f'  <text x="{lx+52}" y="{y2+48}" fill="#48cae4" font-size="11">查表统计，不用大模型</text>')
+L(f'  <text x="{lx+20}" y="{y2+78}" fill="#caf0f8" font-size="12">· 每条参数比对三家竞品：希沃 / 鸿合 / 海康</text>')
+L(f'  <text x="{lx+20}" y="{y2+100}" fill="#caf0f8" font-size="12">· 仅一家满足 = 独有特征，统计各家命中数</text>')
+L(f'  <text x="{lx+20}" y="{y2+122}" fill="#00b4d8" font-size="12" font-weight="700">命中最多者 = 控标方 + 置信度</text>')
 
-# ══════════ LAYER 2: Streamlit UI ══════════
-ui_y = 150
-L(f'<rect x="90" y="{ui_y}" width="850" height="72" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="6,3"/>')
-L(f'<text x="104" y="{ui_y+16}" font-size="11" fill="#94a3b8">Streamlit Web UI (src/app.py)</text>')
+# --- Layer 3: AI语义精判 ---
+y3 = 490
+L(f'  <rect x="{lx}" y="{y3}" width="{lw}" height="150" rx="2" fill="#0d1f3c" stroke="#f77f00" stroke-width="1.5"/>')
+L(f'  <circle cx="{lx+26}" cy="{y3+30}" r="15" fill="#f77f00" opacity="0.15" stroke="#f77f00" stroke-width="1"/>')
+L(f'  <text x="{lx+26}" y="{y3+35}" fill="#f77f00" font-size="15" text-anchor="middle" font-weight="700">3</text>')
+L(f'  <text x="{lx+52}" y="{y3+28}" fill="#ffffff" font-size="15" font-weight="700">第三层 · 语义精判</text>')
+L(f'  <text x="{lx+52}" y="{y3+48}" fill="#48cae4" font-size="11">大模型理解 · DeepSeek</text>')
+L(f'  <text x="{lx+20}" y="{y3+78}" fill="#caf0f8" font-size="12">· 说法不同意思相同 → 说辞可改，给改写建议</text>')
+L(f'  <text x="{lx+20}" y="{y3+100}" fill="#caf0f8" font-size="12">· 确实不满足 → 生成质疑话术 / 渠道协调建议</text>')
+L(f'  <text x="{lx+20}" y="{y3+122}" fill="#f77f00" font-size="12" font-weight="700">只处理前两层无法确定的疑难项</text>')
 
-L(f'<rect x="120" y="{ui_y+24}" width="395" height="38" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>')
-L(f'<text x="317" y="{ui_y+42}" text-anchor="middle" font-size="12" fill="#111827">Page 1: 上传 &amp; 控标结果</text>')
-L(f'<text x="317" y="{ui_y+56}" text-anchor="middle" font-size="9" fill="#6b7280">文件上传 · 置信度卡片 · 厂商得分图</text>')
+# ============ OUTPUT (right) ============
+ox = 910
+L(f'  <rect x="{ox}" y="150" width="250" height="150" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1.5"/>')
+L(f'  <text x="{ox+125}" y="180" fill="#00b4d8" font-size="11" text-anchor="middle" letter-spacing="0.05em">输 出 · 分 析 报 告</text>')
+L(f'  <line x1="{ox+16}" y1="192" x2="{ox+234}" y2="192" stroke="#00b4d8" stroke-width="0.5" opacity="0.5"/>')
+L(f'  <text x="{ox+20}" y="218" fill="#caf0f8" font-size="12">&#9679; 控标方判定 + 置信度</text>')
+L(f'  <text x="{ox+20}" y="244" fill="#caf0f8" font-size="12">&#9679; 逐条正 / 负偏离标记</text>')
+L(f'  <text x="{ox+20}" y="270" fill="#caf0f8" font-size="12">&#9679; 负偏离应对建议</text>')
 
-L(f'<rect x="535" y="{ui_y+24}" width="380" height="38" rx="6" fill="#ffffff" stroke="#d1d5db" stroke-width="1.5"/>')
-L(f'<text x="725" y="{ui_y+42}" text-anchor="middle" font-size="12" fill="#111827">Page 2: 参数对比表 &amp; 应对建议</text>')
-L(f'<text x="725" y="{ui_y+56}" text-anchor="middle" font-size="9" fill="#6b7280">逐条对比 · 筛选器 · 偏离标记 · 建议卡片</text>')
+# deviation legend chips inside output
+L(f'  <rect x="{ox+20}" y="285" width="14" height="8" rx="1" fill="#06d6a0"/>')
+L(f'  <rect x="{ox+90}" y="285" width="14" height="8" rx="1" fill="#f77f00"/>')
+L(f'  <rect x="{ox+165}" y="285" width="14" height="8" rx="1" fill="#e63946"/>')
 
-L(f'<line x1="480" y1="114" x2="480" y2="120" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>')
-L(f'<line x1="480" y1="{ui_y-6}" x2="480" y2="{ui_y}" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>')
+# ============ FLOW ARROWS ============
+# input -> core (into layer1 area)
+L(f'  <polyline points="190,360 220,360 220,225 {lx},225" fill="none" stroke="#00b4d8" stroke-width="1.5" marker-end="url(#ar)"/>')
+# layer1 -> layer2 (down)
+L(f'  <polyline points="{lx+lw//2},300 {lx+lw//2},320" fill="none" stroke="#48cae4" stroke-width="1.5" marker-end="url(#ar)"/>')
+L(f'  <text x="{lx+lw//2+10}" y="314" fill="#48cae4" font-size="10">数值判定</text>')
+# layer2 -> layer3 (down)
+L(f'  <polyline points="{lx+lw//2},470 {lx+lw//2},490" fill="none" stroke="#48cae4" stroke-width="1.5" marker-end="url(#ar)"/>')
+L(f'  <text x="{lx+lw//2+10}" y="484" fill="#48cae4" font-size="10">疑难项下沉</text>')
+# core -> output (three merge into output). Use right edge of each layer.
+L(f'  <polyline points="{lx+lw},225 890,225 890,200 {ox},200" fill="none" stroke="#06d6a0" stroke-width="1.5" marker-end="url(#ar-g)"/>')
+L(f'  <polyline points="{lx+lw},395 890,395 890,235 {ox},235" fill="none" stroke="#00b4d8" stroke-width="1.5" marker-end="url(#ar)"/>')
+L(f'  <polyline points="{lx+lw},565 895,565 895,265 {ox},265" fill="none" stroke="#f77f00" stroke-width="1.5" marker-end="url(#ar-o)"/>')
 
-# ══════════ LAYER 3: ENGINE ══════════
-eng_y = 250
-L(f'<rect x="320" y="{eng_y}" width="320" height="46" rx="8" fill="#ffffff" stroke="#2563eb" stroke-width="2" filter="url(#shadow)"/>')
-L(f'<text x="480" y="{eng_y+20}" text-anchor="middle" font-size="14" font-weight="600" fill="#1d4ed8">engine.py — run_analysis()</text>')
-L(f'<text x="480" y="{eng_y+36}" text-anchor="middle" font-size="10" fill="#6b7280">总调度器: 加载数据 → 调度三层引擎 → 汇总 JSON 输出</text>')
+# ============ LEGEND (bottom-left) ============
+ly = 690
+L(f'  <rect x="40" y="{ly-24}" width="14" height="8" rx="1" fill="#06d6a0"/>')
+L(f'  <text x="60" y="{ly-16}" fill="#caf0f8" font-size="11">正偏离(满足)</text>')
+L(f'  <rect x="160" y="{ly-24}" width="14" height="8" rx="1" fill="#f77f00"/>')
+L(f'  <text x="180" y="{ly-16}" fill="#caf0f8" font-size="11">说辞可改</text>')
+L(f'  <rect x="270" y="{ly-24}" width="14" height="8" rx="1" fill="#e63946"/>')
+L(f'  <text x="290" y="{ly-16}" fill="#caf0f8" font-size="11">真不满足</text>')
 
-L(f'<line x1="480" y1="{ui_y+72}" x2="480" y2="{eng_y}" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a-gray)"/>')
-
-# ══════════ LAYER 4: ANALYSIS ENGINE (3 columns) ══════════
-ana_y = 324
-ana_h = 156
-L(f'<rect x="16" y="{ana_y}" width="928" height="{ana_h}" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>')
-L(f'<text x="56" y="{ana_y+20}" font-size="11" font-weight="600" fill="#64748b">核心分析引擎 (三层对比)</text>')
-
-col_w = 275
-col_h = 126
-col_y = ana_y + 30
-gutter = 24
-x1 = 36; x2 = x1 + col_w + gutter; x3 = x2 + col_w + gutter
-
-# L2: Controller ID (orange)
-L(f'<rect x="{x1}" y="{col_y}" width="{col_w}" height="{col_h}" rx="8" fill="#fff7ed" stroke="#fdba74" stroke-width="1.5"/>')
-L(f'<text x="{x1+col_w/2}" y="{col_y+24}" text-anchor="middle" font-size="13" font-weight="600" fill="#c2410c">Layer 2 · 控标识别</text>')
-L(f'<text x="{x1+col_w/2}" y="{col_y+42}" text-anchor="middle" font-size="9" fill="#9a3412">src/matcher.py — 49 行</text>')
-L(f'<line x1="{x1+12}" y1="{col_y+50}" x2="{x1+col_w-12}" y2="{col_y+50}" stroke="#fed7aa" stroke-width="1"/>')
-for i, n in enumerate([
-    'identify_controller()',
-    '→ 招标参数 x 3家竞品逐一查表',
-    '→ 仅1家满足 = 独有特征命中',
-    '→ 统计 → 控标方 + 置信度',
-]):
-    L(f'<text x="{x1+16}" y="{col_y+64+i*14}" font-size="10" fill="#431407">{n}</text>')
-
-# L1: Program Match (blue)
-L(f'<rect x="{x2}" y="{col_y}" width="{col_w}" height="{col_h}" rx="8" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5"/>')
-L(f'<text x="{x2+col_w/2}" y="{col_y+24}" text-anchor="middle" font-size="13" font-weight="600" fill="#1d4ed8">Layer 1 · 程序粗筛</text>')
-L(f'<text x="{x2+col_w/2}" y="{col_y+42}" text-anchor="middle" font-size="9" fill="#1e3a5f">src/parser.py — 216 行</text>')
-L(f'<line x1="{x2+12}" y1="{col_y+50}" x2="{x2+col_w-12}" y2="{col_y+50}" stroke="#bfdbfe" stroke-width="1"/>')
-for i, n in enumerate([
-    'find_best_match() 评分排序',
-    '→ extract_numeric() 数值提取',
-    '→ compare_indicators() 指标匹配',
-    '→ keyword_overlap() 相似度兜底',
-]):
-    L(f'<text x="{x2+16}" y="{col_y+64+i*14}" font-size="10" fill="#1e3a5f">{n}</text>')
-
-# L3: AI Semantic (purple)
-L(f'<rect x="{x3}" y="{col_y}" width="{col_w}" height="{col_h}" rx="8" fill="#faf5ff" stroke="#c4b5fd" stroke-width="1.5"/>')
-L(f'<text x="{x3+col_w/2}" y="{col_y+24}" text-anchor="middle" font-size="13" font-weight="600" fill="#6d28d9">Layer 3 · AI 语义精判</text>')
-L(f'<text x="{x3+col_w/2}" y="{col_y+42}" text-anchor="middle" font-size="9" fill="#4c1d95">src/advisor.py — 127 行</text>')
-L(f'<line x1="{x3+12}" y1="{col_y+50}" x2="{x3+col_w-12}" y2="{col_y+50}" stroke="#ddd6fe" stroke-width="1"/>')
-for i, n in enumerate([
-    'batch_analyze() 批量打包',
-    '→ 全量讯飞目录注入 Prompt',
-    '→ DeepSeek API (1次请求)',
-    '→ 失败降级: 读本地缓存 JSON',
-]):
-    L(f'<text x="{x3+16}" y="{col_y+64+i*14}" font-size="10" fill="#4c1d95">{n}</text>')
-
-# DeepSeek badge inside L3
-L(f'<rect x="{x3+col_w-76}" y="{col_y+6}" width="68" height="16" rx="4" fill="#ede9fe" stroke="#c4b5fd" stroke-width="0.5"/>')
-L(f'<text x="{x3+col_w-42}" y="{col_y+17}" text-anchor="middle" font-size="8" fill="#7c3aed">DeepSeek API</text>')
-
-# HORIZONTAL FLOW: L2 → L1 → L3
-ay = col_y + 70
-L(f'<path d="M {x1+col_w+4} {ay} L {x2-4} {ay}" stroke="#ea580c" stroke-width="2" fill="none" marker-end="url(#a-orange)"/>')
-L(f'<text x="{x1+col_w+gutter/2}" y="{ay-6}" text-anchor="middle" font-size="9" fill="#ea580c">筛选后</text>')
-L(f'<path d="M {x2+col_w+4} {ay} L {x3-4} {ay}" stroke="#2563eb" stroke-width="2" fill="none" marker-end="url(#a-blue)"/>')
-L(f'<text x="{x2+col_w+gutter/2}" y="{ay-6}" text-anchor="middle" font-size="9" fill="#2563eb">uncertain</text>')
-
-# ENGINE → ANALYSIS (3 paths)
-L(f'<path d="M 480 {eng_y+46} L 480 {eng_y+56} L {x2+col_w/2} {eng_y+56} L {x2+col_w/2} {col_y-8}" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#a-blue)"/>')
-L(f'<path d="M 420 {eng_y+46} L 420 {eng_y+56} L {x1+col_w/2} {eng_y+56} L {x1+col_w/2} {col_y-8}" stroke="#ea580c" stroke-width="1.5" fill="none" marker-end="url(#a-orange)"/>')
-L(f'<path d="M 540 {eng_y+46} L 540 {eng_y+56} L {x3+col_w/2} {eng_y+56} L {x3+col_w/2} {col_y-8}" stroke="#7c3aed" stroke-width="1.5" fill="none" marker-end="url(#a-purple)"/>')
-
-# ══════════ LAYER 5: DATA ══════════
-dy = 510
-dh = 70
-L(f'<rect x="16" y="{dy}" width="928" height="{dh}" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>')
-L(f'<text x="56" y="{dy+16}" font-size="11" font-weight="600" fill="#64748b">数据层 (src/data_loader.py + config.py / .env)</text>')
-
-dw = 210
-ddx = 36
-ddy = dy + 28
-dg = 16
-for idx, (title, sub, is_config) in enumerate([
-    ("competitors/", "xiwo · honghe · haikang (各15条)", False),
-    ("xunfei/", "xunfei.json (15条)", False),
-    ("samples/", "sample-bid.json · demo-result.json", False),
-    ("config.py + .env", "API_KEY · MODEL · 环境变量", True),
-]):
-    cx = ddx + idx * (dw + dg)
-    color = "#fef2f2" if is_config else "#f0fdf4"
-    stroke = "#fca5a5" if is_config else "#86efac"
-    tc = "#991b1b" if is_config else "#166534"
-    L(f'<rect x="{cx}" y="{ddy}" width="{dw}" height="32" rx="6" fill="{color}" stroke="{stroke}" stroke-width="1"/>')
-    L(f'<text x="{cx+dw/2}" y="{ddy+13}" text-anchor="middle" font-size="10" font-weight="600" fill="{tc}">{title}</text>')
-    L(f'<text x="{cx+dw/2}" y="{ddy+27}" text-anchor="middle" font-size="8" fill="#6b7280">{sub}</text>')
-
-# DATA ACCESS
-L(f'<path d="M 460 {eng_y+46} L 460 {eng_y+56} L 80 {eng_y+56} L 80 {dy-4}" stroke="#16a34a" stroke-width="1" fill="none" marker-end="url(#a-green)" stroke-dasharray="4,2"/>')
-L(f'<text x="90" y="{eng_y+50}" font-size="9" fill="#16a34a">读写 JSON</text>')
-
-# ══════════ EXECUTION ORDER ══════════
-bar_y = 596
-L(f'<rect x="16" y="{bar_y}" width="928" height="24" rx="6" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1"/>')
-L(f'<text x="480" y="{bar_y+16}" text-anchor="middle" font-size="10" fill="#0369a1">执行顺序: MinerU解析 → L2(横向查表) → L1(纵向匹配) → L3(AI精判)  |  总计 ~667 行 Python · 14 个函数  |  端到端耗时 ~5s</text>')
-
-# ══════════ MINERU DETAIL BAR ══════════
-minfo_y = 632
-L(f'<rect x="16" y="{minfo_y}" width="928" height="36" rx="6" fill="#fafafa" stroke="#e5e7eb" stroke-width="1"/>')
-L(f'<text x="32" y="{minfo_y+14}" font-size="10" font-weight="600" fill="#0f766e">MinerU 技术路线</text>')
-L(f'<text x="32" y="{minfo_y+29}" font-size="10" fill="#6b7280">Pipeline后端(标准文档): DocLayout-YOLO布局检测 → PaddleOCR文本提取 → Unimernet公式→LaTeX → PP-StructureV2表格→HTML → 阅读顺序排序 → Markdown/JSON</text>')
-L(f'<text x="740" y="{minfo_y+29}" font-size="10" fill="#6b7280">| VLM后端: InternVL2 端到端解析</text>')
-
-# ══════════ LEGEND ══════════
-leg_y = 684
-L(f'<rect x="16" y="{leg_y}" width="928" height="120" rx="6" fill="#fafafa" stroke="#e5e7eb" stroke-width="1"/>')
-L(f'<text x="32" y="{leg_y+18}" font-size="10" font-weight="600" fill="#374151">图例</text>')
-
-leg_items = [
-    ("#0d9488", "a-teal", "文档解析流", "MinerU: 视觉Pipeline + VLM"),
-    ("#ea580c", "a-orange", "控标识别流", "L2: 12条x3家=36次查表"),
-    ("#2563eb", "a-blue", "程序匹配流", "L1: ~80%参数直接出结论"),
-    ("#7c3aed", "a-purple", "AI 语义流", "L3: 批量打包1次请求 + 降级"),
-    ("#16a34a", "a-green", "数据读写", "JSON 文件 / 绿色虚线"),
-    ("#6b7280", "a-gray", "用户交互", "Streamlit UI 请求/响应"),
-]
-for i, (color, marker, label, note) in enumerate(leg_items):
-    row = i // 3
-    col = i % 3
-    lx = 80 + col * 290
-    ly = leg_y + 32 + row * 40
-    L(f'<line x1="{lx}" y1="{ly}" x2="{lx+28}" y2="{ly}" stroke="{color}" stroke-width="1.5" marker-end="url(#{marker})"/>')
-    L(f'<text x="{lx+36}" y="{ly-2}" font-size="10" fill="#374151">{label}</text>')
-    L(f'<text x="{lx+36}" y="{ly+12}" font-size="9" fill="#6b7280">{note}</text>')
-
-# VLM backend note
-L(f'<text x="32" y="{leg_y+110}" font-size="9" fill="#6b7280">MinerU 双后端架构 | Pipeline 后端(快): PaddleOCR + DocLayout-YOLO | VLM 后端(强): InternVL2 端到端 | pip install mineru → magic-pdf 命令行 / Python API</text>')
+# ============ TITLE BLOCK (bottom-right) ============
+L('  <rect x="920" y="660" width="240" height="44" rx="2" fill="#0d1f3c" stroke="#00b4d8" stroke-width="1"/>')
+L('  <line x1="920" y1="676" x2="1160" y2="676" stroke="#00b4d8" stroke-width="0.5"/>')
+L('  <text x="1040" y="672" text-anchor="middle" fill="#48cae4" font-size="9" letter-spacing="0.08em">SYSTEM ARCHITECTURE</text>')
+L('  <text x="1040" y="695" text-anchor="middle" fill="#caf0f8" font-size="12" font-weight="700">三层对比分析引擎 v1.0</text>')
 
 L('</svg>')
-
-with open('./output/arch-three-layer.svg', 'w', encoding='utf-8') as f:
+with open('output/arch-three-layer.svg', 'w', encoding='utf-8') as f:
     f.write('\n'.join(lines))
-print("SVG generated: ./output/arch-three-layer.svg")
-print(f"Lines: {len(lines)}, ViewBox: {W}x{H}")
+print("SVG written:", len(lines), "lines")

@@ -45,12 +45,13 @@ gantt
     参数补充 & 路演辅助     :active,  a5, 07-25, 0.5d
 
     section B组（核心引擎）
-    环境搭建 & 读文档       :active,  b0, 07-24, 0.25d
-    data_loader + parser    :active,  b1, 07-24, 0.5d
-    matcher (L2控标识别)    :active,  b2, 07-24, 0.25d
-    advisor (L3 AI精判)     :active,  b3, 07-25, 0.25d
-    engine + app.py         :active,  b4, 07-25, 0.5d
-    A+B 联调 & 端到端测试   :active,  b5, 07-25, 0.25d
+    环境搭建 & 读文档(覃宝洋)  :active,  b0, 07-24, 0.25d
+    环境搭建 & 读文档(许文卓)  :active,  b0x, 07-24, 0.25d
+    data_loader + parser(覃宝洋):active,  b1, 07-24, 0.5d
+    matcher L2控标识别(许文卓)  :active,  b2, 07-24, 0.25d
+    advisor L3 AI精判(覃宝洋)   :active,  b3, 07-25, 0.25d
+    engine + app.py(许文卓)     :active,  b4, 07-25, 0.5d
+    A+B 联调 & 端到端测试       :active,  b5, 07-25, 0.25d
 
     section 校赛（晋级后）
     彩排 & 录制备选视频      :active,  s1, 07-27, 1d
@@ -68,7 +69,7 @@ gantt
 [A组]                   ├─ Schema学习 ──▶ 3人并行提取 ──▶     ├── 交叉验证 ──▶ 补充辅助
                         │   (0.25d串行)     (0.25d并行)       │    (串行)
                         │                                      │
-[B组]                   ├─ 环境搭建 ──▶ 并行开发 ──────────▶  ├── AI+UI ──▶ 联调
+[B组] 覃宝洋+许文卓 ├─ 环境搭建 ──▶ 并行开发 ──────────▶  ├── AI+UI ──▶ 联调
                         │   (串行)      L1/L2/loader          │   (串行)     ★端到端跑通
                         │               (3文件并行)            │
                                                                               ★校赛(07.28)
