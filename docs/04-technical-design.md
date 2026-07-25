@@ -11,10 +11,12 @@
 |----|------|------|------|
 | 编程语言 | Python | 3.10+ | 上手最快，AI 生成质量最高 |
 | UI 框架 | Streamlit | latest | Python 原生，无需 HTML/CSS/JS |
-| AI 模型 | Claude（Kooky 调用） | Sonnet/Opus | 大赛推荐，语义理解能力强 |
+| AI 模型 | DeepSeek v4-flash | latest | API 调用，批量打包降低成本 |
 | 数据存储 | JSON 文件 | - | 免安装，直接 `json.load()` |
-| 文档解析（可选） | pdfplumber + python-docx + openpyxl | latest | 仅做文件上传 Demo 用 |
-| 版本管理 | Git（Gitee） | - | 代码协作 |
+| 文档解析 | MinerU（OpenDataLab） | latest | 视觉 Pipeline + VLM 双后端，PDF/Word/Excel → Markdown/JSON |
+| 版本管理 | Git（GitHub） | - | 代码协作 |
+
+> **MinerU 技术路线**：不走传统 PDF 文本层解析（如 pdfplumber），而是将页面渲染为图像 → 视觉模型理解版面 → 语义级提取。Pipeline 后端（5 阶段）：DocLayout-YOLO 布局检测 → PaddleOCR 文本提取 → Unimernet 公式→LaTeX → PP-StructureV2 表格→HTML → 阅读顺序排序 → Markdown/JSON。VLM 后端：InternVL2 端到端解析，复杂版面更强。`pip install mineru` 即可集成。
 
 ---
 

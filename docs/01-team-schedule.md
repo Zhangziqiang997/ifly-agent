@@ -31,8 +31,8 @@ gantt
     SPEC & 竞品调研       :done,    pm2, 07-25, 1d
     架构图 & AI 任务计划   :done,    pm3, 07-25, 1d
     引擎串联 & 调试        :active,  pm4, 07-25, 1d
-    Streamlit UI           :         pm5, 07-26, 1d
-    PPT & 路演脚本          :         pm6, 07-27, 1d
+    Streamlit UI           :active,  pm5, 07-26, 1d
+    PPT & 路演脚本          :active,  pm6, 07-27, 1d
     正式路演 PK            :milestone, pm_m, 07-28, 0d
 
     section A组（数据提取）
@@ -40,21 +40,21 @@ gantt
     鸿合参数提取(陈媛媛)    :done,    a1, 07-25, 0.5d
     海康+讯飞提取(李奖)     :done,    a2, 07-25, 0.5d
     希沃参数提取(王尉丞)    :done,    a3, 07-25, 0.5d
-    数据抽查 & 交叉验证     :         a4, 07-26, 0.5d
-    新增参数补充            :         a5, 07-26, 0.5d
+    数据抽查 & 交叉验证     :active,  a4, 07-26, 0.5d
+    新增参数补充            :active,  a5, 07-26, 0.5d
 
     section B组（核心引擎）
     环境搭建 & 读文档       :done,    b0, 07-25, 0.5d
     data_loader.py         :done,    b1, 07-25, 0.5d
     parser.py (L1程序粗筛)  :done,    b2, 07-25, 0.5d
     matcher.py (L2控标识别) :done,    b3, 07-25, 0.5d
-    advisor.py (L3 AI精判)  :         b4, 07-26, 0.5d
-    engine.py & app.py      :         b5, 07-26, 1d
+    advisor.py (L3 AI精判)  :active,  b4, 07-26, 0.5d
+    engine.py & app.py      :active,  b5, 07-26, 1d
 
     section 集成 & 演示
-    A+B 联调 & 端到端测试   :         int1, 07-26, 1d
+    A+B 联调 & 端到端测试   :active,  int1, 07-26, 1d
     班级初选 Demo           :milestone, int_m1, 07-26, 0d
-    彩排 & 录制备选视频      :         int2, 07-27, 1d
+    彩排 & 录制备选视频      :active,  int2, 07-27, 1d
     最终路演 PK             :milestone, int_m2, 07-28, 0d
 ```
 

@@ -119,12 +119,12 @@ import json
 
 # 加载所有竞品
 competitors = {}
-for vendor in ["xiwo", "honghe", "wenxiang", "haikang"]:
+for vendor in ["xiwo", "honghe", "haikang"]:
     try:
         with open(f"data/competitors/{vendor}.json", "r", encoding="utf-8") as f:
             competitors[vendor] = json.load(f)
     except FileNotFoundError:
-        pass  # 文件不存在就跳过（海康还没建好时不会崩）
+        pass  # 文件不存在就跳过
 
 # 加载讯飞
 with open("data/xunfei/xunfei.json", "r", encoding="utf-8") as f:
