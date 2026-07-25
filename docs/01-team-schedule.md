@@ -29,31 +29,31 @@ gantt
     tickInterval 1day
 
     section PM（产品+管理）
-    组队 + 需求定稿        :done,    pm0, 07-23, 1d
-    PRD + SPEC 竞品调研    :done,    pm1, 07-24, 1d
-    架构图 + AI任务计划     :done,    pm2, 07-24, 1d
-    引擎串联 & 调试         :done,    pm3, 07-25, 0.5d
+    组队 + 需求定稿        :active,  pm0, 07-23, 1d
+    PRD + SPEC 竞品调研    :active,  pm1, 07-24, 1d
+    架构图 + AI任务计划     :active,  pm2, 07-24, 1d
+    引擎串联 & 调试         :active,  pm3, 07-25, 0.5d
     Streamlit UI + 路演材料 :active,  pm4, 07-25, 0.5d
     班级初选 Demo          :milestone, pm_m, 07-25, 0d
 
     section A组（数据提取）
-    学习 JSON Schema       :done,    a0, 07-24, 0.25d
-    鸿合提取(陈媛媛)       :done,    a1, 07-24, 0.25d
-    海康+讯飞提取(李奖)    :done,    a2, 07-24, 0.25d
-    希沃提取(王尉丞)       :done,    a3, 07-24, 0.25d
-    数据抽查 & 交叉验证     :done,    a4, 07-25, 0.5d
+    学习 JSON Schema       :active,  a0, 07-24, 0.25d
+    鸿合提取(陈媛媛)       :active,  a1, 07-24, 0.25d
+    海康+讯飞提取(李奖)    :active,  a2, 07-24, 0.25d
+    希沃提取(王尉丞)       :active,  a3, 07-24, 0.25d
+    数据抽查 & 交叉验证     :active,  a4, 07-25, 0.5d
     参数补充 & 路演辅助     :active,  a5, 07-25, 0.5d
 
     section B组（核心引擎）
-    环境搭建 & 读文档       :done,    b0, 07-24, 0.25d
-    data_loader + parser    :done,    b1, 07-24, 0.5d
-    matcher (L2控标识别)    :done,    b2, 07-24, 0.25d
-    advisor (L3 AI精判)     :done,    b3, 07-25, 0.25d
-    engine + app.py         :done,    b4, 07-25, 0.5d
+    环境搭建 & 读文档       :active,  b0, 07-24, 0.25d
+    data_loader + parser    :active,  b1, 07-24, 0.5d
+    matcher (L2控标识别)    :active,  b2, 07-24, 0.25d
+    advisor (L3 AI精判)     :active,  b3, 07-25, 0.25d
+    engine + app.py         :active,  b4, 07-25, 0.5d
     A+B 联调 & 端到端测试   :active,  b5, 07-25, 0.25d
 
     section 校赛（晋级后）
-    彩排 & 录制备选视频      :         s1, 07-27, 1d
+    彩排 & 录制备选视频      :active,  s1, 07-27, 1d
     校赛正式路演 PK         :milestone, s_m, 07-28, 0d
 ```
 
