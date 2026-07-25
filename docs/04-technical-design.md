@@ -20,28 +20,33 @@
 
 ## 2. 系统架构
 
-```
-┌─────────────────────────────────────────────────┐
-│                   Streamlit UI                   │
-│  页面1: 上传&总览  │  页面2: 对比表  │  页面3: 建议  │
-└──────────────────────┬──────────────────────────┘
-                       │
-┌──────────────────────▼──────────────────────────┐
-│                  Core Engine                     │
-│                                                  │
-│  ┌──────────┐  ┌──────────┐  ┌──────────────┐  │
-│  │ Parser   │  │ Matcher  │  │ Advisor      │  │
-│  │ 参数提取  │  │ 双层对比  │  │ 建议生成     │  │
-│  │ 归一化    │  │ 程序+AI  │  │ (AI only)    │  │
-│  └──────────┘  └──────────┘  └──────────────┘  │
-│                                                  │
-└──────────────────────┬──────────────────────────┘
-                       │
-┌──────────────────────▼──────────────────────────┐
-│                  Data Layer                       │
-│  competitors/*.json  │  xunfei/*.json  │  samples/│
-└─────────────────────────────────────────────────┘
-```
+![系统架构图](../output/arch-three-layer.svg)
+
+> 上图展示了完整的三层对比架构：Streamlit UI → engine.py 总调度 → [L2 控标识别 → L1 程序粗筛 → L3 AI 精判] → JSON 数据层。  
+> **执行顺序**：L2 先横向查表判定控标方，L1 再纵向逐条匹配讯飞参数，最后 L3 对 uncertain 项批量调 AI。
+
+### 文件职责
+
+| 文件 | 行数 | 核心函数 | 依赖 |
+|------|------|---------|------|
+| `config.py` | 4 | 环境变量加载 | `.env` |
+| `data_loader.py` | 35 | `load_competitors()`, `load_xunfei()`, `load_bid()` | 文件系统 |
+| `parser.py` | 216 | `find_best_match()`, `quick_match()`, `extract_numeric()`, `compare_indicators()`, `keyword_overlap()` | 无 |
+| `matcher.py` | 45 | `identify_controller()` | parser |
+| `advisor.py` | 127 | `batch_analyze()` | config, DeepSeek API |
+| `engine.py` | 90 | `run_analysis()` | 全部模块 |
+| `app.py` | 150 | `page_upload()`, `page_compare()` | engine |
+| **总计** | **~667** | **14 个函数** | |
+
+### 关键技术决策
+
+| 决策 | 方案 | 理由 |
+|------|------|------|
+| AI 调用 | 批量打包 1 次请求 | 避免 N+1，12 条仅 1 次 API 调用 |
+| 降级设计 | 成功缓存 → 失败读缓存 | API 不可用时系统不崩溃 |
+| 参数匹配 | keyword_overlap 评分 + category/unit 加成 | 修复 unit-only 错配 Bug |
+| Prompt 工程 | 15 条讯飞全量目录注入 | 避免 AI 被错配参数误导 |
+| 数据解耦 | data_loader 抽象层 | 换存储只改 loader，引擎不动 |
 
 ---
 
