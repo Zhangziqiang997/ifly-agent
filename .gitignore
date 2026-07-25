@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+dist/
+
+# Streamlit
+.streamlit/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project outputs (不提交生成产物)
+outputs/
+
+# Secrets (不要提交任何密钥)
+.env
+*.key
+*.token
+
+# 知识库原始数据（文件过大，含二进制PDF/Word/Excel）
+知识库3/
+知识库3.7z
+
+# Claude Code local config
+.claude/
