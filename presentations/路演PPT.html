@@ -156,6 +156,35 @@
         .milestone { position: absolute; top: -2px; right: -6px; font-size: 30px; }
         .gantt-note { margin-top: 28px; font-size: 22px; color: #7c3aed; font-weight: 600; text-align: center; }
 
+        /* ---------- PRD 产品需求 ---------- */
+        .prd-def { background: linear-gradient(135deg,#7c3aed 0%,#a855f7 100%); color:#fff; border-radius: 20px; padding: 40px 48px; margin-bottom: 40px; box-shadow: 0 16px 50px rgba(124,58,237,0.18); }
+        .prd-def-label { font-size: 20px; font-weight: 700; letter-spacing: 0.1em; opacity: 0.85; margin-bottom: 16px; }
+        .prd-def-text { font-size: 34px; font-weight: 600; line-height: 1.5; }
+        .prd-def-text .k { color: #fce7ff; font-weight: 800; }
+        .prd-cols { display: flex; gap: 32px; margin-bottom: 40px; }
+        .prd-col { flex: 1; }
+        .prd-col-h { font-size: 24px; font-weight: 700; color: #7c3aed; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .prd-vs { background: #fff; border-radius: 18px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .prd-vs-row { display: grid; grid-template-columns: 1.2fr 1fr 1.4fr; align-items: center; padding: 22px 26px; border-bottom: 1px solid #f0e7ff; }
+        .prd-vs-row:last-child { border-bottom: none; }
+        .prd-vs-row.head { background: #faf5ff; font-weight: 700; font-size: 17px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.05em; padding: 16px 26px; }
+        .prd-dim { font-size: 21px; font-weight: 700; color: #111827; }
+        .prd-before { font-size: 19px; color: #9ca3af; }
+        .prd-after { font-size: 19px; color: #7c3aed; font-weight: 600; }
+        .prd-users { background: #fff; border-radius: 18px; padding: 32px 34px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .prd-user-item { margin-bottom: 26px; }
+        .prd-user-item:last-child { margin-bottom: 0; }
+        .prd-user-role { font-size: 23px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+        .prd-user-pain { font-size: 19px; color: #6b7280; line-height: 1.55; }
+        .prd-diff-h { font-size: 24px; font-weight: 700; color: #7c3aed; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .prd-diff { display: flex; gap: 28px; }
+        .prd-diff-card { flex: 1; background: #fff; border-radius: 18px; padding: 28px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-left: 6px solid #a855f7; }
+        .prd-diff-card:nth-child(2) { border-left-color: #ec4899; }
+        .prd-diff-card:nth-child(3) { border-left-color: #7c3aed; }
+        .prd-diff-title { font-size: 22px; font-weight: 700; color: #111827; margin-bottom: 10px; }
+        .prd-diff-title .em { background: linear-gradient(135deg,#7c3aed,#ec4899); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .prd-diff-desc { font-size: 18px; color: #6b7280; line-height: 1.55; }
+
         /* ---------- P4 技术框图 ---------- */
         .arch-wrap { background: #fff; border-radius: 24px; padding: 30px; box-shadow: 0 16px 55px rgba(124,58,237,0.12); display: flex; justify-content: center; align-items: center; }
         .arch-wrap img { max-width: 100%; max-height: 620px; width: auto; height: auto; border-radius: 12px; }
@@ -168,21 +197,28 @@
         .ap-big { font-size: 46px; font-weight: 800; }
 
         /* ---------- P5 人机协作 ---------- */
-        .motto { text-align: center; font-size: 27px; font-weight: 600; color: #7c3aed; margin-bottom: 34px; line-height: 1.5; }
+        .motto { text-align: center; font-size: 28px; font-weight: 600; color: #7c3aed; margin-bottom: 44px; line-height: 1.5; }
         .motto .b { font-weight: 800; }
-        .case-row { display: flex; gap: 28px; }
-        .case-card { flex: 1; background: #fff; border-radius: 22px; padding: 32px 28px; box-shadow: 0 16px 55px rgba(124,58,237,0.12); }
-        .case-cap { font-size: 16px; font-weight: 700; letter-spacing: 0.08em; color: #a855f7; text-transform: uppercase; margin-bottom: 12px; }
-        .case-num { display:inline-block; width: 46px; height: 46px; background: linear-gradient(135deg,#7c3aed,#a855f7); color:#fff; border-radius: 12px; font-size: 24px; font-weight: 800; text-align:center; line-height: 46px; margin-bottom: 14px; }
-        .case-title { font-size: 25px; font-weight: 700; color: #111827; margin-bottom: 20px; line-height: 1.3; }
-        .case-step { font-size: 18px; line-height: 1.5; margin-bottom: 14px; padding-left: 28px; position: relative; color: #4b5563; }
-        .case-step::before { position: absolute; left: 0; top: 0; font-size: 19px; }
+        .case-row { display: flex; gap: 32px; margin-bottom: 48px; }
+        .case-card { flex: 1; background: #fff; border-radius: 22px; padding: 42px 34px; box-shadow: 0 16px 55px rgba(124,58,237,0.12); }
+        .case-cap { font-size: 17px; font-weight: 700; letter-spacing: 0.08em; color: #a855f7; text-transform: uppercase; margin-bottom: 16px; }
+        .case-num { display:inline-block; width: 52px; height: 52px; background: linear-gradient(135deg,#7c3aed,#a855f7); color:#fff; border-radius: 13px; font-size: 27px; font-weight: 800; text-align:center; line-height: 52px; margin-bottom: 18px; }
+        .case-title { font-size: 27px; font-weight: 700; color: #111827; margin-bottom: 26px; line-height: 1.3; }
+        .case-step { font-size: 21px; line-height: 1.62; margin-bottom: 20px; padding-left: 34px; position: relative; color: #4b5563; }
+        .case-step:last-child { margin-bottom: 0; }
+        .case-step::before { position: absolute; left: 0; top: 0; font-size: 22px; }
         .case-ai::before { content: "🤖"; }
         .case-human::before { content: "🧑"; }
         .case-fix::before { content: "✅"; }
         .case-step .tag { font-weight: 700; color: #7c3aed; }
         .case-step.case-fix .tag { color: #ec4899; }
-        .case-step code { background: #f3ecff; color: #7c3aed; padding: 1px 7px; border-radius: 6px; font-size: 16px; font-family: 'SFMono-Regular', Consolas, monospace; }
+        .case-step code { background: #f3ecff; color: #7c3aed; padding: 2px 8px; border-radius: 6px; font-size: 19px; font-family: 'SFMono-Regular', Consolas, monospace; }
+        .collab-summary { background: linear-gradient(135deg, #7c3aed 0%, #a855f7 52%, #ec4899 100%); border-radius: 22px; padding: 34px 56px; display: flex; align-items: center; justify-content: center; gap: 48px; box-shadow: 0 18px 55px rgba(124,58,237,0.22); }
+        .collab-side { display: flex; align-items: center; gap: 16px; color: #fff; }
+        .collab-side .icon { font-size: 42px; line-height: 1; }
+        .collab-role { font-size: 22px; font-weight: 800; letter-spacing: 0.04em; opacity: 0.92; margin-bottom: 6px; }
+        .collab-acts { font-size: 30px; font-weight: 700; line-height: 1.25; }
+        .collab-mid { color: #fce7ff; font-size: 40px; font-weight: 300; }
         .evidence { margin-top: 44px; text-align: center; font-size: 24px; color: #6b7280; }
         .evidence strong { color: #7c3aed; }
 
@@ -192,7 +228,7 @@
         .stat { color: #fff; }
         .stat-num { font-size: 82px; font-weight: 800; line-height: 1; }
         .stat-lbl { font-size: 24px; color: #e9d5ff; margin-top: 12px; font-weight: 300; }
-        .end-quote { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.4; max-width: 1400px; }
+        .end-quote { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.9; max-width: 1400px; }
         .end-quote .hl { color: #f9a8d4; }
         .end-thanks { margin-top: 60px; font-size: 30px; color: #d8b4fe; font-weight: 300; letter-spacing: 0.15em; }
 
@@ -215,7 +251,7 @@
                 <div class="origin-label">◈ 选题起源 · 来自一线的真实痛点</div>
                 <div class="origin-content">
                     本课题源自市场部 <strong>赵书进</strong> 经理在客户对接中的真实困境：<br>
-                    每次应标要人工对比 50+ 条技术参数，往往要花上一周，一条废标项即致命。<br>
+                    每次应标要人工对比 50+ 条技术参数，往往时间紧迫，一条废标项即致命。<br>
                     我们想验证：<strong>AI 能否把这个过程压缩到 3 分钟？</strong>
                 </div>
             </div>
@@ -366,6 +402,64 @@
         </div>
     </div>
 
+    <!-- ============ P-prd: 专业工作流 · 产品需求 ============ -->
+    <div class="slide">
+        <div class="page-tag">02 · 产品需求</div>
+        <div class="sec-head" style="margin-bottom: 26px;">
+            <div class="doc-badge">02 PRD</div>
+            <div class="sec-title">先想清楚：<span class="grad-text">给谁用、解决什么</span></div>
+            <div class="sec-sub">在写任何代码之前，先定义产品价值 — 这是 02 号需求文档</div>
+        </div>
+
+        <div class="prd-def">
+            <div class="prd-def-label">◈ 一句话定义</div>
+            <div class="prd-def-text">
+                输入招标文件 → <span class="k">识别控标方</span> → 逐条对比讯飞参数 → 标出正负偏离 → <span class="k">生成应对建议</span>
+            </div>
+        </div>
+
+        <div class="prd-cols">
+            <div class="prd-col">
+                <div class="prd-col-h">🧑 目标用户 &amp; 痛点</div>
+                <div class="prd-users">
+                    <div class="prd-user-item">
+                        <div class="prd-user-role">市场经理</div>
+                        <div class="prd-user-pain">拿到标书要逐条对比 50+ 参数，耗时约一周，易漏废标项</div>
+                    </div>
+                    <div class="prd-user-item">
+                        <div class="prd-user-role">客户经理</div>
+                        <div class="prd-user-pain">公示期想质疑倾向性参数，却缺数据支撑，不敢贸然提</div>
+                    </div>
+                </div>
+            </div>
+            <div class="prd-col">
+                <div class="prd-col-h">📈 带来什么改变</div>
+                <div class="prd-vs">
+                    <div class="prd-vs-row head"><div>维度</div><div>现状</div><div>使用后</div></div>
+                    <div class="prd-vs-row"><div class="prd-dim">应标效率</div><div class="prd-before">时间紧任务重</div><div class="prd-after">10 秒初筛 + 复核</div></div>
+                    <div class="prd-vs-row"><div class="prd-dim">控标识别</div><div class="prd-before">凭经验猜</div><div class="prd-after">数据驱动量化</div></div>
+                    <div class="prd-vs-row"><div class="prd-dim">质疑能力</div><div class="prd-before">不敢提</div><div class="prd-after">三维度话术</div></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="prd-diff-h">💡 产品核心差异化</div>
+        <div class="prd-diff">
+            <div class="prd-diff-card">
+                <div class="prd-diff-title"><span class="em">垂直专用</span>，非通用问答</div>
+                <div class="prd-diff-desc">不是通用 AI 问答，而是面向智慧教育招投标的专用分析引擎，只解决控标比对这一件事</div>
+            </div>
+            <div class="prd-diff-card">
+                <div class="prd-diff-title"><span class="em">三层架构</span>分层协作</div>
+                <div class="prd-diff-desc">该程序做的程序做（快 + 省钱），该 AI 做的 AI 做（语义理解），不滥用也不缺席</div>
+            </div>
+            <div class="prd-diff-card">
+                <div class="prd-diff-title"><span class="em">数据驱动</span>而非经验</div>
+                <div class="prd-diff-desc">竞品参数库 + 独有特征统计算法，控标方结论量化可解释，而不是凭经验拍脑袋</div>
+            </div>
+        </div>
+    </div>
+
     <!-- ============ P4: 专业工作流② 技术框图 ============ -->
     <div class="slide slide-tech" style="background: linear-gradient(135deg,#ffffff 0%,#fce7ff 100%);">
         <div class="page-tag">04 · 技术设计</div>
@@ -418,7 +512,7 @@
                 <div class="case-title">AI 自己提出改进策略</div>
                 <div class="case-step case-human">AI 判不准，因为每次只喂给它<span class="tag">错配的那一条参数</span></div>
                 <div class="case-step case-ai">AI 打的比喻："像考试告诉你答案在第3页，其实在第7页 — 该给整本参考书" → 附完整 15 条参数目录</div>
-                <div class="case-step case-fix">人加 <span class="tag">150 字安全边界</span>防超长 → AI 识别出"135° vs 145°"级差异</div>
+                <div class="case-step case-fix"> <span class="tag">150 字安全边界</span>防超长 → AI 识别出"135° vs 145°"级差异</div>
             </div>
             <div class="case-card">
                 <div class="case-cap">工程编排</div>
@@ -430,13 +524,23 @@
             </div>
         </div>
 
-        <div class="evidence"><strong>8 段人机协作 · 10 条关键决策 · 3 个真实 Bug 修复</strong> — 全程可追溯、可复现，总 Prompt 成本约 $1</div>
+        <div class="collab-summary">
+            <div class="collab-side">
+                <span class="icon">🤖</span>
+                <div><div class="collab-role">AI</div><div class="collab-acts">提方案 · 查漏洞 · 跑并行</div></div>
+            </div>
+            <div class="collab-mid">×</div>
+            <div class="collab-side">
+                <span class="icon">🧑</span>
+                <div><div class="collab-role">人</div><div class="collab-acts">做判断 · 定方向 · 担责任</div></div>
+            </div>
+        </div>
     </div>
 
     <!-- ============ P6: 收获结尾 ============ -->
     <div class="slide slide-end">
         <div class="end-quote">
-            最大的收获不是 Demo，<br>而是一种新的<span class="hl">专业工作方式</span>：<br>人定义问题，AI 加速执行
+            从市场一线的真实痛点出发，<br>为客户提出一个可用的改进方案，<br>更学习了一套 <span class="hl">AI 与开发团队协同的工作流</span>
         </div>
         <div class="end-thanks">— 感谢聆听 —</div>
     </div>
