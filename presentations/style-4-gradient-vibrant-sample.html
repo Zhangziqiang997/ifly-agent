@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育装备招标参数识别与响应决策系统 - 渐变活力风</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f0e7ff 100%);
+            color: #1f2937;
+        }
+
+        .slide {
+            width: 1920px;
+            height: 1080px;
+            position: relative;
+            page-break-after: always;
+            overflow: hidden;
+            padding: 80px 120px;
+        }
+
+        /* P1 - Cover & Pain Point Slide */
+        .slide-cover {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hero-section {
+            padding-top: 60px;
+        }
+
+        .title-main {
+            font-size: 96px;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 38px;
+            font-weight: 300;
+            color: #6b7280;
+            margin-bottom: 80px;
+            line-height: 1.4;
+        }
+
+        .origin-box {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            color: white;
+            padding: 48px 56px;
+            border-radius: 24px;
+            transform: rotate(-2deg);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.15);
+            max-width: 880px;
+        }
+
+        .origin-label {
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.85;
+            margin-bottom: 16px;
+        }
+
+        .origin-content {
+            font-size: 32px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .pain-section {
+            margin-top: 80px;
+        }
+
+        .pain-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+        }
+
+        .pain-card {
+            background: white;
+            padding: 44px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            transform: rotate(2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .pain-card:hover {
+            transform: rotate(0deg) translateY(-8px);
+        }
+
+        .pain-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 24px;
+        }
+
+        .pain-title {
+            font-size: 32px;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .pain-desc {
+            font-size: 20px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        /* P4 - Technical Architecture Slide */
+        .slide-tech {
+            background: linear-gradient(135deg, #ffffff 0%, #fce7ff 100%);
+        }
+
+        .tech-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+
+        .tech-title {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tech-subtitle {
+            font-size: 28px;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .architecture-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .layer-box {
+            flex: 1;
+            background: white;
+            padding: 48px 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.15);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .layer-box:nth-child(2) {
+            transform: rotate(2deg);
+        }
+
+        .layer-box:nth-child(3) {
+            transform: rotate(-3deg);
+        }
+
+        .layer-box:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .layer-number {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .layer-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 16px;
+        }
+
+        .layer-desc {
+            font-size: 18px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .layer-tech {
+            display: inline-block;
+            background: linear-gradient(135deg, #f3e8ff 0%, #fdf4ff 100%);
+            color: #7c3aed;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 8px;
+        }
+
+        .layer-ai-badge {
+            background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+            color: white;
+        }
+
+        .arrow {
+            font-size: 64px;
+            color: #d8b4fe;
+            font-weight: 300;
+        }
+
+        .principle-box {
+            margin-top: 64px;
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            color: white;
+            padding: 36px 48px;
+            border-radius: 20px;
+            text-align: center;
+            transform: rotate(1.5deg);
+            box-shadow: 0 20px 60px rgba(124, 58, 237, 0.15);
+        }
+
+        .principle-text {
+            font-size: 26px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .principle-highlight {
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-thickness: 3px;
+            text-underline-offset: 4px;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .slide {
+                page-break-after: always;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- P1: Cover & Pain Point Slide -->
+    <div class="slide slide-cover">
+        <div class="hero-section">
+            <div class="title-main">教育装备招标参数<br>识别与响应决策系统</div>
+            <div class="subtitle">AI 驱动 · 智慧黑板招投标场景 · 参数智能体</div>
+
+            <div class="origin-box">
+                <div class="origin-label">选题起源</div>
+                <div class="origin-content">
+                    讯飞售前团队每次拿到招标文件，都要花 2-3 天人工对比 50+ 条参数，<br>
+                    容易遗漏废标项。我们想知道：<strong>AI 能不能把这个过程缩短到 3 分钟？</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="pain-section">
+            <div class="pain-grid">
+                <div class="pain-card">
+                    <div class="pain-icon">⏰</div>
+                    <div class="pain-title">时间紧迫</div>
+                    <div class="pain-desc">招标公示期仅 5 个工作日<br>人工对比参数耗时 2-3 天<br>错过质疑窗口=失去机会</div>
+                </div>
+                <div class="pain-card">
+                    <div class="pain-icon">🎯</div>
+                    <div class="pain-title">识别困难</div>
+                    <div class="pain-desc">参数倾向性难判断<br>"145° 视场角"是谁的独有规格？<br>凭经验缺乏数据支撑</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- P4: Technical Architecture Slide -->
+    <div class="slide slide-tech">
+        <div class="tech-header">
+            <div class="tech-title">三层架构：程序粗筛 → AI 精判</div>
+            <div class="tech-subtitle">能用确定方法解决的绝不交给大模型——既快又省，判断过程可解释</div>
+        </div>
+
+        <div class="architecture-diagram">
+            <div class="layer-box">
+                <div class="layer-number">1</div>
+                <div class="layer-title">数值比对层</div>
+                <div class="layer-desc">
+                    单位对齐、数值大小判断<br>
+                    消化约 <strong>80%</strong> 的硬指标<br>
+                    （亮度、分辨率、尺寸等）
+                </div>
+                <div class="layer-tech">程序逻辑</div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="layer-box">
+                <div class="layer-number">2</div>
+                <div class="layer-title">控标方识别</div>
+                <div class="layer-desc">
+                    独有特征统计与匹配<br>
+                    判定控标方与置信度<br>
+                    （查表逻辑，毫秒级）
+                </div>
+                <div class="layer-tech">查表统计</div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="layer-box">
+                <div class="layer-number">3</div>
+                <div class="layer-title">语义精判层</div>
+                <div class="layer-desc">
+                    处理说法差异<br>
+                    （"无线投屏"vs"屏幕镜像"）<br>
+                    生成应对建议
+                </div>
+                <div class="layer-tech layer-ai-badge">AI 语义理解</div>
+            </div>
+        </div>
+
+        <div class="principle-box">
+            <div class="principle-text">
+                <span class="principle-highlight">由易到难、由确定到模糊</span>：数值比大小交给程序，语义理解才调大模型
+                <br>一份标书只调用 AI 一次 · 成本可控 · 可解释 · 可复核
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参数智能体 · 纯黑科技风路演样本</title>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;600&family=Noto+Sans+SC:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #000000;
+  --text: #e0e0e0;
+  --neon-blue: #00d4ff;
+  --neon-purple: #a855f7;
+  --dim: #666666;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', 'Noto Sans SC', sans-serif;
+  background: var(--black);
+  color: var(--text);
+  overflow: hidden;
+  position: relative;
+}
+/* 扫描线网格纹理 */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(0deg, transparent 49%, rgba(255,255,255,0.02) 50%, transparent 51%) 0 0 / 100% 2px,
+    linear-gradient(90deg, transparent 49%, rgba(255,255,255,0.02) 50%, transparent 51%) 0 0 / 2px 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 120px;
+  position: relative;
+  z-index: 2;
+}
+.slide.active { display: flex; }
+
+.terminal-prompt {
+  font-family: 'Courier Prime', 'Courier New', Consolas, monospace;
+  color: var(--neon-blue);
+  font-size: 18px;
+  margin-bottom: 6px;
+  font-weight: 400;
+}
+
+/* ── P1 封面 + 痛点页 ── */
+.cover-title {
+  font-family: 'Courier Prime', 'Courier New', Consolas, monospace;
+  font-size: 64px;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+.cover-subtitle {
+  font-size: 20px;
+  color: var(--dim);
+  text-align: center;
+  margin-bottom: 60px;
+  font-weight: 300;
+}
+.cover-meta {
+  font-size: 14px;
+  color: var(--dim);
+  text-align: center;
+  font-family: 'Courier Prime', monospace;
+  letter-spacing: 1px;
+}
+
+.pain-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  width: 100%;
+  max-width: 1100px;
+  margin-top: 40px;
+}
+.pain-card {
+  border: 1px solid var(--dim);
+  padding: 32px;
+  background: rgba(0, 212, 255, 0.03);
+  position: relative;
+}
+.pain-card::before {
+  content: '[...]';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  color: var(--neon-blue);
+}
+.pain-num {
+  font-family: 'Courier Prime', monospace;
+  font-size: 48px;
+  color: var(--neon-blue);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.pain-label {
+  font-size: 13px;
+  color: var(--dim);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+.pain-text {
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── P4 技术框图页 ── */
+.arch-container {
+  width: 100%;
+  max-width: 1200px;
+}
+.arch-title {
+  font-family: 'Courier Prime', monospace;
+  font-size: 40px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 50px;
+}
+.arch-diagram {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.arch-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.arch-input {
+  flex: 0 0 180px;
+  border: 2px solid var(--neon-purple);
+  padding: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--neon-purple);
+  background: rgba(168, 85, 247, 0.08);
+}
+.arch-arrow {
+  font-size: 28px;
+  color: var(--neon-blue);
+  flex: 0 0 40px;
+  text-align: center;
+}
+.arch-layer {
+  flex: 1;
+  border: 1px solid var(--neon-blue);
+  padding: 24px 28px;
+  background: rgba(0, 212, 255, 0.05);
+  position: relative;
+}
+.layer-badge {
+  display: inline-block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 12px;
+  color: var(--neon-blue);
+  border: 1px solid var(--neon-blue);
+  padding: 3px 10px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+.layer-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.layer-desc {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.layer-tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.layer-tag {
+  font-family: 'Courier Prime', monospace;
+  font-size: 11px;
+  color: var(--dim);
+  border: 1px solid var(--dim);
+  padding: 4px 10px;
+}
+
+.slide-footer {
+  position: absolute;
+  bottom: 30px;
+  right: 40px;
+  font-size: 11px;
+  color: var(--dim);
+  font-family: 'Courier Prime', monospace;
+}
+.nav-hint {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: var(--dim);
+  font-family: 'Courier Prime', monospace;
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     P1: 封面 + 痛点
+════════════════════════════════════════════ -->
+<div class="slide active" id="slide1">
+  <div style="max-width: 900px; width: 100%; text-align: center;">
+    <div class="terminal-prompt">&gt; system.init()</div>
+    <h1 class="cover-title">参数智能体</h1>
+    <div class="cover-subtitle">AI 驱动的招投标参数智能比对与决策辅助系统</div>
+    <div class="cover-meta">iFLYTEK · AI HACKATHON 2026</div>
+  </div>
+
+  <div class="pain-grid">
+    <div class="pain-card">
+      <div class="pain-num">2-3天</div>
+      <div class="pain-label">MANUAL WORK</div>
+      <div class="pain-text">售前团队人工逐条对比竞品参数，费时费力，容易漏掉关键细节</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">72%</div>
+      <div class="pain-label">BIASED PARAMETERS</div>
+      <div class="pain-text">招标参数被竞品控标，讯飞产品无法投标，损失市场机会</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">12条</div>
+      <div class="pain-label">UNIQUE FEATURES</div>
+      <div class="pain-text">每家竞品平均 10+ 条独有特征，人工难以全量识别</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">48h</div>
+      <div class="pain-label">RESPONSE WINDOW</div>
+      <div class="pain-text">招标意向公示期仅 48 小时，必须快速生成质询话术</div>
+    </div>
+  </div>
+
+  <div class="slide-footer">PAGE 01 / 02</div>
+  <div class="nav-hint">[ PRESS SPACE OR → TO CONTINUE ]</div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     P4: 技术架构框图
+════════════════════════════════════════════ -->
+<div class="slide" id="slide2">
+  <div class="arch-container">
+    <div class="terminal-prompt">&gt; architecture.render()</div>
+    <h2 class="arch-title">三层对比架构</h2>
+
+    <div class="arch-diagram">
+      <!-- 输入 -->
+      <div class="arch-row">
+        <div class="arch-input">招标参数<br><span style="font-size:13px;color:var(--dim)">48 条</span></div>
+        <div class="arch-arrow">↓</div>
+      </div>
+
+      <!-- 第一关：程序粗筛 -->
+      <div class="arch-row">
+        <div class="arch-layer">
+          <div class="layer-badge">[ LEVEL 1 ]</div>
+          <div class="layer-title">程序粗筛</div>
+          <div class="layer-desc">数值提取 · 单位归一化 · 关键词匹配<br>覆盖 <span style="color:var(--neon-blue);font-weight:600">80%</span> 参数的明确结论</div>
+          <div class="layer-tags">
+            <div class="layer-tag">regex</div>
+            <div class="layer-tag">unit_map</div>
+            <div class="layer-tag">keyword_match</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+      </div>
+
+      <!-- 第二关：横向对比 -->
+      <div class="arch-row">
+        <div class="arch-layer">
+          <div class="layer-badge">[ LEVEL 2 ]</div>
+          <div class="layer-title">横向对比：控标方识别</div>
+          <div class="layer-desc">每条招标参数 × 3 家竞品库 → 找出独有特征<br>统计命中数 → 判定控标方（<span style="color:var(--neon-blue);font-weight:600">纯查表逻辑</span>）</div>
+          <div class="layer-tags">
+            <div class="layer-tag">competitor_db</div>
+            <div class="layer-tag">unique_feature_match</div>
+            <div class="layer-tag">confidence_score</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+      </div>
+
+      <!-- 第三关：AI 精判 -->
+      <div class="arch-row">
+        <div class="arch-layer" style="border-color:var(--neon-purple);background:rgba(168,85,247,0.06)">
+          <div class="layer-badge" style="color:var(--neon-purple);border-color:var(--neon-purple)">[ LEVEL 3 · AI ]</div>
+          <div class="layer-title" style="color:var(--neon-purple)">纵向对比：讯飞参数匹配</div>
+          <div class="layer-desc">招标参数 × 讯飞参数 → <span style="color:var(--neon-purple);font-weight:600">语义匹配</span><br>正偏离 / 负偏离（说辞可改）/ 负偏离（真不满足）<br>→ AI 生成应对建议</div>
+          <div class="layer-tags">
+            <div class="layer-tag" style="border-color:var(--neon-purple);color:var(--neon-purple)">LLM_semantic_match</div>
+            <div class="layer-tag" style="border-color:var(--neon-purple);color:var(--neon-purple)">suggestion_gen</div>
+          </div>
+        </div>
+        <div class="arch-arrow">↓</div>
+      </div>
+
+      <!-- 输出 -->
+      <div class="arch-row">
+        <div class="arch-input" style="border-color:var(--neon-blue);color:var(--neon-blue);background:rgba(0,212,255,0.08)">
+          分析报告<br><span style="font-size:13px;color:var(--dim)">3 秒输出</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 关键注释 -->
+    <div style="margin-top:40px;padding:20px;border-left:3px solid var(--neon-blue);background:rgba(0,212,255,0.03)">
+      <div style="font-family:'Courier Prime',monospace;font-size:13px;color:var(--neon-blue);margin-bottom:8px">// 设计原则</div>
+      <div style="font-size:14px;line-height:1.8;color:var(--text)">
+        <span style="color:var(--neon-blue);font-weight:600">80%</span> 的参数用程序处理（快速、确定性、零成本）<br>
+        <span style="color:var(--neon-purple);font-weight:600">20%</span> 的参数用 AI 精判（语义理解、创意生成）<br>
+        → 成本控制：每次分析约 <span style="color:var(--neon-blue);font-weight:600">$0.15</span>，可扩展至千级文档
+      </div>
+    </div>
+  </div>
+
+  <div class="slide-footer">PAGE 02 / 02 · ARCH_v3.0</div>
+  <div class="nav-hint">[ PRESS ← TO PREVIOUS ]</div>
+</div>
+
+<script>
+// 幻灯片导航
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+
+function showSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  currentSlide = (n + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight' || e.key === ' ') {
+    showSlide(currentSlide + 1);
+  } else if (e.key === 'ArrowLeft') {
+    showSlide(currentSlide - 1);
+  }
+});
+</script>
+</body>
+</html>
+
+
+
+
+
+

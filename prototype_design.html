@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参数智能体 · 讯飞智慧黑板投标分析系统</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0A1628; --surface:#0F1E35; --card:#162035; --border:#1E3050;
+  --cyan:#00D4FF; --cyan-dim:rgba(0,212,255,.12); --amber:#FFB547;
+  --red:#FF5C5C; --green:#22C55E; --text:#E8EDF5; --muted:#6B82A0;
+  --sidebar-w:220px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Inter','Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;font-size:14px;}
+#sidebar{width:var(--sidebar-w);min-height:100vh;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;top:0;left:0;z-index:100;}
+.logo{padding:26px 20px 18px;border-bottom:1px solid var(--border);}
+.logo-mark{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:36px;height:36px;background:var(--cyan);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.logo-text{font-size:14px;font-weight:700;line-height:1.2;}
+.logo-sub{font-size:10px;color:var(--muted);margin-top:2px;}
+nav{padding:14px 10px;flex:1;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:8px;cursor:pointer;color:var(--muted);font-size:13px;font-weight:500;transition:.15s;margin-bottom:3px;border:1px solid transparent;}
+.nav-item:hover{background:var(--cyan-dim);color:var(--cyan);}
+.nav-item.active{background:var(--cyan-dim);color:var(--cyan);border-color:rgba(0,212,255,.2);}
+.nav-icon{font-size:15px;width:18px;text-align:center;}
+.nav-badge{margin-left:auto;background:var(--red);color:#fff;font-size:10px;padding:1px 6px;border-radius:8px;font-weight:700;}
+.sidebar-footer{padding:14px 20px;border-top:1px solid var(--border);font-size:12px;color:var(--muted);}
+.status-dot{display:inline-block;width:7px;height:7px;background:var(--green);border-radius:50%;margin-right:7px;box-shadow:0 0 8px var(--green);}
+#main{margin-left:var(--sidebar-w);flex:1;min-height:100vh;}
+.page{display:none;padding:36px 40px;min-height:100vh;}
+.page.active{display:block;}
+.page-title{font-size:22px;font-weight:700;margin-bottom:4px;}
+.page-sub{color:var(--muted);font-size:13px;margin-bottom:28px;}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;}
+.card-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px;}
+
+/* ── Upload Page ── */
+.upload-zone{border:2px dashed var(--border);border-radius:14px;padding:64px 40px;text-align:center;cursor:pointer;transition:.2s;background:var(--surface);position:relative;overflow:hidden;}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--cyan);background:var(--cyan-dim);}
+.upload-zone .uicon{font-size:52px;margin-bottom:18px;display:block;}
+.upload-zone h3{font-size:18px;font-weight:600;margin-bottom:8px;}
+.upload-zone p{color:var(--muted);font-size:13px;margin-bottom:22px;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.15s;}
+.btn-primary{background:var(--cyan);color:#0A1628;}
+.btn-primary:hover{background:#33dcff;}
+.btn-secondary{background:transparent;border:1px solid var(--border);color:var(--text);}
+.btn-secondary:hover{border-color:var(--cyan);color:var(--cyan);}
+.file-types{display:flex;gap:10px;justify-content:center;margin-top:16px;}
+.ft-tag{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:6px;padding:4px 12px;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);}
+.progress-section{margin-top:24px;}
+.progress-step{display:flex;align-items:center;gap:14px;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:10px;}
+.step-icon{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.step-done{background:rgba(34,197,94,.15);color:var(--green);}
+.step-active{background:rgba(0,212,255,.15);color:var(--cyan);}
+.step-wait{background:var(--card);color:var(--muted);}
+.step-label{flex:1;font-size:13px;font-weight:500;}
+.step-time{font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--muted);}
+.progress-bar-wrap{height:4px;background:var(--border);border-radius:4px;margin-top:6px;overflow:hidden;}
+.progress-bar{height:100%;background:var(--cyan);border-radius:4px;transition:width .6s ease;}
+.scan-line{position:absolute;top:0;left:-100%;width:60%;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan 2s linear infinite;}
+@keyframes scan{to{left:160%;}}
+
+/* ── Dashboard ── */
+.dash-grid{display:grid;grid-template-columns:340px 1fr;gap:20px;margin-bottom:20px;}
+.verdict-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;flex-direction:column;gap:16px;}
+.verdict-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;}
+.vendor-name{font-size:24px;font-weight:700;color:#fff;margin-top:4px;}
+.vendor-en{font-size:13px;color:var(--muted);}
+.ring-wrap{display:flex;align-items:center;gap:20px;margin:4px 0;}
+.ring-svg{flex-shrink:0;}
+.ring-info{flex:1;}
+.ring-pct{font-size:32px;font-weight:700;font-family:'JetBrains Mono',monospace;color:var(--cyan);}
+.ring-sub{font-size:11px;color:var(--muted);margin-top:2px;}
+.verdict-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,92,92,.12);border:1px solid rgba(255,92,92,.3);color:var(--red);border-radius:20px;padding:5px 12px;font-size:12px;font-weight:600;}
+.hit-list{display:flex;flex-direction:column;gap:6px;max-height:190px;overflow-y:auto;}
+.hit-item{display:flex;align-items:flex-start;gap:8px;font-size:12px;padding:7px 10px;background:var(--surface);border-radius:6px;border:1px solid var(--border);}
+.hit-dot{width:6px;height:6px;background:var(--red);border-radius:50%;margin-top:4px;flex-shrink:0;}
+.hit-text{flex:1;line-height:1.5;}
+
+/* stats row */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:4px;}
+.stat-num{font-size:28px;font-weight:700;font-family:'JetBrains Mono',monospace;}
+.stat-label{font-size:11px;color:var(--muted);}
+.c-green{color:var(--green);}
+.c-amber{color:var(--amber);}
+.c-red{color:var(--red);}
+.c-cyan{color:var(--cyan);}
+
+/* bar chart */
+.bar-chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;}
+.bar-chart{display:flex;align-items:flex-end;gap:18px;height:120px;margin-top:14px;}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1;}
+.bar-seg{width:100%;border-radius:4px 4px 0 0;transition:opacity .2s;}
+.bar-seg:hover{opacity:.8;}
+.bar-seg-green{background:var(--green);}
+.bar-seg-amber{background:var(--amber);}
+.bar-seg-red{background:var(--red);}
+.bar-lbl{font-size:11px;color:var(--muted);text-align:center;}
+.bar-val{font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace;margin-bottom:4px;}
+
+/* comparison table */
+.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:20px;}
+.table-toolbar{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--border);}
+.table-toolbar h3{font-size:14px;font-weight:600;margin-right:auto;}
+.filter-btn{padding:5px 13px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit;transition:.15s;}
+.filter-btn:hover,.filter-btn.on{background:var(--cyan-dim);border-color:rgba(0,212,255,.3);color:var(--cyan);}
+.data-table{width:100%;border-collapse:collapse;}
+.data-table th{background:var(--surface);font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;padding:10px 16px;text-align:left;border-bottom:1px solid var(--border);}
+.data-table td{padding:12px 16px;border-bottom:1px solid rgba(30,48,80,.6);font-size:13px;vertical-align:top;}
+.data-table tr:last-child td{border-bottom:none;}
+.data-table tr:hover td{background:rgba(255,255,255,.02);}
+.deviation-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:5px;}
+.dev-pos{background:rgba(34,197,94,.12);color:var(--green);border:1px solid rgba(34,197,94,.25);}
+.dev-word{background:rgba(255,181,71,.12);color:var(--amber);border:1px solid rgba(255,181,71,.25);}
+.dev-real{background:rgba(255,92,92,.12);color:var(--red);border:1px solid rgba(255,92,92,.25);}
+.star-mark{color:var(--red);font-size:10px;font-weight:700;vertical-align:super;}
+.seq-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);}
+.method-tag{font-size:10px;font-family:'JetBrains Mono',monospace;background:var(--surface);border:1px solid var(--border);padding:2px 6px;border-radius:4px;color:var(--muted);}
+
+/* suggestion panel */
+.suggestion-panel{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-top:8px;overflow:hidden;}
+.suggestion-header{display:flex;align-items:center;gap:8px;padding:10px 14px;cursor:pointer;font-size:12px;font-weight:600;}
+.suggestion-body{padding:12px 14px 14px;border-top:1px solid var(--border);}
+.p-tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:700;margin-right:8px;font-family:'JetBrains Mono',monospace;}
+.p0{background:rgba(34,197,94,.15);color:var(--green);}
+.p1{background:rgba(255,181,71,.15);color:var(--amber);}
+.p2{background:rgba(255,92,92,.15);color:var(--red);}
+.suggest-text{font-size:12px;line-height:1.7;color:#BCC8DC;margin-top:6px;}
+.suggest-dim{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;}
+.dim-badge{font-size:11px;padding:3px 9px;border-radius:5px;background:rgba(255,181,71,.1);border:1px solid rgba(255,181,71,.2);color:var(--amber);}
+
+/* knowledge base */
+.kb-controls{display:flex;gap:10px;margin-bottom:18px;align-items:center;}
+.search-box{flex:1;max-width:300px;position:relative;}
+.search-box input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px 8px 36px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:.15s;}
+.search-box input:focus{border-color:rgba(0,212,255,.4);}
+.search-box .si{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--muted);}
+.select-ctrl{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:8px 14px;color:var(--text);font-size:13px;font-family:inherit;outline:none;cursor:pointer;appearance:none;padding-right:28px;}
+.kb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.kb-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:.15s;cursor:default;}
+.kb-card:hover{border-color:rgba(0,212,255,.25);box-shadow:0 4px 20px rgba(0,212,255,.05);}
+.kb-vendor{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.vendor-badge{padding:3px 10px;border-radius:5px;font-size:11px;font-weight:700;letter-spacing:.04em;}
+.vb-xf{background:rgba(0,212,255,.12);color:var(--cyan);border:1px solid rgba(0,212,255,.2);}
+.vb-sw{background:rgba(255,92,92,.12);color:var(--red);border:1px solid rgba(255,92,92,.2);}
+.vb-hh{background:rgba(255,181,71,.12);color:var(--amber);border:1px solid rgba(255,181,71,.2);}
+.vb-hk{background:rgba(139,92,246,.12);color:#A78BFA;border:1px solid rgba(139,92,246,.2);}
+.kb-product{font-size:13px;font-weight:600;margin-bottom:10px;}
+.kb-params{display:flex;flex-direction:column;gap:5px;}
+.kb-param-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 10px;background:var(--surface);border-radius:5px;}
+.kb-param-val{font-family:'JetBrains Mono',monospace;color:var(--cyan);font-size:11px;}
+.kb-add-btn{border:2px dashed var(--border);border-radius:12px;padding:28px;text-align:center;cursor:pointer;transition:.15s;color:var(--muted);font-size:13px;}
+.kb-add-btn:hover{border-color:var(--cyan);color:var(--cyan);background:var(--cyan-dim);}
+
+/* modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:.2s;}
+.modal-overlay.show{opacity:1;pointer-events:all;}
+.modal{background:#162848;border:1px solid var(--border);border-radius:14px;padding:28px;width:460px;max-width:90vw;transform:translateY(12px);transition:.2s;}
+.modal-overlay.show .modal{transform:translateY(0);}
+.modal h3{font-size:16px;font-weight:700;margin-bottom:18px;}
+.form-field{margin-bottom:14px;}
+.form-field label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px;font-weight:500;}
+.form-field input,.form-field select,.form-field textarea{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 13px;color:var(--text);font-size:13px;font-family:inherit;outline:none;resize:vertical;}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:rgba(0,212,255,.4);}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;}
+
+/* radar animation on ring */
+@keyframes radar-pulse{0%{r:28;opacity:.6;}100%{r:48;opacity:0;}}
+.radar-ring{animation:radar-pulse 2s ease-out infinite;}
+.radar-ring2{animation:radar-pulse 2s ease-out .7s infinite;}
+
+/* scrollbar */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--surface);}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:4px;}
+::-webkit-scrollbar-thumb:hover{background:var(--muted);}
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="logo">
+    <div class="logo-mark">
+      <div class="logo-icon">⚡</div>
+      <div>
+        <div class="logo-text">参数智能体</div>
+        <div class="logo-sub">讯飞智慧黑板 · 投标分析</div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <div class="nav-item" onclick="goto('upload')">
+      <span class="nav-icon">📂</span>上传招标文件
+    </div>
+    <div class="nav-item active" onclick="goto('dashboard')">
+      <span class="nav-icon">🎯</span>分析结果
+      <span class="nav-badge">新</span>
+    </div>
+    <div class="nav-item" onclick="goto('kb')">
+      <span class="nav-icon">🗂</span>参数知识库
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <span class="status-dot"></span>系统就绪 · v3.0
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+
+<!-- ═══════════════════════════════════════
+     PAGE 1: UPLOAD
+════════════════════════════════════════ -->
+<div class="page" id="page-upload">
+  <div class="page-title">上传招标文件</div>
+  <div class="page-sub">支持 PDF、Word、Excel 格式，系统自动解析参数并启动三层分析引擎</div>
+
+  <div id="upload-idle">
+    <div class="upload-zone" id="dropzone"
+         onclick="startUpload()"
+         ondragover="event.preventDefault();this.classList.add('drag')"
+         ondragleave="this.classList.remove('drag')"
+         ondrop="event.preventDefault();this.classList.remove('drag');startUpload()">
+      <div class="scan-line"></div>
+      <span class="uicon">📄</span>
+      <h3>拖拽文件到此处，或点击选择</h3>
+      <p>招标文件通常为 PDF / Word / Excel 格式，含参数配置表</p>
+      <button class="btn btn-primary" onclick="event.stopPropagation();startUpload()">选择文件</button>
+      <div class="file-types">
+        <span class="ft-tag">.pdf</span>
+        <span class="ft-tag">.docx</span>
+        <span class="ft-tag">.doc</span>
+        <span class="ft-tag">.xlsx</span>
+        <span class="ft-tag">.xls</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="upload-progress" style="display:none">
+    <div class="card" style="margin-bottom:18px;padding:18px 22px;display:flex;align-items:center;gap:14px;">
+      <span style="font-size:26px">📄</span>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:600;margin-bottom:4px">某市2026年智慧教室设备采购招标文件.pdf</div>
+        <div style="font-size:12px;color:var(--muted)">2.4 MB · 正在处理…</div>
+      </div>
+      <div style="font-size:22px;color:var(--cyan);animation:spin 1s linear infinite" id="spin-icon">⟳</div>
+    </div>
+    <div class="progress-section" id="steps-container"></div>
+    <div style="margin-top:18px;display:flex;gap:10px;justify-content:flex-end" id="go-result-btn" style="display:none">
+      <button class="btn btn-primary" onclick="goto('dashboard')">查看分析报告 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE 2: DASHBOARD
+════════════════════════════════════════ -->
+<div class="page active" id="page-dashboard">
+  <div class="page-title">分析报告</div>
+  <div class="page-sub">某市2026年智慧教室设备采购项目 · 共识别 48 条有效参数 · 分析完成于 2026-07-25 10:42</div>
+
+  <!-- stats -->
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-num c-cyan">48</div><div class="stat-label">有效参数总计</div></div>
+    <div class="stat-card"><div class="stat-num c-green">31</div><div class="stat-label">🟢 正偏离</div></div>
+    <div class="stat-card"><div class="stat-num c-amber">9</div><div class="stat-label">🟡 说辞可改</div></div>
+    <div class="stat-card"><div class="stat-num c-red">8</div><div class="stat-label">🔴 真负偏离</div></div>
+  </div>
+
+  <div class="dash-grid">
+    <!-- verdict card -->
+    <div class="verdict-card">
+      <div>
+        <div class="verdict-label">控标方判定</div>
+        <div class="vendor-name">希沃 SEEWO</div>
+        <div class="vendor-en">视源股份旗下教育品牌</div>
+      </div>
+      <div class="ring-wrap">
+        <svg class="ring-svg" width="90" height="90" viewBox="0 0 90 90">
+          <circle class="radar-ring" cx="45" cy="45" fill="none" stroke="rgba(255,92,92,.3)" stroke-width="1"/>
+          <circle class="radar-ring2" cx="45" cy="45" fill="none" stroke="rgba(255,92,92,.3)" stroke-width="1"/>
+          <circle cx="45" cy="45" r="38" fill="none" stroke="var(--border)" stroke-width="5"/>
+          <circle cx="45" cy="45" r="38" fill="none" stroke="var(--red)" stroke-width="5"
+                  stroke-dasharray="170 238" stroke-dashoffset="60" stroke-linecap="round"
+                  style="transform:rotate(-90deg);transform-origin:45px 45px"/>
+          <text x="45" y="49" text-anchor="middle" fill="var(--red)" font-size="16" font-weight="700" font-family="JetBrains Mono,monospace">72%</text>
+        </svg>
+        <div class="ring-info">
+          <div class="ring-pct">72%</div>
+          <div class="ring-sub">独有特征命中率</div>
+          <div style="margin-top:10px">
+            <span class="verdict-badge">⚠ 高度可疑</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card-title">命中的独有特征参数</div>
+        <div class="hit-list">
+          <div class="hit-item"><div class="hit-dot"></div><div class="hit-text">内置摄像头 ≥ 1200万像素（AI追踪）</div></div>
+          <div class="hit-item"><div class="hit-dot"></div><div class="hit-text">支持 SEEWO 云课堂协作功能</div></div>
+          <div class="hit-item"><div class="hit-dot"></div><div class="hit-text">红外触控点数 ≥ 40点同时识别</div></div>
+          <div class="hit-item"><div class="hit-dot"></div><div class="hit-text">护眼认证：TÜV莱茵低蓝光 + 无频闪</div></div>
+          <div class="hit-item"><div class="hit-dot"></div><div class="hit-text">电磁笔压感 ≥ 8192 级</div></div>
+          <div class="hit-item"><div class="hit-dot"></div><div class="hit-text">OPS 扩展舱支持双电源热插拔</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- bar chart -->
+    <div class="bar-chart-card">
+      <div class="card-title">参数偏离分布（按类别）</div>
+      <div class="bar-chart" id="barChart"></div>
+      <div style="display:flex;gap:18px;margin-top:14px;font-size:12px;">
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:var(--green);border-radius:2px;display:inline-block"></span>正偏离</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:var(--amber);border-radius:2px;display:inline-block"></span>说辞可改</span>
+        <span style="display:flex;align-items:center;gap:6px;"><span style="width:10px;height:10px;background:var(--red);border-radius:2px;display:inline-block"></span>真负偏离</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- comparison table -->
+  <div class="table-card">
+    <div class="table-toolbar">
+      <h3>参数逐条对比</h3>
+      <button class="filter-btn on" onclick="filterTable('all',this)">全部 (48)</button>
+      <button class="filter-btn" onclick="filterTable('positive',this)">🟢 正偏离 (31)</button>
+      <button class="filter-btn" onclick="filterTable('word',this)">🟡 说辞可改 (9)</button>
+      <button class="filter-btn" onclick="filterTable('real',this)">🔴 真负偏离 (8)</button>
+    </div>
+    <table class="data-table" id="compareTable">
+      <thead>
+        <tr>
+          <th style="width:40px">#</th>
+          <th style="width:80px">类别</th>
+          <th>招标要求</th>
+          <th>讯飞规格</th>
+          <th style="width:100px">偏离判定</th>
+          <th style="width:80px">判定方式</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     PAGE 3: KNOWLEDGE BASE
+════════════════════════════════════════ -->
+<div class="page" id="page-kb">
+  <div class="page-title">参数知识库</div>
+  <div class="page-sub">维护竞品与讯飞产品的结构化参数数据，支持按厂商/品类筛选与新增条目</div>
+
+  <div class="kb-controls">
+    <div class="search-box">
+      <span class="si">🔍</span>
+      <input type="text" placeholder="搜索参数名称、型号…" oninput="filterKB(this.value)">
+    </div>
+    <select class="select-ctrl" id="vendorFilter" onchange="filterKB('')">
+      <option value="">全部厂商</option>
+      <option>讯飞 iFLYTEK</option>
+      <option>希沃 SEEWO</option>
+      <option>鸿合 HiteVision</option>
+      <option>海康威视 HIKVISION</option>
+    </select>
+    <select class="select-ctrl" onchange="">
+      <option value="">全部品类</option>
+      <option>显示</option><option>触控</option><option>摄像</option>
+      <option>音频</option><option>护眼</option><option>接口</option>
+    </select>
+    <button class="btn btn-primary" onclick="openModal()" style="margin-left:auto">＋ 新增条目</button>
+  </div>
+
+  <div class="kb-grid" id="kbGrid"></div>
+</div>
+
+</div><!-- /main -->
+
+<!-- Add Entry Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <h3>新增参数条目</h3>
+    <div class="form-field"><label>厂商</label>
+      <select><option>讯飞 iFLYTEK</option><option>希沃 SEEWO</option><option>鸿合 HiteVision</option><option>海康威视 HIKVISION</option></select></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="form-field"><label>产品型号</label><input type="text" placeholder="如 SMART-86W5"></div>
+      <div class="form-field"><label>参数分类</label>
+        <select><option>显示</option><option>触控</option><option>摄像</option><option>音频</option><option>护眼</option><option>接口</option><option>软件</option></select></div>
+    </div>
+    <div class="form-field"><label>参数名称</label><input type="text" placeholder="如 亮度"></div>
+    <div class="form-field"><label>规格描述</label><textarea rows="2" placeholder="如 ≥ 550 cd/m²，峰值 600 cd/m²"></textarea></div>
+    <div class="form-field"><label>数据来源</label><input type="text" placeholder="如 官网规格书 2026Q1"></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+      <button class="btn btn-primary" onclick="closeModal()">保存条目</button>
+    </div>
+  </div>
+</div>
+
+<style>@keyframes spin{to{transform:rotate(360deg);}}</style>
+<script>
+// ── Navigation ──────────────────────────────
+function goto(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  const idx={upload:0,dashboard:1,kb:2}[page];
+  document.querySelectorAll('.nav-item')[idx].classList.add('active');
+}
+
+// ── Upload simulation ────────────────────────
+const uploadSteps=[
+  {label:'文件格式识别',time:'0.2s',icon:'🔍'},
+  {label:'参数表格提取（OCR 增强）',time:'1.4s',icon:'📑'},
+  {label:'标记符号识别（★ △ ◆）',time:'0.6s',icon:'🏷'},
+  {label:'归一化为结构化 JSON',time:'0.3s',icon:'⚙️'},
+  {label:'控标方识别（横向对比）',time:'2.1s',icon:'🎯'},
+  {label:'参数匹配（程序粗筛 + AI 精判）',time:'3.8s',icon:'🤖'},
+  {label:'应对建议生成',time:'1.6s',icon:'💡'},
+];
+function startUpload(){
+  document.getElementById('upload-idle').style.display='none';
+  document.getElementById('upload-progress').style.display='block';
+  const cont=document.getElementById('steps-container');
+  cont.innerHTML='';
+  uploadSteps.forEach((s,i)=>{
+    const d=document.createElement('div');
+    d.className='progress-step';d.id='step-'+i;
+    d.innerHTML=`<div class="step-icon step-wait" id="si-${i}">${s.icon}</div>
+      <div style="flex:1"><div class="step-label">${s.label}</div>
+      <div class="progress-bar-wrap" id="pb-${i}" style="display:none"><div class="progress-bar" id="pbar-${i}" style="width:0%"></div></div></div>
+      <div class="step-time" id="st-${i}">—</div>`;
+    cont.appendChild(d);
+  });
+  runStep(0);
+}
+function runStep(i){
+  if(i>=uploadSteps.length){
+    document.getElementById('spin-icon').textContent='✅';
+    document.getElementById('spin-icon').style.animation='none';
+    const btn=document.getElementById('go-result-btn');
+    if(btn){btn.style.display='flex';}
+    // auto-inject button if missing
+    const wrap=document.getElementById('upload-progress');
+    if(!document.getElementById('go-result-btn-real')){
+      const b=document.createElement('div');
+      b.id='go-result-btn-real';b.style.cssText='margin-top:18px;display:flex;gap:10px;justify-content:flex-end';
+      b.innerHTML='<button class="btn btn-primary" onclick="goto(\'dashboard\')">查看分析报告 →</button>';
+      wrap.appendChild(b);
+    }
+    return;
+  }
+  const si=document.getElementById('si-'+i);
+  const pb=document.getElementById('pb-'+i);
+  const pbar=document.getElementById('pbar-'+i);
+  const st=document.getElementById('st-'+i);
+  si.className='step-icon step-active';si.textContent='⟳';
+  si.style.animation='spin .8s linear infinite';
+  pb.style.display='block';
+  let w=0;
+  const iv=setInterval(()=>{w+=Math.random()*18+8;if(w>100)w=100;pbar.style.width=w+'%';if(w>=100)clearInterval(iv);},120);
+  const delay=600+Math.random()*800;
+  setTimeout(()=>{
+    si.style.animation='none';si.className='step-icon step-done';si.textContent='✓';
+    st.textContent=uploadSteps[i].time;
+    runStep(i+1);
+  },delay);
+}
+
+// ── Table data ───────────────────────────────
+const tableData=[
+  {seq:1,cat:'显示',req:'亮度 ≥ 500 cd/m²，均匀度 ≥ 80%',xf:'峰值亮度 550 cd/m²，均匀度 82%',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:2,cat:'显示',req:'分辨率 4K（3840×2160），支持 HDR10',xf:'4K UHD 3840×2160，HDR10 认证',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:3,cat:'触控',req:'红外触控点数 ≥ 40 点同时识别',xf:'红外触控支持 20 点同时识别',dev:'real',method:'program',suggest:{p:'P1',text:'建议从教学场景实用性角度质疑：单节课同时有 40 名学生在同一黑板书写的场景极为罕见，现行 GB/T 34551-2017 标准中对触控点数无此要求，该指标仅在希沃 SEEWO 官网宣传资料中出现，存在明显倾向性。',dims:['教学场景实用性','法规与标准依据']},star:true},
+  {seq:4,cat:'触控',req:'触控响应延迟 ≤ 25ms',xf:'触控响应 ≤ 20ms（实测值）',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:5,cat:'摄像',req:'内置 AI 摄像头，像素 ≥ 1200 万，支持人脸追踪',xf:'内置 500 万像素前置摄像头，支持人员检测',dev:'real',method:'ai',suggest:{p:'P0',text:'讯飞产品支持 AI 行为分析与课堂检测，可将"人脸追踪"改写为"AI 课堂感知，支持学生专注度检测与行为分析"，规避像素数值直接比对，同时突出讯飞在 AI 教育能力上的整体优势。',dims:['生态与功能完整性']},star:true},
+  {seq:6,cat:'摄像',req:'摄像头视角 ≥ 110°',xf:'摄像头水平视角 120°',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:7,cat:'护眼',req:'TÜV 莱茵低蓝光认证 + 无频闪认证',xf:'莱茵认证低蓝光，无频闪 DC 调光',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:8,cat:'护眼',req:'蓝光占比 ≤ 30%（全白画面）',xf:'蓝光占比 28%（第三方检测报告）',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:9,cat:'音频',req:'内置音箱功率 ≥ 2×20W，支持回声消除',xf:'2×20W 双声道，AI 回声消除',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:10,cat:'音频',req:'支持 8 米远场拾音麦克风阵列',xf:'支持 5 米远场麦克风阵列',dev:'word',method:'ai',suggest:{p:'P0',text:'讯飞实际支持 5 米近场 + 2 米扩展拾音，在安装高度 1.2m 时覆盖教室 90% 区域，建议将文档描述改写为"支持 AI 降噪麦克风阵列，有效覆盖 36m² 标准教室"，以功能效果替代距离指标对比。',dims:['生态与功能完整性']},star:false},
+  {seq:11,cat:'无线投屏',req:'无线投屏协议：支持 Miracast / AirPlay / 华为投屏',xf:'支持 Miracast / AirPlay / 讯飞智投',dev:'word',method:'ai',suggest:{p:'P0',text:'"讯飞智投"与"华为投屏"均为私有协议投屏，功能等价。建议在技术响应文件中将"讯飞智投"标注为"兼容安卓智慧投屏协议（等效华为投屏体验）"，规避品牌名称锁定。',dims:['生态与功能完整性']},star:false},
+  {seq:12,cat:'接口',req:'HDMI 接口 ≥ 3 个（含 1 个 HDMI 2.1）',xf:'HDMI 2.0 × 2 + HDMI 1.4 × 1',dev:'real',method:'program',suggest:{p:'P1',text:'HDMI 2.1 最高支持 48Gbps 带宽，而 4K 60Hz 仅需 18Gbps，HDMI 2.0 完全满足日常教学需求。建议质疑该指标的教学必要性，并援引国标 GB/T 34552-2020 中对交互式黑板接口的最低要求（HDMI 1.4 以上），指出"HDMI 2.1"超出标准要求，带有品牌倾向。',dims:['教学场景实用性','法规与标准依据']},star:true},
+  {seq:13,cat:'接口',req:'Type-C 接口 ≥ 2 个，支持 PD 充电',xf:'USB-C × 2，支持 65W PD 充电',dev:'positive',method:'program',suggest:null,star:false},
+  {seq:14,cat:'电磁笔',req:'电磁感应手写笔，压感 ≥ 8192 级',xf:'讯飞智能笔，压感 4096 级',dev:'real',method:'program',suggest:{p:'P1',text:'8192 级压感为专业绘图设备规格，在日常板书与课件批注场景中与 4096 级压感无明显体验差异，且现行 K12 教学标准中无压感等级要求。建议质疑此参数在教育场景的实际意义，并补充讯飞智能笔在 AI 手写识别、多语言转写等教学功能上的独特优势。',dims:['教学场景实用性','生态与功能完整性','法规与标准依据']},star:true},
+  {seq:15,cat:'OPS',req:'OPS 扩展舱支持双电源热插拔',xf:'OPS 舱位标准接口，单电源',dev:'real',method:'program',suggest:{p:'P2',text:'此功能涉及硬件设计，短期内无法通过软件更新实现，建议联系讯飞大屏硬件渠道协调，确认是否有支持双电源热插拔的定制型号可提供，或以"具备 OPS 热插拔功能（单电源），满足教学全天候不间断使用需求"进行技术响应。',dims:[]},star:false},
+  {seq:16,cat:'软件',req:'内置课堂互动软件，支持 ≥ 50 人同时在线协作',xf:'讯飞课堂，支持 60 人在线协作',dev:'positive',method:'ai',suggest:null,star:false},
+  {seq:17,cat:'软件',req:'支持 AI 语音转文字，准确率 ≥ 95%',xf:'讯飞语音识别，普通话准确率 98%+',dev:'positive',method:'ai',suggest:null,star:false},
+];
+
+const devMap={positive:'dev-pos',word:'dev-word',real:'dev-real'};
+const devLabel={positive:'🟢 正偏离',word:'🟡 说辞可改',real:'🔴 真负偏离'};
+
+function renderTable(data){
+  const tbody=document.getElementById('tableBody');
+  tbody.innerHTML='';
+  data.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.dataset.dev=r.dev;
+    tr.innerHTML=`
+      <td><span class="seq-num">${String(r.seq).padStart(2,'0')}</span></td>
+      <td><span style="font-size:11px;color:var(--muted)">${r.cat}</span></td>
+      <td>${r.req}${r.star?'<sup class="star-mark">★废标</sup>':''}</td>
+      <td>${r.xf}</td>
+      <td><span class="deviation-tag ${devMap[r.dev]}">${devLabel[r.dev]}</span></td>
+      <td><span class="method-tag">${r.method==='ai'?'AI精判':'程序粗筛'}</span></td>`;
+    tbody.appendChild(tr);
+    if(r.suggest){
+      const sr=document.createElement('tr');
+      sr.dataset.dev=r.dev;
+      const dims=r.suggest.dims.length?`<div class="suggest-dim">${r.suggest.dims.map(d=>`<span class="dim-badge">${d}</span>`).join('')}</div>`:'';
+      sr.innerHTML=`<td colspan="6" style="padding:0 16px 12px 48px">
+        <div class="suggestion-panel">
+          <div class="suggestion-header">
+            <span class="p-tag ${r.suggest.p==='P0'?'p0':r.suggest.p==='P1'?'p1':'p2'}">${r.suggest.p}</span>
+            ${r.suggest.p==='P0'?'改说辞建议':r.suggest.p==='P1'?'质疑话术':'渠道协调'}
+          </div>
+          <div class="suggestion-body">
+            <div class="suggest-text">${r.suggest.text}</div>
+            ${dims}
+          </div>
+        </div></td>`;
+      tbody.appendChild(sr);
+    }
+  });
+}
+
+function filterTable(type, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const filtered=type==='all'?tableData:tableData.filter(r=>
+    type==='positive'?r.dev==='positive':
+    type==='word'?r.dev==='word':r.dev==='real'
+  );
+  renderTable(filtered);
+}
+
+// ── Bar chart ────────────────────────────────
+const barData=[
+  {label:'显示',g:6,a:1,r:1},{label:'触控',g:3,a:0,r:2},{label:'摄像',g:2,a:0,r:2},
+  {label:'护眼',g:4,a:0,r:0},{label:'音频',g:2,a:1,r:0},{label:'投屏',g:1,a:2,r:0},
+  {label:'接口',g:3,a:0,r:2},{label:'软件',g:5,a:2,r:0},{label:'智能笔',g:1,a:1,r:1},{label:'OPS',g:2,a:1,r:1},
+  {label:'其他',g:2,a:1,r:0},
+];
+function renderBar(){
+  const cont=document.getElementById('barChart');
+  if(!cont)return;
+  const max=Math.max(...barData.map(d=>d.g+d.a+d.r));
+  cont.innerHTML='';
+  barData.forEach(d=>{
+    const total=d.g+d.a+d.r;
+    const col=document.createElement('div');
+    col.className='bar-col';
+    col.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;justify-content:flex-end;width:100%">
+      ${d.r?`<div class="bar-seg bar-seg-red" style="height:${d.r/max*90}px;width:100%" title="${d.label} 真负偏离 ${d.r}"></div>`:''}
+      ${d.a?`<div class="bar-seg bar-seg-amber" style="height:${d.a/max*90}px;width:100%" title="${d.label} 说辞可改 ${d.a}"></div>`:''}
+      ${d.g?`<div class="bar-seg bar-seg-green" style="height:${d.g/max*90}px;width:100%" title="${d.label} 正偏离 ${d.g}"></div>`:''}
+    </div>
+    <div class="bar-lbl" style="font-size:10px;margin-top:4px;line-height:1.3">${d.label}</div>`;
+    cont.appendChild(col);
+  });
+}
+
+// ── KB data ──────────────────────────────────
+const kbData=[
+  {vendor:'讯飞 iFLYTEK',vclass:'vb-xf',product:'SMART-86W5',params:[
+    {n:'亮度',v:'550 cd/m²'},{n:'分辨率',v:'4K HDR10'},{n:'触控点数',v:'20点红外'},
+    {n:'摄像头',v:'500万/AI检测'},{n:'压感笔',v:'4096级'},{n:'语音识别',v:'98%+ 普通话'},
+  ]},
+  {vendor:'希沃 SEEWO',vclass:'vb-sw',product:'V6-86',params:[
+    {n:'亮度',v:'500 cd/m²'},{n:'分辨率',v:'4K HDR10'},{n:'触控点数',v:'40点红外'},
+    {n:'摄像头',v:'1200万/人脸追踪'},{n:'压感笔',v:'8192级'},{n:'云课堂',v:'私有协议'},
+  ]},
+  {vendor:'鸿合 HiteVision',vclass:'vb-hh',product:'HD-86EA',params:[
+    {n:'亮度',v:'450 cd/m²'},{n:'分辨率',v:'4K'},{n:'触控点数',v:'20点红外'},
+    {n:'摄像头',v:'200万'},  {n:'音箱',v:'2×15W'},{n:'接口',v:'HDMI×2'},
+  ]},
+  {vendor:'海康威视 HIKVISION',vclass:'vb-hk',product:'DS-D5B86RB',params:[
+    {n:'亮度',v:'500 cd/m²'},{n:'分辨率',v:'4K'},{n:'触控点数',v:'20点红外'},
+    {n:'摄像头',v:'800万+热成像'},{n:'音箱',v:'2×20W'},{n:'AI分析',v:'行为识别'},
+  ]},
+  {vendor:'讯飞 iFLYTEK',vclass:'vb-xf',product:'SMART-75W3',params:[
+    {n:'亮度',v:'500 cd/m²'},{n:'分辨率',v:'4K'},{n:'触控点数',v:'20点红外'},
+    {n:'摄像头',v:'200万'},{n:'OPS',v:'标准舱位'},{n:'接口',v:'HDMI 2.0×2'},
+  ]},
+];
+
+function renderKB(data){
+  const grid=document.getElementById('kbGrid');
+  if(!grid)return;
+  grid.innerHTML='';
+  data.forEach(k=>{
+    const c=document.createElement('div');
+    c.className='kb-card';
+    c.innerHTML=`<div class="kb-vendor">
+      <span class="vendor-badge ${k.vclass}">${k.vendor}</span>
+    </div>
+    <div class="kb-product">${k.product}</div>
+    <div class="kb-params">${k.params.map(p=>`<div class="kb-param-row"><span>${p.n}</span><span class="kb-param-val">${p.v}</span></div>`).join('')}</div>`;
+    grid.appendChild(c);
+  });
+  const add=document.createElement('div');
+  add.className='kb-add-btn';
+  add.innerHTML='＋ 新增产品参数条目';
+  add.onclick=openModal;
+  grid.appendChild(add);
+}
+
+function filterKB(q){
+  const vendor=document.getElementById('vendorFilter').value;
+  const filtered=kbData.filter(k=>
+    (!vendor||k.vendor===vendor)&&
+    (!q||(k.product+k.params.map(p=>p.n).join('')).toLowerCase().includes(q.toLowerCase()))
+  );
+  renderKB(filtered);
+}
+
+function openModal(){document.getElementById('modal').classList.add('show');}
+function closeModal(){document.getElementById('modal').classList.remove('show');}
+document.getElementById('modal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+// ── Init ─────────────────────────────────────
+renderTable(tableData);
+renderBar();
+renderKB(kbData);
+</script>
+</body>
+</html>

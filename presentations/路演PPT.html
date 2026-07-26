@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教育装备招标参数识别与响应决策系统 · 路演</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', sans-serif;
+            background: #e9e3f5;
+            color: #1f2937;
+        }
+
+        /* 16:10 slide = 1920 x 1200 */
+        .slide {
+            width: 1920px;
+            height: 1200px;
+            position: relative;
+            page-break-after: always;
+            overflow: hidden;
+            padding: 90px 130px;
+            margin: 0 auto 40px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0e7ff 100%);
+        }
+
+        /* ===== 演示模式：一次一页 + 键盘翻页 + 自适应缩放 ===== */
+        body.present {
+            background: #000;
+            overflow: hidden;
+            height: 100vh;
+        }
+        body.present #stage {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform-origin: center center;
+            /* JS 会覆盖 transform 加入 scale */
+        }
+        body.present .slide {
+            display: none !important;
+            margin: 0;
+            /* 定位到 stage 中心 */
+            position: absolute;
+            top: -600px; left: -960px;
+        }
+        /* 普通页：块级；用 !important 保证覆盖 display:none */
+        body.present .slide.active {
+            display: block !important;
+        }
+        /* flex 居中页（封面/演示/结尾）：激活时恢复 flex */
+        body.present .slide-cover.active,
+        body.present .slide-demo.active,
+        body.present .slide-end.active {
+            display: flex !important;
+        }
+        /* 页码指示器（仅演示模式） */
+        .pager {
+            display: none;
+            position: fixed;
+            bottom: 26px; right: 40px;
+            z-index: 999;
+            font-size: 22px; font-weight: 700;
+            color: #fff; background: rgba(124,58,237,0.75);
+            padding: 8px 20px; border-radius: 20px;
+            font-family: 'Inter', sans-serif; letter-spacing: 0.08em;
+        }
+        body.present .pager { display: block; }
+
+        .page-tag {
+            position: absolute;
+            top: 54px; right: 70px;
+            font-size: 20px; font-weight: 600;
+            color: #a855f7; letter-spacing: 0.15em;
+        }
+        .doc-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            color: #fff; font-size: 22px; font-weight: 700;
+            padding: 8px 22px; border-radius: 12px;
+            letter-spacing: 0.05em; margin-bottom: 28px;
+        }
+        .grad-text {
+            background: linear-gradient(135deg, #7c3aed 0%, #ec4899 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ---------- P1 Cover ---------- */
+        .slide-cover { display: flex; flex-direction: column; justify-content: space-between; }
+        .title-main { font-size: 104px; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 30px; }
+        .subtitle { font-size: 40px; font-weight: 300; color: #6b7280; margin-bottom: 70px; }
+        .origin-box {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            color: #fff; padding: 52px 60px; border-radius: 28px;
+            transform: rotate(-1.5deg); box-shadow: 0 24px 70px rgba(124,58,237,0.22);
+            max-width: 1180px;
+        }
+        .origin-label { font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; opacity: 0.85; margin-bottom: 18px; }
+        .origin-content { font-size: 34px; font-weight: 400; line-height: 1.55; }
+        .pain-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; margin-top: 56px; }
+        .pain-card { background: #fff; padding: 40px; border-radius: 22px; box-shadow: 0 12px 44px rgba(0,0,0,0.06); transform: rotate(1.5deg); }
+        .pain-card:nth-child(2) { transform: rotate(-1.5deg); }
+        .pain-icon { width: 74px; height: 74px; background: linear-gradient(135deg,#ec4899 0%,#f472b6 100%); border-radius: 18px; display:flex; align-items:center; justify-content:center; font-size: 40px; margin-bottom: 22px; }
+        .pain-title { font-size: 30px; font-weight: 700; color: #111827; margin-bottom: 14px; }
+        .pain-desc { font-size: 21px; color: #6b7280; line-height: 1.55; }
+        .team-line { position: absolute; bottom: 60px; left: 130px; font-size: 24px; color: #9ca3af; font-weight: 400; }
+
+        /* ---------- P2 Demo ---------- */
+        .slide-demo { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, #2a1846 0%, #4c1d95 60%, #7c3aed 100%); }
+        .demo-kicker { font-size: 32px; color: #e9d5ff; font-weight: 300; letter-spacing: 0.2em; margin-bottom: 30px; }
+        .demo-title { font-size: 132px; font-weight: 800; color: #fff; line-height: 1.05; margin-bottom: 46px; }
+        .demo-flow { display: flex; align-items: center; gap: 34px; margin-top: 20px; }
+        .demo-step { background: rgba(255,255,255,0.12); border: 2px solid rgba(255,255,255,0.35); color:#fff; padding: 26px 44px; border-radius: 18px; font-size: 30px; font-weight: 600; backdrop-filter: blur(6px); }
+        .demo-arrow { font-size: 52px; color: #e9d5ff; }
+        .demo-hint { margin-top: 70px; font-size: 26px; color: #d8b4fe; font-weight: 300; }
+
+        /* ---------- shared section header ---------- */
+        .sec-head { margin-bottom: 50px; }
+        .sec-title { font-size: 66px; font-weight: 800; line-height: 1.1; }
+        .sec-sub { font-size: 28px; color: #6b7280; font-weight: 400; margin-top: 14px; }
+
+        /* ---------- P-docs 文档体系 ---------- */
+        .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 40px; margin-top: 20px; }
+        .doc-item { display: flex; align-items: center; gap: 24px; background: #fff; border-radius: 16px; padding: 22px 30px; box-shadow: 0 8px 30px rgba(0,0,0,0.05); border-left: 6px solid #a855f7; }
+        .doc-item.first { border-left-color: #ec4899; background: linear-gradient(135deg,#fff 0%,#fdf0f8 100%); }
+        .doc-no { font-size: 40px; font-weight: 800; color: #a855f7; min-width: 64px; line-height: 1; }
+        .doc-item.first .doc-no { color: #ec4899; }
+        .doc-names { flex: 1; }
+        .doc-cn { font-size: 27px; font-weight: 700; color: #111827; line-height: 1.2; }
+        .doc-en { font-size: 18px; color: #9ca3af; font-weight: 400; margin-top: 4px; letter-spacing: 0.02em; }
+        .doc-flag { font-size: 20px; color: #ec4899; font-weight: 700; white-space: nowrap; }
+
+        /* ---------- P3 团队 + 甘特 ---------- */
+        .role-row { display: flex; gap: 26px; margin-bottom: 54px; }
+        .role-card { flex: 1; background: #fff; border-radius: 20px; padding: 32px 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-top: 6px solid #a855f7; }
+        .role-card.pm { border-top-color: #7c3aed; }
+        .role-card.prod { border-top-color: #ec4899; }
+        .role-name { font-size: 27px; font-weight: 700; color: #111827; margin-bottom: 8px; }
+        .role-who { font-size: 20px; color: #7c3aed; font-weight: 700; margin-bottom: 12px; }
+        .role-duty { font-size: 19px; color: #6b7280; line-height: 1.5; }
+        .gantt { background: #fff; border-radius: 22px; padding: 40px 46px; box-shadow: 0 14px 50px rgba(124,58,237,0.10); }
+        .gantt-days { display: grid; grid-template-columns: 200px repeat(3, 1fr); margin-bottom: 18px; }
+        .gantt-days div { font-size: 22px; font-weight: 700; color: #7c3aed; text-align: center; }
+        .gantt-days .lbl { text-align: left; color: #9ca3af; }
+        .gantt-row { display: grid; grid-template-columns: 200px repeat(3, 1fr); align-items: center; margin-bottom: 16px; }
+        .gantt-label { font-size: 22px; font-weight: 600; color: #374151; }
+        .gantt-track { grid-column: 2 / 5; position: relative; height: 46px; }
+        .bar { position: absolute; height: 46px; border-radius: 10px; display: flex; align-items: center; padding: 0 18px; font-size: 17px; font-weight: 600; color: #fff; white-space: nowrap; }
+        .bar-pm { background: linear-gradient(135deg,#7c3aed,#a855f7); }
+        .bar-a  { background: linear-gradient(135deg,#ec4899,#f472b6); }
+        .bar-b  { background: linear-gradient(135deg,#8b5cf6,#c084fc); }
+        .milestone { position: absolute; top: -2px; right: -6px; font-size: 30px; }
+        .gantt-note { margin-top: 28px; font-size: 22px; color: #7c3aed; font-weight: 600; text-align: center; }
+
+        /* ---------- P4 技术框图 ---------- */
+        .arch-wrap { background: #fff; border-radius: 24px; padding: 30px; box-shadow: 0 16px 55px rgba(124,58,237,0.12); display: flex; justify-content: center; align-items: center; }
+        .arch-wrap img { max-width: 100%; max-height: 620px; width: auto; height: auto; border-radius: 12px; }
+        .arch-principle { display: flex; gap: 28px; margin-top: 32px; }
+        .ap-card { flex: 1; border-radius: 18px; padding: 30px 34px; color: #fff; }
+        .ap-1 { background: linear-gradient(135deg,#7c3aed,#a855f7); }
+        .ap-2 { background: linear-gradient(135deg,#ec4899,#f472b6); }
+        .ap-label { font-size: 20px; font-weight: 700; opacity: 0.85; margin-bottom: 10px; letter-spacing: 0.05em; }
+        .ap-text { font-size: 26px; font-weight: 600; line-height: 1.4; }
+        .ap-big { font-size: 46px; font-weight: 800; }
+
+        /* ---------- P5 人机协作 ---------- */
+        .motto { text-align: center; font-size: 27px; font-weight: 600; color: #7c3aed; margin-bottom: 34px; line-height: 1.5; }
+        .motto .b { font-weight: 800; }
+        .case-row { display: flex; gap: 28px; }
+        .case-card { flex: 1; background: #fff; border-radius: 22px; padding: 32px 28px; box-shadow: 0 16px 55px rgba(124,58,237,0.12); }
+        .case-cap { font-size: 16px; font-weight: 700; letter-spacing: 0.08em; color: #a855f7; text-transform: uppercase; margin-bottom: 12px; }
+        .case-num { display:inline-block; width: 46px; height: 46px; background: linear-gradient(135deg,#7c3aed,#a855f7); color:#fff; border-radius: 12px; font-size: 24px; font-weight: 800; text-align:center; line-height: 46px; margin-bottom: 14px; }
+        .case-title { font-size: 25px; font-weight: 700; color: #111827; margin-bottom: 20px; line-height: 1.3; }
+        .case-step { font-size: 18px; line-height: 1.5; margin-bottom: 14px; padding-left: 28px; position: relative; color: #4b5563; }
+        .case-step::before { position: absolute; left: 0; top: 0; font-size: 19px; }
+        .case-ai::before { content: "🤖"; }
+        .case-human::before { content: "🧑"; }
+        .case-fix::before { content: "✅"; }
+        .case-step .tag { font-weight: 700; color: #7c3aed; }
+        .case-step.case-fix .tag { color: #ec4899; }
+        .case-step code { background: #f3ecff; color: #7c3aed; padding: 1px 7px; border-radius: 6px; font-size: 16px; font-family: 'SFMono-Regular', Consolas, monospace; }
+        .evidence { margin-top: 44px; text-align: center; font-size: 24px; color: #6b7280; }
+        .evidence strong { color: #7c3aed; }
+
+        /* ---------- P6 收获 ---------- */
+        .slide-end { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: linear-gradient(135deg,#2a1846 0%,#4c1d95 55%,#7c3aed 100%); }
+        .end-stats { display: flex; gap: 56px; margin-bottom: 70px; }
+        .stat { color: #fff; }
+        .stat-num { font-size: 82px; font-weight: 800; line-height: 1; }
+        .stat-lbl { font-size: 24px; color: #e9d5ff; margin-top: 12px; font-weight: 300; }
+        .end-quote { font-size: 52px; font-weight: 700; color: #fff; line-height: 1.4; max-width: 1400px; }
+        .end-quote .hl { color: #f9a8d4; }
+        .end-thanks { margin-top: 60px; font-size: 30px; color: #d8b4fe; font-weight: 300; letter-spacing: 0.15em; }
+
+        @media print {
+            body { background: #fff; }
+            .slide { margin: 0; page-break-after: always; }
+        }
+    </style>
+</head>
+<body>
+<div id="stage">
+
+    <!-- ============ P1: 封面 + 痛点 ============ -->
+    <div class="slide slide-cover">
+        <div>
+            <div class="title-main grad-text">教育装备招标参数<br>识别与响应决策系统</div>
+            <div class="subtitle">面向智慧教育招投标场景的 AI 参数分析平台</div>
+
+            <div class="origin-box">
+                <div class="origin-label">◈ 选题起源 · 来自一线的真实痛点</div>
+                <div class="origin-content">
+                    本课题源自市场部 <strong>赵书进</strong> 经理在客户对接中的真实困境：<br>
+                    每次应标要人工对比 50+ 条技术参数，往往要花上一周，一条废标项即致命。<br>
+                    我们想验证：<strong>AI 能否把这个过程压缩到 3 分钟？</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="pain-grid">
+            <div class="pain-card">
+                <div class="pain-icon">⏰</div>
+                <div class="pain-title">时间紧迫</div>
+                <div class="pain-desc">公示期通常仅半个月<br>人工对比耗时约一周<br>错过窗口即失去机会</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">🎯</div>
+                <div class="pain-title">识别困难</div>
+                <div class="pain-desc">参数倾向性难判断<br>"145° 视场角"是谁的独有规格<br>凭经验缺数据支撑</div>
+            </div>
+            <div class="pain-card">
+                <div class="pain-icon">⚠️</div>
+                <div class="pain-title">代价高昂</div>
+                <div class="pain-desc">一条 ★ 废标项即出局<br>负偏离缺应对话术<br>丢标损失巨大</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============ P2: 视频演示（占位） ============ -->
+    <div class="slide slide-demo">
+        <div class="demo-kicker">L I V E   D E M O</div>
+        <div class="demo-title">现场演示</div>
+        <div class="demo-flow">
+            <div class="demo-step">📄 上传招标文件</div>
+            <div class="demo-arrow">→</div>
+            <div class="demo-step">⚙️ 三层分析</div>
+            <div class="demo-arrow">→</div>
+            <div class="demo-step">📊 应标决策报告</div>
+        </div>
+        <div class="demo-hint">— 一份标书，从上传到出结果，不到 10 秒 —</div>
+    </div>
+
+    <!-- ============ P-docs: 专业工作流 · 文档体系 ============ -->
+    <div class="slide">
+        <div class="page-tag">工作流 · 文档体系</div>
+        <div class="sec-head" style="margin-bottom: 24px;">
+            <div class="doc-badge">规范流程</div>
+            <div class="sec-title">不急着写代码，<span class="grad-text">AI 协作沉淀 10 份工程文档</span></div>
+            <div class="sec-sub">拿到问题先分工、再需求、再设计、后编码 — 全程可追溯</div>
+        </div>
+
+        <div class="doc-grid">
+            <div class="doc-item first">
+                <div class="doc-no">01</div>
+                <div class="doc-names"><div class="doc-cn">团队分工 & 排期</div><div class="doc-en">Team Schedule</div></div>
+                <div class="doc-flag">← 第一步</div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">02</div>
+                <div class="doc-names"><div class="doc-cn">产品需求文档</div><div class="doc-en">PRD · Product Requirements</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">03</div>
+                <div class="doc-names"><div class="doc-cn">竞品调研报告</div><div class="doc-en">Competitive Research</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">04</div>
+                <div class="doc-names"><div class="doc-cn">技术方案设计</div><div class="doc-en">Technical Design</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">05</div>
+                <div class="doc-names"><div class="doc-cn">功能规格书</div><div class="doc-en">SPEC · Specification</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">06</div>
+                <div class="doc-names"><div class="doc-cn">AI 任务实施计划</div><div class="doc-en">AI Task Plan</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">07</div>
+                <div class="doc-names"><div class="doc-cn">测试用例</div><div class="doc-en">Test Cases</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">08</div>
+                <div class="doc-names"><div class="doc-cn">AI 代码审查报告</div><div class="doc-en">Code Review</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">09</div>
+                <div class="doc-names"><div class="doc-cn">执行日志</div><div class="doc-en">Execution Log</div></div>
+            </div>
+            <div class="doc-item">
+                <div class="doc-no">10</div>
+                <div class="doc-names"><div class="doc-cn">路演材料</div><div class="doc-en">Roadshow</div></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ============ P3: 专业工作流① 分工与排期 ============ -->
+    <div class="slide">
+        <div class="page-tag">01 · 分工与排期</div>
+        <div class="sec-head">
+            <div class="doc-badge">01 团队分工</div>
+            <div class="sec-title">拿到问题，<span class="grad-text">先分工排期</span>，再动手</div>
+            <div class="sec-sub">专业团队的第一个动作不是写代码，而是明确谁做什么、什么时候做</div>
+        </div>
+
+        <div class="role-row">
+            <div class="role-card pm">
+                <div class="role-name">项目经理</div>
+                <div class="role-who">张子强</div>
+                <div class="role-duty">目标拆解、排期推进、材料整合、路演</div>
+            </div>
+            <div class="role-card prod">
+                <div class="role-name">产品经理</div>
+                <div class="role-who">赵书进</div>
+                <div class="role-duty">需求定义、竞品调研、选题来源（市场一线）</div>
+            </div>
+            <div class="role-card">
+                <div class="role-name">原型开发 · 3 人</div>
+                <div class="role-who">陈媛媛 · 李奖 · 王尉丞</div>
+                <div class="role-duty">数据提取、参数结构化、原型搭建</div>
+            </div>
+            <div class="role-card">
+                <div class="role-name">内容呈现 · 2 人</div>
+                <div class="role-who">覃宝洋 · 许文卓</div>
+                <div class="role-duty">核心引擎实现、界面与演示呈现</div>
+            </div>
+        </div>
+
+        <div class="gantt">
+            <div class="gantt-days">
+                <div class="lbl">3 天冲刺</div>
+                <div>07.23 Day1</div><div>07.24 Day2</div><div>07.25 Day3 ★初选</div>
+            </div>
+            <div class="gantt-row">
+                <div class="gantt-label">PM</div>
+                <div class="gantt-track"><div class="bar bar-pm" style="left:0%; width:100%;">需求 → 竞品 → 架构 → 调试 → 材料<span class="milestone">🏁</span></div></div>
+            </div>
+            <div class="gantt-row">
+                <div class="gantt-label">产品经理</div>
+                <div class="gantt-track"><div class="bar bar-a" style="left:0%; width:62%;">需求定义 · 竞品调研</div></div>
+            </div>
+            <div class="gantt-row">
+                <div class="gantt-label">原型开发</div>
+                <div class="gantt-track"><div class="bar bar-b" style="left:33%; width:67%;">3 人并行提取 → 交叉验证 → 辅助</div></div>
+            </div>
+            <div class="gantt-row">
+                <div class="gantt-label">内容呈现</div>
+                <div class="gantt-track"><div class="bar bar-b" style="left:33%; width:67%;">引擎开发 → AI 精判 → 联调跑通</div></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ P4: 专业工作流② 技术框图 ============ -->
+    <div class="slide slide-tech" style="background: linear-gradient(135deg,#ffffff 0%,#fce7ff 100%);">
+        <div class="page-tag">04 · 技术设计</div>
+        <div class="sec-head" style="margin-bottom: 32px;">
+            <div class="doc-badge">04 技术设计</div>
+            <div class="sec-title">核心：<span class="grad-text">三层对比架构</span></div>
+            <div class="sec-sub">能用程序算清的，绝不交给大模型 — 又快、又省、又可解释</div>
+        </div>
+
+        <div class="arch-wrap">
+            <img src="../output/arch-three-layer.svg" alt="三层对比架构图">
+        </div>
+
+        <div class="arch-principle">
+            <div class="ap-card ap-1">
+                <div class="ap-label">◈ 程序层（第一、二层）</div>
+                <div class="ap-text"><span class="ap-big">80%</span> 参数纯程序秒判 · 零 AI 成本</div>
+            </div>
+            <div class="ap-card ap-2">
+                <div class="ap-label">◈ AI 层（第三层）</div>
+                <div class="ap-text">仅 <span class="ap-big">20%</span> 疑难项调用大模型 · 一份标书只调一次</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ P5: 人机协作（核心页） ============ -->
+    <div class="slide">
+        <div class="page-tag">09 · 人机协作</div>
+        <div class="sec-head" style="text-align:center; margin-bottom: 30px;">
+            <div class="doc-badge">09 执行日志</div>
+            <div class="sec-title">AI 不只是写代码，<span class="grad-text">它参与调试、诊断与决策</span></div>
+        </div>
+
+        <div class="motto">
+            以下三个片段全部真实发生，<span class="b">完整记录在 09 执行日志</span>　·　AI 深度介入，人做最终判断
+        </div>
+
+        <div class="case-row">
+            <div class="case-card">
+                <div class="case-cap">深度调试</div>
+                <div class="case-num">1</div>
+                <div class="case-title">AI 诊断出算法根因</div>
+                <div class="case-step case-human">Bug：<code>防眩玻璃</code> 被错配到讯飞「亮度」，匹配像随机</div>
+                <div class="case-step case-ai">AI 定位根因：两者都带 <code>unit=pct</code>，旧逻辑"pct=pct 就是它" → 给出连根拔起方案：关键词打分重写</div>
+                <div class="case-step case-fix">人认可方案，AI 重写后 <span class="tag">5 条疑难参数命中 4 条</span></div>
+            </div>
+            <div class="case-card">
+                <div class="case-cap">Prompt 工程</div>
+                <div class="case-num">2</div>
+                <div class="case-title">AI 自己提出改进策略</div>
+                <div class="case-step case-human">AI 判不准，因为每次只喂给它<span class="tag">错配的那一条参数</span></div>
+                <div class="case-step case-ai">AI 打的比喻："像考试告诉你答案在第3页，其实在第7页 — 该给整本参考书" → 附完整 15 条参数目录</div>
+                <div class="case-step case-fix">人加 <span class="tag">150 字安全边界</span>防超长 → AI 识别出"135° vs 145°"级差异</div>
+            </div>
+            <div class="case-card">
+                <div class="case-cap">工程编排</div>
+                <div class="case-num">3</div>
+                <div class="case-title">AI 编排并行，人做把关</div>
+                <div class="case-step case-ai">AI 按文件大小拆分，部署 <span class="tag">8 个 Haiku 子代理并行</span>，4 分钟提取 79 条参数声明</div>
+                <div class="case-step case-human">人判断其中 1 个代理输出不可用（是招标文件非产品规格）</div>
+                <div class="case-step case-fix">人从 79 条中精筛 <span class="tag">4 家 × 15 条</span>核心参数入库</div>
+            </div>
+        </div>
+
+        <div class="evidence"><strong>8 段人机协作 · 10 条关键决策 · 3 个真实 Bug 修复</strong> — 全程可追溯、可复现，总 Prompt 成本约 $1</div>
+    </div>
+
+    <!-- ============ P6: 收获结尾 ============ -->
+    <div class="slide slide-end">
+        <div class="end-quote">
+            最大的收获不是 Demo，<br>而是一种新的<span class="hl">专业工作方式</span>：<br>人定义问题，AI 加速执行
+        </div>
+        <div class="end-thanks">— 感谢聆听 —</div>
+    </div>
+
+<!-- APPEND-MARKER -->
+</div><!-- /#stage -->
+
+<div class="pager"></div>
+
+<script>
+(function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const stage  = document.getElementById('stage');
+    const pager  = document.querySelector('.pager');
+    const SLIDE_W = 1920, SLIDE_H = 1200;
+    let idx = 0;
+    let present = false;
+
+    function fitScale() {
+        if (!present) return;
+        const s = Math.min(window.innerWidth / SLIDE_W, window.innerHeight / SLIDE_H);
+        stage.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
+    }
+
+    function show(i) {
+        idx = Math.max(0, Math.min(slides.length - 1, i));
+        slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+        pager.textContent = (idx + 1) + ' / ' + slides.length;
+    }
+
+    function enterPresent() {
+        present = true;
+        document.body.classList.add('present');
+        fitScale();
+        show(idx);
+    }
+    function exitPresent() {
+        present = false;
+        document.body.classList.remove('present');
+        stage.style.transform = '';
+        slides.forEach(s => s.classList.remove('active'));
+    }
+
+    document.addEventListener('keydown', function (e) {
+        // O 键：切换 演示 / 滚动总览
+        if (e.key === 'o' || e.key === 'O') {
+            present ? exitPresent() : enterPresent();
+            e.preventDefault();
+            return;
+        }
+        if (!present) return;
+        switch (e.key) {
+            case 'ArrowRight': case 'ArrowDown': case 'PageDown': case ' ':
+                show(idx + 1); e.preventDefault(); break;
+            case 'ArrowLeft': case 'ArrowUp': case 'PageUp':
+                show(idx - 1); e.preventDefault(); break;
+            case 'Home': show(0); e.preventDefault(); break;
+            case 'End':  show(slides.length - 1); e.preventDefault(); break;
+            case 'Escape': exitPresent(); e.preventDefault(); break;
+        }
+    });
+
+    // 点击翻页（演示模式下，左侧上一页 / 右侧下一页）
+    document.addEventListener('click', function (e) {
+        if (!present) return;
+        (e.clientX < window.innerWidth / 2) ? show(idx - 1) : show(idx + 1);
+    });
+
+    window.addEventListener('resize', fitScale);
+
+    // 默认进入演示模式
+    enterPresent();
+})();
+</script>
+</body>
+</html>
