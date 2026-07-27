@@ -114,21 +114,24 @@
         .page-tag {
             position: absolute;
             top: 54px; right: 70px;
-            font-size: 20px; font-weight: 600;
+            font-size: 22px; font-weight: 600;
             color: var(--brand-blue-dark); letter-spacing: 0.15em;
-            /* 统一外框尺寸：宽/高固定 + 居中，避免不同字数导致圆角矩形大小不一 */
-            min-width: 240px; height: 44px;
+            /* 固定外框与锚点，避免不同字数导致切页时左右跳动 */
+            width: 320px; height: 52px;
             display: inline-flex; align-items: center; justify-content: center;
-            padding: 0 18px; border-radius: 22px;
+            padding: 0 24px; border-radius: 26px;
             background: rgba(22,139,234,0.10);
             border: 1.5px solid rgba(22,139,234,0.35);
+            white-space: nowrap;
         }
         .doc-badge {
-            display: inline-block;
+            display: flex; align-items: center; justify-content: center;
+            width: fit-content; height: 54px;
             background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--brand-blue) 100%);
-            color: #fff; font-size: 22px; font-weight: 700;
-            padding: 8px 22px; border-radius: 12px;
+            color: #fff; font-size: 26px; font-weight: 700; line-height: 1;
+            padding: 0 28px; border-radius: 15px;
             letter-spacing: 0.05em; margin-bottom: 28px;
+            white-space: nowrap;
         }
         .grad-text {
             background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--brand-blue) 72%, var(--success) 100%);
