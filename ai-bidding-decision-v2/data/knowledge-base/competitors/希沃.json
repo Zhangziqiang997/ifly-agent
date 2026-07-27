@@ -1,0 +1,544 @@
+[
+  {
+    "vendor": "希沃",
+    "product": "FG86ED交互智能平板",
+    "category": "智慧黑板/交互智能平板",
+    "updated": "2026-07-25",
+    "params": [
+      {
+        "id": "screen_size",
+        "category": "显示",
+        "name": "屏幕尺寸",
+        "spec": "整机采用86英寸液晶显示器",
+        "indicators": [
+          {"name": "尺寸", "value": "86", "unit": "英寸", "comparator": "eq"}
+        ],
+        "star_mark": true,
+        "cert_required": true
+      },
+      {
+        "id": "resolution",
+        "category": "显示",
+        "name": "分辨率",
+        "spec": "整机采用超高清LED液晶显示屏，显示比例16:9，分辨率3840×2160",
+        "indicators": [
+          {"name": "分辨率", "value": "3840×2160", "unit": "feature", "comparator": "eq"},
+          {"name": "显示比例", "value": "16:9", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": true,
+        "cert_required": true
+      },
+      {
+        "id": "color_gamut",
+        "category": "显示",
+        "name": "色域覆盖率",
+        "spec": "整机色域覆盖率（NTSC）≥72%",
+        "indicators": [
+          {"name": "NTSC色域", "value": "72", "unit": "%", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "brightness_uniformity",
+        "category": "显示",
+        "name": "亮度均匀性",
+        "spec": "支持对背光光源进行均光，在屏幕中心亮度≥350cd/㎡下，增加屏幕两侧亮度，白场画面下亮度均匀性≥85%",
+        "indicators": [
+          {"name": "中心亮度", "value": "350", "unit": "cd/㎡", "comparator": "gte"},
+          {"name": "亮度均匀性", "value": "85", "unit": "%", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "dc_dimming",
+        "category": "显示",
+        "name": "DC调光",
+        "spec": "整机背光系统支持DC调光方式，多级亮度调节，支持白颜色背景下最暗亮度≤100nit",
+        "indicators": [
+          {"name": "最暗亮度", "value": "100", "unit": "nit", "comparator": "lte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "gray_scale",
+        "category": "显示",
+        "name": "灰阶等级",
+        "spec": "灰阶等级≥256级",
+        "indicators": [
+          {"name": "灰阶等级", "value": "256", "unit": "级", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "touch_points",
+        "category": "触控",
+        "name": "触控点数",
+        "spec": "采用红外触控技术，支持Windows系统中进行40点或以上触控，支持在Android系统中进行40点或以上触控",
+        "indicators": [
+          {"name": "Windows触控点数", "value": "40", "unit": "点", "comparator": "gte"},
+          {"name": "Android触控点数", "value": "40", "unit": "点", "comparator": "gte"}
+        ],
+        "star_mark": true,
+        "cert_required": true
+      },
+      {
+        "id": "touch_resolution",
+        "category": "触控",
+        "name": "触摸分辨率",
+        "spec": "触摸分辨率32768×32768",
+        "indicators": [
+          {"name": "触摸分辨率", "value": "32768×32768", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "touch_latency",
+        "category": "触控",
+        "name": "书写触控延迟",
+        "spec": "书写触控延迟≤25ms",
+        "indicators": [
+          {"name": "书写延迟", "value": "25", "unit": "ms", "comparator": "lte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "touch_response",
+        "category": "触控",
+        "name": "触摸响应时间",
+        "spec": "触摸响应≤4ms",
+        "indicators": [
+          {"name": "触摸响应", "value": "4", "unit": "ms", "comparator": "lte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "touch_min_object",
+        "category": "触控",
+        "name": "触摸最小识别物",
+        "spec": "触摸最小识别物≤3mm",
+        "indicators": [
+          {"name": "最小识别物", "value": "3", "unit": "mm", "comparator": "lte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "camera_specs",
+        "category": "摄像",
+        "name": "内置摄像头像素",
+        "spec": "整机内置一体化高清摄像头，可拍摄≥1300万像素数的照片，可拍摄输出4K分辨率的视频",
+        "indicators": [
+          {"name": "像素", "value": "1300", "unit": "万", "comparator": "gte"},
+          {"name": "视频分辨率", "value": "4K", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "camera_fov",
+        "category": "摄像",
+        "name": "摄像头视场角",
+        "spec": "整机摄像头对角线视场角≥120度",
+        "indicators": [
+          {"name": "对角线视场角", "value": "120", "unit": "度", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "speaker_system",
+        "category": "音频",
+        "name": "扬声器系统",
+        "spec": "整机内置2.2声道扬声器，前朝向10W高音扬声器2个，20W中低音扬声器2个，额定总功率60W",
+        "indicators": [
+          {"name": "额定总功率", "value": "60", "unit": "W", "comparator": "gte"},
+          {"name": "高音扬声器功率", "value": "10", "unit": "W", "comparator": "eq"},
+          {"name": "中低音扬声器功率", "value": "20", "unit": "W", "comparator": "eq"},
+          {"name": "扬声器数量", "value": "4", "unit": "个", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "sound_pressure_level",
+        "category": "音频",
+        "name": "声压级",
+        "spec": "整机扬声器在100%音量下，可做到1米处声压级≥88db，10米处声压级≥79dB",
+        "indicators": [
+          {"name": "1米声压级", "value": "88", "unit": "dB", "comparator": "gte"},
+          {"name": "10米声压级", "value": "79", "unit": "dB", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "speaker_opening",
+        "category": "音频",
+        "name": "扬声器开口设计",
+        "spec": "整机内置扬声器采用缝隙发声技术，喇叭采用槽式开口设计，不大于5.8mm",
+        "indicators": [
+          {"name": "开口宽度", "value": "5.8", "unit": "mm", "comparator": "lte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "microphone_array",
+        "category": "音频",
+        "name": "内置麦克风阵列",
+        "spec": "整机内置非独立外扩展的4阵列麦克风，可用于对教室环境音频进行采集，麦克风拾音距离≥12米",
+        "indicators": [
+          {"name": "阵列数", "value": "4", "unit": "个", "comparator": "eq"},
+          {"name": "拾音距离", "value": "12", "unit": "米", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "blue_light_control",
+        "category": "护眼",
+        "name": "蓝光控制",
+        "spec": "整机屏幕蓝光占比（有害蓝光415～455nm能量综合）/（整体蓝光400～500能量综合）＜50%",
+        "indicators": [
+          {"name": "有害蓝光占比", "value": "50", "unit": "%", "comparator": "lt"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "blue_light_hazard",
+        "category": "护眼",
+        "name": "蓝光危害等级",
+        "spec": "整机视网膜蓝光危害（蓝光加权辐射亮度LB）满足IEC TR 62778:2014蓝光危害RG0级别",
+        "indicators": [
+          {"name": "蓝光危害等级", "value": "RG0", "unit": "certification", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "glass_hardness",
+        "category": "护眼",
+        "name": "钢化玻璃硬度",
+        "spec": "钢化玻璃表面硬度≥9H",
+        "indicators": [
+          {"name": "表面硬度", "value": "9", "unit": "H", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "wireless_network",
+        "category": "无线投屏",
+        "name": "WiFi功能",
+        "spec": "整机内置双WiFi6无线网卡（不接受外接），在Android下支持无线设备同时连接数量≥32个，在Windows系统下支持无线设备同时连接≥8个",
+        "indicators": [
+          {"name": "WiFi标准", "value": "WiFi6", "unit": "feature", "comparator": "eq"},
+          {"name": "Android连接数", "value": "32", "unit": "个", "comparator": "gte"},
+          {"name": "Windows连接数", "value": "8", "unit": "个", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "wifi_distance",
+        "category": "无线投屏",
+        "name": "WiFi工作距离",
+        "spec": "Wi-Fi和AP热点工作距离≥12m",
+        "indicators": [
+          {"name": "工作距离", "value": "12", "unit": "米", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "bluetooth_version",
+        "category": "无线投屏",
+        "name": "蓝牙版本",
+        "spec": "整机支持蓝牙Bluetooth 5.4标准，固件版本号HCI13.0/LMP13.0",
+        "indicators": [
+          {"name": "蓝牙版本", "value": "5.4", "unit": "feature", "comparator": "eq"},
+          {"name": "HCI版本", "value": "13.0", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "interface_ports",
+        "category": "接口",
+        "name": "接口配置",
+        "spec": "侧置输入接口具备2路HDMI、1路RS232、1路USB接口。侧置输出接口具备1路音频输出、1路触控USB输出。前置输入接口3路USB接口（包含1路Type-C、2路USB）",
+        "indicators": [
+          {"name": "HDMI接口", "value": "2", "unit": "路", "comparator": "gte"},
+          {"name": "RS232接口", "value": "1", "unit": "路", "comparator": "gte"},
+          {"name": "前置USB", "value": "3", "unit": "路", "comparator": "gte"},
+          {"name": "Type-C接口", "value": "1", "unit": "路", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "system_config",
+        "category": "物理结构",
+        "name": "嵌入式系统配置",
+        "spec": "嵌入式系统版本不低于Android 14。内存≥2GB。存储空间≥8GB",
+        "indicators": [
+          {"name": "Android版本", "value": "14", "unit": "feature", "comparator": "gte"},
+          {"name": "内存", "value": "2", "unit": "GB", "comparator": "gte"},
+          {"name": "存储空间", "value": "8", "unit": "GB", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "front_buttons",
+        "category": "物理结构",
+        "name": "前置按键",
+        "spec": "整机具备至少6个前置按键，可实现开关机、调出中控菜单、音量+/-、护眼、录屏操作",
+        "indicators": [
+          {"name": "前置按键数量", "value": "6", "unit": "个", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "custom_buttons",
+        "category": "物理结构",
+        "name": "自定义前置按键",
+        "spec": "整机支持5个自定义前置按键，'设置'、'音量-'，'音量+'，'录屏''护眼'按键，可通过自定义设置实现前置面板功能按键一键启用任一全局小工具",
+        "indicators": [
+          {"name": "可自定义按键数", "value": "5", "unit": "个", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "working_temperature",
+        "category": "物理结构",
+        "name": "工作温度范围",
+        "spec": "整机在0℃- 40℃环境下可正常工作，在-20℃—60℃的环境下可正常贮存且贮存后功能无损",
+        "indicators": [
+          {"name": "工作温度下限", "value": "0", "unit": "℃", "comparator": "gte"},
+          {"name": "工作温度上限", "value": "40", "unit": "℃", "comparator": "lte"},
+          {"name": "贮存温度下限", "value": "-20", "unit": "℃", "comparator": "gte"},
+          {"name": "贮存温度上限", "value": "60", "unit": "℃", "comparator": "lte"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "ops_cpu",
+        "category": "OPS电脑",
+        "name": "OPS处理器",
+        "spec": "Intel 酷睿系列，兼容 i5/i7",
+        "indicators": [
+          {"name": "处理器系列", "value": "Intel酷睿i5/i7", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "ops_memory",
+        "category": "OPS电脑",
+        "name": "OPS内存",
+        "spec": "兼容 4G/8G/16G/32G",
+        "indicators": [
+          {"name": "内存容量", "value": "4/8/16/32", "unit": "GB", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "ops_storage",
+        "category": "OPS电脑",
+        "name": "OPS硬盘",
+        "spec": "兼容固态硬盘 128GB/256GB/512GB/1TB；机械硬盘 512GB/1TB",
+        "indicators": [
+          {"name": "固态硬盘", "value": "128/256/512/1024", "unit": "GB", "comparator": "eq"},
+          {"name": "机械硬盘", "value": "512/1024", "unit": "GB", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "ops_transfer_rate",
+        "category": "OPS电脑",
+        "name": "OPS传输速率",
+        "spec": "和整机的连接采用万兆级接口，传输速率≥10Gbps",
+        "indicators": [
+          {"name": "传输速率", "value": "10", "unit": "Gbps", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "ops_usb_ports",
+        "category": "OPS电脑",
+        "name": "OPS USB接口",
+        "spec": "具有独立非外拓展的电脑 USB 接口：至少具备 3个USB3.0 接口",
+        "indicators": [
+          {"name": "USB3.0接口", "value": "3", "unit": "个", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "whiteboard_multitouch",
+        "category": "教学软件",
+        "name": "白板多笔书写",
+        "spec": "无PC状态下，嵌入式系统内置互动白板支持十笔书写及手掌擦除",
+        "indicators": [
+          {"name": "支持笔数", "value": "10", "unit": "笔", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "ai_gesture_answer",
+        "category": "AI能力",
+        "name": "手势答题",
+        "spec": "支持手势答题功能，老师在课中发起互动选择题，通过摄像头进行捕捉和AI识别，学生通过手势给出对应答案",
+        "indicators": [
+          {"name": "AI识别能力", "value": "手势识别", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "ai_face_recognition",
+        "category": "AI能力",
+        "name": "人脸识别",
+        "spec": "整机摄像头支持人脸识别、清点人数、随机抽人；识别所有学生，显示标记，然后随机抽选，同时显示标记不少于60人",
+        "indicators": [
+          {"name": "支持人数", "value": "60", "unit": "人", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": true
+      },
+      {
+        "id": "earthquake_warning",
+        "category": "AI能力",
+        "name": "地震预警",
+        "spec": "整机设备自带地震预警软件；支持在地震预警页面中获取位置，可以手动进行位置校准；支持在地震预警页面中选择提醒阈值",
+        "indicators": [
+          {"name": "预警功能", "value": "地震预警", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      }
+    ]
+  },
+  {
+    "vendor": "希沃",
+    "product": "视频展台",
+    "category": "视频展台",
+    "updated": "2026-07-25",
+    "params": [
+      {
+        "id": "power_supply",
+        "category": "接口",
+        "name": "供电方式",
+        "spec": "采用USB方式供电，支持壁挂安装方式",
+        "indicators": [
+          {"name": "供电方式", "value": "USB", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "material",
+        "category": "物理结构",
+        "name": "外观材质",
+        "spec": "兼顾教学环境，保护师生安全，采用ABS材质",
+        "indicators": [
+          {"name": "材质", "value": "ABS", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "camera_pixel",
+        "category": "摄像",
+        "name": "摄像头像素",
+        "spec": "采用高清摄像头设计，不小于1300万像素摄像头，解析度不低于1600TV线，使画面展示更加清晰",
+        "indicators": [
+          {"name": "像素", "value": "1300", "unit": "万", "comparator": "gte"},
+          {"name": "解析度", "value": "1600", "unit": "TV线", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "shooting_area",
+        "category": "摄像",
+        "name": "拍摄幅面",
+        "spec": "拍摄幅面：A4及以上",
+        "indicators": [
+          {"name": "拍摄幅面", "value": "A4", "unit": "feature", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "image_color",
+        "category": "显示",
+        "name": "图像色彩",
+        "spec": "图像色彩：24位及以上",
+        "indicators": [
+          {"name": "色彩位数", "value": "24", "unit": "位", "comparator": "gte"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "output_format",
+        "category": "显示",
+        "name": "输出格式",
+        "spec": "输出格式：图片JPG，视频MP4",
+        "indicators": [
+          {"name": "图片格式", "value": "JPG", "unit": "feature", "comparator": "eq"},
+          {"name": "视频格式", "value": "MP4", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      }
+    ]
+  },
+  {
+    "vendor": "希沃",
+    "product": "智能笔SP39",
+    "category": "智能笔",
+    "updated": "2026-07-25",
+    "params": [
+      {
+        "id": "connection_method",
+        "category": "无线投屏",
+        "name": "连接方式",
+        "spec": "整机支持同一品牌智能笔，通过BLE（蓝牙低能耗技术）、USB Dongle（通用串口总线接收器）等方式连接",
+        "indicators": [
+          {"name": "连接方式", "value": "BLE/USB Dongle", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      },
+      {
+        "id": "auto_connect",
+        "category": "无线投屏",
+        "name": "自动连接",
+        "spec": "当整机和智能笔均支持BLE功能时，支持指定区域内智能笔自动发现、自动连接",
+        "indicators": [
+          {"name": "自动连接", "value": "支持", "unit": "feature", "comparator": "eq"}
+        ],
+        "star_mark": false,
+        "cert_required": false
+      }
+    ]
+  }
+]

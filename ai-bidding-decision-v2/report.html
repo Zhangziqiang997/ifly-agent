@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 分析报告 · 参数智能体</title>
+  <link rel="stylesheet" href="report-light.css">
+  <link rel="stylesheet" href="report-risk.css">
+  <link rel="stylesheet" href="business-menu.css">
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body class="report-page">
+  <aside data-sidebar data-page="report"></aside>
+
+  <main class="shell">
+    <header class="topbar">
+      <div class="crumb">项目总览 <i>/</i> AI 分析报告</div>
+      <div class="top-actions"><span class="analysis-ready"><i></i>分析已完成</span><a class="back-link" href="index.html">← 返回分析首页</a></div>
+    </header>
+
+    <section class="page">
+      <div class="title-row">
+        <h1 id="report-title"></h1>
+        <p id="controller-summary"></p>
+      </div>
+
+      <section class="summary-grid" id="report-kpis" aria-label="分析概览"></section>
+
+      <section class="insight-grid" aria-label="控标研判与偏离分布">
+        <article class="panel controller-panel">
+          <h2><span class="heading-icon red-outline">◉</span> 控标风险研判</h2>
+          <div class="controller-main">
+            <div class="confidence-orb"><strong id="controller-confidence"></strong><span>置信度</span></div>
+            <div><p class="controller-label">疑似关联厂商</p><strong class="vendor-name" id="controller-vendor"></strong><span class="risk-badge">高度可疑</span></div>
+          </div>
+          <div class="evidence-block"><strong>命中依据</strong><ul id="controller-evidence"></ul></div>
+        </article>
+
+        <article class="panel distribution-panel">
+          <h2><span class="heading-icon blue">▥</span> 参数偏离分布</h2>
+          <p class="panel-note">按参数类别统计识别结果</p>
+          <div id="category-chart" class="bar-chart" role="img" aria-label="按类别展示正偏离、措辞可改和真实负偏离数量"></div>
+          <div class="chart-legend"><span><i class="legend-positive"></i>正偏离</span><span><i class="legend-wording"></i>措辞可改</span><span><i class="legend-negative"></i>真实负偏离</span></div>
+        </article>
+      </section>
+
+      <section class="panel detail-panel" aria-labelledby="table-title">
+        <div class="detail-head">
+          <div><h2 id="table-title"><span class="heading-icon blue-outline">▧</span> 招标参数逐条对比 <small id="table-count"></small></h2><p>讯飞规格与招标条款的可追溯分析结果</p></div>
+          <div class="report-filters" role="group" aria-label="偏离类型筛选">
+            <button class="report-filter" type="button" data-filter="all" aria-pressed="true">全部</button>
+            <button class="report-filter" type="button" data-filter="positive" aria-pressed="false">正偏离</button>
+            <button class="report-filter" type="button" data-filter="wording" aria-pressed="false">措辞可改</button>
+            <button class="report-filter" type="button" data-filter="negative" aria-pressed="false">真实负偏离</button>
+          </div>
+        </div>
+        <div class="table-wrap"><table class="analysis-table"><thead><tr><th>序号</th><th>分类</th><th>招标条款</th><th>讯飞规格</th><th>偏离判定</th><th>判定方式</th><th>操作</th></tr></thead><tbody id="report-table-body"></tbody></table></div>
+      </section>
+    </section>
+  </main>
+  <script src="sidebar-config.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="report.js" type="module"></script>
+</body>
+</html>

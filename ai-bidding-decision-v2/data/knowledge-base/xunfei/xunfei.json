@@ -1,0 +1,194 @@
+{
+  "vendor": "科大讯飞（iFLYTEK）",
+  "product": "讯飞智慧黑板 iFLY-EB860",
+  "category": "智慧黑板",
+  "updated": "2026-07",
+  "params": [
+    {
+      "id": "XUNFEI-001",
+      "category": "显示",
+      "name": "屏幕尺寸",
+      "spec": "86英寸超高清显示面板",
+      "indicators": [
+        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-002",
+      "category": "显示",
+      "name": "屏幕分辨率",
+      "spec": "4K超高清（3840×2160），支持HDR10",
+      "indicators": [
+        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "eq"},
+        {"name": "HDR10", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-003",
+      "category": "显示",
+      "name": "屏幕亮度",
+      "spec": "520cd/m²，智能环境光自适应调节",
+      "indicators": [
+        {"name": "亮度", "value": 520, "unit": "cd_m2", "comparator": "gte"},
+        {"name": "环境光自适应", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-004",
+      "category": "触控",
+      "name": "触控技术",
+      "spec": "红外触控，支持20点同时触控书写",
+      "indicators": [
+        {"name": "触控点数", "value": 20, "unit": "touch_points", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-005",
+      "category": "触控",
+      "name": "笔锋书写",
+      "spec": "支持毛笔/钢笔/马克笔等多笔触效果，2048级压感",
+      "indicators": [
+        {"name": "压感级别", "value": 2048, "unit": "pressure_level", "comparator": "eq"},
+        {"name": "多笔触效果", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-006",
+      "category": "摄像",
+      "name": "内置摄像头",
+      "spec": "1300万像素超广角摄像头，支持AI人脸识别与行为分析",
+      "indicators": [
+        {"name": "摄像头像素", "value": 1300, "unit": "mp", "comparator": "eq"},
+        {"name": "视频分辨率", "value": 1920, "unit": "px", "comparator": "eq"},
+        {"name": "AI人脸识别", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-007",
+      "category": "音频",
+      "name": "内置音响",
+      "spec": "2×15W高品质扬声器 + 4阵列麦克风，支持远场语音唤醒",
+      "indicators": [
+        {"name": "扬声器功率", "value": 30, "unit": "watt", "comparator": "gte"},
+        {"name": "麦克风阵列", "value": 4, "unit": "count", "comparator": "gte"},
+        {"name": "远场语音唤醒", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-008",
+      "category": "护眼",
+      "name": "护眼认证",
+      "spec": "通过德国莱茵TÜV低蓝光认证 + 无频闪认证 + 国家眼科工程中心护眼评测",
+      "indicators": [
+        {"name": "TÜV低蓝光认证", "value": true, "unit": "cert", "comparator": "eq"},
+        {"name": "无频闪认证", "value": true, "unit": "cert", "comparator": "eq"},
+        {"name": "国家眼科中心认证", "value": true, "unit": "cert", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "XUNFEI-009",
+      "category": "无线",
+      "name": "无线投屏",
+      "spec": "支持手机/平板/PC屏幕镜像与反向控制功能，兼容Android/iOS/Windows/Mac全平台",
+      "indicators": [
+        {"name": "投屏平台数", "value": 4, "unit": "platform_count", "comparator": "gte"},
+        {"name": "反向触控", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-010",
+      "category": "软件",
+      "name": "教学白板软件",
+      "spec": "讯飞智慧课堂教学系统，集成AI语音板书转写、课堂互动评测、学情数据分析",
+      "indicators": [
+        {"name": "AI语音转写", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "课堂互动评测", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "学情分析", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-011",
+      "category": "物理",
+      "name": "整机厚度",
+      "spec": "≤25mm（含壁挂支架），超窄边框设计",
+      "indicators": [
+        {"name": "整机厚度", "value": 25, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-012",
+      "category": "连接",
+      "name": "接口配置",
+      "spec": "前置USB 3.0×2、Type-C×1（65W快充+视频传输）、HDMI IN×1、HDMI OUT×1、RJ45×1",
+      "indicators": [
+        {"name": "前置USB3.0", "value": 2, "unit": "count", "comparator": "gte"},
+        {"name": "前置Type-C", "value": 1, "unit": "count", "comparator": "gte"},
+        {"name": "Type-C充电功率", "value": 65, "unit": "watt", "comparator": "gte"},
+        {"name": "Type-C视频传输", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "前置HDMI IN", "value": 1, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-013",
+      "category": "AI",
+      "name": "语音交互",
+      "spec": "内置讯飞星火大模型引擎，支持语音指令操控、课堂语音转写、多语种实时翻译",
+      "indicators": [
+        {"name": "语音指令操控", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "课堂语音转写", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "多语种翻译", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-014",
+      "category": "计算",
+      "name": "内置OPS电脑",
+      "spec": "Intel Core i5-12450H / 16GB DDR4 / 512GB SSD / Windows 11",
+      "indicators": [
+        {"name": "CPU", "value": "i5-12450H", "unit": "spec", "comparator": "eq"},
+        {"name": "内存", "value": 16, "unit": "gb", "comparator": "gte"},
+        {"name": "硬盘", "value": 512, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "XUNFEI-015",
+      "category": "生态",
+      "name": "教育平台对接",
+      "spec": "无缝对接讯飞教育云平台，支持区/校级教学数据看板、AI精准教学分析报告",
+      "indicators": [
+        {"name": "教育云平台对接", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "AI精准教学分析", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    }
+  ]
+}

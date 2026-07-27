@@ -1,0 +1,723 @@
+{
+  "vendor": "海康威视（Hikvision）",
+  "product": "智慧黑板 DS-D5186BCEC/DS-D5190BCEC/DS-D5186BCER",
+  "category": "智慧黑板",
+  "updated": "2026-07",
+  "params": [
+    {
+      "id": "HK-001",
+      "category": "显示",
+      "name": "屏幕尺寸",
+      "spec": "86英寸或90英寸UHD超高清LED液晶屏",
+      "indicators": [
+        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-002",
+      "category": "显示",
+      "name": "屏幕分辨率",
+      "spec": "3840×2160（4K UHD）",
+      "indicators": [
+        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "gte"},
+        {"name": "垂直分辨率", "value": 2160, "unit": "px", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-003",
+      "category": "显示",
+      "name": "灰度等级",
+      "spec": "屏幕显示灰度分辨等级达到256及以上灰阶",
+      "indicators": [
+        {"name": "灰度等级", "value": 256, "unit": "level", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-004",
+      "category": "显示",
+      "name": "色域覆盖率",
+      "spec": "整机色域覆盖率（NTSC）≥85%",
+      "indicators": [
+        {"name": "色域NTSC", "value": 85, "unit": "percent", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-005",
+      "category": "显示",
+      "name": "可视角度",
+      "spec": "可视角度≥178°",
+      "indicators": [
+        {"name": "可视角度", "value": 178, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-006",
+      "category": "触控",
+      "name": "触控技术",
+      "spec": "电容触控或红外触控，支持40-50点触控",
+      "indicators": [
+        {"name": "触控点数", "value": 40, "unit": "touch_points", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": false
+    },
+    {
+      "id": "HK-007",
+      "category": "触控",
+      "name": "触控响应时间",
+      "spec": "触摸首点响应时间≤4ms，连续响应时间≤2ms",
+      "indicators": [
+        {"name": "首点响应", "value": 4, "unit": "ms", "comparator": "lte"},
+        {"name": "连续响应", "value": 2, "unit": "ms", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-008",
+      "category": "触控",
+      "name": "最小识别物",
+      "spec": "触摸最小识别物3mm",
+      "indicators": [
+        {"name": "最小识别物", "value": 3, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-009",
+      "category": "摄像",
+      "name": "内置摄像头",
+      "spec": "1600万像素摄像头，支持4K视频输出，视场角145°，水平视场角120°",
+      "indicators": [
+        {"name": "摄像头像素", "value": 1600, "unit": "mp", "comparator": "gte"},
+        {"name": "视频分辨率", "value": 3840, "unit": "px", "comparator": "gte"},
+        {"name": "总视场角", "value": 145, "unit": "degree", "comparator": "gte"},
+        {"name": "水平视场角", "value": 120, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-010",
+      "category": "摄像",
+      "name": "摄像头集成方式",
+      "spec": "内置非独立式摄像头，无外接线材，未占用端口",
+      "indicators": [
+        {"name": "内置集成", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-011",
+      "category": "音频",
+      "name": "内置扬声器",
+      "spec": "≥4个扬声器单元，每个扬声器额定功率≥15W，总功率≥60W",
+      "indicators": [
+        {"name": "扬声器数量", "value": 4, "unit": "count", "comparator": "gte"},
+        {"name": "单个功率", "value": 15, "unit": "watt", "comparator": "gte"},
+        {"name": "总功率", "value": 60, "unit": "watt", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-012",
+      "category": "音频",
+      "name": "麦克风阵列",
+      "spec": "内置8阵列麦克风，拾音距离≥12米，拾音角度≥180°",
+      "indicators": [
+        {"name": "麦克风阵列", "value": 8, "unit": "count", "comparator": "gte"},
+        {"name": "拾音距离", "value": 12, "unit": "meter", "comparator": "gte"},
+        {"name": "拾音角度", "value": 180, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-013",
+      "category": "音频",
+      "name": "音效模式",
+      "spec": "支持标准、听力、影院、自定义模式及AI空间感知音效模式",
+      "indicators": [
+        {"name": "音效模式数", "value": 5, "unit": "count", "comparator": "gte"},
+        {"name": "AI音效", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-014",
+      "category": "音频",
+      "name": "音频处理器",
+      "spec": "内置专属4核音频CPU，支持8路麦克风数据处理，采样率192K",
+      "indicators": [
+        {"name": "音频CPU核数", "value": 4, "unit": "core", "comparator": "gte"},
+        {"name": "采样率", "value": 192, "unit": "khz", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-015",
+      "category": "护眼",
+      "name": "物理防蓝光",
+      "spec": "硬件低蓝光背光技术，有害蓝光占比<50%，不偏色不泛黄",
+      "indicators": [
+        {"name": "有害蓝光占比", "value": 50, "unit": "percent", "comparator": "lt"},
+        {"name": "物理防蓝光", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-016",
+      "category": "护眼",
+      "name": "钢化玻璃防护",
+      "spec": "≥3.2mm防眩钢化玻璃，硬度≥9H，透光率≥93%，雾度≤8%",
+      "indicators": [
+        {"name": "玻璃厚度", "value": 3.2, "unit": "mm", "comparator": "gte"},
+        {"name": "硬度", "value": 9, "unit": "H", "comparator": "gte"},
+        {"name": "透光率", "value": 93, "unit": "percent", "comparator": "gte"},
+        {"name": "雾度", "value": 8, "unit": "percent", "comparator": "lte"}
+      ],
+      "star_mark": true,
+      "cert_required": false
+    },
+    {
+      "id": "HK-017",
+      "category": "无线投屏",
+      "name": "WiFi标准",
+      "spec": "支持WiFi 6（802.11ax），双频2.4G&5G",
+      "indicators": [
+        {"name": "WiFi版本", "value": "WiFi6", "unit": "spec", "comparator": "eq"},
+        {"name": "双频支持", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-018",
+      "category": "无线投屏",
+      "name": "蓝牙标准",
+      "spec": "支持蓝牙Bluetooth 5.4，工作距离15米",
+      "indicators": [
+        {"name": "蓝牙版本", "value": "5.4", "unit": "version", "comparator": "gte"},
+        {"name": "工作距离", "value": 15, "unit": "meter", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-019",
+      "category": "无线投屏",
+      "name": "NFC模块",
+      "spec": "内置NFC模块支持主从模式，支持手机/平板投屏，同时连接9台设备",
+      "indicators": [
+        {"name": "NFC功能", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "同时连接数", "value": 9, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-020",
+      "category": "接口",
+      "name": "前置USB接口",
+      "spec": "≥3路双通道USB 3.0接口",
+      "indicators": [
+        {"name": "前置USB3.0", "value": 3, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-021",
+      "category": "接口",
+      "name": "前置Type-C接口",
+      "spec": "≥1路全功能USB Type-C接口（音视频传输、触控传输、充电、U盘数据传输、接管摄像头）",
+      "indicators": [
+        {"name": "前置Type-C", "value": 1, "unit": "count", "comparator": "gte"},
+        {"name": "Type-C全功能", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-022",
+      "category": "接口",
+      "name": "前置HDMI接口",
+      "spec": "≥1路HDMI IN接口",
+      "indicators": [
+        {"name": "前置HDMI IN", "value": 1, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-023",
+      "category": "接口",
+      "name": "侧置接口",
+      "spec": "侧置输入：≥1路HDMI IN、≥1路RS232、≥2路USB；侧置输出：≥1路音频输入输出、≥1路触控USB输出",
+      "indicators": [
+        {"name": "侧置HDMI IN", "value": 1, "unit": "count", "comparator": "gte"},
+        {"name": "侧置RS232", "value": 1, "unit": "count", "comparator": "gte"},
+        {"name": "侧置USB", "value": 2, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-024",
+      "category": "接口",
+      "name": "USB接口模块化设计",
+      "spec": "前置USB接口采用模块化旋转式设计，支持向下翻转保护，便捷拆卸更换",
+      "indicators": [
+        {"name": "USB模块化", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-025",
+      "category": "物理结构",
+      "name": "整机尺寸",
+      "spec": "宽≥4200mm，高≥1200mm，厚≤87mm",
+      "indicators": [
+        {"name": "宽度", "value": 4200, "unit": "mm", "comparator": "gte"},
+        {"name": "高度", "value": 1200, "unit": "mm", "comparator": "gte"},
+        {"name": "厚度", "value": 87, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-026",
+      "category": "物理结构",
+      "name": "整机设计",
+      "spec": "三拼接平面一体化设计，全金属外壳，无推拉式结构，无外露连接线",
+      "indicators": [
+        {"name": "一体化设计", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "全金属外壳", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-027",
+      "category": "物理结构",
+      "name": "副板书写",
+      "spec": "副屏板支持普通粉笔、液体粉笔、水溶性粉笔书写，支持磁吸附功能",
+      "indicators": [
+        {"name": "多种粉笔支持", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "磁吸附", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-028",
+      "category": "OPS电脑",
+      "name": "处理器",
+      "spec": "Intel Core i5 十二代或更高，≥6核12线程，主频≥3.3GHz",
+      "indicators": [
+        {"name": "CPU", "value": "i5-12代", "unit": "spec", "comparator": "gte"},
+        {"name": "核心数", "value": 6, "unit": "core", "comparator": "gte"},
+        {"name": "线程数", "value": 12, "unit": "thread", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-029",
+      "category": "OPS电脑",
+      "name": "内存",
+      "spec": "≥8GB DDR4内存",
+      "indicators": [
+        {"name": "内存容量", "value": 8, "unit": "gb", "comparator": "gte"},
+        {"name": "内存类型", "value": "DDR4", "unit": "type", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-030",
+      "category": "OPS电脑",
+      "name": "硬盘",
+      "spec": "≥256GB SSD固态硬盘",
+      "indicators": [
+        {"name": "硬盘容量", "value": 256, "unit": "gb", "comparator": "gte"},
+        {"name": "硬盘类型", "value": "SSD", "unit": "type", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-031",
+      "category": "OPS电脑",
+      "name": "插拔式设计",
+      "spec": "80Pin插拔式电脑模块架构，屏体与电脑无单独接线",
+      "indicators": [
+        {"name": "插拔式", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "针脚数", "value": 80, "unit": "pin", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-032",
+      "category": "教学软件",
+      "name": "双系统设计",
+      "spec": "内置Android 14及以上操作系统，RAM≥4GB，ROM≥32GB，支持在线升级",
+      "indicators": [
+        {"name": "Android版本", "value": 14, "unit": "version", "comparator": "gte"},
+        {"name": "安卓RAM", "value": 4, "unit": "gb", "comparator": "gte"},
+        {"name": "安卓ROM", "value": 32, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-033",
+      "category": "教学软件",
+      "name": "白板软件",
+      "spec": "内置互动式教学课件资源，≥100个教材版本，≥10万份课件资源",
+      "indicators": [
+        {"name": "教材版本数", "value": 100, "unit": "count", "comparator": "gte"},
+        {"name": "课件资源数", "value": 100000, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-034",
+      "category": "教学软件",
+      "name": "智能备课",
+      "spec": "智能备课功能，支持思维导图、课堂活动，备授课一体化设计",
+      "indicators": [
+        {"name": "智能备课", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "备授课一体", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-035",
+      "category": "教学软件",
+      "name": "3D教学资源",
+      "spec": "≥1000个3D知识点模型，覆盖12大类别36个子领域",
+      "indicators": [
+        {"name": "3D模型数", "value": 1000, "unit": "count", "comparator": "gte"},
+        {"name": "知识类别", "value": 12, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-036",
+      "category": "教学软件",
+      "name": "集体备课",
+      "spec": "支持集体备课功能，多重访问权限，生成集备报告",
+      "indicators": [
+        {"name": "集体备课", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-037",
+      "category": "教学软件",
+      "name": "校本资源库",
+      "spec": "支持校本资源共建共享，电脑端、手机端批量上传",
+      "indicators": [
+        {"name": "资源共建共享", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-038",
+      "category": "智能笔",
+      "name": "触控智能笔",
+      "spec": "型号DS-D51P02I，长度≤20cm，直径≤15mm，重量≤20g",
+      "indicators": [
+        {"name": "笔长", "value": 20, "unit": "cm", "comparator": "lte"},
+        {"name": "笔径", "value": 15, "unit": "mm", "comparator": "lte"},
+        {"name": "重量", "value": 20, "unit": "g", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-039",
+      "category": "智能笔",
+      "name": "智能笔功能",
+      "spec": "≥5个按键，连续书写≥6km，支持语音控制、翻页、聚光灯、颜色切换",
+      "indicators": [
+        {"name": "按键数", "value": 5, "unit": "count", "comparator": "gte"},
+        {"name": "书写距离", "value": 6, "unit": "km", "comparator": "gte"},
+        {"name": "语音控制", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-040",
+      "category": "视频展台",
+      "name": "展台摄像头",
+      "spec": "型号DS-D51C08C，≥800万或1300万像素，支持A3/A4拍摄幅面",
+      "indicators": [
+        {"name": "展台像素", "value": 800, "unit": "mp", "comparator": "gte"},
+        {"name": "拍摄幅面", "value": "A4", "unit": "spec", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-041",
+      "category": "视频展台",
+      "name": "展台功能",
+      "spec": "LED补光灯，实时批注，放大缩小旋转，延时拍照，二维码扫描",
+      "indicators": [
+        {"name": "LED补光", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "实时批注", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "二维码扫描", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-042",
+      "category": "集控管理",
+      "name": "集控软件架构",
+      "spec": "B/S云架构设计，支持Windows、Linux、iOS、Android多终端登录",
+      "indicators": [
+        {"name": "BS架构", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "多终端支持", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-043",
+      "category": "集控管理",
+      "name": "远程控制",
+      "spec": "支持远程开关机、文件下发、软件安装、画面巡视、实时监控",
+      "indicators": [
+        {"name": "远程控制", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "画面巡视", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-044",
+      "category": "集控管理",
+      "name": "实时监控",
+      "spec": "同时查看多个教室实时摄像头、屏幕画面，监听麦克风声音",
+      "indicators": [
+        {"name": "多教室监控", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-045",
+      "category": "集控管理",
+      "name": "穿透动作",
+      "spec": "设备关机时触发穿透动作，无需人为解冻即可执行指令、安装软件",
+      "indicators": [
+        {"name": "穿透动作", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-046",
+      "category": "集控管理",
+      "name": "音视频直播",
+      "spec": "支持批量选择设备进行音视频直播，屏幕共享、摄像头、麦克风、扬声器",
+      "indicators": [
+        {"name": "音视频直播", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-047",
+      "category": "集控管理",
+      "name": "弹窗拦截",
+      "spec": "支持手动、截图、自动拦截弹窗，可针对应用配置拦截策略",
+      "indicators": [
+        {"name": "弹窗拦截", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-048",
+      "category": "AI能力",
+      "name": "人脸识别解锁",
+      "spec": "支持人脸识别解锁，2秒内完成识别，老师人脸库由学校自行录入",
+      "indicators": [
+        {"name": "人脸识别", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "识别时间", "value": 2, "unit": "second", "comparator": "lte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-049",
+      "category": "AI能力",
+      "name": "多种解锁方式",
+      "spec": "支持USB key、密码、刷卡、人脸识别、扫码（有网/无网）等多种解锁方式",
+      "indicators": [
+        {"name": "解锁方式数", "value": 5, "unit": "count", "comparator": "gte"},
+        {"name": "无网解锁", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-050",
+      "category": "AI能力",
+      "name": "AI画质调节",
+      "spec": "AI-PQ人工智能画质调节，根据屏幕内容自动调整对比度、饱和度、锐利度",
+      "indicators": [
+        {"name": "AI画质", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-051",
+      "category": "AI能力",
+      "name": "智能手势识别",
+      "spec": "识别五指长按、滑动、画O、画~、缩放等手势，自定义功能映射",
+      "indicators": [
+        {"name": "手势识别", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "手势类型", "value": 8, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-052",
+      "category": "AI能力",
+      "name": "人脸识别点名",
+      "spec": "调用摄像头进行人脸识别、清点人数、随机抽人，同时显示≥60人",
+      "indicators": [
+        {"name": "人脸识别人数", "value": 60, "unit": "count", "comparator": "gte"},
+        {"name": "随机抽人", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-053",
+      "category": "AI能力",
+      "name": "视力检测",
+      "spec": "支持视力检测功能，建立学生视力档案，通过遥控器或手势识别进行测试",
+      "indicators": [
+        {"name": "视力检测", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "视力档案", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": false
+    },
+    {
+      "id": "HK-054",
+      "category": "AI能力",
+      "name": "物联传感器",
+      "spec": "内置物联传感器，监控教室温度、湿度，上传云端，控制灯光、窗帘、空调",
+      "indicators": [
+        {"name": "温湿度监控", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "物联控制", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-055",
+      "category": "AI能力",
+      "name": "自习与朗读监测",
+      "spec": "内置自习工具和朗读工具，通过麦克风监测学生音量，弹窗提醒纪律干预",
+      "indicators": [
+        {"name": "自习监测", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "朗读监测", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-056",
+      "category": "其他特色",
+      "name": "国产芯片",
+      "spec": "整机CPU、可编程逻辑芯片、时钟芯片采用国产自主芯片",
+      "indicators": [
+        {"name": "国产芯片", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-057",
+      "category": "其他特色",
+      "name": "日历与地图",
+      "spec": "支持日历功能（待办、考试计划、历史上的今天），支持地图app（中国地图、世界地图、地球仪）",
+      "indicators": [
+        {"name": "日历功能", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "地图app", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HK-058",
+      "category": "其他特色",
+      "name": "钢琴演奏",
+      "spec": "支持钢琴演奏app，模拟钢琴按键，自动播放≥3首音乐，判断弹奏准确率",
+      "indicators": [
+        {"name": "钢琴app", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "自动播放曲目", "value": 3, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": false
+    },
+    {
+      "id": "HK-059",
+      "category": "其他特色",
+      "name": "半屏模式",
+      "spec": "支持半屏模式，手势下移实现半屏显示，≥4种模式，画面完整无裁剪",
+      "indicators": [
+        {"name": "半屏模式", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "半屏模式数", "value": 4, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HK-060",
+      "category": "其他特色",
+      "name": "认证证书",
+      "spec": "需提供3C认证证书、节能认证证书",
+      "indicators": [
+        {"name": "3C认证", "value": true, "unit": "cert", "comparator": "eq"},
+        {"name": "节能认证", "value": true, "unit": "cert", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    }
+  ]
+}

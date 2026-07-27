@@ -66,9 +66,10 @@
             height: 60px;
             background: url('ifly_logo.png') center / contain no-repeat;
         }
-        .slide-tech.template-header-page .arch-wrap { padding: 22px; }
-        .slide-tech.template-header-page .arch-wrap img { max-height: 540px; }
-        .slide-tech.template-header-page .arch-principle { margin-top: 22px; }
+        .slide-tech.template-header-page .arch-wrap { padding: 20px; }
+        .slide-tech.template-header-page .arch-wrap img { display: block; max-height: 640px; }
+        .slide-tech.template-header-page .arch-principle { display: none; }
+        .slide-tech.template-header-page .arch-diagram { display: none; }
 
         /* ===== 演示模式：一次一页 + 键盘翻页 + 自适应缩放 ===== */
         body.present {
@@ -160,7 +161,15 @@
         .pain-card:nth-child(3) .pain-icon { background: linear-gradient(135deg,#E28A19 0%,#F6C15A 100%); }
         .pain-title { font-size: 30px; font-weight: 700; color: #111827; margin-bottom: 14px; }
         .pain-desc { font-size: 21px; color: #6b7280; line-height: 1.55; }
-        .team-line { position: absolute; bottom: 60px; left: 130px; font-size: 24px; color: #9ca3af; font-weight: 400; }
+        .team-line {
+            position: absolute; top: 54px; right: 130px;
+            display: inline-flex; align-items: center;
+            padding: 12px 24px; border-radius: 999px;
+            background: rgba(22,139,234,0.10);
+            border: 1.5px solid rgba(22,139,234,0.28);
+            color: var(--brand-blue-dark); font-size: 28px; font-weight: 700;
+            letter-spacing: 0.08em;
+        }
 
         /* ---------- P2 Demo ---------- */
         .slide-demo { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, var(--navy) 0%, #0B4F8A 60%, var(--brand-blue) 100%); }
@@ -417,7 +426,7 @@
             <div class="origin-box">
                 <div class="origin-label">◈ 选题起源 · 来自一线的真实痛点</div>
                 <div class="origin-content">
-                    本课题源自本组市场经理 <strong>赵书进</strong> 在客户对接中的真实困境：<br>
+                    本课题源自本组天津课学市场经理 <strong>赵书进</strong> 在客户对接中的真实困境：<br>
                     每次应标要人工对比 100+ 条技术参数，往往时间紧迫，一条废标项即致命。<br>
                     我们想验证：<strong>AI 能否把这个过程压缩到 3 分钟？</strong>
                 </div>
@@ -441,6 +450,8 @@
                 <div class="pain-desc">一条 ★ 废标项即出局<br>负偏离缺应对话术<br>丢标损失巨大</div>
             </div>
         </div>
+
+        <div class="team-line">展翼4班 · 第2组</div>
 
     </div>
 
@@ -730,7 +741,11 @@
             <div class="sec-sub">能用程序算清的，绝不交给大模型 — 又快、又省、又可解释</div>
         </div>
 
-        <!-- 三层架构流程图 -->
+        <div class="arch-wrap">
+            <img src="ai-contest-flow-diagram.png" alt="招标文件输入、三层判定引擎与多维度评估建议的技术流程图">
+        </div>
+
+        <!-- 三层架构流程图（保留旧结构，演示时隐藏） -->
         <div class="arch-diagram">
             <!-- 输入：MinerU 解析 -->
             <div class="arch-node arch-input">

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>参数知识库 · AI 投标决策中心</title>
+  <link rel="stylesheet" href="kb-light.css">
+  <link rel="stylesheet" href="business-menu.css">
+  <link rel="stylesheet" href="sidebar.css">
+</head>
+<body>
+  <aside data-sidebar data-page="knowledge"></aside>
+  <main class="shell">
+    <header class="topbar">
+      <div class="crumb">产品与知识 <i>/</i> 参数知识库</div>
+      <div class="top-actions"><label class="global-search"><input id="search" type="search" placeholder="搜索产品、参数名称或规格"><span>⌕</span></label><button class="plain-icon" type="button">◌</button><div class="avatar">👩🏻‍💼</div><span class="down">⌄</span></div>
+    </header>
+    <section class="page">
+      <div class="title-row"><h1>参数知识库</h1><p>讯飞与竞品参数结构化沉淀，支持按厂商与分类浏览</p></div>
+      <section class="panel">
+        <div class="kb-filters">
+          <div class="chip-row"><span class="chip-label">厂商</span><div id="vendor-filter" class="chip-options"></div></div>
+          <div class="chip-row"><span class="chip-label">分类</span><div id="category-filter" class="chip-options"></div></div>
+          <div class="kb-stat" id="result-count">正在加载参数…</div>
+        </div>
+        <div id="kb-list" aria-live="polite"></div>
+      </section>
+    </section>
+  </main>
+  <dialog id="detail-dialog">
+    <div class="dialog-head"><div><p class="dialog-kicker">Parameter detail</p><h2></h2><p class="dialog-meta"></p></div><button class="dialog-close" type="button" aria-label="关闭">×</button></div>
+    <div class="dialog-list"></div>
+  </dialog>
+  <script src="sidebar-config.js"></script>
+  <script src="sidebar.js"></script>
+  <script src="knowledge-base.js"></script>
+</body>
+</html>

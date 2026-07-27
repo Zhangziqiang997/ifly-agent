@@ -1,0 +1,697 @@
+{
+  "vendor": "鸿合（HiteVision）",
+  "product": "智慧黑板系列（HB-H868S / HD-86HS / HD-98HP）",
+  "category": "智慧黑板/交互大屏",
+  "updated": "2026-07",
+  "params": [
+    {
+      "id": "HH-001",
+      "category": "显示",
+      "name": "屏幕尺寸",
+      "spec": "86英寸/98英寸",
+      "indicators": [
+        {"name": "显示尺寸", "value": 86, "unit": "inch", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-002",
+      "category": "显示",
+      "name": "屏幕分辨率",
+      "spec": "3840×2160",
+      "indicators": [
+        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "gte"},
+        {"name": "垂直分辨率", "value": 2160, "unit": "px", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-003",
+      "category": "显示",
+      "name": "屏幕亮度",
+      "spec": "≥500cd/m²",
+      "indicators": [
+        {"name": "亮度", "value": 500, "unit": "cd_m2", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-004",
+      "category": "显示",
+      "name": "对比度",
+      "spec": "≥5000:1",
+      "indicators": [
+        {"name": "对比度", "value": 5000, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-005",
+      "category": "显示",
+      "name": "可视角度",
+      "spec": "≥178°",
+      "indicators": [
+        {"name": "可视角度", "value": 178, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-006",
+      "category": "显示",
+      "name": "色域覆盖率",
+      "spec": "≥72% NTSC / ≥130% NTSC",
+      "indicators": [
+        {"name": "色域覆盖率NTSC", "value": 72, "unit": "pct", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-007",
+      "category": "显示",
+      "name": "色彩深度",
+      "spec": "≥10bit（灰度≥256级）",
+      "indicators": [
+        {"name": "灰度等级", "value": 256, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-008",
+      "category": "物理",
+      "name": "钢化玻璃厚度",
+      "spec": "≤3.2mm",
+      "indicators": [
+        {"name": "玻璃厚度", "value": 3.2, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-009",
+      "category": "物理",
+      "name": "钢化玻璃硬度",
+      "spec": "≥莫氏7级，石墨硬度≥9H",
+      "indicators": [
+        {"name": "莫氏硬度", "value": 7, "unit": "spec", "comparator": "gte"},
+        {"name": "石墨硬度", "value": 9, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-010",
+      "category": "触控",
+      "name": "触控点数",
+      "spec": "50点触控及50点书写",
+      "indicators": [
+        {"name": "触控点数", "value": 50, "unit": "touch_points", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-011",
+      "category": "触控",
+      "name": "触控响应时间",
+      "spec": "≤4ms / ≤8ms",
+      "indicators": [
+        {"name": "触控响应时间", "value": 8, "unit": "second", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-012",
+      "category": "触控",
+      "name": "触控精度",
+      "spec": "±1mm / ±1.5mm",
+      "indicators": [
+        {"name": "触控精度", "value": 1.5, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-013",
+      "category": "触控",
+      "name": "书写延迟",
+      "spec": "≤35ms",
+      "indicators": [
+        {"name": "书写延迟", "value": 35, "unit": "second", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-014",
+      "category": "音频",
+      "name": "扬声器功率",
+      "spec": "≥60W / ≥80W",
+      "indicators": [
+        {"name": "扬声器功率", "value": 60, "unit": "watt", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-015",
+      "category": "音频",
+      "name": "声压级（1米）",
+      "spec": "≥90dB",
+      "indicators": [
+        {"name": "声压级1米", "value": 90, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-016",
+      "category": "音频",
+      "name": "声压级（10米）",
+      "spec": "≥80dB",
+      "indicators": [
+        {"name": "声压级10米", "value": 80, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-017",
+      "category": "音频",
+      "name": "谐振频率",
+      "spec": "≤100Hz / ≤260Hz",
+      "indicators": [
+        {"name": "谐振频率", "value": 100, "unit": "spec", "comparator": "lte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-018",
+      "category": "音频",
+      "name": "内置麦克风阵列",
+      "spec": "≥4阵列 / ≥8阵列",
+      "indicators": [
+        {"name": "麦克风阵列数", "value": 4, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-019",
+      "category": "音频",
+      "name": "拾音角度",
+      "spec": "≥180°",
+      "indicators": [
+        {"name": "拾音角度", "value": 180, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-020",
+      "category": "音频",
+      "name": "拾音距离",
+      "spec": "≥12m",
+      "indicators": [
+        {"name": "拾音距离", "value": 12, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-021",
+      "category": "摄像",
+      "name": "内置摄像头",
+      "spec": "≥1300万像素 / ≥1800万 / ≥1900万像素，5K超高清",
+      "indicators": [
+        {"name": "摄像头像素", "value": 1300, "unit": "mp", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-022",
+      "category": "摄像",
+      "name": "摄像头分辨率",
+      "spec": "最大分辨率5104×3864",
+      "indicators": [
+        {"name": "水平分辨率", "value": 5104, "unit": "px", "comparator": "gte"},
+        {"name": "垂直分辨率", "value": 3864, "unit": "px", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-023",
+      "category": "摄像",
+      "name": "摄像头视场角",
+      "spec": "≥120° / ≥135°",
+      "indicators": [
+        {"name": "视场角", "value": 120, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-024",
+      "category": "计算",
+      "name": "驱动芯片",
+      "spec": "≥12核驱动芯片（8核CPU、4核GPU）",
+      "indicators": [
+        {"name": "芯片核心数", "value": 12, "unit": "count", "comparator": "gte"},
+        {"name": "CPU核心数", "value": 8, "unit": "count", "comparator": "gte"},
+        {"name": "GPU核心数", "value": 4, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-025",
+      "category": "计算",
+      "name": "Android系统版本",
+      "spec": "≥Android 11.0 / ≥Android 14.0",
+      "indicators": [
+        {"name": "Android版本", "value": 11, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-026",
+      "category": "计算",
+      "name": "内存（RAM）",
+      "spec": "≥2G / ≥4G",
+      "indicators": [
+        {"name": "内存容量", "value": 2, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-027",
+      "category": "计算",
+      "name": "存储（ROM）",
+      "spec": "≥8G / ≥32G",
+      "indicators": [
+        {"name": "存储容量", "value": 8, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-028",
+      "category": "连接",
+      "name": "前置HDMI接口",
+      "spec": "≥1路HDMI接口（非转接）",
+      "indicators": [
+        {"name": "前置HDMI数量", "value": 1, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-029",
+      "category": "连接",
+      "name": "前置USB接口",
+      "spec": "≥2路USB3.0接口",
+      "indicators": [
+        {"name": "前置USB数量", "value": 2, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-030",
+      "category": "连接",
+      "name": "前置Type-C接口",
+      "spec": "≥1路Type-C接口（全功能）",
+      "indicators": [
+        {"name": "前置TypeC数量", "value": 1, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-031",
+      "category": "连接",
+      "name": "后置HDMI输入",
+      "spec": "≥2路HDMI输入（非转接）",
+      "indicators": [
+        {"name": "后置HDMI输入数量", "value": 2, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-032",
+      "category": "连接",
+      "name": "后置HDMI输出",
+      "spec": "≥1路HDMI输出",
+      "indicators": [
+        {"name": "后置HDMI输出数量", "value": 1, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-033",
+      "category": "无线",
+      "name": "无线网络",
+      "spec": "支持Wi-Fi 6，2.4GHz/5GHz双频",
+      "indicators": [
+        {"name": "WiFi6支持", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-034",
+      "category": "无线",
+      "name": "蓝牙",
+      "spec": "支持蓝牙5.0 / 5.2 / 5.4",
+      "indicators": [
+        {"name": "蓝牙版本", "value": 5, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-035",
+      "category": "无线",
+      "name": "AP热点",
+      "spec": "支持AP热点功能，工作距离≥12m / ≥30m",
+      "indicators": [
+        {"name": "AP工作距离", "value": 12, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-036",
+      "category": "无线",
+      "name": "无线传输速率",
+      "spec": "Wi-Fi最高支持866Mbps",
+      "indicators": [
+        {"name": "WiFi传输速率", "value": 866, "unit": "spec", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-037",
+      "category": "护眼",
+      "name": "低蓝光技术",
+      "spec": "硬件低蓝光背光技术，有害蓝光占比＜50%",
+      "indicators": [
+        {"name": "有害蓝光占比", "value": 50, "unit": "pct", "comparator": "lt"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-038",
+      "category": "护眼",
+      "name": "无频闪",
+      "spec": "DC调光，无频闪",
+      "indicators": [
+        {"name": "无频闪", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-039",
+      "category": "认证",
+      "name": "近视防控认证",
+      "spec": "符合《GB40070-2021儿童青少年学习用品近视防控卫生要求》",
+      "indicators": [
+        {"name": "GB40070认证", "value": true, "unit": "cert", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-040",
+      "category": "认证",
+      "name": "书写板安全卫生",
+      "spec": "符合GB28231-2011《书写板安全卫生要求》",
+      "indicators": [
+        {"name": "GB28231认证", "value": true, "unit": "cert", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-041",
+      "category": "认证",
+      "name": "无线电发射设备认证",
+      "spec": "SRRC无线电发射设备型号核准证",
+      "indicators": [
+        {"name": "SRRC认证", "value": true, "unit": "cert", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-042",
+      "category": "认证",
+      "name": "能效等级",
+      "spec": "依据GB21520-2023标准，能效等级达到1级",
+      "indicators": [
+        {"name": "能效等级", "value": 1, "unit": "spec", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-043",
+      "category": "物理",
+      "name": "前置按键",
+      "spec": "≥7个前置按键，支持功能复用",
+      "indicators": [
+        {"name": "前置按键数量", "value": 7, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-044",
+      "category": "特色",
+      "name": "前置接口防护",
+      "spec": "隐藏式设计，翻转式防护盖板，开合角度≥100°",
+      "indicators": [
+        {"name": "盖板开合角度", "value": 100, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-045",
+      "category": "特色",
+      "name": "前掀式维护",
+      "spec": "前掀式维护功能，掀起角度≥30°",
+      "indicators": [
+        {"name": "前掀角度", "value": 30, "unit": "degree", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-046",
+      "category": "特色",
+      "name": "整机尺寸（宽）",
+      "spec": "宽≥4200mm / ≥4400mm",
+      "indicators": [
+        {"name": "整机宽度", "value": 4200, "unit": "mm", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-047",
+      "category": "特色",
+      "name": "整机尺寸（高）",
+      "spec": "高≥1200mm",
+      "indicators": [
+        {"name": "整机高度", "value": 1200, "unit": "mm", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-048",
+      "category": "特色",
+      "name": "整机尺寸（厚）",
+      "spec": "厚≤120mm",
+      "indicators": [
+        {"name": "整机厚度", "value": 120, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-049",
+      "category": "特色",
+      "name": "边框宽度",
+      "spec": "双侧边框宽度≤17mm",
+      "indicators": [
+        {"name": "边框宽度", "value": 17, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-050",
+      "category": "特色",
+      "name": "MTBF（平均无故障时间）",
+      "spec": "≥120000小时 / ≥150000小时",
+      "indicators": [
+        {"name": "MTBF", "value": 120000, "unit": "hour", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-051",
+      "category": "计算",
+      "name": "内置OPS-CPU",
+      "spec": "≥8核12线程 / Intel i5第14代 / Intel i7第11代",
+      "indicators": [
+        {"name": "OPS_CPU核心数", "value": 8, "unit": "count", "comparator": "gte"},
+        {"name": "OPS_CPU线程数", "value": 12, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-052",
+      "category": "计算",
+      "name": "内置OPS-内存",
+      "spec": "≥8G / ≥16G DDR4",
+      "indicators": [
+        {"name": "OPS_内存", "value": 8, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-053",
+      "category": "计算",
+      "name": "内置OPS-硬盘",
+      "spec": "≥256G / ≥512G SSD固态硬盘",
+      "indicators": [
+        {"name": "OPS_硬盘", "value": 256, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-054",
+      "category": "连接",
+      "name": "OPS-USB接口",
+      "spec": "≥3路 / ≥6路USB（含USB3.0）",
+      "indicators": [
+        {"name": "OPS_USB数量", "value": 3, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-055",
+      "category": "连接",
+      "name": "OPS-HDMI输出",
+      "spec": "≥1路HDMI输出",
+      "indicators": [
+        {"name": "OPS_HDMI数量", "value": 1, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-056",
+      "category": "软件",
+      "name": "云存储空间",
+      "spec": "≥200GB云端存储空间，可扩展至3TB",
+      "indicators": [
+        {"name": "云存储", "value": 200, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-057",
+      "category": "软件",
+      "name": "白板登录方式",
+      "spec": "≥5种登录方式（U盘、账号密码、微信扫码、手机验证码、书写登录）",
+      "indicators": [
+        {"name": "登录方式数量", "value": 5, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "HH-058",
+      "category": "软件",
+      "name": "课堂活动类型",
+      "spec": "≥8种课堂活动类型",
+      "indicators": [
+        {"name": "课堂活动类型", "value": 8, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-059",
+      "category": "AI",
+      "name": "AI口语对练",
+      "spec": "支持≥3种口语对练方式（跟读训练、场景对话、自由对话）",
+      "indicators": [
+        {"name": "口语对练方式", "value": 3, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-060",
+      "category": "AI",
+      "name": "AI一键备课",
+      "spec": "支持AI一键生成教学大纲、课件内容AI重写、图片AI优化",
+      "indicators": [
+        {"name": "AI备课", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "HH-061",
+      "category": "特色",
+      "name": "会议纪要功能",
+      "spec": "支持手写输入文本，自动调整窗口大小，一键生成二维码分享",
+      "indicators": [
+        {"name": "会议纪要", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": true,
+      "cert_required": true
+    },
+    {
+      "id": "HH-062",
+      "category": "特色",
+      "name": "投屏功能",
+      "spec": "支持≥4台设备同时投屏，响应时间≤3ms",
+      "indicators": [
+        {"name": "投屏设备数", "value": 4, "unit": "count", "comparator": "gte"},
+        {"name": "投屏响应时间", "value": 3, "unit": "second", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    }
+  ]
+}
