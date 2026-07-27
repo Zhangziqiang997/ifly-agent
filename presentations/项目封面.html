@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教育装备招标参数识别与响应决策系统 — 项目封面</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy-0:  #060b18;
+    --navy-1:  #0a142c;
+    --navy-2:  #0e1d40;
+    --navy-3:  #123058;
+    --blue:    #2f7de0;
+    --sky:     #4aa8f0;
+    --cyan:    #33d6c4;
+    --ink-hi:  #eaf2ff;
+    --ink:     #b8c9e0;
+    --ink-lo:  #6f89aa;
+    --green:   #34d399;
+    --yellow:  #fbbf24;
+    --red:     #f87171;
+  }
+
+  html { font-size: 16px; }
+  body {
+    font-family: "Noto Sans SC", "PingFang SC", "HarmonyOS Sans SC",
+                 "Source Han Sans SC", "Microsoft YaHei", sans-serif;
+    background: #05080f;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 24px;
+  }
+
+  /* ===== 16:9 Stage ===== */
+  .cover {
+    position: relative;
+    width: min(96vw, 1280px);
+    aspect-ratio: 16 / 9;
+    border-radius: 18px;
+    overflow: hidden;
+    background:
+      radial-gradient(120% 120% at 100% 0%, rgba(51,214,196,0.10) 0%, transparent 45%),
+      radial-gradient(120% 130% at 90% 100%, rgba(47,125,224,0.16) 0%, transparent 55%),
+      linear-gradient(120deg, var(--navy-0) 0%, var(--navy-1) 38%, var(--navy-2) 70%, var(--navy-3) 100%);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.55), inset 0 0 0 1px rgba(120,170,255,0.10);
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+
+  /* ==== Decorative grid & glow on the right ==== */
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(90,150,240,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(90,150,240,0.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+    mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 40%, #000 100%);
+    pointer-events: none;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    top: -30%; right: -12%;
+    width: 620px; height: 620px;
+    background: radial-gradient(circle, rgba(51,214,196,0.14) 0%, transparent 62%);
+    pointer-events: none;
+  }
+
+  /* ================= LEFT : info ================= */
+  .left {
+    position: relative;
+    z-index: 2;
+    padding: 62px 20px 54px 64px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 16px;
+    border: 1px solid rgba(120,175,255,0.32);
+    border-radius: 999px;
+    background: rgba(80,140,240,0.10);
+    color: var(--sky);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(6px);
+  }
+  .badge .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--cyan);
+    box-shadow: 0 0 8px var(--cyan);
+  }
+
+  h1 {
+    margin-top: 34px;
+    font-size: clamp(2.3rem, 4vw, 3.7rem);
+    line-height: 1.22;
+    font-weight: 900;
+    letter-spacing: 0.005em;
+    color: var(--ink-hi);
+    text-shadow: 0 2px 20px rgba(30,90,200,0.35);
+  }
+  h1 .accent {
+    background: linear-gradient(100deg, var(--sky) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    margin-top: 18px;
+    font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+    font-weight: 500;
+    color: var(--sky);
+    letter-spacing: 0.03em;
+  }
+
+  .oneliner {
+    margin-top: 22px;
+    padding-left: 16px;
+    border-left: 3px solid rgba(74,168,240,0.55);
+    font-size: clamp(0.95rem, 1.2vw, 1.12rem);
+    line-height: 1.75;
+    color: var(--ink);
+    max-width: 42ch;
+  }
+  .oneliner b { color: var(--ink-hi); font-weight: 700; }
+
+  /* KPI row */
+  .kpis {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 26px;
+  }
+  .kpi {
+    flex: 1;
+    padding: 14px 12px;
+    border-radius: 12px;
+    background: rgba(18,32,64,0.55);
+    border: 1px solid rgba(110,160,240,0.16);
+    backdrop-filter: blur(6px);
+  }
+  .kpi .num {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+    font-weight: 900;
+    line-height: 1.1;
+    background: linear-gradient(120deg, var(--sky), var(--cyan));
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap;
+  }
+  .kpi .cap {
+    margin-top: 6px;
+    font-size: 0.82rem;
+    color: var(--ink-lo);
+    letter-spacing: 0.02em;
+  }
+
+  /* ================= RIGHT : visual + team ================= */
+  .right {
+    position: relative;
+    z-index: 2;
+    padding: 58px 60px 54px 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 26px;
+  }
+
+  /* three-layer pipeline card */
+  .pipeline {
+    position: relative;
+    border-radius: 16px;
+    padding: 22px 22px 20px;
+    background: linear-gradient(160deg, rgba(20,38,74,0.82), rgba(10,20,44,0.72));
+    border: 1px solid rgba(120,175,255,0.18);
+    box-shadow: 0 18px 46px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+  }
+  .pipeline .p-head {
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+    color: var(--ink-lo);
+    margin-bottom: 16px;
+  }
+  .layer {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 11px 13px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(120,175,255,0.10);
+    margin-bottom: 9px;
+  }
+  .layer:last-child { margin-bottom: 0; }
+  .layer .node {
+    width: 12px; height: 12px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .layer.l1 .node { background: var(--green);  box-shadow: 0 0 10px var(--green); }
+  .layer.l2 .node { background: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
+  .layer.l3 .node { background: var(--red);    box-shadow: 0 0 10px var(--red); }
+  .layer .l-txt .t { font-size: 1rem; font-weight: 700; color: var(--ink-hi); }
+  .layer .l-txt .d { font-size: 0.8rem; color: var(--ink-lo); margin-top: 2px; }
+  .layer .tagx {
+    margin-left: auto;
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .layer.l1 .tagx, .layer.l2 .tagx { background: rgba(52,211,153,0.12); color: var(--green); }
+  .layer.l3 .tagx { background: rgba(180,130,255,0.16); color: #c4a3ff; }
+
+  /* team block */
+  .team {
+    border-radius: 14px;
+    padding: 16px 20px;
+    background: rgba(10,20,44,0.55);
+    border: 1px solid rgba(110,160,240,0.14);
+    backdrop-filter: blur(6px);
+  }
+  .team .t-head {
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    color: var(--ink-lo);
+    margin-bottom: 10px;
+  }
+  .team-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 0.95rem;
+    line-height: 2;
+  }
+  .team-row .role {
+    flex-shrink: 0;
+    width: 4.6em;
+    color: var(--sky);
+    font-weight: 700;
+  }
+  .team-row .names { color: var(--ink); }
+
+  @media (max-width: 720px) {
+    .cover { grid-template-columns: 1fr; aspect-ratio: auto; }
+    .cover::before, .cover::after { display: none; }
+    .left  { padding: 40px 28px 20px; }
+    .right { padding: 8px 28px 40px; }
+    body   { min-height: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+
+  <!-- ===================== LEFT ===================== -->
+  <div class="left">
+    <span class="badge"><span class="dot"></span>科大讯飞 2026 展翼校招培训大赛 · 翼展4班第2组</span>
+
+    <h1>教育装备招标参数<br><span class="accent">识别与响应决策系统</span></h1>
+
+    <div class="subtitle">AI 驱动的招投标参数智能比对与决策辅助</div>
+
+    <div class="oneliner">
+      输入招标文件 → <b>识别控标方</b> → 逐条对比讯飞参数 →
+      标出<b>正 / 负偏离</b> → 对不满足项<b>生成应对建议</b>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi"><div class="num">2-3天→3秒</div><div class="cap">应标分析提速</div></div>
+      <div class="kpi"><div class="num">80% / 20%</div><div class="cap">程序粗筛 / AI 精判</div></div>
+      <div class="kpi"><div class="num">3 家竞品库</div><div class="cap">希沃 · 鸿合 · 海康</div></div>
+      <div class="kpi"><div class="num">三层架构</div><div class="cap">分而治之 · 可解释</div></div>
+    </div>
+  </div>
+
+  <!-- ===================== RIGHT ===================== -->
+  <div class="right">
+
+    <div class="pipeline">
+      <div class="p-head">核心算法 · 三层对比架构</div>
+
+      <div class="layer l1">
+        <span class="node"></span>
+        <div class="l-txt"><div class="t">第一层 · 数值比对</div><div class="d">单位对齐 · 数值判断</div></div>
+        <span class="tagx">程序</span>
+      </div>
+      <div class="layer l2">
+        <span class="node"></span>
+        <div class="l-txt"><div class="t">第二层 · 控标方识别</div><div class="d">独有特征统计 · 置信度量化</div></div>
+        <span class="tagx">程序</span>
+      </div>
+      <div class="layer l3">
+        <span class="node"></span>
+        <div class="l-txt"><div class="t">第三层 · 语义精判</div><div class="d">大模型处理疑难 · 生成建议</div></div>
+        <span class="tagx">AI</span>
+      </div>
+    </div>
+
+    <div class="team">
+      <div class="t-head">Team · 项目团队</div>
+      <div class="team-row"><span class="role">项目经理</span><span class="names">张子强</span></div>
+      <div class="team-row"><span class="role">产品经理</span><span class="names">赵书进</span></div>
+      <div class="team-row"><span class="role">原型开发</span><span class="names">陈媛媛 · 李奖 · 王尉丞</span></div>
+      <div class="team-row"><span class="role">内容呈现</span><span class="names">覃宝洋 · 许文卓</span></div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

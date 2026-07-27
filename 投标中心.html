@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教育装备投标决策平台 · 投标中心</title>
+  <style>
+    :root {
+      --blue: #1677ff;
+      --blue-deep: #0756c9;
+      --blue-soft: #eaf3ff;
+      --blue-pale: #f5f9ff;
+      --ink: #1d2b45;
+      --muted: #7b879b;
+      --line: #dfe7f2;
+      --panel: #ffffff;
+      --page: #f7f9fc;
+      --green: #13a66b;
+      --green-soft: #e9f8f1;
+      --orange: #f28b18;
+      --orange-soft: #fff5e8;
+      --red: #e94343;
+      --red-soft: #fff2f1;
+      --purple: #7357e8;
+      --shadow: 0 8px 24px rgba(45, 78, 125, .06);
+      --radius: 10px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-width: 1180px;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      font-size: 14px;
+    }
+    button, input { font: inherit; }
+    button { cursor: pointer; }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      min-height: 100vh;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+    }
+    .brand {
+      min-height: 90px;
+      padding: 18px 16px;
+      background: linear-gradient(135deg, #0f67dd, #0961da);
+      color: #fff;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 24px;
+      background: linear-gradient(145deg, #8ec7ff 0 28%, #fff 29% 43%, #70afff 44% 68%, #0a4fbf 69%);
+      box-shadow: 0 5px 12px rgba(0, 39, 120, .16);
+    }
+    .brand-name { font-size: 16px; font-weight: 700; line-height: 1.35; white-space: nowrap; }
+    .brand-sub { margin-top: 4px; font-size: 12px; font-weight: 600; opacity: .9; }
+
+    .workspace { padding: 20px 14px 8px; }
+    .workspace-label { color: var(--muted); font-size: 12px; margin: 0 6px 8px; }
+    .workspace-select {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 11px;
+      border: 1px solid #cfd9e8;
+      border-radius: 7px;
+      background: #fff;
+      color: var(--ink);
+      text-align: left;
+    }
+    .workspace-select .caret { margin-left: auto; color: var(--muted); }
+
+    .nav { padding: 10px 12px; overflow: auto; }
+    .nav-group { margin: 14px 0 10px; }
+    .nav-group:first-child { margin-top: 4px; }
+    .nav-group-title { padding: 0 8px 8px; color: var(--blue); font-size: 13px; font-weight: 700; }
+    .nav-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 11px;
+      margin: 3px 0;
+      border: 0;
+      border-radius: 7px;
+      background: transparent;
+      color: #42516a;
+      text-align: left;
+      transition: background .15s, color .15s;
+    }
+    .nav-item:hover { background: var(--blue-pale); color: var(--blue); }
+    .nav-item.active { background: var(--blue-soft); color: var(--blue); font-weight: 700; box-shadow: inset 3px 0 var(--blue); }
+    .nav-icon { width: 18px; text-align: center; color: currentColor; font-size: 17px; }
+    .sidebar-foot { margin-top: auto; padding: 14px 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    .status-dot { display: inline-block; width: 7px; height: 7px; margin-right: 6px; border-radius: 50%; background: var(--green); }
+
+    .main { min-width: 0; }
+    .topbar {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 0 24px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+    .crumb { color: #36445d; font-size: 15px; white-space: nowrap; }
+    .crumb strong { color: var(--ink); }
+    .crumb-sep { padding: 0 10px; color: #9aa7ba; }
+    .search {
+      width: min(360px, 32vw);
+      margin-left: auto;
+      position: relative;
+    }
+    .search input {
+      width: 100%;
+      height: 36px;
+      padding: 0 38px 0 14px;
+      border: 1px solid #d5deea;
+      border-radius: 7px;
+      outline: none;
+      color: var(--ink);
+      background: #fff;
+    }
+    .search input:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-soft); }
+    .search span { position: absolute; right: 13px; top: 8px; color: #65748b; font-size: 17px; }
+    .top-actions { display: flex; align-items: center; gap: 17px; color: var(--ink); }
+    .top-action { position: relative; border: 0; padding: 0; background: transparent; font-size: 20px; }
+    .top-badge { position: absolute; top: -8px; right: -8px; width: 14px; height: 14px; border-radius: 50%; background: var(--red); color: white; font-size: 9px; display: grid; place-items: center; }
+    .avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; background: #e5ebf3; color: #2d3b52; font-weight: 700; }
+    .top-user { display: flex; align-items: center; gap: 7px; color: #3c4b63; }
+    .top-user .caret { color: var(--muted); font-size: 12px; }
+
+    .content { padding: 17px 20px 24px; }
+    .page-head { margin: 0 4px 14px; }
+    .page-title { margin: 0; font-size: 27px; letter-spacing: -.03em; }
+    .page-subtitle { margin: 5px 0 0; color: var(--muted); font-size: 13px; }
+
+    .top-grid { display: grid; grid-template-columns: 1.5fr .92fr .82fr; gap: 12px; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .panel-pad { padding: 14px 15px; }
+    .panel-title { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; }
+    .panel-title .title-icon { color: var(--blue); font-size: 20px; }
+    .panel-title .title-icon.red { color: var(--red); }
+    .panel-title .title-icon.purple { color: var(--purple); }
+    .file-chip { margin-top: 11px; display: inline-flex; align-items: center; gap: 10px; padding: 8px 11px; border: 1px solid #d9e3ef; border-radius: 7px; background: #fff; }
+    .pdf-icon { width: 28px; height: 32px; border-radius: 4px; display: grid; place-items: center; color: #fff; background: #f04b43; font-size: 9px; font-weight: 800; }
+    .file-name { font-weight: 700; }
+    .file-status { margin-top: 4px; color: var(--green); font-size: 12px; }
+    .pipeline { display: grid; grid-template-columns: 1fr 34px 1fr 34px 1fr 34px 1fr; gap: 4px; align-items: center; margin-top: 14px; }
+    .pipe-step { text-align: center; color: #43516a; font-size: 12px; }
+    .pipe-icon { width: 38px; height: 38px; margin: 0 auto 5px; border-radius: 50%; display: grid; place-items: center; color: #fff; background: var(--blue); font-size: 18px; box-shadow: 0 3px 8px rgba(22, 119, 255, .22); }
+    .pipe-icon.green { background: var(--green); }
+    .pipe-icon.purple { background: var(--purple); }
+    .pipe-arrow { color: #90a2bb; font-size: 22px; text-align: center; }
+    .metric-row { display: grid; grid-template-columns: 1fr 1fr; margin-top: 13px; padding: 10px 4px 0; border-top: 1px solid var(--line); text-align: center; }
+    .metric-row > div + div { border-left: 1px solid var(--line); }
+    .metric-number { font-size: 22px; font-weight: 800; color: var(--blue); }
+    .metric-number.red { color: var(--red); }
+    .metric-label { margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .panel-actions { display: flex; gap: 10px; margin-top: 11px; }
+    .btn { min-height: 34px; padding: 0 14px; border: 1px solid var(--blue); border-radius: 6px; background: #fff; color: var(--blue); font-weight: 700; }
+    .btn:hover { background: var(--blue-soft); }
+    .btn-primary { flex: 1; color: #fff; background: var(--blue); }
+    .btn-primary:hover { background: var(--blue-deep); }
+    .btn-danger { border-color: var(--red); color: var(--red); }
+    .btn-danger:hover { background: var(--red-soft); }
+
+    .risk-panel { border-color: #f2baba; }
+    .risk-summary { margin-top: 11px; font-size: 13px; }
+    .risk-summary strong { color: var(--red); font-size: 20px; }
+    .risk-callout { margin-top: 9px; padding: 10px; border: 1px solid #ffb5b5; border-radius: 7px; background: var(--red-soft); }
+    .risk-title { display: flex; gap: 8px; align-items: flex-start; color: #c93434; font-weight: 800; line-height: 1.5; }
+    .risk-title .warn { font-size: 18px; }
+    .risk-text { margin-top: 7px; color: #556275; font-size: 12px; line-height: 1.55; }
+    .ai-note { margin-top: 7px; color: #3d4b60; font-size: 12px; font-weight: 700; }
+    .confidence { margin-top: 8px; color: var(--red); font-size: 12px; }
+
+    .report-card { display: flex; flex-direction: column; }
+    .report-state { margin-left: auto; color: var(--green); font-size: 12px; font-weight: 700; }
+    .report-metrics { margin-top: 11px; border: 1px solid #d8e4f2; border-radius: 7px; overflow: hidden; }
+    .report-metric { display: flex; align-items: center; gap: 10px; padding: 9px 11px; }
+    .report-metric + .report-metric { border-top: 1px solid var(--line); }
+    .report-metric .bubble { width: 28px; height: 28px; border-radius: 7px; display: grid; place-items: center; background: var(--blue-soft); color: var(--blue); font-size: 16px; }
+    .report-metric:nth-child(2) .bubble { background: #f0ebff; color: var(--purple); }
+    .report-metric:nth-child(3) .bubble { background: var(--green-soft); color: var(--green); }
+    .report-number { font-size: 20px; color: var(--blue); font-weight: 800; }
+    .report-metric:nth-child(2) .report-number { color: var(--purple); }
+    .report-metric:nth-child(3) .report-number { color: var(--green); }
+    .report-label { margin-left: 3px; font-weight: 700; }
+    .report-desc { margin-top: 2px; color: var(--muted); font-size: 11px; }
+    .report-card .btn { margin-top: auto; width: 100%; }
+
+    .quick-panel { margin-top: 12px; padding: 12px 13px; }
+    .quick-title { margin-bottom: 10px; font-size: 16px; font-weight: 700; }
+    .quick-grid { display: grid; grid-template-columns: 1.2fr 1fr 1fr 1fr; gap: 10px; }
+    .quick-item { min-height: 68px; display: flex; align-items: center; gap: 12px; padding: 10px 13px; border: 1px solid var(--line); border-radius: 7px; background: #fff; text-align: left; color: var(--ink); }
+    .quick-item:hover { border-color: var(--blue); background: var(--blue-pale); }
+    .quick-item.primary { border: 2px solid var(--blue); }
+    .quick-icon { width: 34px; height: 34px; flex: 0 0 34px; display: grid; place-items: center; border-radius: 7px; background: var(--blue-soft); color: var(--blue); font-size: 20px; }
+    .quick-item:nth-child(2) .quick-icon { background: #f0ebff; color: var(--purple); }
+    .quick-item:nth-child(3) .quick-icon { background: var(--orange-soft); color: var(--orange); }
+    .quick-item:nth-child(4) .quick-icon { background: var(--green-soft); color: var(--green); }
+    .quick-name { font-weight: 800; }
+    .quick-desc { margin-top: 3px; color: var(--muted); font-size: 11px; }
+    .quick-arrow { margin-left: auto; color: var(--blue); font-size: 19px; }
+
+    .bottom-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 12px; margin-top: 12px; }
+    .result-panel, .product-panel { padding: 13px 14px; }
+    .result-table { width: 100%; margin-top: 10px; border-collapse: collapse; font-size: 12px; }
+    .result-table th { padding: 8px 7px; background: var(--blue-pale); color: #5f6d83; font-weight: 700; text-align: left; }
+    .result-table td { padding: 9px 7px; border-bottom: 1px solid var(--line); color: #42516a; }
+    .result-table tr:last-child td { border-bottom: 0; }
+    .tag { display: inline-flex; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; }
+    .tag-high { background: #ffe4e4; color: var(--red); }
+    .tag-mid { background: #fff0d8; color: #c87708; }
+    .result-link { color: var(--blue); font-weight: 700; cursor: pointer; }
+    .product-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; margin-top: 10px; }
+    .product-item { min-height: 115px; padding: 12px 8px; border: 1px solid var(--line); border-radius: 8px; text-align: center; }
+    .product-icon { width: 32px; height: 32px; margin: 0 auto 8px; border-radius: 50%; display: grid; place-items: center; background: var(--blue-soft); color: var(--blue); font-size: 18px; }
+    .product-item:nth-child(2) .product-icon { background: var(--green-soft); color: var(--green); }
+    .product-item:nth-child(3) .product-icon { background: #f0ebff; color: var(--purple); }
+    .product-item:nth-child(4) .product-icon { background: #e8fbf6; color: #16a68b; }
+    .product-name { font-weight: 700; font-size: 12px; }
+    .product-desc { margin-top: 6px; color: var(--muted); font-size: 10px; line-height: 1.45; }
+    .product-foot { margin-top: 10px; color: #68768a; text-align: center; font-size: 11px; }
+
+    .toast { position: fixed; left: 50%; bottom: 24px; z-index: 20; transform: translate(-50%, 20px); padding: 10px 16px; border-radius: 7px; color: #fff; background: rgba(26, 41, 65, .94); opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+
+    @media (max-width: 1320px) {
+      body { min-width: 1040px; }
+      .app { grid-template-columns: 220px minmax(0, 1fr); }
+      .top-grid { grid-template-columns: 1.35fr 1fr 1fr; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" aria-label="主导航">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">◇</div>
+        <div>
+          <div class="brand-name">教育装备投标决策平台</div>
+          <div class="brand-sub">讯飞教育业务中心</div>
+        </div>
+      </div>
+
+      <div class="workspace">
+        <div class="workspace-label">业务选择</div>
+        <button class="workspace-select" id="workspaceBtn" type="button">
+          <span aria-hidden="true">▣</span><strong>教育装备投标业务</strong><span class="caret">⌄</span>
+        </button>
+      </div>
+
+      <nav class="nav">
+        <section class="nav-group">
+          <div class="nav-group-title">业务中心</div>
+          <button class="nav-item active" type="button" data-nav="项目总览"><span class="nav-icon">▣</span>项目总览</button>
+          <button class="nav-item" type="button" data-nav="投标项目"><span class="nav-icon">▤</span>投标项目</button>
+          <button class="nav-item" type="button" data-nav="文档中心"><span class="nav-icon">▧</span>文档中心</button>
+        </section>
+        <section class="nav-group">
+          <div class="nav-group-title">智能分析</div>
+          <button class="nav-item" type="button" data-nav="招标参数对比"><span class="nav-icon">⚖</span>招标参数对比</button>
+          <button class="nav-item" type="button" data-nav="AI分析报告"><span class="nav-icon">▤</span>AI分析报告</button>
+          <button class="nav-item" type="button" data-nav="AI风险识别"><span class="nav-icon">♧</span>AI风险识别</button>
+          <button class="nav-item" type="button" data-nav="话术与方案"><span class="nav-icon">▣</span>话术与方案</button>
+        </section>
+        <section class="nav-group">
+          <div class="nav-group-title">产品与知识</div>
+          <button class="nav-item" type="button" data-nav="产品与参数中心"><span class="nav-icon">◇</span>产品与参数中心</button>
+          <button class="nav-item" type="button" data-nav="参数知识库"><span class="nav-icon">▤</span>参数知识库</button>
+          <button class="nav-item" type="button" data-nav="产品与竞品"><span class="nav-icon">▦</span>产品与竞品</button>
+          <button class="nav-item" type="button" data-nav="规则与标准"><span class="nav-icon">▥</span>规则与标准</button>
+        </section>
+      </nav>
+      <div class="sidebar-foot"><span class="status-dot"></span>平台运行正常</div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="crumb"><strong>项目总览</strong><span class="crumb-sep">/</span>AI投标决策中心</div>
+        <label class="search">
+          <span class="sr-only">搜索</span>
+          <input type="search" placeholder="搜索项目、文档、产品或参数">
+          <span aria-hidden="true">⌕</span>
+        </label>
+        <div class="top-actions">
+          <button class="top-action" type="button" aria-label="消息"><span aria-hidden="true">♧</span><span class="top-badge">1</span></button>
+          <button class="top-action" type="button" aria-label="帮助">?</button>
+          <div class="top-user"><span class="avatar">张</span><span class="caret">⌄</span></div>
+        </div>
+      </header>
+
+      <div class="content">
+        <div class="page-head">
+          <h1 class="page-title">AI投标决策中心</h1>
+          <p class="page-subtitle">基于参数知识库，自动完成招标研判、风险识别与投标策略生成</p>
+        </div>
+
+        <section class="top-grid" aria-label="核心 AI 能力">
+          <article class="panel panel-pad knowledge-panel">
+            <div class="panel-title"><span class="title-icon">▤</span>知识库接入</div>
+            <div class="file-chip">
+              <div class="pdf-icon">PDF</div>
+              <div><div class="file-name" id="fileName">智慧教室采购需求.pdf</div><div class="file-status" id="fileStatus">解析完成 · 已写入参数知识库</div></div>
+            </div>
+            <div class="pipeline" aria-label="文档入库流程">
+              <div class="pipe-step"><div class="pipe-icon">↑</div>上传文档</div><div class="pipe-arrow">→</div>
+              <div class="pipe-step"><div class="pipe-icon">▤</div>解析结构化</div><div class="pipe-arrow">→</div>
+              <div class="pipe-step"><div class="pipe-icon green">▤</div>JSON入库</div><div class="pipe-arrow">→</div>
+              <div class="pipe-step"><div class="pipe-icon purple">◔</div>可复用分析</div>
+            </div>
+            <div class="metric-row">
+              <div><div class="metric-number">99</div><div class="metric-label">已沉淀 99 组数据</div></div>
+              <div><div class="metric-number red" id="totalData">100</div><div class="metric-label">新增后 100 组数据</div></div>
+            </div>
+            <div class="panel-actions">
+              <button class="btn" type="button" data-action="knowledge">查看参数知识库</button>
+              <button class="btn btn-primary" type="button" id="startAiBtn">✦&nbsp; 开始 AI 分析</button>
+              <input class="sr-only" id="fileInput" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx">
+            </div>
+          </article>
+
+          <article class="panel panel-pad risk-panel">
+            <div class="panel-title"><span class="title-icon red">♧</span>AI风险识别</div>
+            <div class="risk-summary">本次分析发现 <strong>8</strong> 项重大风险</div>
+            <div class="risk-callout">
+              <div class="risk-title"><span class="warn">▲</span><span>145°视场角：疑似竞品独有参数，存在控标倾向</span></div>
+              <div class="ai-note">AI已完成语义研判</div>
+              <div class="risk-text">通过对比历史 99 份招标文件与产品规格，145°视场角在 90% 以上的项目中出现在竞品方案，结合其他限制条件，存在排他性风险。</div>
+              <div class="confidence">研判置信度&nbsp; <strong>92%</strong></div>
+            </div>
+            <div class="panel-actions">
+              <button class="btn" type="button" data-action="evidence">查看研判依据</button>
+              <button class="btn btn-danger" type="button" id="scriptBtn">生成质疑话术</button>
+            </div>
+          </article>
+
+          <article class="panel panel-pad report-card">
+            <div class="panel-title"><span class="title-icon purple">▤</span>AI分析报告<span class="report-state" id="reportState">已完成 ✓</span></div>
+            <div class="report-metrics">
+              <div class="report-metric"><div class="bubble">▤</div><div><span class="report-number">48</span><span class="report-label">条参数</span><div class="report-desc">结构化提取的关键参数</div></div></div>
+              <div class="report-metric"><div class="bubble">▧</div><div><span class="report-number">12</span><span class="report-label">项语义复核</span><div class="report-desc">AI对关键条款的语义复核</div></div></div>
+              <div class="report-metric"><div class="bubble">▤</div><div><span class="report-number">6</span><span class="report-label">条应对建议</span><div class="report-desc">基于风险识别的应对建议</div></div></div>
+            </div>
+            <button class="btn" type="button" data-action="report">查看文档AI分析报告</button>
+          </article>
+        </section>
+
+        <section class="panel quick-panel" aria-label="核心工作入口">
+          <div class="quick-title">核心工作入口</div>
+          <div class="quick-grid">
+            <button class="quick-item primary" type="button" data-action="compare"><span class="quick-icon">⚖</span><span><span class="quick-name">招标参数对比</span><span class="quick-desc">快速对比招标参数与产品差异</span></span><span class="quick-arrow">›</span></button>
+            <button class="quick-item" type="button" data-action="report"><span class="quick-icon">▤</span><span><span class="quick-name">AI文档分析报告</span><span class="quick-desc">查看本次文档的 AI 分析结果</span></span><span class="quick-arrow">›</span></button>
+            <button class="quick-item" type="button" data-action="script"><span class="quick-icon">▰</span><span><span class="quick-name">生成质疑话术</span><span class="quick-desc">AI生成质疑话术与沟通内容</span></span><span class="quick-arrow">›</span></button>
+            <button class="quick-item" type="button" data-action="knowledge"><span class="quick-icon">▤</span><span><span class="quick-name">查看参数知识库</span><span class="quick-desc">浏览已沉淀的参数知识库</span></span><span class="quick-arrow">›</span></button>
+          </div>
+        </section>
+
+        <section class="bottom-grid">
+          <article class="panel result-panel">
+            <div class="panel-title"><span class="title-icon">✦</span>AI研判结果</div>
+            <table class="result-table">
+              <thead><tr><th>识别对象</th><th>AI判断</th><th>风险等级</th><th>下一步操作</th></tr></thead>
+              <tbody>
+                <tr><td>控标方识别</td><td>疑似希沃</td><td><span class="tag tag-high">高</span></td><td><span class="result-link" data-action="evidence">查看依据</span></td></tr>
+                <tr><td>摄像头视场角</td><td>竞品独有特征</td><td><span class="tag tag-high">高</span></td><td><span class="result-link" data-action="script">生成质疑话术</span></td></tr>
+                <tr><td>语音转写能力</td><td>讯飞具备优势</td><td><span class="tag tag-mid">中</span></td><td><span class="result-link" data-action="solution">加入方案</span></td></tr>
+              </tbody>
+            </table>
+            <div style="text-align:center;margin-top:10px"><span class="result-link" data-action="all-results">查看全部研判结果&nbsp;›</span></div>
+          </article>
+
+          <article class="panel product-panel">
+            <div class="panel-title"><span class="title-icon purple">✦</span>讯飞AI产品能力</div>
+            <div class="product-grid">
+              <div class="product-item"><div class="product-icon">●</div><div class="product-name">AI语音转写</div><div class="product-desc">高准确率语音转写<br>支持多语种与行业词库</div></div>
+              <div class="product-item"><div class="product-icon">◉</div><div class="product-name">远场语音交互</div><div class="product-desc">远距离拾音与唤醒<br>自然语言实时交互</div></div>
+              <div class="product-item"><div class="product-icon">●</div><div class="product-name">课堂互动评测</div><div class="product-desc">多维度课堂互动评测<br>实时反馈学习效果</div></div>
+              <div class="product-item"><div class="product-icon">▥</div><div class="product-name">学情数据分析</div><div class="product-desc">学情数据采集与分析<br>精准教学决策支持</div></div>
+            </div>
+            <div class="product-foot">基于自研 AI 技术与教育场景深度融合，赋能更优投标方案与差异化优势</div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (() => {
+      const toast = document.getElementById('toast');
+      const fileInput = document.getElementById('fileInput');
+      const fileName = document.getElementById('fileName');
+      const fileStatus = document.getElementById('fileStatus');
+      const totalData = document.getElementById('totalData');
+      const reportState = document.getElementById('reportState');
+      let toastTimer;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+      }
+
+      function runAiAnalysis() {
+        reportState.textContent = '分析中…';
+        reportState.style.color = 'var(--blue)';
+        showToast('AI 正在基于 100 组知识库数据进行分析');
+        setTimeout(() => {
+          reportState.textContent = '已完成 ✓';
+          reportState.style.color = 'var(--green)';
+          showToast('文档 AI 分析报告已生成');
+        }, 900);
+      }
+
+      document.getElementById('workspaceBtn').addEventListener('click', () => showToast('当前业务：教育装备投标业务'));
+      document.getElementById('startAiBtn').addEventListener('click', runAiAnalysis);
+      document.getElementById('scriptBtn').addEventListener('click', () => showToast('已生成 3 个维度的质疑话术'));
+
+      document.querySelectorAll('[data-action]').forEach((element) => {
+        element.addEventListener('click', () => {
+          const action = element.dataset.action;
+          const messages = {
+            knowledge: '正在打开参数知识库',
+            compare: '正在打开招标参数对比',
+            report: '正在打开文档 AI 分析报告',
+            script: '已生成 3 个维度的质疑话术',
+            evidence: '正在展开 AI 研判依据',
+            solution: '已将讯飞 AI 能力加入投标方案',
+            'all-results': '正在打开全部研判结果'
+          };
+          showToast(messages[action] || '操作已触发');
+        });
+      });
+
+      document.querySelectorAll('.nav-item').forEach((item) => {
+        item.addEventListener('click', () => {
+          document.querySelectorAll('.nav-item').forEach((navItem) => navItem.classList.remove('active'));
+          item.classList.add('active');
+          showToast('已切换至：' + item.dataset.nav);
+        });
+      });
+
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files && fileInput.files[0];
+        if (!file) return;
+        fileName.textContent = file.name;
+        fileStatus.textContent = '解析完成 · 已写入参数知识库';
+        totalData.textContent = '100';
+        showToast('文档解析完成，已写入参数知识库');
+      });
+
+      document.querySelector('.file-chip').addEventListener('click', () => fileInput.click());
+    })();
+  </script>
+</body>
+</html>
