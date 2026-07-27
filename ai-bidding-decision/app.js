@@ -20,7 +20,10 @@ const mockData = {
 };
 
 const nav = document.querySelector('#side-nav');
-nav.innerHTML = mockData.nav.map(([title, items]) => `<div class="group-title">${title}</div>${items.map(([icon, label, active]) => `<a href="#" class="${active ? 'active' : ''}"><span class="nav-ico">${icon}</span>${label}</a>`).join('')}`).join('');
+nav.innerHTML = mockData.nav.map(([title, items]) => `<div class="group-title">${title}</div>${items.map(([icon, label, active]) => {
+  const href = label === '参数知识库' ? 'knowledge-base.html' : label === 'AI分析报告' ? 'report.html' : '#';
+  return `<a href="${href}" class="${active ? 'active' : ''}"><span class="nav-ico">${icon}</span>${label}</a>`;
+}).join('')}`).join('');
 
 document.querySelector('#report-items').innerHTML = mockData.report.map(([icon, number, label, note, color]) => `<div class="report-item"><span class="metric-icon" style="background:${color}">${icon}</span><div class="metric-copy"><strong>${number}</strong><span>${label}</span><small>${note}</small></div></div>`).join('');
 document.querySelector('#work-list').innerHTML = mockData.work.map(([icon, title, note, active]) => `<button class="work-item demo-action ${active ? 'active' : ''}"><span class="work-icon">${icon}</span><span class="work-copy"><strong>${title}</strong><small>${note}</small></span><span class="work-arrow">›</span></button>`).join('');
@@ -164,6 +167,11 @@ function formatFileSize(bytes) {
 
 reportButton.addEventListener('click', () => {
   if (!reportButton.disabled) window.location.href = 'report.html';
+});
+
+document.querySelector('.button-row .demo-action').addEventListener('click', (event) => {
+  event.preventDefault();
+  window.location.href = 'knowledge-base.html';
 });
 
 function showToast(message) {

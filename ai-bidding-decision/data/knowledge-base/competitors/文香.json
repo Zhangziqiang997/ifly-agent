@@ -1,0 +1,184 @@
+{
+  "vendor": "文香（Wenxiang）",
+  "product": "智慧黑板 WX-B860S",
+  "category": "智慧黑板",
+  "updated": "2026-07",
+  "note": "⚠️ 此为 Mock 测试数据。真实竞品已替换为海康威视，该文件仅供开发测试使用。",
+  "params": [
+    {
+      "id": "WENXIANG-001",
+      "category": "显示",
+      "name": "屏幕尺寸",
+      "spec": "86英寸",
+      "indicators": [
+        {"name": "屏幕尺寸", "value": 86, "unit": "inch", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-002",
+      "category": "显示",
+      "name": "屏幕分辨率",
+      "spec": "3840×2160（4K）",
+      "indicators": [
+        {"name": "水平分辨率", "value": 3840, "unit": "px", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-003",
+      "category": "显示",
+      "name": "屏幕亮度",
+      "spec": "480cd/m²",
+      "indicators": [
+        {"name": "亮度", "value": 480, "unit": "cd_m2", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-004",
+      "category": "触控",
+      "name": "触控技术",
+      "spec": "红外触控，支持20点触控",
+      "indicators": [
+        {"name": "触控点数", "value": 20, "unit": "touch_points", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-005",
+      "category": "触控",
+      "name": "笔锋书写",
+      "spec": "支持普通笔迹书写，1024级压感",
+      "indicators": [
+        {"name": "压感级别", "value": 1024, "unit": "pressure_level", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-006",
+      "category": "摄像",
+      "name": "内置摄像头",
+      "spec": "800万像素（1080P），100°广角",
+      "indicators": [
+        {"name": "摄像头像素", "value": 800, "unit": "mp", "comparator": "eq"},
+        {"name": "视频分辨率", "value": 1920, "unit": "px", "comparator": "eq"},
+        {"name": "视场角", "value": 100, "unit": "degree", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-007",
+      "category": "音频",
+      "name": "内置音响",
+      "spec": "2×10W立体声",
+      "indicators": [
+        {"name": "扬声器功率", "value": 20, "unit": "watt", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-008",
+      "category": "护眼",
+      "name": "护眼认证",
+      "spec": "通过国家CCC认证/中国能效认证",
+      "indicators": [
+        {"name": "CCC认证", "value": true, "unit": "cert", "comparator": "eq"},
+        {"name": "能效认证", "value": true, "unit": "cert", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": true
+    },
+    {
+      "id": "WENXIANG-009",
+      "category": "无线",
+      "name": "无线投屏",
+      "spec": "支持Android/iOS无线投屏",
+      "indicators": [
+        {"name": "投屏平台数", "value": 2, "unit": "platform_count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-010",
+      "category": "软件",
+      "name": "教学白板软件",
+      "spec": "文香教学助手，基础白板书写+课件播放功能",
+      "indicators": [
+        {"name": "白板书写", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "课件播放", "value": true, "unit": "feature", "comparator": "eq"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-011",
+      "category": "物理",
+      "name": "整机厚度",
+      "spec": "≤32mm（含壁挂支架）",
+      "indicators": [
+        {"name": "整机厚度", "value": 32, "unit": "mm", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-012",
+      "category": "连接",
+      "name": "接口配置",
+      "spec": "前置USB 3.0×1、USB 2.0×2、HDMI IN×1",
+      "indicators": [
+        {"name": "前置USB3.0", "value": 1, "unit": "count", "comparator": "gte"},
+        {"name": "前置USB2.0", "value": 2, "unit": "count", "comparator": "gte"},
+        {"name": "前置HDMI IN", "value": 1, "unit": "count", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-013",
+      "category": "显示",
+      "name": "量子点显示技术",
+      "spec": "采用量子点QLED显示技术，色域覆盖DCI-P3 98%",
+      "indicators": [
+        {"name": "量子点技术", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "DCI-P3色域", "value": 98, "unit": "pct", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-014",
+      "category": "计算",
+      "name": "内置OPS电脑",
+      "spec": "Intel Core i5-1135G7 / 8GB DDR4 / 256GB SSD / Windows 10",
+      "indicators": [
+        {"name": "CPU", "value": "i5-1135G7", "unit": "spec", "comparator": "eq"},
+        {"name": "内存", "value": 8, "unit": "gb", "comparator": "gte"},
+        {"name": "硬盘", "value": 256, "unit": "gb", "comparator": "gte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    },
+    {
+      "id": "WENXIANG-015",
+      "category": "特色",
+      "name": "双系统切换",
+      "spec": "支持Android 12 + Windows 双系统一键切换，5秒内完成",
+      "indicators": [
+        {"name": "双系统切换", "value": true, "unit": "feature", "comparator": "eq"},
+        {"name": "切换速度", "value": 5, "unit": "second", "comparator": "lte"}
+      ],
+      "star_mark": false,
+      "cert_required": false
+    }
+  ]
+}

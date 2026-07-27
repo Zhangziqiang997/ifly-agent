@@ -7,15 +7,15 @@ import {
 
 const deviationMeta = Object.freeze({
   positive: Object.freeze({ label: '正偏离', tone: 'positive' }),
-  negative_wording: Object.freeze({ label: '可改说辞', tone: 'wording' }),
+  negative_wording: Object.freeze({ label: '说辞可改', tone: 'wording' }),
   negative_real: Object.freeze({ label: '真负偏离', tone: 'negative' }),
 });
 
-function createNode(tagName, className, text) {
-  const node = document.createElement(tagName);
-  if (className) node.className = className;
-  if (text !== undefined) node.textContent = text;
-  return node;
+function node(tag, className, text) {
+  const element = document.createElement(tag);
+  if (className) element.className = className;
+  if (text !== undefined) element.textContent = text;
+  return element;
 }
 
 function setText(id, text) {
@@ -23,157 +23,129 @@ function setText(id, text) {
 }
 
 function renderHeader(report) {
-  setText('report-title', report.projectName);
+  const confidence = Math.round(report.controller.confidence * 100);
+  setText('report-title', `${report.projectName} · 分析报告`);
   setText('controller-summary', report.controller.summary);
   setText('controller-vendor', report.controller.vendor);
-  setText('controller-confidence', `${Math.round(report.controller.confidence * 100)}%`);
+  setText('controller-confidence', `${confidence}%`);
+  setText('confidence-ring-text', `${confidence}%`);
   setText('controller-hit-count', `${report.suspiciousItems.length} 项`);
+  const circle = document.getElementById('confidence-progress');
+  const circumference = 2 * Math.PI * 38;
+  circle.style.strokeDasharray = String(circumference);
+  circle.style.strokeDashoffset = String(circumference * (1 - report.controller.confidence));
 }
 
 function renderKpis(metrics) {
-  const container = document.getElementById('report-kpis');
   const kpis = [
-    { label: '总参数', value: metrics.total, note: '纳入逐项研判', tone: 'total' },
-    { label: '正偏离', value: metrics.positiveCount, note: '优于对标规格', tone: 'positive' },
-    { label: '可改说辞', value: metrics.wordingCount, note: '可通过措辞修订', tone: 'wording' },
-    { label: '真负偏离', value: metrics.negativeCount, note: '需形成处置闭环', tone: 'negative' },
+    { label: '有效参数总计', value: metrics.total, tone: 'cyan' },
+    { label: '🟢 正偏离', value: metrics.positiveCount, tone: 'green' },
+    { label: '🟡 说辞可改', value: metrics.wordingCount, tone: 'amber' },
+    { label: '🔴 真负偏离', value: metrics.negativeCount, tone: 'red' },
   ];
-
-  kpis.forEach((kpi) => {
-    const card = createNode('article', `report-kpi report-kpi-${kpi.tone}`);
-    const marker = createNode('span', 'report-kpi-marker');
-    marker.setAttribute('aria-hidden', 'true');
-    const copy = createNode('div', 'report-kpi-copy');
-    const label = createNode('span', 'report-kpi-label', kpi.label);
-    const value = createNode('strong', 'report-kpi-value', String(kpi.value));
-    const note = createNode('p', 'report-kpi-note', kpi.note);
-
-    copy.append(label, value, note);
-    card.append(marker, copy);
-    container.append(card);
-  });
+  const container = document.getElementById('report-kpis');
+  container.replaceChildren(...kpis.map((kpi) => {
+    const card = node('article', 'stat-card');
+    card.append(node('strong', `stat-num c-${kpi.tone}`, String(kpi.value)), node('span', 'stat-label', kpi.label));
+    return card;
+  }));
 }
 
-function renderControllerEvidence(report) {
+function renderEvidence(report) {
   const list = document.getElementById('controller-evidence');
-
-  report.suspiciousItems.forEach((evidence) => {
-    const item = createNode('li', 'controller-evidence-item');
-    const marker = createNode('span', 'controller-evidence-marker', '✓');
-    marker.setAttribute('aria-hidden', 'true');
-    const text = createNode('p', '', evidence);
-    item.append(marker, text);
-    list.append(item);
-  });
+  list.replaceChildren(...report.suspiciousItems.map((evidence) => {
+    const item = node('li', 'hit-item');
+    item.append(node('i', 'hit-dot'), node('span', 'hit-text', evidence));
+    return item;
+  }));
 }
 
-function renderCategoryChart(report) {
+function renderChart(report) {
   const chart = document.getElementById('category-chart');
   const distribution = getCategoryDistribution(report);
-
-  Object.entries(distribution).forEach(([category, total]) => {
-    const categoryItems = report.analysisItems.filter((item) => item.category === category);
-    const counts = {
-      positive: categoryItems.filter((item) => item.deviation === 'positive').length,
-      wording: categoryItems.filter((item) => item.deviation === 'negative_wording').length,
-      negative: categoryItems.filter((item) => item.deviation === 'negative_real').length,
+  const allCounts = Object.entries(distribution).map(([category, total]) => {
+    const items = report.analysisItems.filter((item) => item.category === category);
+    return {
+      category,
+      total,
+      positive: items.filter((item) => item.deviation === 'positive').length,
+      wording: items.filter((item) => item.deviation === 'negative_wording').length,
+      negative: items.filter((item) => item.deviation === 'negative_real').length,
     };
-    const row = createNode('div', 'category-chart-row');
-    const heading = createNode('div', 'category-chart-heading');
-    const label = createNode('strong', '', category);
-    const count = createNode('span', '', `${total} 项`);
-    const bar = createNode('div', 'category-chart-bar');
-    bar.setAttribute(
-      'aria-label',
-      `${category}：正偏离 ${counts.positive}，可改说辞 ${counts.wording}，真负偏离 ${counts.negative}`,
-    );
-
-    ['positive', 'wording', 'negative'].forEach((tone) => {
-      if (counts[tone] === 0) return;
-      const segment = createNode(
-        'span',
-        `deviation-segment deviation-segment-${tone}`,
-        String(counts[tone]),
-      );
-      segment.style.width = `${(counts[tone] / total) * 100}%`;
-      segment.title = `${deviationMeta[tone === 'negative' ? 'negative_real' : tone === 'wording' ? 'negative_wording' : 'positive'].label} ${counts[tone]} 项`;
-      bar.append(segment);
-    });
-
-    heading.append(label, count);
-    row.append(heading, bar);
-    chart.append(row);
   });
+  const max = Math.max(...allCounts.map((item) => item.total), 1);
+  chart.replaceChildren(...allCounts.map((item) => {
+    const column = node('div', 'bar-column');
+    const stack = node('div', 'bar-stack');
+    stack.setAttribute('title', `${item.category}：正偏离 ${item.positive}，说辞可改 ${item.wording}，真负偏离 ${item.negative}`);
+    ['negative', 'wording', 'positive'].forEach((tone) => {
+      if (!item[tone]) return;
+      const segment = node('span', `bar-segment bar-${tone}`);
+      segment.style.height = `${Math.max((item[tone] / max) * 90, 8)}px`;
+      stack.append(segment);
+    });
+    column.append(stack, node('span', 'bar-label', item.category));
+    return column;
+  }));
 }
 
-function createDetails(item) {
-  const details = createNode('details', 'analysis-details');
-  const summary = createNode('summary', '', '展开风险与处置闭环');
-  const body = createNode('div', 'analysis-details-body');
-  const explanation = createNode('div', 'analysis-detail-block');
-  const explanationLabel = createNode('strong', '', '风险解释');
-  const explanationText = createNode('p', '', item.riskExplanation);
-  const basis = createNode('div', 'analysis-detail-block');
-  const basisLabel = createNode('strong', '', '判定依据');
-  const basisText = createNode('p', '', item.method);
-  const closure = createNode('div', 'analysis-detail-block analysis-detail-closure');
-  const closureLabel = createNode('strong', '', '行动闭环');
-  const closureText = createNode('p', '', item.action);
-
-  explanation.append(explanationLabel, explanationText);
-  basis.append(basisLabel, basisText);
-  closure.append(closureLabel, closureText);
-  body.append(explanation, basis, closure);
-  details.append(summary, body);
-  return details;
-}
-
-function createAnalysisRow(item) {
+function createSuggestionRow(item) {
   const meta = deviationMeta[item.deviation];
-  const row = createNode('tr', `analysis-row analysis-row-${meta.tone}`);
-  const categoryCell = createNode('td', 'analysis-category', item.category);
-  const requirementCell = createNode('td', 'analysis-requirement', item.bidRequirement);
-  const specCell = createNode('td', 'analysis-spec', item.xunfeiSpec);
-  const resultCell = createNode('td', '');
-  const status = createNode('span', `report-status report-status-${meta.tone}`, meta.label);
-  const sourceCell = createNode('td', 'analysis-source');
-  const method = createNode('span', '', item.method);
-  const priority = createNode('strong', `priority-tag priority-${item.priority.toLowerCase()}`, item.priority);
-  const actionCell = createNode('td', 'analysis-action');
-  const action = createNode('p', '', item.action);
-
-  resultCell.append(status);
-  sourceCell.append(method, priority);
-  actionCell.append(action);
-  if (item.deviation === 'negative_real') actionCell.append(createDetails(item));
-  row.append(categoryCell, requirementCell, specCell, resultCell, sourceCell, actionCell);
+  const row = node('tr', 'suggestion-row');
+  const cell = node('td');
+  cell.colSpan = 6;
+  const details = node('details', 'suggestion-panel');
+  const summary = node('summary', 'suggestion-header');
+  summary.append(node('b', `priority-tag priority-${item.priority.toLowerCase()}`, item.priority), node('span', '', meta.tone === 'wording' ? '改说辞建议' : '风险研判与处置建议'));
+  const body = node('div', 'suggestion-body');
+  const risk = node('p', 'suggestion-risk', item.riskExplanation);
+  const action = node('p', 'suggestion-text', item.action);
+  const basis = node('p', 'suggestion-basis', `判定依据：${item.method}`);
+  body.append(risk, action, basis);
+  details.append(summary, body);
+  cell.append(details);
+  row.append(cell);
   return row;
 }
 
-function renderTable(report, filter) {
-  const body = document.getElementById('report-table-body');
-  const items = filterAnalysisItems(report, filter);
-  body.replaceChildren(...items.map(createAnalysisRow));
-  setText('table-count', `显示 ${items.length} / ${report.analysisItems.length} 项`);
+function createAnalysisRows(items) {
+  return items.flatMap((item, index) => {
+    const meta = deviationMeta[item.deviation];
+    const row = node('tr', `analysis-row analysis-row-${meta.tone}`);
+    const seq = node('td', 'seq-num', String(index + 1).padStart(2, '0'));
+    const category = node('td', 'analysis-category', item.category);
+    const requirement = node('td', 'analysis-requirement', item.bidRequirement);
+    const spec = node('td', 'analysis-spec', item.xunfeiSpec);
+    const verdict = node('td');
+    verdict.append(node('span', `deviation-tag dev-${meta.tone}`, meta.label));
+    const method = node('td');
+    method.append(node('span', 'method-tag', item.method.includes('审查') ? 'AI 精判' : '程序粗筛'));
+    row.append(seq, category, requirement, spec, verdict, method);
+    return item.deviation === 'positive' ? [row] : [row, createSuggestionRow(item)];
+  });
 }
 
-function activateFilter(report, activeButton) {
-  document.querySelectorAll('.report-filter').forEach((button) => {
-    button.setAttribute('aria-pressed', String(button === activeButton));
-  });
-  renderTable(report, activeButton.dataset.filter);
+function renderTable(report, filter) {
+  const items = filterAnalysisItems(report, filter);
+  document.getElementById('report-table-body').replaceChildren(...createAnalysisRows(items));
+  setText('table-count', `显示 ${items.length} / ${report.analysisItems.length} 项`);
 }
 
 function bindFilters(report) {
   document.querySelectorAll('.report-filter').forEach((button) => {
-    button.addEventListener('click', () => activateFilter(report, button));
+    button.addEventListener('click', () => {
+      document.querySelectorAll('.report-filter').forEach((candidate) => {
+        candidate.setAttribute('aria-pressed', String(candidate === button));
+      });
+      renderTable(report, button.dataset.filter);
+    });
   });
 }
 
 const metrics = getDashboardMetrics(analysisReport);
 renderHeader(analysisReport);
 renderKpis(metrics);
-renderControllerEvidence(analysisReport);
-renderCategoryChart(analysisReport);
+renderEvidence(analysisReport);
+renderChart(analysisReport);
 renderTable(analysisReport, 'all');
 bindFilters(analysisReport);

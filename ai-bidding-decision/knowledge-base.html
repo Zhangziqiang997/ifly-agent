@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>参数知识库 · AI 投标决策中心</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="knowledge-base.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-icon">▦</span><div><strong>参数智能体</strong><small>教育装备投标分析</small></div></div>
+    <nav>
+      <a href="index.html"><span>⌂</span>投标分析首页</a>
+      <a href="report.html"><span>◫</span>分析报告</a>
+      <a class="active" href="knowledge-base.html"><span>▤</span>参数知识库</a>
+    </nav>
+    <div class="system-state"><i></i>知识库已就绪 · 静态演示</div>
+  </aside>
+  <main>
+    <header>
+      <div><p class="eyebrow">Knowledge base</p><h1>参数知识库</h1><p class="sub">汇集讯飞及主要竞品的产品规格，为投标研判提供可追溯参数依据</p></div>
+      <div class="header-metric"><strong id="vendor-count">—</strong><span>家厂商 / 产品线</span></div>
+    </header>
+    <section class="filters" aria-label="知识库筛选">
+      <label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜索产品、参数名称或规格"></label>
+      <select id="vendor-filter" aria-label="厂商筛选"><option value="">全部厂商</option></select>
+      <select id="category-filter" aria-label="品类筛选"><option value="">全部品类</option></select>
+      <span class="result-count" id="result-count">正在加载知识库…</span>
+    </section>
+    <section id="kb-grid" class="kb-grid" aria-live="polite"></section>
+  </main>
+  <template id="card-template">
+    <article class="kb-card">
+      <div class="card-top"><span class="vendor-badge"></span><span class="updated"></span></div>
+      <h2></h2><p class="product-category"></p>
+      <div class="parameter-list"></div>
+      <button type="button" class="show-all">查看全部参数 <span>→</span></button>
+    </article>
+  </template>
+  <dialog id="detail-dialog"><div class="dialog-head"><div><p class="eyebrow">Parameter detail</p><h2></h2><p></p></div><button class="dialog-close" aria-label="关闭">×</button></div><div class="dialog-list"></div></dialog>
+  <script src="knowledge-base.js"></script>
+</body>
+</html>
