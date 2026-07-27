@@ -6,7 +6,7 @@ const sources = [
   'data/knowledge-base/competitors/文香.json',
 ];
 
-const state = { entries: [], query: '', vendor: '', category: '' };
+const state = { products: [], params: [], query: '', vendor: '', category: '' };
 const $ = (selector) => document.querySelector(selector);
 const esc = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
 
@@ -17,70 +17,78 @@ async function loadKnowledgeBase() {
     const data = await response.json();
     return Array.isArray(data) ? data : [data];
   }));
-  state.entries = datasets.flat();
-  setupFilters();
+  state.products = datasets.flat();
+  state.params = state.products.flatMap((product) => (product.params || []).map((param) => ({
+    ...param,
+    vendor: product.vendor,
+    product: product.product,
+    productCategory: product.category,
+    updated: product.updated,
+  })));
+  bindControls();
   render();
 }
 
-function setupFilters() {
-  const vendors = [...new Set(state.entries.map((entry) => entry.vendor))];
-  const categories = [...new Set(state.entries.map((entry) => entry.category))];
-  $('#vendor-filter').insertAdjacentHTML('beforeend', vendors.map((vendor) => `<option value="${esc(vendor)}">${esc(vendor)}</option>`).join(''));
-  $('#category-filter').insertAdjacentHTML('beforeend', categories.map((category) => `<option value="${esc(category)}">${esc(category)}</option>`).join(''));
-  $('#vendor-count').textContent = vendors.length;
+function bindControls() {
   $('#search').addEventListener('input', (event) => { state.query = event.target.value.trim().toLowerCase(); render(); });
-  $('#vendor-filter').addEventListener('change', (event) => { state.vendor = event.target.value; render(); });
-  $('#category-filter').addEventListener('change', (event) => { state.category = event.target.value; render(); });
+  $('.dialog-close').addEventListener('click', () => $('#detail-dialog').close());
+  $('#detail-dialog').addEventListener('click', (event) => { if (event.target === $('#detail-dialog')) $('#detail-dialog').close(); });
 }
 
-function getVisibleEntries() {
-  return state.entries.filter((entry) => {
-    const haystack = [entry.vendor, entry.product, entry.category, ...(entry.params || []).flatMap((param) => [param.name, param.spec])].join(' ').toLowerCase();
-    return (!state.vendor || entry.vendor === state.vendor) && (!state.category || entry.category === state.category) && (!state.query || haystack.includes(state.query));
+function filteredParams() {
+  return state.params.filter((param) => {
+    const haystack = [param.vendor, param.product, param.productCategory, param.category, param.name, param.spec, ...(param.indicators || []).flatMap((indicator) => [indicator.name, indicator.value])].join(' ').toLowerCase();
+    return (!state.vendor || param.vendor === state.vendor) && (!state.category || param.category === state.category) && (!state.query || haystack.includes(state.query));
   });
 }
 
-function vendorClass(vendor) {
-  if (vendor.includes('讯飞')) return 'vendor-xunfei';
-  return `vendor-${vendor}`;
+function renderChips(container, values, current, label, onChange) {
+  container.innerHTML = ['', ...values].map((value) => `<button type="button" class="chip ${current === value ? 'chip-on' : ''}" data-value="${esc(value)}">${esc(value || label)}</button>`).join('');
+  container.querySelectorAll('.chip').forEach((button) => button.addEventListener('click', () => onChange(button.dataset.value)));
 }
 
-function indicatorText(param) {
-  const first = param.indicators?.[0];
-  return first ? `${first.value}${first.unit === 'feature' || first.unit === 'cert' ? '' : first.unit}` : '查看规格';
+function displayIndicator(indicator) {
+  const value = indicator.value === true ? '支持' : indicator.value === false ? '不支持' : indicator.value;
+  const unit = ['feature', 'cert', 'spec'].includes(indicator.unit) ? '' : indicator.unit || '';
+  return `${indicator.name} ${indicator.comparator || ''} ${value}${unit}`.replace(/\s+/g, ' ').trim();
 }
 
 function render() {
-  const entries = getVisibleEntries();
-  $('#result-count').textContent = `共 ${entries.length} 个产品条目 · ${entries.reduce((sum, entry) => sum + entry.params.length, 0)} 条参数`;
-  const grid = $('#kb-grid');
-  grid.innerHTML = '';
-  if (!entries.length) { grid.innerHTML = '<div class="kb-card">没有找到匹配的参数条目，请调整筛选条件。</div>'; return; }
-  const template = $('#card-template');
-  entries.forEach((entry, index) => {
-    const card = template.content.cloneNode(true);
-    card.querySelector('.vendor-badge').classList.add(vendorClass(entry.vendor));
-    card.querySelector('.vendor-badge').textContent = entry.vendor;
-    card.querySelector('.updated').textContent = entry.updated || '已入库';
-    card.querySelector('h2').textContent = entry.product;
-    card.querySelector('.product-category').textContent = entry.category || '教育装备';
-    card.querySelector('.parameter-list').innerHTML = entry.params.slice(0, 5).map((param) => `<div class="param-row"><span>${esc(param.name)}</span><strong>${esc(indicatorText(param))}</strong></div>`).join('');
-    card.querySelector('.show-all').addEventListener('click', () => showDetails(entry));
-    grid.append(card);
-  });
+  const vendors = [...new Set(state.params.map((param) => param.vendor))];
+  const categories = [...new Set(state.params.map((param) => param.category))];
+  renderChips($('#vendor-filter'), vendors, state.vendor, '全部厂商', (value) => { state.vendor = value; render(); });
+  renderChips($('#category-filter'), categories, state.category, '全部分类', (value) => { state.category = value; render(); });
+  const list = filteredParams();
+  $('#result-count').innerHTML = `共 <strong>${list.length}</strong> 条参数 · ${vendors.length} 家厂商`;
+  const target = $('#kb-list');
+  if (!list.length) { target.innerHTML = '<div class="state-empty">无匹配参数，请调整筛选条件。</div>'; return; }
+  target.innerHTML = list.map((param) => {
+    const indicators = (param.indicators || []).map((indicator) => `<span class="ind">${esc(displayIndicator(indicator))}</span>`).join('');
+    const tags = `${param.star_mark ? '<span class="tag star">★星标</span>' : ''}${param.cert_required ? '<span class="tag cert">需认证</span>' : ''}`;
+    return `<article class="kb-item">
+      <div class="kb-item-head"><strong>${esc(param.name)}</strong><span class="kb-vendor">${esc(param.vendor)}</span><span class="kb-cat">${esc(param.category || param.productCategory)}</span>${tags}</div>
+      <p class="kb-product">${esc(param.product)}</p><p class="kb-spec">${esc(param.spec)}</p>
+      ${indicators ? `<div class="kb-inds">${indicators}</div>` : ''}
+      <div class="kb-foot"><small class="kb-src">来源：${esc(param.product)} · ${esc(param.id || '')}</small><button type="button" class="detail-btn" data-product="${esc(param.product)}">查看详情</button></div>
+    </article>`;
+  }).join('');
+  target.querySelectorAll('.detail-btn').forEach((button) => button.addEventListener('click', () => showDetails(button.dataset.product)));
 }
 
-function showDetails(entry) {
+function showDetails(productName) {
+  const product = state.products.find((item) => item.product === productName);
+  if (!product) return;
   const dialog = $('#detail-dialog');
-  dialog.querySelector('h2').textContent = entry.product;
-  dialog.querySelector('.dialog-head p:last-child').textContent = `${entry.vendor} · ${entry.category || '教育装备'} · ${entry.updated || '已入库'}`;
-  dialog.querySelector('.dialog-list').innerHTML = entry.params.map((param) => {
-    const tags = (param.indicators || []).map((item) => `<span class="tag">${esc(item.name)}：${esc(item.value)}${item.unit === 'feature' || item.unit === 'cert' ? '' : esc(item.unit)}</span>`).join('');
-    return `<article class="detail-item"><h3>${esc(param.name)}${param.star_mark ? ' ★' : ''}</h3><p>${esc(param.spec)}</p>${tags ? `<div class="tags">${tags}</div>` : ''}</article>`;
+  dialog.querySelector('h2').textContent = product.product;
+  dialog.querySelector('.dialog-meta').textContent = `${product.vendor} · ${product.category || '教育装备'} · ${product.updated || '已入库'}`;
+  dialog.querySelector('.dialog-list').innerHTML = product.params.map((param) => {
+    const tags = (param.indicators || []).map((indicator) => `<span class="ind">${esc(displayIndicator(indicator))}</span>`).join('');
+    return `<article class="detail-item"><h3>${esc(param.name)}${param.star_mark ? ' ★' : ''}</h3><p>${esc(param.spec)}</p>${tags ? `<div class="kb-inds">${tags}</div>` : ''}</article>`;
   }).join('');
   dialog.showModal();
 }
 
-$('.dialog-close').addEventListener('click', () => $('#detail-dialog').close());
-$('#detail-dialog').addEventListener('click', (event) => { if (event.target === $('#detail-dialog')) $('#detail-dialog').close(); });
-loadKnowledgeBase().catch((error) => { $('#result-count').textContent = '知识库加载失败'; $('#kb-grid').innerHTML = `<div class="kb-card">${esc(error.message)}。请通过本地 HTTP 服务打开页面。</div>`; });
+loadKnowledgeBase().catch((error) => {
+  $('#result-count').textContent = '知识库加载失败';
+  $('#kb-list').innerHTML = `<div class="state-empty">${esc(error.message)}。请通过本地 HTTP 服务打开页面。</div>`;
+});

@@ -4,42 +4,44 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>参数知识库 · AI 投标决策中心</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="knowledge-base.css">
+  <link rel="stylesheet" href="kb-light.css">
 </head>
 <body>
   <aside class="sidebar">
-    <div class="brand"><span class="brand-icon">▦</span><div><strong>参数智能体</strong><small>教育装备投标分析</small></div></div>
+    <div class="brand"><strong>教育装备投标决策平台</strong><span>讯飞教育业务中心</span></div>
+    <div class="business-label">业务选择</div>
+    <button class="business-select" type="button"><span>▣</span>教育装备投标业务 <b>⌄</b></button>
     <nav>
-      <a href="index.html"><span>⌂</span>投标分析首页</a>
-      <a href="report.html"><span>◫</span>分析报告</a>
-      <a class="active" href="knowledge-base.html"><span>▤</span>参数知识库</a>
+      <p class="group-title">业务中心</p>
+      <a href="index.html"><span>▣</span>投标分析首页</a>
+      <p class="group-title">智能分析</p>
+      <a href="report.html"><span>▧</span>AI分析报告</a>
+      <p class="group-title">产品与知识</p>
+      <a class="active" href="knowledge-base.html"><span>▣</span>参数知识库</a>
     </nav>
-    <div class="system-state"><i></i>知识库已就绪 · 静态演示</div>
+    <div class="sidebar-collapse">‹</div>
   </aside>
-  <main>
-    <header>
-      <div><p class="eyebrow">Knowledge base</p><h1>参数知识库</h1><p class="sub">汇集讯飞及主要竞品的产品规格，为投标研判提供可追溯参数依据</p></div>
-      <div class="header-metric"><strong id="vendor-count">—</strong><span>家厂商 / 产品线</span></div>
+  <main class="shell">
+    <header class="topbar">
+      <div class="crumb">产品与知识 <i>/</i> 参数知识库</div>
+      <div class="top-actions"><label class="global-search"><input id="search" type="search" placeholder="搜索产品、参数名称或规格"><span>⌕</span></label><button class="plain-icon" type="button">◌</button><div class="avatar">👩🏻‍💼</div><span class="down">⌄</span></div>
     </header>
-    <section class="filters" aria-label="知识库筛选">
-      <label class="search"><span>⌕</span><input id="search" type="search" placeholder="搜索产品、参数名称或规格"></label>
-      <select id="vendor-filter" aria-label="厂商筛选"><option value="">全部厂商</option></select>
-      <select id="category-filter" aria-label="品类筛选"><option value="">全部品类</option></select>
-      <span class="result-count" id="result-count">正在加载知识库…</span>
+    <section class="page">
+      <div class="title-row"><h1>参数知识库</h1><p>讯飞与竞品参数结构化沉淀，支持按厂商与分类浏览</p></div>
+      <section class="panel">
+        <div class="kb-filters">
+          <div class="chip-row"><span class="chip-label">厂商</span><div id="vendor-filter" class="chip-options"></div></div>
+          <div class="chip-row"><span class="chip-label">分类</span><div id="category-filter" class="chip-options"></div></div>
+          <div class="kb-stat" id="result-count">正在加载参数…</div>
+        </div>
+        <div id="kb-list" aria-live="polite"></div>
+      </section>
     </section>
-    <section id="kb-grid" class="kb-grid" aria-live="polite"></section>
   </main>
-  <template id="card-template">
-    <article class="kb-card">
-      <div class="card-top"><span class="vendor-badge"></span><span class="updated"></span></div>
-      <h2></h2><p class="product-category"></p>
-      <div class="parameter-list"></div>
-      <button type="button" class="show-all">查看全部参数 <span>→</span></button>
-    </article>
-  </template>
-  <dialog id="detail-dialog"><div class="dialog-head"><div><p class="eyebrow">Parameter detail</p><h2></h2><p></p></div><button class="dialog-close" aria-label="关闭">×</button></div><div class="dialog-list"></div></dialog>
+  <dialog id="detail-dialog">
+    <div class="dialog-head"><div><p class="dialog-kicker">Parameter detail</p><h2></h2><p class="dialog-meta"></p></div><button class="dialog-close" type="button" aria-label="关闭">×</button></div>
+    <div class="dialog-list"></div>
+  </dialog>
   <script src="knowledge-base.js"></script>
 </body>
 </html>

@@ -3,96 +3,67 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>参数智能体 · 分析报告</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="report-design3.css">
+  <title>AI 分析报告 · 参数智能体</title>
+  <link rel="stylesheet" href="report-light.css">
 </head>
 <body class="report-page">
-  <aside class="report-sidebar" aria-label="页面导航">
-    <a class="report-logo" href="index.html" aria-label="返回智能招标决策平台首页">
-      <span class="report-logo-icon" aria-hidden="true">⚡</span>
-      <span>
-        <strong>参数智能体</strong>
-        <small>讯飞智慧黑板 · 投标分析</small>
-      </span>
-    </a>
-    <nav class="report-nav">
-      <a href="index.html"><span aria-hidden="true">⌂</span>招标分析首页</a>
-      <a class="is-active" href="report.html" aria-current="page"><span aria-hidden="true">◉</span>分析报告 <b>新</b></a>
-      <a href="knowledge-base.html"><span aria-hidden="true">▦</span>参数知识库</a>
+  <aside class="sidebar">
+    <div class="brand"><strong>教育装备投标决策平台</strong><span>讯飞教育业务中心</span></div>
+    <div class="business-label">业务选择</div>
+    <div class="business-select"><span>▣</span> 教育装备投标业务 <b>⌄</b></div>
+    <nav>
+      <div class="group-title">投标分析</div>
+      <a href="index.html"><span class="nav-ico">⌂</span>招标分析首页</a>
+      <a class="active" href="report.html" aria-current="page"><span class="nav-ico">▧</span>AI 分析报告</a>
+      <a href="knowledge-base.html"><span class="nav-ico">▤</span>参数知识库</a>
     </nav>
-    <div class="report-sidebar-footer"><i aria-hidden="true"></i> AI 分析服务正常</div>
+    <div class="sidebar-collapse">‹</div>
   </aside>
 
-  <main class="report-content">
-    <header class="report-page-head">
-      <div>
-        <p class="report-overline">AI BID ANALYSIS / 已完成</p>
-        <h1 id="report-title"></h1>
-        <p id="controller-summary" class="report-subtitle"></p>
-      </div>
-      <a class="report-back" href="index.html">← 返回分析首页</a>
+  <main class="shell">
+    <header class="topbar">
+      <div class="crumb">项目总览 <i>/</i> AI 分析报告</div>
+      <div class="top-actions"><span class="analysis-ready"><i></i>分析已完成</span><a class="back-link" href="index.html">← 返回分析首页</a></div>
     </header>
 
-    <section class="stats-row" id="report-kpis" aria-label="关键分析指标"></section>
-
-    <section class="dashboard-grid" aria-label="控标判断与参数偏离分布">
-      <article class="cockpit-card verdict-card" aria-labelledby="controller-title">
-        <p class="card-title" id="controller-title">控标方判定</p>
-        <div class="vendor-name" id="controller-vendor"></div>
-        <p class="vendor-en">招标参数关联品牌</p>
-        <div class="confidence-row">
-          <div class="confidence-ring" aria-label="控标判定置信度">
-            <svg viewBox="0 0 90 90" aria-hidden="true">
-              <circle class="pulse-ring pulse-ring-first" cx="45" cy="45" r="28"></circle>
-              <circle class="pulse-ring pulse-ring-second" cx="45" cy="45" r="28"></circle>
-              <circle class="ring-track" cx="45" cy="45" r="38"></circle>
-              <circle id="confidence-progress" class="ring-progress" cx="45" cy="45" r="38"></circle>
-              <text id="confidence-ring-text" x="45" y="50" text-anchor="middle"></text>
-            </svg>
-          </div>
-          <div>
-            <strong id="controller-confidence" class="confidence-number"></strong>
-            <p>独有特征命中置信度</p>
-            <span class="verdict-badge">⚠ 高度可疑</span>
-          </div>
-        </div>
-        <div class="hit-heading"><span>命中的独有特征参数</span><b id="controller-hit-count"></b></div>
-        <ul id="controller-evidence" class="hit-list"></ul>
-      </article>
-
-      <article class="cockpit-card chart-card" aria-labelledby="distribution-title">
-        <p class="card-title" id="distribution-title">参数偏离分布（按类别）</p>
-        <div id="category-chart" class="bar-chart" role="img" aria-label="按类别展示正偏离、可改说辞和真负偏离数量"></div>
-        <div class="chart-legend" aria-label="图例">
-          <span><i class="legend-positive"></i>正偏离</span>
-          <span><i class="legend-wording"></i>说辞可改</span>
-          <span><i class="legend-negative"></i>真负偏离</span>
-        </div>
-      </article>
-    </section>
-
-    <section class="table-card" aria-labelledby="table-title">
-      <div class="table-toolbar">
-        <div>
-          <p class="card-title">逐条对照</p>
-          <h2 id="table-title">参数逐条对比 <span id="table-count" aria-live="polite"></span></h2>
-        </div>
-        <div class="report-filters" role="group" aria-label="按偏离判定筛选">
-          <button class="report-filter" type="button" data-filter="all" aria-pressed="true">全部</button>
-          <button class="report-filter" type="button" data-filter="positive" aria-pressed="false">正偏离</button>
-          <button class="report-filter" type="button" data-filter="wording" aria-pressed="false">说辞可改</button>
-          <button class="report-filter" type="button" data-filter="negative" aria-pressed="false">真负偏离</button>
-        </div>
+    <section class="page">
+      <div class="title-row">
+        <h1 id="report-title"></h1>
+        <p id="controller-summary"></p>
       </div>
-      <div class="report-table-wrap">
-        <table class="report-table">
-          <thead><tr><th>#</th><th>类别</th><th>招标要求</th><th>讯飞规格</th><th>偏离判定</th><th>判定方式</th></tr></thead>
-          <tbody id="report-table-body"></tbody>
-        </table>
-      </div>
+
+      <section class="summary-grid" id="report-kpis" aria-label="分析概览"></section>
+
+      <section class="insight-grid" aria-label="控标研判与偏离分布">
+        <article class="panel controller-panel">
+          <h2><span class="heading-icon red-outline">◉</span> 控标风险研判</h2>
+          <div class="controller-main">
+            <div class="confidence-orb"><strong id="controller-confidence"></strong><span>置信度</span></div>
+            <div><p class="controller-label">疑似关联厂商</p><strong class="vendor-name" id="controller-vendor"></strong><span class="risk-badge">高度可疑</span></div>
+          </div>
+          <div class="evidence-block"><strong>命中依据</strong><ul id="controller-evidence"></ul></div>
+        </article>
+
+        <article class="panel distribution-panel">
+          <h2><span class="heading-icon blue">▥</span> 参数偏离分布</h2>
+          <p class="panel-note">按参数类别统计识别结果</p>
+          <div id="category-chart" class="bar-chart" role="img" aria-label="按类别展示正偏离、措辞可改和真实负偏离数量"></div>
+          <div class="chart-legend"><span><i class="legend-positive"></i>正偏离</span><span><i class="legend-wording"></i>措辞可改</span><span><i class="legend-negative"></i>真实负偏离</span></div>
+        </article>
+      </section>
+
+      <section class="panel detail-panel" aria-labelledby="table-title">
+        <div class="detail-head">
+          <div><h2 id="table-title"><span class="heading-icon blue-outline">▧</span> 招标参数逐条对比 <small id="table-count"></small></h2><p>讯飞规格与招标条款的可追溯分析结果</p></div>
+          <div class="report-filters" role="group" aria-label="偏离类型筛选">
+            <button class="report-filter" type="button" data-filter="all" aria-pressed="true">全部</button>
+            <button class="report-filter" type="button" data-filter="positive" aria-pressed="false">正偏离</button>
+            <button class="report-filter" type="button" data-filter="wording" aria-pressed="false">措辞可改</button>
+            <button class="report-filter" type="button" data-filter="negative" aria-pressed="false">真实负偏离</button>
+          </div>
+        </div>
+        <div class="table-wrap"><table class="analysis-table"><thead><tr><th>序号</th><th>分类</th><th>招标条款</th><th>讯飞规格</th><th>偏离判定</th><th>判定方式</th></tr></thead><tbody id="report-table-body"></tbody></table></div>
+      </section>
     </section>
   </main>
   <script src="report.js" type="module"></script>
