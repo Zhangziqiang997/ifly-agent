@@ -354,7 +354,43 @@
         .spec-card p { font-size: 24px; color: #6b7280; line-height: 1.55; margin-bottom: 6px; }
         .spec-note { background: linear-gradient(135deg,var(--blue-050),#fff); border-radius: 18px; padding: 28px 36px; font-size: 26px; font-weight: 600; color: var(--brand-blue-dark); line-height: 1.6; text-align: center; box-shadow: 0 10px 40px rgba(22,139,234,0.08); }
 
-        /* ---------- P-SPEC-B 完整规约链：JSON 契约只是其中一环 ---------- */
+        /* ---------- P-SPEC-B 项目化规约页 ---------- */
+        .spec-project-slide { background: linear-gradient(135deg,#ffffff 0%,#F4F9FD 100%); }
+        .spec-project-slide .sec-head { margin-bottom: 20px !important; }
+        .spec-project-slide .sec-title { font-size: 68px; }
+        .spec-project-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+        .spec-project-meta span { display: inline-block; padding: 9px 16px; border-radius: 10px; background: #fff; color: var(--muted); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 20px; box-shadow: 0 5px 18px rgba(11,49,91,0.06); }
+        .spec-project-meta span:first-child { color: var(--brand-blue-dark); background: var(--blue-050); font-weight: 800; }
+        .spec-project-flow { display: flex; align-items: stretch; gap: 12px; margin-bottom: 24px; }
+        .spec-project-node { flex: 1; min-width: 0; min-height: 190px; padding: 23px 18px 20px; background: #fff; border-radius: 17px; border-top: 6px solid var(--brand-blue); box-shadow: 0 10px 30px rgba(11,49,91,0.08); }
+        .spec-project-node.input { border-top-color: var(--brand-blue-dark); }
+        .spec-project-node.rule { border-top-color: #0B6DB7; }
+        .spec-project-node.controller { border-top-color: #0F927A; }
+        .spec-project-node.ai { border-top-color: #D97706; }
+        .spec-project-node.output { border-top-color: var(--navy); }
+        .spec-project-k { display: block; margin-bottom: 10px; color: var(--brand-blue-dark); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 18px; font-weight: 800; line-height: 1.2; }
+        .spec-project-node.rule .spec-project-k { color: #0B6DB7; }
+        .spec-project-node.controller .spec-project-k { color: #0F927A; }
+        .spec-project-node.ai .spec-project-k { color: #B45309; }
+        .spec-project-node.output .spec-project-k { color: var(--navy); }
+        .spec-project-node-t { margin-bottom: 9px; color: #111827; font-size: 27px; font-weight: 800; line-height: 1.15; white-space: nowrap; }
+        .spec-project-node-d { color: var(--muted); font-size: 20px; line-height: 1.4; }
+        .spec-project-arrow { flex: 0 0 24px; display: flex; align-items: center; justify-content: center; color: var(--brand-blue); font-size: 32px; font-weight: 800; }
+        .spec-project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .spec-project-card { min-width: 0; min-height: 465px; padding: 30px 32px 28px; background: #fff; border-radius: 20px; border-left: 7px solid var(--brand-blue); box-shadow: 0 11px 34px rgba(11,49,91,0.07); }
+        .spec-project-card:nth-child(2) { border-left-color: #0F927A; }
+        .spec-project-card:nth-child(3) { border-left-color: #D97706; }
+        .spec-project-card-h { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; }
+        .spec-project-card-id { color: var(--brand-blue-dark); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 20px; font-weight: 800; }
+        .spec-project-card:nth-child(2) .spec-project-card-id { color: #0F927A; }
+        .spec-project-card:nth-child(3) .spec-project-card-id { color: #B45309; }
+        .spec-project-card-title { color: #111827; font-size: 31px; font-weight: 800; white-space: nowrap; }
+        .spec-project-card p { margin: 0 0 14px; color: var(--muted); font-size: 23px; line-height: 1.5; }
+        .spec-project-card .spec-project-detail { color: #374151; font-size: 20px; line-height: 1.5; }
+        .spec-project-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+        .spec-project-tag { display: inline-block; padding: 6px 11px; border-radius: 8px; background: var(--blue-050); color: var(--brand-blue-dark); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 17px; font-weight: 700; }
+        .spec-project-card:nth-child(2) .spec-project-tag { background: #ECFDF5; color: #0F927A; }
+        .spec-project-card:nth-child(3) .spec-project-tag { background: #FFF7ED; color: #B45309; }
         .spec-full-slide { background: linear-gradient(135deg,#ffffff 0%,#F4F9FD 100%); }
         .spec-full-chain { display: flex; align-items: stretch; gap: 12px; margin: 0 0 22px; }
         .spec-full-node { flex: 1; min-width: 0; height: 150px; padding: 22px 18px 18px; background: #fff; border-radius: 16px; border-top: 6px solid var(--brand-blue); box-shadow: 0 10px 34px rgba(11,49,91,0.08); }
@@ -904,84 +940,81 @@
         </div>
     </div>
 
-    <!-- ============ P-SPEC-B: 完整 SPEC 规约链 ============ -->
-    <div class="slide template-header-page spec-full-slide">
+    <!-- ============ P-SPEC-B: 项目化规约链 ============ -->
+    <div class="slide template-header-page spec-project-slide">
         <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
-        <div class="page-tag">05-B · SPEC 规约链</div>
-        <div class="sec-head" style="margin-bottom: 22px;">
-            <div class="doc-badge">05 SPEC · 规约总览</div>
-            <div class="sec-title">完整的 SPEC，定义<span class="grad-text">从需求到验收的闭环</span></div>
-            <div class="sec-sub">JSON 契约只是其中一环：还要明确为什么做、做到什么程度、如何证明、出了问题怎么办</div>
+        <div class="page-tag">05-B · 项目化规约</div>
+        <div class="sec-head">
+            <div class="doc-badge">05 SPEC · 交付基线</div>
+            <div class="sec-title">从招标 JSON 到<span class="grad-text">可验收的分析结果</span></div>
         </div>
 
-        <div class="spec-full-chain" aria-label="SPEC 追溯链">
-            <div class="spec-full-node">
-                <div class="spec-full-code">G</div>
-                <div class="spec-full-node-t">需求目标</div>
-                <div class="spec-full-node-d">要解决什么问题，交付什么结果</div>
-            </div>
-            <div class="spec-full-arrow" aria-hidden="true">→</div>
-            <div class="spec-full-node">
-                <div class="spec-full-code">NFR</div>
-                <div class="spec-full-node-t">质量要求</div>
-                <div class="spec-full-node-d">性能、安全、可用性等底线</div>
-            </div>
-            <div class="spec-full-arrow" aria-hidden="true">→</div>
-            <div class="spec-full-node">
-                <div class="spec-full-code">API</div>
-                <div class="spec-full-node-t">接口契约</div>
-                <div class="spec-full-node-d">输入、输出、错误与行为边界</div>
-            </div>
-            <div class="spec-full-arrow" aria-hidden="true">→</div>
-            <div class="spec-full-node">
-                <div class="spec-full-code">AC</div>
-                <div class="spec-full-node-t">验收标准</div>
-                <div class="spec-full-node-d">Given / When / Then，什么算完成</div>
-            </div>
-            <div class="spec-full-arrow" aria-hidden="true">→</div>
-            <div class="spec-full-node">
-                <div class="spec-full-code">TC</div>
-                <div class="spec-full-node-t">测试用例</div>
-                <div class="spec-full-node-d">用证据验证每条验收标准</div>
-            </div>
-            <div class="spec-full-arrow" aria-hidden="true">→</div>
-            <div class="spec-full-node">
-                <div class="spec-full-code">TASK</div>
-                <div class="spec-full-node-t">实施任务</div>
-                <div class="spec-full-node-d">谁改什么、依赖什么、如何交付</div>
-            </div>
+        <div class="spec-project-meta">
+            <span>05-SPEC v2.0 · review</span>
+            <span>基线：src/ · Streamlit · Python 3.10</span>
+            <span>入口：data/samples/sample-bid.json</span>
         </div>
 
-        <div class="spec-full-risk">
-            <div class="spec-full-risk-k">R 风险边界</div>
-            <div class="spec-full-risk-t">风险不是附录，而是贯穿接口、验收和实施的约束</div>
-            <div class="spec-full-risk-d">每个高风险项都要有 Owner、缓解措施与回溯路径</div>
-        </div>
-
-        <div class="spec-full-panels">
-            <div class="spec-full-panel">
-                <div class="spec-full-panel-h"><span class="spec-full-panel-id">01</span><span class="spec-full-panel-title">需求规约</span></div>
-                <p>先定义目标与可观察结果，再写非目标、约束、假设和依赖。</p>
-                <p>这部分回答：为什么做，边界在哪里。</p>
-                <div class="spec-full-token-row"><span class="spec-full-token">G</span><span class="spec-full-token">NFR</span><span class="spec-full-token">NG</span><span class="spec-full-token">C</span><span class="spec-full-token">A / D</span></div>
+        <div class="spec-project-flow" aria-label="项目分析链路（engine 编排）">
+            <div class="spec-project-node input">
+                <span class="spec-project-k">G-002 · API-003</span>
+                <div class="spec-project-node-t">12 条招标参数</div>
+                <div class="spec-project-node-d">sample-bid.json<br>29 个子指标</div>
             </div>
-            <div class="spec-full-panel">
-                <div class="spec-full-panel-h"><span class="spec-full-panel-id">02</span><span class="spec-full-panel-title">接口契约</span></div>
-                <p>JSON Schema 只定义字段；SPEC 还要定义输入输出、异常行为和决策依据。</p>
-                <p>字段细节归 `data/README.md`，避免产生第二套契约。</p>
-                <div class="spec-full-token-row"><span class="spec-full-token">API</span><span class="spec-full-token">DEC</span><span class="spec-full-token">Schema</span><span class="spec-full-token">Error boundary</span></div>
+            <div class="spec-project-arrow" aria-hidden="true">→</div>
+            <div class="spec-project-node rule">
+                <span class="spec-project-k">TASK-005 · engine.py</span>
+                <div class="spec-project-node-t">engine 编排</div>
+                <div class="spec-project-node-d">run_analysis() · 串联三层</div>
             </div>
-            <div class="spec-full-panel">
-                <div class="spec-full-panel-h"><span class="spec-full-panel-id">03</span><span class="spec-full-panel-title">验收闭环</span></div>
-                <p>用 Given / When / Then 写清通过条件，再关联 TC 和实施任务。</p>
-                <p>每个结果都能回溯到需求，也能追到风险与责任人。</p>
-                <div class="spec-full-token-row"><span class="spec-full-token">AC</span><span class="spec-full-token">TC</span><span class="spec-full-token">TASK</span><span class="spec-full-token">Traceability</span></div>
+            <div class="spec-project-arrow" aria-hidden="true">→</div>
+            <div class="spec-project-node controller">
+                <span class="spec-project-k">TASK-002 / 003</span>
+                <div class="spec-project-node-t">规则判定</div>
+                <div class="spec-project-node-d">parser.py + matcher.py</div>
+            </div>
+            <div class="spec-project-arrow" aria-hidden="true">→</div>
+            <div class="spec-project-node ai">
+                <span class="spec-project-k">TASK-004 · advisor.py</span>
+                <div class="spec-project-node-t">AI 精判</div>
+                <div class="spec-project-node-d">batch_analyze() · 三类偏离</div>
+            </div>
+            <div class="spec-project-arrow" aria-hidden="true">→</div>
+            <div class="spec-project-node output">
+                <span class="spec-project-k">API-004</span>
+                <div class="spec-project-node-t">结果契约</div>
+                <div class="spec-project-node-d">controller · matching · summary</div>
+            </div>
+            <div class="spec-project-arrow" aria-hidden="true">→</div>
+            <div class="spec-project-node output">
+                <span class="spec-project-k">TASK-007 · app.py</span>
+                <div class="spec-project-node-t">Streamlit 两页</div>
+                <div class="spec-project-node-d">总览 → 对比 → 建议</div>
             </div>
         </div>
 
-        <div class="spec-full-note">
-            JSON 只回答“数据长什么样”；SPEC 还要回答“为什么做、做到什么程度、如何证明、出了问题怎么办”。
+        <div class="spec-project-grid">
+            <div class="spec-project-card">
+                <div class="spec-project-card-h"><span class="spec-project-card-id">边界</span><span class="spec-project-card-title">输入边界</span></div>
+                <p>3 家竞品 + 1 份讯飞参数库，各 15 条；Demo 只承诺 1 份标准化招标 JSON。</p>
+                <div class="spec-project-detail">真实 PDF / Word / Excel 解析属于 NG-001，不是本版本验收证据。</div>
+                <div class="spec-project-tags"><span class="spec-project-tag">C-002</span><span class="spec-project-tag">NG-001</span><span class="spec-project-tag">API-001～003</span></div>
+            </div>
+            <div class="spec-project-card">
+                <div class="spec-project-card-h"><span class="spec-project-card-id">规则</span><span class="spec-project-card-title">判定边界</span></div>
+                <p>业务上分 L1 / L2 / L3；当前由 engine.py 编排：identify_controller() → find_best_match() → batch_analyze()。</p>
+                <div class="spec-project-detail">规则比较 indicators、数值 / 单位与关键词；仅一家满足才算独有命中。</div>
+                <div class="spec-project-detail">注意：negative 项也会进入 AI，C-003 的“仅 uncertain”约束尚未闭合。</div>
+                <div class="spec-project-tags"><span class="spec-project-tag">DEC-001</span><span class="spec-project-tag">DEC-002</span><span class="spec-project-tag">AC-003～005</span></div>
+            </div>
+            <div class="spec-project-card">
+                <div class="spec-project-card-h"><span class="spec-project-card-id">证据</span><span class="spec-project-card-title">输出与验收</span></div>
+                <p>离线规则运行结果：海康威视 · 55% · 6 个独有命中 · 1 个异常项。</p>
+                <div class="spec-project-detail">matching[] 按 seq 回填页面；demo-result.json 当前仅覆盖 5 条 AI 结果。</div>
+                <div class="spec-project-tags"><span class="spec-project-tag">API-004</span><span class="spec-project-tag">API-006</span><span class="spec-project-tag">AC-006～007</span></div>
+            </div>
         </div>
+
     </div>
 
     <!-- ============ P5: 人机协作（核心页） ============ -->
