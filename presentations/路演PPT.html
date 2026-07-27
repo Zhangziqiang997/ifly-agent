@@ -257,21 +257,18 @@
         .case-head { display: flex; align-items: center; gap: 16px; margin-bottom: 26px; }
         .case-num { flex: 0 0 auto; width: 64px; height: 64px; background: linear-gradient(135deg,var(--brand-blue-dark),var(--brand-blue)); color:#fff; border-radius: 14px; font-size: 34px; font-weight: 800; text-align:center; line-height: 64px; }
         .case-title { flex: 1; font-size: 32px; font-weight: 700; color: #111827; line-height: 1.25; }
-        .case-step { font-size: 25px; line-height: 1.48; margin-bottom: 18px; padding-left: 38px; position: relative; color: #4b5563; }
+        .case-step { font-size: 25px; line-height: 1.48; margin-bottom: 18px; padding-left: 0; position: relative; color: #4b5563; }
         .case-step:last-child { margin-bottom: 0; }
-        .case-step::before { position: absolute; left: 0; top: 0; font-size: 24px; }
-        .case-ai::before { content: "🤖"; }
-        .case-human::before { content: "🧑"; }
-        .case-fix::before { content: "✅"; }
+        .case-step::before { display: none; }
         .case-step .tag { font-weight: 700; color: var(--brand-blue-dark); }
         .case-step.case-fix .tag { color: var(--warning); }
         .case-step code { background: var(--blue-050); color: var(--brand-blue-dark); padding: 2px 8px; border-radius: 6px; font-size: 22px; font-family: 'SFMono-Regular', Consolas, monospace; }
-        .collab-summary { background: linear-gradient(135deg, var(--brand-blue-dark) 0%, var(--brand-blue) 58%, var(--success) 100%); border-radius: 22px; padding: 34px 56px; display: flex; align-items: center; justify-content: center; gap: 48px; box-shadow: 0 18px 55px rgba(22,139,234,0.18); }
-        .collab-side { display: flex; align-items: center; gap: 16px; color: #fff; }
-        .collab-side .icon { font-size: 42px; line-height: 1; }
-        .collab-role { font-size: 22px; font-weight: 800; letter-spacing: 0.04em; opacity: 0.92; margin-bottom: 6px; }
-        .collab-acts { font-size: 30px; font-weight: 700; line-height: 1.25; }
-        .collab-mid { color: var(--blue-100); font-size: 40px; font-weight: 300; }
+        .collab-summary { background: #F5F7FA; border: 1px solid var(--line); border-radius: 22px; padding: 28px 56px; display: flex; align-items: center; justify-content: center; gap: 48px; box-shadow: 0 10px 30px rgba(22,38,58,0.06); }
+        .collab-side { display: flex; align-items: center; gap: 16px; color: var(--ink); }
+        .collab-side .icon { display: none; }
+        .collab-role { font-size: 22px; font-weight: 800; letter-spacing: 0.04em; color: var(--brand-blue-dark); margin-bottom: 6px; }
+        .collab-acts { font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--ink); }
+        .collab-mid { color: #9AA7B6; font-size: 40px; font-weight: 300; }
         .evidence { margin-top: 44px; text-align: center; font-size: 24px; color: #6b7280; }
         .evidence strong { color: var(--brand-blue-dark); }
 
@@ -792,9 +789,9 @@
                     <div class="case-num">1</div>
                     <div class="case-title">AI 诊断出算法根因</div>
                 </div>
-                <div class="case-step case-human">Bug：<code>防眩玻璃</code> 被错配到讯飞「亮度」，匹配像随机</div>
-                <div class="case-step case-ai">AI 定位根因：两者都带 <code>unit=pct</code>，旧逻辑"pct=pct 就是它" → 给出连根拔起方案：关键词打分重写</div>
-                <div class="case-step case-fix">人认可方案，AI 重写后 <span class="tag">5 条疑难参数命中 4 条</span></div>
+                <div class="case-step case-human">Bug 错配：<code>防眩玻璃</code> → 讯飞「亮度」</div>
+                <div class="case-step case-ai">AI 找到根因：<code>unit=pct</code> 相同，重写关键词打分</div>
+                <div class="case-step case-fix">结果：<span class="tag">5 条疑难参数命中 4 条</span></div>
             </div>
             <div class="case-card">
                 <div class="case-cap">Prompt 工程</div>
@@ -802,9 +799,9 @@
                     <div class="case-num">2</div>
                     <div class="case-title">AI 自己提出改进策略</div>
                 </div>
-                <div class="case-step case-human">AI 判不准，因为每次只喂给它<span class="tag">错配的那一条参数</span></div>
-                <div class="case-step case-ai">AI 打的比喻："像考试告诉你答案在第3页，其实在第7页 — 该给整本参考书" → 附完整 15 条参数目录</div>
-                <div class="case-step case-fix"> <span class="tag">150 字安全边界</span>防超长 → AI 识别出"135° vs 145°"级差异</div>
+                <div class="case-step case-human">问题：每次只喂给 AI 一条<span class="tag">错配参数</span></div>
+                <div class="case-step case-ai">AI 建议：提供完整参数目录（15 条）</div>
+                <div class="case-step case-fix">结果：<span class="tag">150 字安全边界</span>，识别 135° / 145° 级差异</div>
             </div>
             <div class="case-card">
                 <div class="case-cap">工程编排</div>
@@ -812,9 +809,9 @@
                     <div class="case-num">3</div>
                     <div class="case-title">AI 编排并行，人做把关</div>
                 </div>
-                <div class="case-step case-ai">AI 按文件大小拆分，部署 <span class="tag">8 个 Haiku 子代理并行</span>，4 分钟提取 79 条参数声明</div>
-                <div class="case-step case-human">人判断其中 1 个代理输出不可用（是招标文件非产品规格）</div>
-                <div class="case-step case-fix">人从 79 条中精筛 <span class="tag">4 家 × 15 条</span>核心参数入库</div>
+                <div class="case-step case-ai">AI 拆分文件：<span class="tag">8 个 Haiku 子代理并行</span>，4 分钟提取 79 条</div>
+                <div class="case-step case-human">人复核：剔除 1 个非产品规格代理结果</div>
+                <div class="case-step case-fix">结果：从 79 条中筛出 <span class="tag">4 家 × 15 条</span>核心参数</div>
             </div>
         </div>
 
