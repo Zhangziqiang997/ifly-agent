@@ -44,6 +44,31 @@
             background: linear-gradient(135deg, #ffffff 0%, var(--canvas) 100%);
         }
 
+        /* ---------- 公司模板页眉（首页 / 结尾页不使用） ---------- */
+        .template-header-page { padding-top: 150px; }
+        .template-header-page .page-tag { top: 132px; }
+        .template-header {
+            position: absolute;
+            z-index: 10;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 104px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 80px;
+            background: linear-gradient(100deg, var(--brand-sky) 0%, var(--brand-blue) 100%);
+            box-shadow: 0 2px 16px rgba(11, 79, 138, 0.12);
+        }
+        .template-header-logo-slot {
+            width: 360px;
+            height: 60px;
+        }
+        .slide-tech.template-header-page .arch-wrap { padding: 22px; }
+        .slide-tech.template-header-page .arch-wrap img { max-height: 540px; }
+        .slide-tech.template-header-page .arch-principle { margin-top: 22px; }
+
         /* ===== 演示模式：一次一页 + 键盘翻页 + 自适应缩放 ===== */
         body.present {
             background: #000;
@@ -396,7 +421,8 @@
     </div>
 
     <!-- ============ P-科普: 招投标科普 + 重申痛点 ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">背景科普</div>
         <div class="sec-head" style="margin-bottom: 40px;">
             <div class="doc-badge">先搞懂规则</div>
@@ -448,7 +474,8 @@
     </div>
 
     <!-- ============ P2: 视频演示（占位） ============ -->
-    <div class="slide slide-demo">
+    <div class="slide slide-demo template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="demo-kicker">L I V E   D E M O</div>
         <div class="demo-title">现场演示</div>
         <div class="demo-flow">
@@ -462,7 +489,8 @@
     </div>
 
     <!-- ============ P-docs: 专业工作流 · 文档体系 ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">工作流 · 文档体系</div>
         <div class="sec-head" style="margin-bottom: 24px;">
             <div class="doc-badge">规范流程</div>
@@ -517,7 +545,8 @@
     </div>
 
     <!-- ============ P3: 专业工作流① 分工与排期 ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">01 · 分工与排期</div>
         <div class="sec-head">
             <div class="doc-badge">01 团队分工</div>
@@ -573,7 +602,8 @@
     </div>
 
     <!-- ============ P-prd: 专业工作流 · 产品需求 ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">02 · 产品需求</div>
         <div class="sec-head" style="margin-bottom: 26px;">
             <div class="doc-badge">02 PRD</div>
@@ -631,7 +661,8 @@
     </div>
 
     <!-- ============ P4: 专业工作流② 技术框图 ============ -->
-    <div class="slide slide-tech" style="background: linear-gradient(135deg,#ffffff 0%,var(--canvas) 100%);">
+    <div class="slide slide-tech template-header-page" style="background: linear-gradient(135deg,#ffffff 0%,var(--canvas) 100%);">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">04 · 技术设计</div>
         <div class="sec-head" style="margin-bottom: 32px;">
             <div class="doc-badge">04 技术设计</div>
@@ -656,7 +687,8 @@
     </div>
 
     <!-- ============ P-SPEC: 规约先行 ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">05 · 功能规格书</div>
         <div class="sec-head" style="margin-bottom: 30px;">
             <div class="doc-badge">05 SPEC</div>
@@ -701,7 +733,8 @@
     </div>
 
     <!-- ============ P-风险: 控标风险识别 ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">核心能力 · 风险识别</div>
         <div class="sec-head" style="margin-bottom: 40px;">
             <div class="doc-badge">差异化能力</div>
@@ -737,7 +770,8 @@
     </div>
 
     <!-- ============ P5: 人机协作（核心页） ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">09 · 人机协作</div>
         <div class="sec-head" style="text-align:center; margin-bottom: 30px;">
             <div class="doc-badge">09 执行日志</div>
@@ -789,7 +823,8 @@
     </div>
 
     <!-- ============ P-蓝图: 未来规划 · 端到端闭环 ============ -->
-    <div class="slide">
+    <div class="slide template-header-page">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
         <div class="page-tag">未来规划</div>
         <div class="sec-head" style="margin-bottom: 34px;">
             <div class="doc-badge">从核心链路到端到端</div>
