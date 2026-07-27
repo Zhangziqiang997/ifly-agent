@@ -185,12 +185,12 @@
 
         /* ---------- P3 团队 + 甘特 ---------- */
         .role-row { display: flex; gap: 26px; margin-bottom: 54px; }
-        .role-card { flex: 1; background: #fff; border-radius: 20px; padding: 32px 28px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-top: 6px solid var(--brand-blue); }
+        .role-card { flex: 1; background: #fff; border-radius: 20px; padding: 36px 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-top: 6px solid var(--brand-blue); }
         .role-card.pm { border-top-color: var(--brand-blue-dark); }
         .role-card.prod { border-top-color: var(--success); }
-        .role-name { font-size: 27px; font-weight: 700; color: #111827; margin-bottom: 8px; }
-        .role-who { font-size: 20px; color: var(--brand-blue-dark); font-weight: 700; margin-bottom: 12px; }
-        .role-duty { font-size: 19px; color: #6b7280; line-height: 1.5; }
+        .role-name { font-size: 30px; font-weight: 700; color: #111827; margin-bottom: 10px; }
+        .role-who { font-size: 22px; color: var(--brand-blue-dark); font-weight: 700; margin-bottom: 14px; }
+        .role-duty { font-size: 21px; color: #6b7280; line-height: 1.5; }
         .gantt { background: #fff; border-radius: 22px; padding: 40px 46px; box-shadow: 0 14px 50px rgba(22,139,234,0.10); }
         .gantt-days { display: grid; grid-template-columns: 200px repeat(3, 1fr); margin-bottom: 18px; }
         .gantt-days div { font-size: 22px; font-weight: 700; color: var(--brand-blue-dark); text-align: center; }
@@ -287,23 +287,23 @@
         }
 
         /* ---------- P-科普 招投标科普 ---------- */
-        .edu-flow { display: flex; align-items: stretch; gap: 18px; margin-bottom: 56px; }
-        .edu-step { flex: 1; background: #fff; border-radius: 20px; padding: 38px 32px; box-shadow: 0 12px 44px rgba(0,0,0,0.06); position: relative; border-top: 6px solid var(--brand-blue); }
+        .edu-flow { display: flex; align-items: stretch; gap: 18px; margin-bottom: 48px; }
+        .edu-step { flex: 1; background: #fff; border-radius: 20px; padding: 34px 28px 36px; box-shadow: 0 12px 44px rgba(0,0,0,0.06); position: relative; border-top: 6px solid var(--brand-blue); }
         .edu-step:nth-child(3) { border-top-color: var(--brand-blue-dark); }
         .edu-step:nth-child(5) { border-top-color: var(--warning); }
         .edu-step:nth-child(7) { border-top-color: var(--success); }
         .edu-arrow { display: flex; align-items: center; font-size: 48px; color: var(--brand-blue); font-weight: 800; }
-        .edu-no { display: inline-block; width: 52px; height: 52px; background: linear-gradient(135deg,var(--brand-blue-dark),var(--brand-blue)); color:#fff; border-radius: 12px; font-size: 28px; font-weight: 800; text-align:center; line-height: 52px; margin-bottom: 18px; }
+        .edu-no { display: inline-block; width: 64px; height: 64px; background: linear-gradient(135deg,var(--brand-blue-dark),var(--brand-blue)); color:#fff; border-radius: 14px; font-size: 34px; font-weight: 800; text-align:center; line-height: 64px; margin: 0 14px 20px 0; vertical-align: middle; }
         .edu-step:nth-child(5) .edu-no { background: linear-gradient(135deg,#E28A19,#F6C15A); }
-        .edu-name { font-size: 34px; font-weight: 800; color: #111827; margin-bottom: 14px; }
-        .edu-desc { font-size: 22px; color: #6b7280; line-height: 1.6; }
+        .edu-name { display: inline-block; vertical-align: middle; font-size: 40px; font-weight: 800; color: #111827; line-height: 1.2; margin-bottom: 20px; }
+        .edu-desc { font-size: 25px; color: #6b7280; line-height: 1.55; }
         .edu-step.hot { background: linear-gradient(135deg,var(--warning-light) 0%,#fff 100%); }
         .edu-pain-h { font-size: 30px; font-weight: 700; color: var(--brand-blue-dark); margin-bottom: 28px; display: flex; align-items: center; gap: 12px; }
         .edu-pain-h::before { content: ""; width: 44px; height: 5px; background: var(--brand-blue); border-radius: 2px; }
         .edu-pains { display: flex; gap: 30px; }
-        .edu-pain { flex: 1; background: #fff; border-radius: 18px; padding: 34px 36px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-left: 6px solid var(--brand-blue); }
-        .edu-pain-t { font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 14px; }
-        .edu-pain-d { font-size: 21px; color: #6b7280; line-height: 1.6; }
+        .edu-pain { flex: 1; background: #fff; border-radius: 18px; padding: 30px 32px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-left: 6px solid var(--brand-blue); }
+        .edu-pain-t { font-size: 31px; font-weight: 700; color: #111827; margin-bottom: 14px; }
+        .edu-pain-d { font-size: 23px; color: #6b7280; line-height: 1.55; }
 
         /* ---------- P-SPEC 规约先行 ---------- */
         .spec-contract { background: linear-gradient(135deg,var(--brand-blue-dark) 0%,var(--brand-blue) 100%); color:#fff; border-radius: 22px; padding: 40px 46px; margin-bottom: 30px; box-shadow: 0 18px 55px rgba(22,139,234,0.18); }
@@ -315,10 +315,10 @@
         .spec-fields { font-size: 19px; line-height: 1.5; }
         .spec-fields .ct { display: inline-block; background: rgba(255,255,255,0.18); border-radius: 8px; padding: 4px 12px; margin: 3px 5px 3px 0; font-weight: 600; font-family: 'SFMono-Regular', Consolas, monospace; font-size: 18px; }
         .spec-row { display: flex; gap: 26px; margin-bottom: 30px; }
-        .spec-card { flex: 1; background: #fff; border-radius: 18px; padding: 28px 32px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-left: 6px solid var(--brand-blue); }
+        .spec-card { flex: 1; background: #fff; border-radius: 18px; padding: 32px 34px; box-shadow: 0 10px 40px rgba(0,0,0,0.05); border-left: 6px solid var(--brand-blue); }
         .spec-card:nth-child(2) { border-left-color: var(--success); }
-        .spec-card-h { font-size: 24px; font-weight: 700; color: #111827; margin-bottom: 12px; }
-        .spec-card p { font-size: 20px; color: #6b7280; line-height: 1.55; margin-bottom: 6px; }
+        .spec-card-h { font-size: 27px; font-weight: 700; color: #111827; margin-bottom: 14px; }
+        .spec-card p { font-size: 22px; color: #6b7280; line-height: 1.55; margin-bottom: 6px; }
         .spec-note { background: linear-gradient(135deg,var(--blue-050),#fff); border-radius: 18px; padding: 28px 36px; font-size: 24px; font-weight: 600; color: var(--brand-blue-dark); line-height: 1.6; text-align: center; box-shadow: 0 10px 40px rgba(22,139,234,0.08); }
 
         /* ---------- P-风险 控标风险识别 ---------- */
