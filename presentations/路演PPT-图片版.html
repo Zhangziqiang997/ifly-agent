@@ -786,58 +786,12 @@
         </div>
     </div>
 
-    <!-- ============ P-SPEC: 规约先行 ============ -->
-    <div class="slide template-header-page">
-        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
-        <div class="page-tag">05 · 功能规格书</div>
-        <div class="sec-head" style="margin-bottom: 30px;">
-            <div class="doc-badge">05 SPEC</div>
-            <div class="sec-title">先写规约，<span class="grad-text">再写代码</span></div>
-            <div class="sec-sub">动手编码之前，先把「要做成什么样」定义清楚 — 这是 05 号功能规格书</div>
-        </div>
-
-        <div class="spec-contract">
-            <div class="spec-contract-h">◈ 核心规约：一份数据接口契约（Mock JSON）</div>
-            <div class="spec-parallel">
-                <div class="spec-lane">
-                    <div class="spec-lane-t">数据组</div>
-                    <div class="spec-lane-d">把 PDF 招标文件转成约定格式的 JSON</div>
-                </div>
-                <div class="spec-lane">
-                    <div class="spec-lane-t">引擎组</div>
-                    <div class="spec-lane-d">直接拿一份手写 mock JSON 开发比对引擎</div>
-                </div>
-            </div>
-            <div class="spec-fields">
-                先共同敲定「数据长什么样」，两组便可并行开发、谁都不用等谁。关键字段约定：
-                <span class="ct">indicators[]</span><span class="ct">comparator: eq/gte/lte</span><span class="ct">unit 单位枚举</span><span class="ct">spec 原文兜底</span><span class="ct">star_mark 废标标记</span>
-            </div>
-        </div>
-
-        <div class="spec-row">
-            <div class="spec-card">
-                <div class="spec-card-h">🧩 模块拆分规约</div>
-                <p>参数库 · 解析 · 控标识别 · 参数匹配 · 应对建议</p>
-                <p>五大模块边界清晰，各自独立可测</p>
-            </div>
-            <div class="spec-card">
-                <div class="spec-card-h">📐 判定与性能规约</div>
-                <p>控标置信度阈值：&gt;60% / 30–60% / &lt;30%</p>
-                <p>端到端总耗时：&lt; 10 秒</p>
-            </div>
-        </div>
-
-        <div class="spec-note">
-            先有工程契约，再让 AI 严格照规约实现，而非对着模型即兴生成 —— 这正是两组能真正并行的前提。
-        </div>
-    </div>
-
     <!-- ============ P-SPEC-B: 项目化规约链 ============ -->
     <div class="slide template-header-page spec-project-slide">
         <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
-        <div class="page-tag">05-B · 项目化规约</div>
+        <div class="page-tag">05 · 功能规格书</div>
         <div class="sec-head">
-            <div class="doc-badge">05 SPEC · 交付基线</div>
+            <div class="doc-badge">05 SPEC</div>
             <div class="sec-title">从招标 JSON 到<span class="grad-text">可验收的分析结果</span></div>
         </div>
 
