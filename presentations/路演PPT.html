@@ -263,12 +263,12 @@
         .case-step .tag { font-weight: 700; color: var(--brand-blue-dark); }
         .case-step.case-fix .tag { color: var(--warning); }
         .case-step code { background: var(--blue-050); color: var(--brand-blue-dark); padding: 2px 8px; border-radius: 6px; font-size: 22px; font-family: 'SFMono-Regular', Consolas, monospace; }
-        .collab-summary { background: #F5F7FA; border: 1px solid var(--line); border-radius: 22px; padding: 28px 56px; display: flex; align-items: center; justify-content: center; gap: 48px; box-shadow: 0 10px 30px rgba(22,38,58,0.06); }
-        .collab-side { display: flex; align-items: center; gap: 16px; color: var(--ink); }
-        .collab-side .icon { display: none; }
-        .collab-role { font-size: 22px; font-weight: 800; letter-spacing: 0.04em; color: var(--brand-blue-dark); margin-bottom: 6px; }
-        .collab-acts { font-size: 30px; font-weight: 700; line-height: 1.25; color: var(--ink); }
-        .collab-mid { color: #9AA7B6; font-size: 40px; font-weight: 300; }
+        .collab-summary { background: #F5F7FA; border: 1px solid var(--line); border-radius: 22px; padding: 28px 56px; display: flex; align-items: center; justify-content: center; gap: 36px; box-shadow: 0 10px 30px rgba(22,38,58,0.06); }
+        .collab-side { flex: 1; min-width: 0; display: flex; align-items: center; justify-content: center; color: var(--ink); }
+        .collab-content { display: flex; align-items: baseline; gap: 18px; white-space: nowrap; }
+        .collab-role { flex: 0 0 auto; font-size: 24px; font-weight: 800; letter-spacing: 0.04em; color: var(--brand-blue-dark); }
+        .collab-acts { font-size: 28px; font-weight: 700; line-height: 1.25; color: var(--ink); }
+        .collab-mid { flex: 0 0 auto; color: #9AA7B6; font-size: 30px; font-weight: 300; }
         .evidence { margin-top: 44px; text-align: center; font-size: 24px; color: #6b7280; }
         .evidence strong { color: var(--brand-blue-dark); }
 
@@ -817,13 +817,11 @@
 
         <div class="collab-summary">
             <div class="collab-side">
-                <span class="icon">🤖</span>
-                <div><div class="collab-role">AI</div><div class="collab-acts">提方案 · 查漏洞 · 跑并行</div></div>
+                <div class="collab-content"><div class="collab-role">AI</div><div class="collab-acts">提方案 · 查漏洞 · 跑并行</div></div>
             </div>
             <div class="collab-mid">×</div>
             <div class="collab-side">
-                <span class="icon">🧑</span>
-                <div><div class="collab-role">人</div><div class="collab-acts">做判断 · 定方向 · 担责任</div></div>
+                <div class="collab-content"><div class="collab-role">人</div><div class="collab-acts">做判断 · 定方向 · 担责任</div></div>
             </div>
         </div>
     </div>
