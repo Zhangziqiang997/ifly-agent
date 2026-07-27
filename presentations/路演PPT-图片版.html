@@ -323,6 +323,41 @@
         .spec-card p { font-size: 24px; color: #6b7280; line-height: 1.55; margin-bottom: 6px; }
         .spec-note { background: linear-gradient(135deg,var(--blue-050),#fff); border-radius: 18px; padding: 28px 36px; font-size: 26px; font-weight: 600; color: var(--brand-blue-dark); line-height: 1.6; text-align: center; box-shadow: 0 10px 40px rgba(22,139,234,0.08); }
 
+        /* ---------- P-SPEC-B 完整规约链：JSON 契约只是其中一环 ---------- */
+        .spec-full-slide { background: linear-gradient(135deg,#ffffff 0%,#F4F9FD 100%); }
+        .spec-full-chain { display: flex; align-items: stretch; gap: 12px; margin: 0 0 22px; }
+        .spec-full-node { flex: 1; min-width: 0; height: 150px; padding: 22px 18px 18px; background: #fff; border-radius: 16px; border-top: 6px solid var(--brand-blue); box-shadow: 0 10px 34px rgba(11,49,91,0.08); }
+        .spec-full-node:nth-child(3) { border-top-color: var(--brand-blue-dark); }
+        .spec-full-node:nth-child(5) { border-top-color: var(--success); }
+        .spec-full-node:nth-child(7) { border-top-color: #0B6DB7; }
+        .spec-full-node:nth-child(9) { border-top-color: #D97706; }
+        .spec-full-node:nth-child(11) { border-top-color: var(--navy); }
+        .spec-full-code { display: inline-block; color: var(--brand-blue-dark); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 20px; font-weight: 800; letter-spacing: 0.04em; margin-bottom: 10px; }
+        .spec-full-node:nth-child(9) .spec-full-code { color: #B45309; }
+        .spec-full-node:nth-child(11) .spec-full-code { color: var(--navy); }
+        .spec-full-node-t { font-size: 26px; font-weight: 800; color: #111827; margin-bottom: 8px; white-space: nowrap; }
+        .spec-full-node-d { font-size: 20px; color: var(--muted); line-height: 1.38; }
+        .spec-full-arrow { flex: 0 0 34px; display: flex; align-items: center; justify-content: center; color: var(--brand-blue); font-size: 34px; font-weight: 800; }
+        .spec-full-risk { display: flex; align-items: center; gap: 18px; margin-bottom: 24px; padding: 15px 24px; border-radius: 14px; background: linear-gradient(100deg,var(--navy),var(--brand-blue-dark)); color: #fff; box-shadow: 0 12px 34px rgba(11,49,91,0.14); }
+        .spec-full-risk-k { color: var(--blue-100); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 22px; font-weight: 800; letter-spacing: 0.05em; }
+        .spec-full-risk-t { font-size: 24px; font-weight: 600; }
+        .spec-full-risk-d { font-size: 21px; font-weight: 300; opacity: 0.9; }
+        .spec-full-panels { display: flex; gap: 24px; margin-bottom: 24px; }
+        .spec-full-panel { flex: 1; min-width: 0; min-height: 248px; padding: 28px 30px 26px; background: #fff; border-radius: 18px; border-left: 6px solid var(--brand-blue); box-shadow: 0 10px 34px rgba(11,49,91,0.07); }
+        .spec-full-panel:nth-child(2) { border-left-color: var(--success); }
+        .spec-full-panel:nth-child(3) { border-left-color: #D97706; }
+        .spec-full-panel-h { display: flex; align-items: baseline; gap: 12px; margin-bottom: 16px; }
+        .spec-full-panel-id { color: var(--brand-blue-dark); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 21px; font-weight: 800; }
+        .spec-full-panel:nth-child(2) .spec-full-panel-id { color: #0F927A; }
+        .spec-full-panel:nth-child(3) .spec-full-panel-id { color: #B45309; }
+        .spec-full-panel-title { color: #111827; font-size: 30px; font-weight: 800; white-space: nowrap; }
+        .spec-full-panel p { color: var(--muted); font-size: 22px; line-height: 1.5; margin-bottom: 9px; }
+        .spec-full-token-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+        .spec-full-token { display: inline-block; padding: 6px 10px; border-radius: 8px; background: var(--blue-050); color: var(--brand-blue-dark); font-family: 'SFMono-Regular', Consolas, monospace; font-size: 18px; font-weight: 700; }
+        .spec-full-panel:nth-child(2) .spec-full-token { background: #ECFDF5; color: #0F927A; }
+        .spec-full-panel:nth-child(3) .spec-full-token { background: #FFF7ED; color: #B45309; }
+        .spec-full-note { padding: 24px 34px; border-radius: 18px; background: linear-gradient(135deg,var(--blue-050),#fff); color: var(--brand-blue-dark); font-size: 25px; font-weight: 700; line-height: 1.5; text-align: center; box-shadow: 0 10px 34px rgba(22,139,234,0.08); }
+
         /* ---------- P-风险 控标风险识别 ---------- */
         .risk-row { display: flex; gap: 36px; margin-bottom: 50px; }
         .risk-card { flex: 1; background: #fff; border-radius: 22px; padding: 44px 40px; box-shadow: 0 16px 55px rgba(0,0,0,0.07); border-top: 8px solid #ef4444; }
@@ -758,6 +793,86 @@
 
         <div class="spec-note">
             先有工程契约，再让 AI 严格照规约实现，而非对着模型即兴生成 —— 这正是两组能真正并行的前提。
+        </div>
+    </div>
+
+    <!-- ============ P-SPEC-B: 完整 SPEC 规约链 ============ -->
+    <div class="slide template-header-page spec-full-slide">
+        <div class="template-header" aria-hidden="true"><div class="template-header-logo-slot"></div></div>
+        <div class="page-tag">05-B · SPEC 规约链</div>
+        <div class="sec-head" style="margin-bottom: 22px;">
+            <div class="doc-badge">05 SPEC · 规约总览</div>
+            <div class="sec-title">完整的 SPEC，定义<span class="grad-text">从需求到验收的闭环</span></div>
+            <div class="sec-sub">JSON 契约只是其中一环：还要明确为什么做、做到什么程度、如何证明、出了问题怎么办</div>
+        </div>
+
+        <div class="spec-full-chain" aria-label="SPEC 追溯链">
+            <div class="spec-full-node">
+                <div class="spec-full-code">G</div>
+                <div class="spec-full-node-t">需求目标</div>
+                <div class="spec-full-node-d">要解决什么问题，交付什么结果</div>
+            </div>
+            <div class="spec-full-arrow" aria-hidden="true">→</div>
+            <div class="spec-full-node">
+                <div class="spec-full-code">NFR</div>
+                <div class="spec-full-node-t">质量要求</div>
+                <div class="spec-full-node-d">性能、安全、可用性等底线</div>
+            </div>
+            <div class="spec-full-arrow" aria-hidden="true">→</div>
+            <div class="spec-full-node">
+                <div class="spec-full-code">API</div>
+                <div class="spec-full-node-t">接口契约</div>
+                <div class="spec-full-node-d">输入、输出、错误与行为边界</div>
+            </div>
+            <div class="spec-full-arrow" aria-hidden="true">→</div>
+            <div class="spec-full-node">
+                <div class="spec-full-code">AC</div>
+                <div class="spec-full-node-t">验收标准</div>
+                <div class="spec-full-node-d">Given / When / Then，什么算完成</div>
+            </div>
+            <div class="spec-full-arrow" aria-hidden="true">→</div>
+            <div class="spec-full-node">
+                <div class="spec-full-code">TC</div>
+                <div class="spec-full-node-t">测试用例</div>
+                <div class="spec-full-node-d">用证据验证每条验收标准</div>
+            </div>
+            <div class="spec-full-arrow" aria-hidden="true">→</div>
+            <div class="spec-full-node">
+                <div class="spec-full-code">TASK</div>
+                <div class="spec-full-node-t">实施任务</div>
+                <div class="spec-full-node-d">谁改什么、依赖什么、如何交付</div>
+            </div>
+        </div>
+
+        <div class="spec-full-risk">
+            <div class="spec-full-risk-k">R 风险边界</div>
+            <div class="spec-full-risk-t">风险不是附录，而是贯穿接口、验收和实施的约束</div>
+            <div class="spec-full-risk-d">每个高风险项都要有 Owner、缓解措施与回溯路径</div>
+        </div>
+
+        <div class="spec-full-panels">
+            <div class="spec-full-panel">
+                <div class="spec-full-panel-h"><span class="spec-full-panel-id">01</span><span class="spec-full-panel-title">需求规约</span></div>
+                <p>先定义目标与可观察结果，再写非目标、约束、假设和依赖。</p>
+                <p>这部分回答：为什么做，边界在哪里。</p>
+                <div class="spec-full-token-row"><span class="spec-full-token">G</span><span class="spec-full-token">NFR</span><span class="spec-full-token">NG</span><span class="spec-full-token">C</span><span class="spec-full-token">A / D</span></div>
+            </div>
+            <div class="spec-full-panel">
+                <div class="spec-full-panel-h"><span class="spec-full-panel-id">02</span><span class="spec-full-panel-title">接口契约</span></div>
+                <p>JSON Schema 只定义字段；SPEC 还要定义输入输出、异常行为和决策依据。</p>
+                <p>字段细节归 `data/README.md`，避免产生第二套契约。</p>
+                <div class="spec-full-token-row"><span class="spec-full-token">API</span><span class="spec-full-token">DEC</span><span class="spec-full-token">Schema</span><span class="spec-full-token">Error boundary</span></div>
+            </div>
+            <div class="spec-full-panel">
+                <div class="spec-full-panel-h"><span class="spec-full-panel-id">03</span><span class="spec-full-panel-title">验收闭环</span></div>
+                <p>用 Given / When / Then 写清通过条件，再关联 TC 和实施任务。</p>
+                <p>每个结果都能回溯到需求，也能追到风险与责任人。</p>
+                <div class="spec-full-token-row"><span class="spec-full-token">AC</span><span class="spec-full-token">TC</span><span class="spec-full-token">TASK</span><span class="spec-full-token">Traceability</span></div>
+            </div>
+        </div>
+
+        <div class="spec-full-note">
+            JSON 只回答“数据长什么样”；SPEC 还要回答“为什么做、做到什么程度、如何证明、出了问题怎么办”。
         </div>
     </div>
 

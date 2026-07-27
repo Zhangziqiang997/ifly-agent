@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-25 21:46:42",
+  "generated_at": "2026-07-27 23:30:39",
   "model": "deepseek-v4-flash",
   "item_count": 5,
   "results": [
@@ -7,36 +7,36 @@
       "seq": 3,
       "match": false,
       "deviation": "negative_real",
-      "explanation": "iFLYTEK参数中未提及屏幕玻璃厚度、硬度、透光率、雾度等规格，无法确认满足要求。",
-      "suggestion": "与iFLYTEK确认是否具备防眩钢化玻璃及具体参数，或要求补充此规格。"
+      "explanation": "iFLYTEK参数中未涉及防眩钢化玻璃的厚度、硬度、透光率及雾度指标",
+      "suggestion": "建议与厂商确认能否提供该规格或增加防眩玻璃组件，或调整要求以适配iFLYTEK现有屏幕防护规格"
     },
     {
       "seq": 4,
       "match": false,
       "deviation": "negative_real",
-      "explanation": "招标要求红外触控技术，iFLYTEK采用电容触控技术，技术路线不同。",
-      "suggestion": "若招标未强制红外，可澄清电容触控同样支持≥50点触控且性能更优；若强制红外，则无法满足。"
+      "explanation": "iFLYTEK采用电容触控技术，而非红外触控，技术路线不同",
+      "suggestion": "可强调电容触控更精准、多点触控性能更高（≥50点），若客户坚持红外触控则需协调替换方案"
     },
     {
       "seq": 5,
       "match": false,
       "deviation": "negative_real",
-      "explanation": "iFLYTEK摄像头对角视场角≥135°，不满足招标要求的≥145°。",
-      "suggestion": "与招标方协调修改视场角要求至135°，或确认iFLYTEK实际规格是否可达到145°。"
+      "explanation": "iFLYTEK摄像头对角视场角为135°，不满足≥145°要求",
+      "suggestion": "建议与客户沟通135°实际覆盖范围是否可接受，或寻找可提供更大视场角的机型"
     },
     {
       "seq": 9,
       "match": false,
-      "deviation": "negative_wording",
-      "explanation": "iFLYTEK Type-C接口标注为全功能PD≥65W，但未明确支持HDMI信号接入、调用内置设备及反向触控功能。",
-      "suggestion": "与iFLYTEK确认Type-C是否支持上述功能，并相应更新产品描述。"
+      "deviation": "negative_real",
+      "explanation": "iFLYTEK Type-C仅标注支持全功能PD充电，未明确支持HDMI输入、调用内置外设及反向触控",
+      "suggestion": "需向厂商确认Type-C是否具备视频输入及扩展能力，若不支持则需调整接口要求或增加转换配件"
     },
     {
       "seq": 12,
       "match": false,
       "deviation": "negative_real",
-      "explanation": "iFLYTEK参数中未提及任何物联传感器（温湿度监控及云端上传）功能。",
-      "suggestion": "若需此功能，需外接传感器或选用其他支持该功能的型号。"
+      "explanation": "iFLYTEK产品参数中无温湿度物联传感器描述",
+      "suggestion": "建议协商外置传感器模块或取消该要求，若非必需可引导客户关注iFLYTEK已具备的AI教学功能"
     }
   ]
 }

@@ -3,7 +3,7 @@ window.SidebarConfig = Object.freeze({
     {
       title: '业务中心',
       items: [
-        { label: '项目总览', icon: '▣', href: 'index.html', page: 'home' },
+        { label: '投标分析', icon: '▣', href: 'index.html', page: 'home' },
         { label: '投标项目', icon: '▣' },
       ],
     },

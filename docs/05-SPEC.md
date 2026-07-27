@@ -1,328 +1,198 @@
-# 05 — 功能规格书（SPEC）
+# 05 — 需求规约（SPEC）
 
-> 版本：v1.0 | 日期：2026-07-25  
-> 定位：**设计阶段**。纯技术规格——模块功能定义、数据格式契约、算法伪代码、接口规范。  
-> 用户场景和价值部分见 [`02-PRD.md`](./02-PRD.md)。  
-> Demo 范围的取舍见 [`06-ai-task-plan.md`](./06-ai-task-plan.md)。
+> 优先级：P1 | Owner：PM + 产品/开发组 | 创建：2026-07-25 | 更新：2026-07-27<br>
+> 状态：review | 版本：v2.0<br>
+> 本文回答“要做成什么”，是产品、设计、开发和测试共同遵守的需求基线。
 
----
+## 文档边界与关联文档
 
-## 1. 模块功能规格
+本文件只定义目标、范围、可观察行为、质量要求和验收依据，不重复维护完整的 JSON Schema、算法实现或任务步骤。
 
-### 1.1 模块一：参数知识库（Data Layer）
+| 文档 | 职责 | 本 SPEC 中的关系 |
+|------|------|------------------|
+| [`02-PRD.md`](./02-PRD.md) | 用户、场景、产品价值 | 提供背景输入 |
+| [`04-technical-design.md`](./04-technical-design.md) | 技术方案、架构和实现决策 | 承载 DEC 的实现依据 |
+| [`../data/README.md`](../data/README.md) | JSON 数据契约 | 承载 API-001～API-003 的字段定义 |
+| [`06-ai-task-plan.md`](./06-ai-task-plan.md) | 实施任务和文件步骤 | 承载 TASK-001～TASK-007 |
+| [`07-test-cases.md`](./07-test-cases.md) | 详细测试用例 | 承载 TC-xxx 的步骤和预期结果 |
 
-**职责**：维护结构化的产品参数数据库，为上层分析提供数据支撑。
-
-**输入**：无（系统内置数据）。
-
-**数据范围**：
-- 竞品厂商：希沃（SEEWO）、鸿合（HiteVision）、海康威视（HIKVISION）
-- 讯飞自身产品：讯飞智慧黑板系列
-- 每家 15 条核心硬件参数，覆盖 14 个参数分类
-
-**参数分类枚举**：
-`显示` / `触控` / `摄像` / `音频` / `护眼` / `无线` / `软件` / `物理` / `连接` / `计算` / `认证` / `AI` / `生态` / `特色`
-
-**接口**：
-```
-load_competitors(base_dir) → dict[str, dict]   # 加载所有竞品 JSON
-load_xunfei(base_dir) → dict                     # 加载讯飞参数 JSON
-load_bid(base_dir, filename) → dict              # 加载招标文件 JSON
-save_json(data, filepath) → None                 # 保存 JSON 文件
-```
+> 规则：本文件中的 ID 是唯一追溯入口。字段细节、实现细节和测试步骤应在关联文档中维护，不能与本文件形成第二套互相漂移的事实来源。
 
 ---
 
-### 1.2 模块二：招标文件解析（Parser Input）
+## 1. 需求规约
 
-**职责**：将招标文件（PDF/Word/Excel）转化为归一化的结构化参数列表。
+### 1.1 背景与问题
 
-**支持的输入格式**：
-- PDF（含扫描件 OCR，由 MinerU 提供解析能力）
-- Word（.docx / .doc）
-- Excel（.xlsx / .xls）
+售前或投标经理拿到智慧教育招标文件后，需要快速判断三件事：招标参数是否存在明显控标倾向、讯飞产品逐条是否满足要求、负偏离是否可以通过改写说辞或质疑流程应对。当前人工逐条比对耗时长，容易遗漏废标项，也缺少可复核的证据链。
 
-**处理步骤**：
-1. 自动识别文件格式（magic bytes / 扩展名）
-2. 提取参数文本（表格行 / 编号列表 / 段落中的参数声明）
-3. 识别参数标记：
-   - ★ 星号 → `star_mark: true`（废标项，不满足直接出局）
-   - △ 三角 → `triangle_mark: true`（扣分项，不满足扣分但不废标）
-   - ◆ 菱形 → `cert_required: true`（需提供检测报告/证明材料）
-4. 归一化为统一 JSON 结构（见 §2.2）
+本版本以比赛 Demo 为交付边界，先打通“结构化参数输入 → 控标识别 → 参数匹配 → 应对建议 → 报告展示”的核心链路。
 
-**Demo 实现状态**：Demo 阶段跳过文件解析，直接使用预制的 `sample-bid.json`。文件解析（MinerU 集成）为后续迭代内容。
+### 1.2 功能目标
 
----
+| ID | 目标 | 可观察结果 | 当前范围 |
+|----|------|------------|----------|
+| G-001 | 加载参数知识库 | 系统能够读取 3 家竞品和讯飞产品的结构化 JSON 参数 | Demo 内 |
+| G-002 | 接收统一的招标参数 | 系统能够读取包含项目、条目、原文和 indicators 的标准化招标 JSON | Demo 内 |
+| G-003 | 识别控标倾向 | 系统逐条比较竞品，输出控标方、置信度、独有命中和异常项 | Demo 内 |
+| G-004 | 完成讯飞参数匹配 | 系统将招标要求与讯飞参数分类为正偏离、可改写负偏离或真实负偏离 | Demo 内 |
+| G-005 | 生成应对建议 | 对负偏离项输出改写说辞、质疑话术或渠道协调建议 | Demo 内 |
+| G-006 | 展示可复核结果 | 系统展示摘要、逐条对比、偏离分类和建议详情，且结果可按类别筛选 | Demo 内 |
 
-### 1.3 模块三：控标方识别 / 横向对比（Matcher — Layer 2）
+### 1.3 非功能需求
 
-**职责**：判定招标文件中哪些参数是"独有特征"——市面上仅某一家厂商能满足的规格，从而推断控标方。
+| ID | 需求 | 可度量标准 | 验收关联 |
+|----|------|------------|----------|
+| NFR-001 | 响应速度 | 12 条样例招标参数的正常分析链路目标为端到端 ≤ 10 秒 | AC-008 |
+| NFR-002 | 降级能力 | AI API 未配置、超时或返回不可解析内容时，读取本地 `data/samples/demo-result.json`，页面不崩溃 | AC-005、AC-008 |
+| NFR-003 | 数据边界 | 原始招标文件不作为文件上传到第三方；外部 AI 请求只发送完成语义判断所需的标准化参数文本 | AC-008 |
+| NFR-004 | 可扩展性 | 新增竞品时优先通过新增 `data/competitors/*.json` 完成，不改变匹配结果契约 | AC-001、AC-006 |
+| NFR-005 | 编码兼容 | Windows Python 3.10 环境可以读取现有中文 JSON，不因特殊字符导致主流程退出 | AC-001、AC-006 |
+| NFR-006 | 可用性 | Streamlit 页面能够从样例输入进入总览，再进入逐条对比和建议详情 | AC-007 |
 
-**算法**（纯程序，不调 AI）：
+> 当前实现事实：`src/advisor.py` 的 AI 请求超时常量仍为 30 秒；这与 NFR-001 的路演目标存在差距，记录为 R-001，不能把“目标值”误写成“当前已达成值”。
 
-```
-输入：招标参数列表 B，竞品数据库 {厂商名: [参数列表]}
-输出：{控标方, 置信度, 各厂商命中数, 独有特征清单, 异常项清单}
+### 1.4 非目标（Out of Scope）
 
-for each bid_item in B:
-    satisfied_by = []
-    for each (vendor_name, vendor_params) in 竞品数据库:
-        if find_best_match(bid_item, vendor_params) → status == 'positive':
-            satisfied_by.append(vendor_name)
+以下内容不属于本版本的验收范围：
 
-    if len(satisfied_by) == 1:
-        该厂商独有特征命中数 += 1
-        记录命中详情
-    elif len(satisfied_by) == 0:
-        标记为异常（所有厂商均不满足）
+| ID | 非目标 | 原因 |
+|----|--------|------|
+| NG-001 | PDF/Word/Excel 的真实解析和 MinerU 集成 | Demo 使用预制的 `sample-bid.json` 验证核心分析链路 |
+| NG-002 | 招标评分自动计算 | 不同项目评分规则不同，超出本课题的参数分析范围 |
+| NG-003 | 全行业厂商数据库 | 本版本只验证 3 家竞品和讯飞数据 |
+| NG-004 | 用户登录、权限、审计系统 | Demo 场景不需要多租户访问控制 |
+| NG-005 | 历史记录持久化、PDF/Excel 报告导出、移动端适配 | 不影响本版本的实时演示闭环 |
+| NG-006 | 参数自动抓取和自动更新 | 数据来源和更新机制尚未纳入本版本 |
 
-置信度 = 总命中数 / (总参数数 - 异常数)
-控标方 = argmax(各厂商命中数)
-```
+### 1.5 约束
 
-**置信度解读阈值**：
+| ID | 约束 |
+|----|------|
+| C-001 | 本版本使用 JSON 文件存储，不引入数据库 |
+| C-002 | Demo 数据规模为 3 家竞品、1 份讯飞参数库和 12 条样例招标参数 |
+| C-003 | 程序先处理可确定的参数；只有 uncertain 项才允许进入 AI 语义判断 |
+| C-004 | uncertain 项必须一次批量请求，禁止逐条串行调用 AI |
+| C-005 | 代码实现必须遵守 `data/README.md` 的数据契约，不在本文件复制另一套 Schema |
+| C-006 | 当前交付以本地 Streamlit 页面和 Python 3.10 运行环境为准 |
 
-| 命中率 | 结论 | 行动建议 |
-|--------|------|---------|
-| > 60% | 高度可疑 | 强烈指向某一家，可启动质询流程 |
-| 30-60% | 部分倾向 | 可能混合控标，需逐条分析 |
-| < 30% | 无明显倾向 | 标书较公正，正常投标即可 |
+### 1.6 假设与依赖
 
----
-
-### 1.4 模块四：参数匹配 / 纵向对比（Parser + Advisor — Layer 1 + 3）
-
-**职责**：将招标要求逐条与讯飞产品参数对比，判定正偏离或负偏离。采用双层架构。
-
-#### Layer 1：程序粗筛
-
-| 匹配类型 | 方法 | 适用范围 |
-|----------|------|---------|
-| 数值直接比较 | 正则提取数字 + 单位 → 比大小 | 有明确数值+单位的参数 |
-| 单位归一化 | 映射表统一单位后比较 | 同义不同名的单位（4K = 3840×2160） |
-| 关键词匹配 | Jaccard bigram 相似度 > 0.5 | 文本描述型参数 |
-| 指标组匹配 | 逐 indicator 按 name+unit 比对 | 复合参数（一条含多个子指标） |
-
-```
-quick_match(bid_item, our_param) → ('positive'|'negative'|'uncertain', detail)
-
-Step A: 尝试 indicators[] 级别匹配（compare_indicators）
-Step B: 尝试从 requirement/spec 文本提取数值比较（extract_numeric）
-Step C: 关键词 bigram 相似度兜底（keyword_overlap）
-```
-
-#### Layer 2/3 分界规则
-
-| 条件 | 走哪层 |
-|------|--------|
-| indicators 匹配成功（全部子指标满足） | Layer 1 → 直接判定 positive |
-| indicators 匹配失败（0 匹配） | Layer 1 → 直接判定 negative |
-| indicators 部分匹配 / 关键词相似度 0.3-0.5 | Layer 3 → 送 AI 精判 |
-| 纯功能/软件描述，无 indicators 可提取 | Layer 3 → 送 AI 精判 |
-
-#### Layer 3：AI 语义精判
-
-**调用方式**：所有 uncertain 参数打包为 1 次批量请求（禁止逐条串行）。
-
-**Prompt 结构**：
-1. System prompt：招投标参数分析专家角色
-2. 讯飞参数全量目录（供 AI 纠正程序错配）
-3. 逐条参数对比请求
-4. 要求 JSON 数组输出（{seq, match, deviation, explanation, suggestion}）
-
-**输出分类**：
-
-| 类型 | 标记 | 含义 | 下一步 |
-|------|------|------|--------|
-| `positive` | 🟢 正偏离 | 讯飞规格 ≥ 招标要求 | 标注优势 |
-| `negative_wording` | 🟡 负偏离（可改） | 能力有但描述不同 | 改写参数说辞 |
-| `negative_real` | 🔴 负偏离（真不满足） | 确实达不到 | 生成应对建议 |
-
-**降级方案**：API 超时 30s 或调用失败 → 自动读取 `data/samples/demo-result.json`（上次成功调用的缓存）。
+| ID | 类型 | 内容 | 验证/影响 |
+|----|------|------|----------|
+| A-001 | 假设 | 输入 JSON 已按统一契约完成基本结构化，包含 `items[]` 和必要的条目字段 | 由 API-003 和 TC-4.1.x 验证 |
+| A-002 | 假设 | 竞品及讯飞参数库的 `indicators[]`、单位和比较方式可供程序匹配 | 由 API-001、API-002 和 TC-1.4.x 验证 |
+| A-003 | 假设 | AI 服务可能不可用，系统必须可离线展示上次成功的结果 | 由 NFR-002、TC-3.1.5～TC-3.2.2 验证 |
+| D-001 | 依赖 | `data/competitors/`、`data/xunfei/`、`data/samples/` 路径和 JSON 文件可读取 | 由 TASK-001、TASK-005 验证 |
+| D-002 | 依赖 | AI 精判依赖 DeepSeek API Key 和可用网络；不可用时走降级路径 | 由 TASK-004、R-001 验证 |
+| D-003 | 依赖 | 详细实现顺序、文件变更和启动方式由 `06-ai-task-plan.md` 维护 | 由 TASK-001～TASK-007 引用 |
 
 ---
 
-### 1.5 模块五：应对建议生成（Advisor — Layer 3 子功能）
+## 2. 接口契约与行为边界
 
-**职责**：针对负偏离项，按优先级自动生成应对策略。
+完整字段定义以 [`data/README.md`](../data/README.md) 为准。本章只规定本需求依赖的接口边界、行为和异常结果，避免把 SPEC 再次写成 JSON Schema 文档。
 
-| 优先级 | 策略 | 适用场景 | 示例 |
-|--------|------|---------|------|
-| P0 | 改说辞 | 讯飞有能力，但参数文档描述不同 | "无线投屏" → "屏幕镜像" |
-| P1 | 质疑话术 | 讯飞确实不满足 | 从教学实用性/生态完整性/法规标准三个角度生成 |
-| P2 | 渠道协调 | 无法通过改说辞或质疑解决 | 联系招标代理机构、寻求联合体投标 |
+| ID | 接口/能力 | 输入 | 输出 | 必须满足的行为 |
+|----|-----------|------|------|----------------|
+| API-001 | `load_competitors(base_dir)` | 竞品数据目录 | `dict[str, dict]` | 自动读取目录下竞品 JSON；目录不存在时返回空字典，不使应用崩溃 |
+| API-002 | `load_xunfei(base_dir)` | 讯飞数据目录 | `dict` | 读取讯飞参数库；文件不存在时返回空字典 |
+| API-003 | `load_bid(base_dir, filename)` | 样例文件名或标准化招标 JSON | `dict` | 返回项目、日期和 `items[]`；输入文件缺失时返回可处理的空结果 |
+| API-004 | `run_analysis(bid_filename)` | 招标 JSON 文件名 | `project`、`controller`、`matching[]`、`summary` | 按 G-003～G-005 串联完整分析，并保持 `matching[]` 按 `seq` 排序 |
+| API-005 | `batch_analyze(uncertain_items, xunfei_params)` | uncertain 条目及讯飞参数目录 | 语义判断结果数组 | 一次批量调用；输出不可解析、超时或无 Key 时进入 NFR-002 降级路径 |
+| API-006 | Streamlit 展示流程 | `run_analysis()` 结果 | 总览页、对比页、建议详情 | 能展示控标结果、偏离分类、筛选结果和负偏离建议 |
 
-**质疑话术三维度**：
-1. **教学场景实用性**：该参数在日常教学中是否必要？是否过度规格？
-2. **生态与功能完整性**：单一参数不达标不代表整体方案差，讯飞在其他维度有补偿优势
-3. **法规与标准依据**：现行国标/行标是否有此强制要求？是否违反公平竞争原则？
+### 2.1 业务行为规则
 
----
+1. 控标识别对每条招标参数检查竞品满足情况：仅一家满足时计入该厂商的独有命中；没有厂商满足时记录为异常；置信度计算必须排除异常项。
+2. 参数匹配按以下优先级工作：`indicators[]` 比较 → 数值/单位比较 → 文本相似度；无法可靠判定的条目进入 `API-005`。
+3. 匹配结果只允许使用 `positive`、`negative_wording`、`negative_real` 三类偏离值。
+4. `positive` 表示讯飞规格满足要求，建议字段为 `null`；`negative_wording` 表示能力可能满足但表述不同；`negative_real` 表示确实不满足。
+5. 应对建议按 P0 改写说辞、P1 质疑话术、P2 渠道协调组织；建议必须能回指对应的负偏离条目。
 
-## 2. 数据格式契约（JSON Schema）
+### 2.2 规范性决策引用
 
-> ⚠️ **这是产品组和开发组的共同契约。格式不统一 = 引擎读不到数据 = Demo 跑不起来。**
-
-### 2.1 竞品 / 讯飞参数 JSON
-
-```json
-{
-  "vendor": "厂商全称（如：鸿合（HiteVision））",
-  "product": "产品型号（如：智慧黑板 HB-H868S）",
-  "category": "产品品类（如：智慧黑板）",
-  "updated": "数据更新日期（如：2026-07）",
-  "params": [
-    {
-      "id": "唯一标识（如：HH-001），格式：厂商缩写-序号",
-      "category": "参数分类（显示/触控/摄像/音频/护眼/无线/软件/物理/连接/计算/认证/AI/生态/特色）",
-      "name": "参数名称（人可读）",
-      "spec": "原始描述文本（从源文档直接复制）",
-      "indicators": [
-        {
-          "name": "子指标名称",
-          "value": "数值或布尔值",
-          "unit": "单位（px/inch/cd_m2/watt/mp/mm/gb/count/touch_points/pressure_level/degree/pct/hour/platform_count/feature/cert/spec/type/second）",
-          "comparator": "比较方式：eq/gte/lte/gt/lt"
-        }
-      ],
-      "star_mark": "是否为★废标项：true/false",
-      "cert_required": "是否需提供检测报告：true/false"
-    }
-  ]
-}
-```
-
-**关键规则**：
-1. 每个参数必须有 `indicators` 数组——即使是简单参数（单值），也用数组包一层
-2. `indicators[].value` 可以是数字或布尔值——数值型填数字，特征型填 `true`/`false`
-3. `comparator` 决定匹配方向——`gte` = 值 ≥ 招标要求才算满足
-4. `spec` 必须保留原始文本——供 AI 语义匹配时参考，不能省略
-
-### 2.2 招标参数 JSON（解析器输出）
-
-```json
-{
-  "project": "项目名称",
-  "date": "招标日期",
-  "items": [
-    {
-      "seq": 1,
-      "category": "参数分类",
-      "name": "参数名称",
-      "requirement": "原始招标要求文本",
-      "indicators": [
-        {"name": "子指标名", "value": "数值", "unit": "单位", "comparator": "比较方式"}
-      ],
-      "star_mark": false,
-      "triangle_mark": true
-    }
-  ]
-}
-```
-
-### 2.3 分析结果 JSON（最终输出）
-
-```json
-{
-  "project": "项目名称",
-  "controller": {
-    "vendor": "控标方厂商全称",
-    "confidence": 0.55,
-    "scores": {"希沃": 2, "鸿合": 1, "海康威视": 6},
-    "hits": [{"seq": 1, "param_name": "摄像头", "hit_vendor": "海康威视"}],
-    "anomalies": [{"seq": 9, "param_name": "参数名", "reason": "所有厂商均不满足"}]
-  },
-  "matching": [
-    {
-      "seq": 1,
-      "category": "参数分类",
-      "name": "参数名称",
-      "bid_req": "招标要求原文",
-      "xunfei_spec": "讯飞对应参数原文",
-      "deviation": "positive | negative_wording | negative_real",
-      "match_method": "program | ai_semantic",
-      "detail": "匹配详情说明",
-      "suggestion": "应对建议文本（正偏离时为 null）"
-    }
-  ],
-  "summary": {
-    "total": 12,
-    "positive": 8,
-    "negative_wording": 2,
-    "negative_real": 2
-  }
-}
-```
+| ID | 决策 | 需求原因 | 实现依据 |
+|----|------|----------|----------|
+| DEC-001 | 采用“程序粗筛 → 控标统计 → AI 精判”的三层链路 | 可确定问题不消耗 AI，疑难问题保留语义判断能力 | [`04-technical-design.md`](./04-technical-design.md) |
+| DEC-002 | uncertain 条目采用单次批量 AI 调用 | 降低调用次数，保证结果在可接受时间内返回 | [`06-ai-task-plan.md`](./06-ai-task-plan.md) Task 3 |
+| DEC-003 | AI 不可用时读取本地缓存结果 | 比让 Demo 因外部依赖失败更适合当前演示边界 | [`06-ai-task-plan.md`](./06-ai-task-plan.md) Global Constraints |
+| DEC-004 | 本版本以标准化 JSON 作为分析入口，真实文件解析后置 | 先验证核心分析链路，避免解析工程掩盖产品判断价值 | NG-001、C-002 |
 
 ---
 
-## 3. 引擎流水线规格
+## 3. 验收标准与测试用例
 
-### 3.1 完整执行流程
+验收标准先于实现定义，采用 Given/When/Then；详细步骤、输入和断言维护在 [`07-test-cases.md`](./07-test-cases.md)。当前测试文档使用 `TC-1.x`～`TC-6.x` 的历史编号，下面先建立它们与需求的关联。
 
-```
-run_analysis(bid_filename)
-    │
-    ├── Step 1: 加载数据
-    │   load_competitors() → {xiwo, honghe, haikang}
-    │   load_xunfei()      → {vendor, params[15]}
-    │   load_bid()          → {items[12]}
-    │
-    ├── Step 2: Layer 2 — 控标识别
-    │   identify_controller(bid.items, competitors)
-    │   → {vendor, confidence, hits[6], anomalies[1]}
-    │
-    ├── Step 3: Layer 1 — 逐条程序匹配
-    │   for each bid_item:
-    │       find_best_match(bid_item, xunfei.params)
-    │       → positive → 直接入 matching[]
-    │       → negative → 入 matching[] + 标记送 AI 生成建议
-    │       → uncertain → 入 uncertain_items[] 待 AI 批量处理
-    │
-    ├── Step 4: Layer 3 — AI 批量精判
-    │   batch_analyze(uncertain_items, xunfei.params)
-    │   → 合并 AI 结果到 matching[]
-    │
-    └── Step 5: 汇总输出
-        matching.sort(by seq)
-        summary = {total, positive, negative_wording, negative_real}
-        return {project, controller, matching, summary}
-```
+| ID | 验收标准（Given / When / Then） | 测试引用 |
+|----|--------------------------------|----------|
+| AC-001 | Given 竞品目录、讯飞参数库和标准 JSON 存在；When 调用 API-001～API-003；Then 数据可读取，缺失文件返回可处理的空结构而非未捕获异常 | TC-6.1.1～TC-6.1.4 |
+| AC-002 | Given 招标输入包含 12 条标准化参数；When 调用 API-004；Then 每条条目均参与分析，输出条目数量与输入一致 | TC-4.1.1～TC-4.1.2 |
+| AC-003 | Given 竞品满足情况包含独有命中、多家命中和无人满足；When 执行控标识别；Then 输出控标方、置信度、命中详情和异常项，置信度计算排除异常项 | TC-2.1.1～TC-2.1.5 |
+| AC-004 | Given 参数存在完全满足、数值不满足、说法不同和无指标四类情况；When 执行参数匹配；Then 分别得到正确的正偏离、负偏离或 uncertain 分类 | TC-1.4.1～TC-1.6.4、TC-3.1.1～TC-3.1.3 |
+| AC-005 | Given uncertain 条目非空；When 调用 API-005；Then 只发起一次批量 AI 请求，并将每条结果合并回 matching；当 Key 缺失、超时或响应非 JSON 时，进入可处理的降级结果（缓存、可提取的 raw 结果或空列表） | TC-3.1.4～TC-3.2.2 |
+| AC-006 | Given matching 结果包含三类偏离；When API-004 返回结果；Then 顶层包含 `controller`、`matching`、`summary`，matching 按 seq 排序，正偏离项 suggestion 为 null，汇总数量一致 | TC-4.1.1～TC-4.1.8 |
+| AC-007 | Given 用户首次打开页面、查看总览并进入对比页；When 使用筛选和展开详情；Then 页面能够完成上传/样例入口、总览、分类筛选、返回和建议详情流程 | TC-5.1.1～TC-5.3.2 |
+| AC-008 | Given 12 条样例数据且 AI 服务正常或不可用；When 执行完整链路；Then 正常路径达到 NFR-001 目标，异常路径触发 NFR-002，页面不崩溃且不暴露原始文件上传行为 | `TC-PERF-001`、`TC-SEC-001`（当前测试文档待补充） |
 
-### 3.2 性能指标
+### 3.1 验收口径
 
-| 指标 | 目标值 | 实际值（当前） |
-|------|--------|---------------|
-| 数据加载 | < 100ms | ~10ms |
-| Layer 1 程序匹配（12 条） | < 500ms | ~50ms |
-| Layer 2 控标识别（12 条 × 3 家） | < 500ms | ~100ms |
-| Layer 3 AI 批量调用 | < 10s | ~5s（DeepSeek v4-flash） |
-| **端到端总耗时** | **< 10s** | **~5s** |
+- “通过”必须同时满足功能结果和对应的 `TC-xxx`；不能只凭页面截图或单次手工演示判断通过。
+- AC-001～AC-007 已有历史测试用例引用；AC-008 的性能和安全自动化用例尚未在 `07-test-cases.md` 中落地，状态必须保持为“待补充”。
+- 任何新增字段、偏离类型或接口行为，都必须先更新 API/AC/TC 的关联，再进入实现。
 
 ---
 
-## 4. 非功能性需求
+## 4. 风险评估
 
-| 需求 | 标准 |
-|------|------|
-| 响应速度 | 单次分析（含 AI 调用）≤ 10 秒 |
-| 数据安全 | 招标文件处理在本地完成，不上传至第三方 |
-| 可用性 | Web 页面（Streamlit），浏览器打开即用 |
-| 可扩展性 | 新增竞品厂商只需添加 JSON 文件，无需改代码 |
-| 降级能力 | AI API 不可用时自动读取缓存结果，系统不崩溃 |
-| 编码兼容 | Windows GBK 环境兼容（避免 emoji 等特殊字符） |
+| ID | 风险 | 概率 | 影响 | 缓解措施 | Owner | 状态 |
+|----|------|------|------|----------|-------|------|
+| R-001 | AI 请求实际超时 30 秒，可能无法满足 10 秒路演目标 | 中 | 高 | 将超时、批量调用和降级时间纳入性能测试；统一 `src/advisor.py`、任务计划和 SPEC 的口径 | 开发组 | open |
+| R-002 | `05-SPEC.md`、`data/README.md` 和样例 JSON 形成多套契约，字段漂移会导致引擎读不到数据 | 中 | 高 | 以 `data/README.md` 作为当前 Schema 单一来源；新增字段必须同步 API-xxx、TC-xxx | 数据组 + 开发组 | open |
+| R-003 | 程序匹配或 AI 语义判断产生误匹配，导致偏离分类错误 | 中 | 高 | 保留 match_method/detail；对边界值、无指标和复合指标增加反向用例；结果需人工复核 | 算法/开发组 | open |
+| R-004 | 真实 PDF/Word/Excel 解析尚未完成，产品叙事可能误把 Demo 输入描述成已交付能力 | 高 | 中 | 明确 NG-001；演示和测试均以标准化 JSON 为准，解析能力另立需求 | PM | open |
+| R-005 | 外部 AI 请求可能包含招标敏感文本，与“本地处理”表述发生冲突 | 中 | 高 | 只发送必要的标准化字段；脱敏规则、用户提示和离线模式需要在上线前补齐 | PM + 开发组 | open |
+| R-006 | 性能和安全验收用例未进入当前测试文件，质量结论缺少证据 | 中 | 中 | 补充 `TC-PERF-001`、`TC-SEC-001`，并在交付前执行 | 测试组 | open |
 
 ---
 
-## 5. Out of Scope（明确不做）
+## 5. 追溯矩阵
 
-| 项目 | 原因 |
-|------|------|
-| 招标评分自动计算 | 超出课题范围，且评分规则各项目不同 |
-| 全行业厂商数据库 | 比赛 Demo 只需 3 家，4 天做不完 |
-| 用户登录/权限系统 | Demo 场景不需要 |
-| 历史记录持久化 / 报告导出 | Demo 以实时展示为主 |
-| 移动端适配 | Web 端已满足演示需求 |
-| 参数自动抓取/更新（爬虫） | 非 Demo 范围 |
-| 文件上传解析（MinerU） | Demo 使用预制 JSON，解析作为后续迭代 |
+目标是让每个功能目标和非功能目标都能追溯到决策、接口、验收、测试和实施任务。当前覆盖率按已建立的关联为 100%；标记为“待补充”的测试项不代表已经通过。
+
+| 需求 | NFR/约束 | 决策 | 接口 | 验收 | 测试 | 任务 |
+|------|----------|------|------|------|------|------|
+| G-001 | NFR-004、NFR-005、C-001 | DEC-004 | API-001、API-002 | AC-001 | TC-6.1.1～TC-6.1.4 | TASK-001 |
+| G-002 | C-002、C-005、A-001 | DEC-004 | API-003 | AC-002 | TC-4.1.1～TC-4.1.2 | TASK-001、TASK-006 |
+| G-003 | C-002 | DEC-001 | API-004 | AC-003 | TC-2.1.1～TC-2.1.5 | TASK-003、TASK-005 |
+| G-004 | C-003、C-004 | DEC-001、DEC-002 | API-004、API-005 | AC-004 | TC-1.4.1～TC-1.6.4、TC-3.1.1～TC-3.1.3 | TASK-002、TASK-004、TASK-005 |
+| G-005 | C-003、NFR-002 | DEC-002、DEC-003 | API-005 | AC-005 | TC-3.1.4～TC-3.2.2 | TASK-004 |
+| G-006 | NFR-006 | DEC-001 | API-004、API-006 | AC-006、AC-007 | TC-4.1.1～TC-4.1.8、TC-5.1.1～TC-5.3.2 | TASK-005、TASK-007 |
+| NFR-001 | C-002 | DEC-001、DEC-002 | API-004、API-005 | AC-008 | TC-PERF-001（待补充） | TASK-004、TASK-005 |
+| NFR-002 | A-003 | DEC-003 | API-005 | AC-005、AC-008 | TC-3.1.5～TC-3.2.2 | TASK-004 |
+| NFR-003 | C-005、D-002 | DEC-003 | API-005、API-006 | AC-008 | TC-SEC-001（待补充） | TASK-004、TASK-007 |
+| NFR-004～NFR-006 | C-001、C-006 | DEC-004 | API-001～API-006 | AC-001、AC-006、AC-007 | TC-4.x、TC-5.x、TC-6.x | TASK-001～TASK-007 |
+
+### 5.1 任务 ID 对照
+
+| TASK ID | `06-ai-task-plan.md` 中的任务 |
+|---------|------------------------------|
+| TASK-001 | Task 0：data_loader — JSON 读写 |
+| TASK-002 | Task 1：parser — 程序粗筛 |
+| TASK-003 | Task 2：matcher — 控标识别 |
+| TASK-004 | Task 3：advisor — AI 精判和建议 |
+| TASK-005 | Task 4：engine — 串联三层架构 |
+| TASK-006 | Task 5：样例招标 JSON |
+| TASK-007 | Task 6：app.py — Streamlit 两页面 UI |
+
+---
+
+## 6. 变更记录
+
+| 版本 | 日期 | 变更内容 | 原因 | 影响范围 |
+|------|------|----------|------|----------|
+| v2.0 | 2026-07-27 | 将文档从“技术规格 + JSON Schema + 算法伪代码”重写为需求规约；新增 G/NFR/NG/C/A/D/DEC/API/AC/TC/R/TASK ID、风险表、追溯矩阵和验收口径 | 按 spec 工作流区分“做什么、怎么做、契约、怎么验收、怎么执行” | 影响 02、04、06、07 和 data/README 的引用关系；不改变代码和 JSON 文件 |
+| v1.0 | 2026-07-25 | 初版功能规格、JSON 数据格式、三层算法和 Demo 非目标 | 建立 Demo 的技术交接材料 | 作为历史版本保留 |
+
+> v2.0 当前状态为 `review`。在 PM、产品组、开发组和测试组确认 AC-008、R-001、R-005、R-006 后，才可将状态改为 `approved`。
