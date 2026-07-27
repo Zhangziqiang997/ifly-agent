@@ -31,24 +31,38 @@
       <section class="overview-grid">
         <article class="panel knowledge">
           <h2><span class="heading-icon blue">▤</span> 知识库接入</h2>
-          <div class="pdf-file"><span class="pdf-icon">⌑<b>PDF</b></span><div><strong>智慧教室采购需求.pdf</strong><small>解析完成 · 已写入参数知识库</small></div></div>
+          <div class="upload-drop" id="upload-drop" role="button" tabindex="0" aria-controls="upload-input">
+            <span class="upload-drop-icon">☁</span>
+            <span class="upload-drop-copy"><strong>拖拽文件到此处上传</strong><small>支持 PDF / DOC / DOCX / XLSX，单文件不超过 50MB</small></span>
+            <button class="upload-choose" id="upload-button" type="button">选择文件</button>
+          </div>
+          <div class="upload-file" id="upload-result" hidden>
+            <span class="upload-file-icon">⌑<b id="file-type">PDF</b></span>
+            <span class="upload-file-copy"><strong id="file-name"></strong><small id="upload-status" aria-live="polite"></small></span>
+            <button class="upload-remove" id="upload-remove" type="button" aria-label="移除上传文件">×</button>
+            <span class="upload-progress" aria-hidden="true"><i id="upload-progress-bar"></i></span>
+          </div>
           <div class="pipeline">
             <div><span class="process cloud">☁</span><b>上传文档</b></div><i>→</i><div><span class="process parse">▤</span><b>解析结构化</b></div><i>→</i><div><span class="process db">●</span><b>JSON入库</b></div><i>→</i><div><span class="process chart">◕</span><b>可复用分析</b></div>
           </div>
-          <div class="stats"><div>已沉淀 <strong>99</strong> 组数据<small>历史招标文件已结构化入库</small></div><div>新增后 <strong class="red">100</strong> 组数据<small>本次文档入库后知识库总量</small></div></div>
-          <div class="button-row"><button class="outline demo-action">▣　查看参数知识库</button><button class="primary demo-action">✦　开始 AI 分析</button></div>
+          <div class="stats"><div>已沉淀 <strong>99</strong> 组数据<small>历史招标文件已结构化入库</small></div><div>新增后 <strong class="red" id="knowledge-total">99</strong> 组数据<small>本次文档入库后知识库总量</small></div></div>
+          <input class="file-input" id="upload-input" type="file" accept=".pdf,.doc,.docx,.xlsx,.xls" aria-label="上传招标文件" />
+          <div class="button-row"><button class="outline demo-action" type="button">▣　查看参数知识库</button><button class="primary" id="analysis-button" type="button">✦　开始 AI 分析</button></div>
+          <p class="action-status" id="analysis-status" aria-live="polite"></p>
         </article>
 
         <article class="panel risk">
           <h2><span class="heading-icon red-outline">♧</span> AI风险识别</h2>
-          <p class="analysis-intro">本次分析发现 <strong>8</strong> 项重大风险</p>
-          <div class="risk-box"><h3>⚠　145°视场角：疑似竞品独有参数，存在控标倾向</h3><p><b>AI已完成语义研判</b><br>通过对比历史 99 份招标文件与产品规格，145°视场角在 90% 以上的项目中仅出现在竞品方案，结合其他限制条件，存在排他性风险。</p><p>研判置信度　<strong>92%</strong></p><div><button class="dark demo-action">查看研判依据</button><button class="danger demo-action">生成质疑话术</button></div></div>
+          <div class="analysis-state analysis-waiting" data-analysis-state="waiting"><span class="analysis-state-icon">♧</span><p>等待 AI 分析</p><small>点击「开始 AI 分析」后展示风险识别结果</small></div>
+          <div class="analysis-state analysis-loading" data-analysis-state="loading" hidden><span class="analysis-spinner"></span><p>AI 正在识别风险…</p><small>正在比对历史招标文件与产品规格</small></div>
+          <div data-analysis-state="done" hidden><p class="analysis-intro">本次分析发现 <strong>8</strong> 项重大风险</p><div class="risk-box"><h3>⚠　145°视场角：疑似竞品独有参数，存在控标倾向</h3><p><b>AI已完成语义研判</b><br>通过对比历史 99 份招标文件与产品规格，145°视场角在 90% 以上的项目中仅出现在竞品方案，结合其他限制条件，存在排他性风险。</p><p>研判置信度　<strong>92%</strong></p></div></div>
         </article>
 
         <article class="panel report">
-          <h2><span class="heading-icon blue-outline">▧</span> AI分析报告 <span class="finished">已完成　●</span></h2>
-          <div class="report-items" id="report-items"></div>
-          <button class="outline report-btn demo-action">▧　查看文档AI分析报告</button>
+          <h2><span class="heading-icon blue-outline">▧</span> AI分析报告 <span class="finished" id="report-state" hidden>已完成　●</span></h2>
+          <div class="analysis-state analysis-waiting" data-analysis-state="waiting"><span class="analysis-state-icon">▧</span><p>等待 AI 分析</p><small>点击「开始 AI 分析」后生成文档分析报告</small></div>
+          <div class="analysis-state analysis-loading" data-analysis-state="loading" hidden><span class="analysis-spinner"></span><p>AI 正在生成报告…</p><small>正在结构化提取参数与应对建议</small></div>
+          <div data-analysis-state="done" hidden><div class="report-items" id="report-items"></div><button class="outline report-btn" id="report-button" type="button" disabled>▧　查看文档AI分析报告</button></div>
         </article>
       </section>
 

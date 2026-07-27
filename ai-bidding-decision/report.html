@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 招标分析驾驶舱</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="report-page">
+  <header class="report-header">
+    <a class="report-back" href="index.html" aria-label="返回招标分析首页">
+      <span aria-hidden="true">←</span>
+      返回分析首页
+    </a>
+    <div class="report-brand">
+      <span class="report-brand-mark" aria-hidden="true">AI</span>
+      <span>智能招标决策平台</span>
+    </div>
+  </header>
+
+  <main class="report-main">
+    <section class="report-hero" aria-labelledby="report-title">
+      <div class="report-hero-copy">
+        <p class="report-eyebrow">AI 招标参数分析报告</p>
+        <h1 id="report-title"></h1>
+        <p id="controller-summary" class="report-lead"></p>
+      </div>
+      <div class="report-hero-meta" aria-label="分析状态">
+        <span class="report-live-dot" aria-hidden="true"></span>
+        <span>分析完成 · 数据已核验</span>
+      </div>
+    </section>
+
+    <section aria-labelledby="kpi-title">
+      <div class="report-section-heading report-section-heading-compact">
+        <div>
+          <p class="report-eyebrow">Cockpit overview</p>
+          <h2 id="kpi-title">关键研判指标</h2>
+        </div>
+        <p class="report-section-note">基于逐项招标参数与讯飞公开规格对照</p>
+      </div>
+      <div id="report-kpis" class="report-kpi-grid"></div>
+    </section>
+
+    <section class="report-insight-grid" aria-label="控标判断与分类偏离分布">
+      <article class="report-card controller-panel" aria-labelledby="controller-title">
+        <div class="report-card-heading">
+          <div>
+            <p class="report-eyebrow">Controller signal</p>
+            <h2 id="controller-title">控标倾向判断</h2>
+          </div>
+          <span class="controller-severity">高相关</span>
+        </div>
+        <div class="controller-result">
+          <div>
+            <span class="controller-result-label">倾向品牌</span>
+            <strong id="controller-vendor"></strong>
+          </div>
+          <div>
+            <span class="controller-result-label">判断置信度</span>
+            <strong id="controller-confidence"></strong>
+          </div>
+          <div>
+            <span class="controller-result-label">命中特征</span>
+            <strong id="controller-hit-count"></strong>
+          </div>
+        </div>
+        <div class="controller-evidence-heading">
+          <h3>命中特征 / 证据清单</h3>
+          <span>已核验</span>
+        </div>
+        <ul id="controller-evidence" class="controller-evidence"></ul>
+      </article>
+
+      <article class="report-card distribution-panel" aria-labelledby="distribution-title">
+        <div class="report-card-heading">
+          <div>
+            <p class="report-eyebrow">Category distribution</p>
+            <h2 id="distribution-title">分类偏离分布</h2>
+          </div>
+          <div class="chart-legend" aria-label="图例">
+            <span><i class="legend-positive"></i>正偏离</span>
+            <span><i class="legend-wording"></i>可改说辞</span>
+            <span><i class="legend-negative"></i>真负偏离</span>
+          </div>
+        </div>
+        <div id="category-chart" class="category-chart"></div>
+      </article>
+    </section>
+
+    <section class="report-card report-table-card" aria-labelledby="table-title">
+      <div class="report-table-heading">
+        <div>
+          <p class="report-eyebrow">Item-by-item review</p>
+          <div class="report-table-title-row">
+            <h2 id="table-title">逐项参数研判</h2>
+            <span id="table-count" class="table-count" aria-live="polite"></span>
+          </div>
+        </div>
+        <div class="report-filters" role="group" aria-label="按偏离判定筛选">
+          <button class="report-filter" type="button" data-filter="all" aria-pressed="true">全部</button>
+          <button class="report-filter" type="button" data-filter="positive" aria-pressed="false">正偏离</button>
+          <button class="report-filter" type="button" data-filter="wording" aria-pressed="false">可改说辞</button>
+          <button class="report-filter" type="button" data-filter="negative" aria-pressed="false">真负偏离</button>
+        </div>
+      </div>
+      <div class="report-table-wrap">
+        <table class="report-table">
+          <thead>
+            <tr>
+              <th scope="col">类别</th>
+              <th scope="col">招标要求</th>
+              <th scope="col">讯飞规格</th>
+              <th scope="col">判定</th>
+              <th scope="col">来源 / 优先级</th>
+              <th scope="col">行动建议</th>
+            </tr>
+          </thead>
+          <tbody id="report-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="report.js" type="module"></script>
+</body>
+</html>

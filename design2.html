@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>参数智能体 · 讯飞智慧黑板投标分析系统</title>
+  <style>
+:root{--blue:#1167ed;--ink:#17233a;--muted:#6d7b92;--line:#dce5f1;--soft:#f5f8fc}*{box-sizing:border-box}body{margin:0;font-family:"Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:#fff;font-size:14px}.sidebar{position:fixed;inset:0 auto 0 0;width:240px;background:#f7faff;border-right:1px solid #dfe7f1;z-index:2}.brand{height:92px;padding:22px 22px;color:#fff;background:linear-gradient(120deg,#126ce9,#0054d5);display:flex;flex-direction:column;gap:7px}.brand strong{font-size:19px;letter-spacing:.4px}.brand span{font-size:15px}.business-label{margin:19px 20px 10px;color:#6b7a91;font-weight:700}.business-select{margin:0 19px;width:202px;height:40px;border:1px solid #d1dce9;border-radius:6px;background:#fff;text-align:left;padding:0 13px;font-weight:700;color:#344159}.business-select span{color:var(--blue);font-size:18px;margin-right:8px}.business-select b{float:right;color:#76849b;font-size:17px}nav{padding:16px 12px}nav .group-title{padding:12px 8px 8px;color:var(--blue);font-size:16px;font-weight:700}nav a{height:39px;display:flex;align-items:center;gap:12px;border-radius:6px;padding:0 12px;color:#35445c;text-decoration:none;font-weight:600;margin:1px 0;font-size:15px}nav a .nav-ico{font-size:18px;width:18px;color:#344662}nav a.active{color:#1267f0;background:#e7f0ff;border-left:4px solid var(--blue);padding-left:8px}nav a.active .nav-ico{color:var(--blue)}.sidebar-collapse{position:absolute;bottom:16px;left:16px;right:16px;border-top:1px solid #d9e2ee;text-align:right;padding-top:10px;font-size:30px;color:#6c7b91}.shell{margin-left:240px;min-width:1100px}.topbar{height:63px;border-bottom:1px solid #e1e8f0;display:flex;align-items:center;justify-content:space-between;padding:0 25px}.crumb{font-size:16px;color:#313c4f}.crumb i{font-style:normal;color:#a9b3c1;margin:0 13px}.top-actions{display:flex;align-items:center;gap:20px}.search{height:43px;width:356px;border:1px solid #d3dbe7;border-radius:7px;display:flex;align-items:center;padding-left:13px}.search input{border:0;outline:0;font:inherit;flex:1;color:#47556c}.search input::placeholder{color:#a4adbd}.search span{font-size:28px;color:#63718a;margin-right:11px}.plain-icon{background:none;border:0;font-size:27px;color:#17233a;position:relative;cursor:pointer}.notification em{position:absolute;width:8px;height:8px;border-radius:50%;background:#f5222d;right:1px;top:0}.avatar{width:42px;height:42px;border-radius:50%;background:#e8eef6;display:grid;place-items:center;font-size:32px;overflow:hidden}.down{font-size:18px;color:#566278;margin-left:-12px}.page{padding:14px 18px 40px;max-width:1450px;margin:auto}.title-row{height:81px}.title-row h1{margin:0 0 6px;font-size:35px;letter-spacing:.5px}.title-row p{margin:0;color:#536278;font-size:16px}.overview-grid{display:grid;grid-template-columns:1.4fr .96fr .92fr;gap:13px}.panel{border:1px solid var(--line);border-radius:9px;background:#fff;box-shadow:0 1px 2px rgba(20,50,90,.015);padding:13px}.panel h2{font-size:18px;margin:1px 0 13px;display:flex;align-items:center;gap:9px}.heading-icon{font-size:22px;line-height:1}.blue{color:#0766ef}.red-outline{color:#f02125}.blue-outline{color:#1269f0}.pdf-file{height:69px;border:1px solid #dce4ef;border-radius:7px;display:flex;align-items:center;width:257px;padding:8px 12px;gap:11px}.pdf-icon{height:43px;width:32px;background:#f24846;color:#fff;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px}.pdf-icon b{font-size:9px}.pdf-file strong{display:block;font-size:15px}.pdf-file small{display:block;color:#08a454;font-size:12px;font-weight:bold;margin-top:5px}.pipeline{height:86px;display:flex;align-items:center;justify-content:space-around}.pipeline>div{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:13px}.pipeline i{font-size:42px;font-style:normal;color:#94a5be}.process{height:48px;width:48px;border-radius:50%;display:grid;place-items:center;font-size:28px;box-shadow:0 2px 8px #dce6f4}.cloud{color:#1671f5;background:#eef5ff}.parse{color:#1469e8;background:#eff5ff}.db{color:#0ba34a;background:#ecfaef}.chart{color:#7641ed;background:#f3efff}.stats{display:grid;grid-template-columns:1fr 1fr;height:67px;border:1px solid #d6e1f0;border-radius:8px}.stats div{text-align:center;padding-top:10px;font-weight:700;font-size:15px}.stats div+div{border-left:1px solid #d6e1f0}.stats strong{font-size:29px;color:#103c82;margin:0 4px}.stats .red{color:#f02223}.stats small{display:block;color:#6b7890;font-weight:normal;margin-top:0}.button-row{display:flex;gap:13px;margin-top:12px}button{font:inherit;cursor:pointer}.outline,.primary{height:46px;border-radius:6px;font-size:15px;font-weight:700;flex:1}.outline{border:2px solid #1767f3;background:#fff;color:#0762e7}.primary{border:0;background:linear-gradient(100deg,#126df5,#075be1);color:#fff}.analysis-intro{font-size:15px;color:#5a677c;margin:-2px 0 10px}.analysis-intro strong{color:red;font-size:24px;margin:0 3px}.risk-box{border:1px solid #ffb9b9;background:linear-gradient(120deg,#fff8f8,#fff);border-radius:8px;padding:12px 11px;height:255px}.risk-box h3{color:#e5302d;font-size:15px;line-height:1.45;margin:0 0 10px}.risk-box p{line-height:1.65;color:#536075;margin:8px 0;font-size:13px}.risk-box p b{color:#263247;font-size:14px}.risk-box p strong{color:#e72b28}.risk-box>div{display:flex;gap:15px;margin-top:8px}.risk-box button{height:42px;border-radius:6px;flex:1;font-weight:bold;background:#fff}.dark{border:1px solid #27364c;color:#243349}.danger{border:1px solid #ff3232;color:#ec2323}.finished{font-size:13px;color:#14a850;margin-left:auto}.report-items{border:1px solid #dfe7f0;border-radius:8px;padding:0 14px;margin-top:5px}.report-item{height:70px;border-bottom:1px solid #e1e7ef;display:flex;align-items:center;gap:12px}.report-item:last-child{border:0}.metric-icon{width:43px;height:43px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:21px}.metric-copy strong{font-size:24px;color:#1268ee;margin-right:6px}.metric-copy span{font-size:15px;font-weight:bold}.metric-copy small{display:block;color:#718096;margin-top:2px}.report-item:nth-child(2) .metric-copy strong{color:#7245e9}.report-item:nth-child(3) .metric-copy strong{color:#08a347}.report-btn{width:100%;margin-top:17px}.work{margin-top:12px;padding:11px}.work h2{margin:0 0 10px}.work-list{display:grid;grid-template-columns:1.15fr 1fr 1fr 1fr;gap:18px}.work-item{height:81px;border:1px solid #dce5ef;border-radius:7px;display:flex;align-items:center;padding:0 18px;gap:15px}.work-item.active{border:2px solid #1267ef}.work-icon{width:64px;font-size:39px;text-align:center}.work-copy{flex:1}.work-copy strong{font-size:16px}.work-copy small{display:block;color:#65738a;margin-top:5px}.work-arrow{height:23px;width:23px;border:1px solid #dce4ee;border-radius:50%;display:grid;place-items:center;color:#69778d;font-size:22px;line-height:16px}.active .work-arrow{background:#1267ec;border-color:#1267ec;color:#fff}.bottom-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:13px;margin-top:10px}.bottom-grid .panel{height:225px}.assessment h2,.capabilities h2{margin-bottom:8px;font-size:17px}table{border-collapse:separate;border-spacing:0;width:100%;border:1px solid #d5e1ef;border-radius:8px;overflow:hidden;font-size:13px}th{background:#f0f5fc;color:#536178;font-weight:700;height:28px}td{height:35px;border-top:1px solid #e2e8f1;color:#435168;padding:0 12px}th+th,td+td{border-left:1px solid #e2e8f1}td:last-child{color:#1268e9;font-weight:700}.badge{display:inline-block;border-radius:4px;padding:3px 20px;color:#ec2c30;background:#ffe8e7}.badge.mid{color:#e98b00;background:#fff0d5}.link-button{display:block;margin:10px auto 0;border:0;background:white;color:#0567ef;font-weight:bold}.capability-list{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.capability{height:135px;border:1px solid #dce4ef;border-radius:10px;text-align:center;padding:15px 7px}.capability .cap-ico{font-size:31px;display:block;margin-bottom:8px}.capability strong{font-size:14px}.capability small{display:block;font-size:13px;color:#647188;line-height:1.5;margin-top:10px}.capabilities>p{text-align:center;color:#536178;margin:12px 0 0}.toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,90px);opacity:0;background:#1f2e45;color:#fff;padding:11px 20px;border-radius:6px;box-shadow:0 6px 20px #9cacbf;transition:.25s;z-index:10}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1200px){.overview-grid{grid-template-columns:1fr}.bottom-grid{grid-template-columns:1fr}.shell{min-width:900px}.page{padding-right:12px}.work-list{gap:8px}.work-item{padding:0 8px}.work-icon{width:40px}}
+
+/* Typography tuned */
+body{font-family:"Microsoft YaHei","PingFang SC",Arial,sans-serif;font-size:14px;line-height:1.45}
+.brand strong{font-size:16px;line-height:1.35;letter-spacing:0}.brand span{font-size:12px;font-weight:600}
+.business-label{font-size:12px}.business-select{font-size:13px}.business-select span{font-size:16px}
+nav .group-title{font-size:13px}nav a{font-size:14px;font-weight:500}nav a.active{font-weight:700}.crumb{font-size:15px}
+.title-row h1{font-size:27px;line-height:1.25;letter-spacing:-.03em}.title-row p{font-size:13px;line-height:1.45}
+.panel h2{font-size:16px}.heading-icon{font-size:20px}.pdf-file strong{font-size:14px}.pdf-file small{font-size:12px}
+.upload-drop{position:relative;border:2px dashed #b9cbe6;border-radius:8px;background:#f7faff;padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:pointer;transition:.18s}
+.upload-drop:hover{border-color:#1167ed;background:#eef5ff}
+.upload-drop.dragover{border-color:#1167ed;background:#e7f0ff;box-shadow:0 0 0 3px rgba(17,103,237,.12)}
+.upload-drop .up-ico{width:44px;height:44px;flex-shrink:0;border-radius:8px;background:#e7f0ff;color:#1167ed;display:grid;place-items:center;font-size:24px}
+.upload-drop .up-text strong{display:block;font-size:14px;color:#243349}
+.upload-drop .up-text small{display:block;font-size:12px;color:#6d7b92;margin-top:4px}
+.upload-drop .up-btn{margin-left:auto;flex-shrink:0;height:34px;padding:0 15px;border:1px solid #1167ed;border-radius:6px;background:#fff;color:#0762e7;font-weight:700;font-size:13px}
+.upload-file{border:1px solid #dce4ef;border-radius:7px;display:flex;align-items:center;padding:9px 12px;gap:11px;margin-top:10px}
+.upload-file .uf-ico{height:43px;width:32px;flex-shrink:0;background:#f24846;color:#fff;border-radius:4px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:17px}
+.upload-file .uf-ico b{font-size:9px}
+.upload-file .uf-meta{flex:1;min-width:0}
+.upload-file .uf-meta strong{display:block;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upload-file .uf-meta small{display:block;color:#08a454;font-size:12px;font-weight:bold;margin-top:5px}
+.upload-file .uf-meta small.parsing{color:#e98b00}
+.upload-file .uf-remove{flex-shrink:0;border:0;background:none;color:#9aa6b8;font-size:20px;line-height:1;padding:4px}
+.upload-file .uf-remove:hover{color:#f02223}
+.upload-bar{height:4px;border-radius:4px;background:#e2e9f3;overflow:hidden;margin-top:9px}
+.upload-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#126df5,#075be1);transition:width .3s ease}
+.ai-waiting,.ai-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;min-height:255px;border:1px dashed #d3ddec;border-radius:8px;background:#f9fbfe;color:#7d8aa0;padding:20px}
+.ai-waiting .wait-ico{font-size:36px;opacity:.5;margin-bottom:12px}
+.ai-waiting p,.ai-loading p{margin:0;font-size:15px;font-weight:700;color:#5a6a82}
+.ai-waiting small,.ai-loading small{margin-top:8px;font-size:12px;color:#93a0b4}
+.ai-spinner{width:38px;height:38px;border-radius:50%;border:3px solid #d9e6fa;border-top-color:#1167ed;animation:aispin .8s linear infinite;margin-bottom:14px}
+@keyframes aispin{to{transform:rotate(360deg)}}
+.pipeline>div{font-size:12px}.pipeline i{font-size:28px}.process{font-size:22px}.stats div{font-size:13px}.stats strong{font-size:22px}.stats small{font-size:11px}
+.outline,.primary{font-size:14px}.analysis-intro{font-size:13px}.analysis-intro strong{font-size:20px}.risk-box h3{font-size:14px}.risk-box p{font-size:12px}.risk-box p b{font-size:12px}
+.finished{font-size:12px}.metric-copy strong{font-size:20px}.metric-copy span{font-size:14px}.metric-copy small{font-size:11px}
+.work-copy strong{font-size:14px}.work-copy small{font-size:11px}.assessment h2,.capabilities h2{font-size:16px}table{font-size:12px}.capability strong{font-size:12px}.capability small{font-size:10px;line-height:1.45}.capabilities>p{font-size:11px}
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><strong>参数智能体</strong><span>讯飞智慧黑板 · 投标分析</span></div>
+    <div class="business-label">业务选择</div>
+    <button class="business-select"><span>▣</span> 讯飞智慧黑板投标业务</button>
+    <nav id="side-nav"></nav>
+    <div class="sidebar-collapse">‹</div>
+  </aside>
+
+  <main class="shell">
+    <header class="topbar">
+      <div class="crumb">项目总览 <i>/</i> 参数智能体投标分析</div>
+      <div class="top-actions">
+        <label class="search"><input placeholder="搜索项目、文档、产品或参数" /><span>⌕</span></label>
+        <button class="plain-icon notification">♧<em></em></button>
+        <button class="plain-icon">?</button>
+        <div class="avatar">⚡</div><span class="down">⌄</span>
+      </div>
+    </header>
+    <section class="page">
+      <div class="title-row"><h1>参数智能体 · 投标分析系统</h1><p>基于参数知识库，自动完成招标研判、风险识别与投标策略生成</p></div>
+
+      <section class="overview-grid">
+        <article class="panel knowledge">
+          <h2><span class="heading-icon blue">▤</span> 知识库接入</h2>
+          <div class="upload-drop" id="uploadDrop">
+            <span class="up-ico">☁</span>
+            <div class="up-text"><strong>拖拽文件到此处上传</strong><small>支持 PDF / DOC / DOCX / XLSX，单文件不超过 50MB</small></div>
+            <button class="up-btn" type="button">选择文件</button>
+            <input type="file" id="uploadInput" accept=".pdf,.doc,.docx,.xlsx,.xls" style="display:none" />
+          </div>
+          <div id="uploadResult"></div>
+          <div class="pipeline">
+            <div><span class="process cloud">☁</span><b>上传文档</b></div><i>→</i><div><span class="process parse">▤</span><b>解析结构化</b></div><i>→</i><div><span class="process db">●</span><b>JSON入库</b></div><i>→</i><div><span class="process chart">◕</span><b>可复用分析</b></div>
+          </div>
+          <div class="stats"><div>已沉淀 <strong>99</strong> 组数据<small>历史招标文件已结构化入库</small></div><div>新增后 <strong class="red">100</strong> 组数据<small>本次文档入库后知识库总量</small></div></div>
+          <div class="button-row"><button class="outline demo-action">▣　查看参数知识库</button><button class="primary" id="startAnalyze">✦　开始 AI 分析</button></div>
+        </article>
+
+        <article class="panel risk">
+          <h2><span class="heading-icon red-outline">♧</span> AI风险识别</h2>
+          <div class="ai-waiting" data-state="waiting"><span class="wait-ico">♧</span><p>等待 AI 分析</p><small>点击「开始 AI 分析」后展示风险识别结果</small></div>
+          <div class="ai-loading" data-state="loading" style="display:none"><span class="ai-spinner"></span><p>AI 正在识别风险…</p><small>正在比对历史招标文件与产品规格</small></div>
+          <div data-state="done" style="display:none">
+            <p class="analysis-intro">本次分析发现 <strong>8</strong> 项重大风险</p>
+            <div class="risk-box"><h3>⚠　红外触控点数 ≥ 40点：疑似希沃独有参数，存在控标倾向</h3><p><b>AI已完成语义研判</b><br>通过对比历史招标文件与产品规格，40点触控在90%以上的项目中仅出现在希沃方案，结合其他限制条件，存在排他性风险。</p><p style="font-size:16px;font-weight:700">研判置信度　<strong>92%</strong></p></div>
+          </div>
+        </article>
+
+        <article class="panel report">
+          <h2><span class="heading-icon blue-outline">▧</span> AI分析报告 <span class="finished" data-state="done" style="display:none">已完成　●</span></h2>
+          <div class="ai-waiting" data-state="waiting"><span class="wait-ico">▧</span><p>等待 AI 分析</p><small>点击「开始 AI 分析」后生成文档分析报告</small></div>
+          <div class="ai-loading" data-state="loading" style="display:none"><span class="ai-spinner"></span><p>AI 正在生成报告…</p><small>正在结构化提取参数与应对建议</small></div>
+          <div data-state="done" style="display:none">
+            <div class="report-items" id="report-items"></div>
+            <button class="outline report-btn demo-action">▧　查看文档AI分析报告</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="panel work"><h2>核心工作入口</h2><div class="work-list" id="work-list"></div></section>
+      <section class="bottom-grid">
+        <article class="panel assessment"><h2>AI研判结果</h2><table><thead><tr><th>识别对象</th><th>AI判断</th><th>风险等级</th><th>下一步操作</th></tr></thead><tbody id="assessment-body"></tbody></table><button class="link-button demo-action">查看全部研判结果　›</button></article>
+        <article class="panel capabilities"><h2>讯飞AI产品能力</h2><div class="capability-list" id="capability-list"></div><p>基于自研 AI 技术与教育场景深度融合，赋能更优投标方案与差异化优势</p></article>
+      </section>
+    </section>
+  </main>
+  <div class="toast" id="toast">功能演示：已收到您的操作</div>
+  <script>
+const mockData = {
+  nav: [
+    ['上传与解析', [['📂','上传招标文件',false],['🎯','分析结果',true],['🗂','参数知识库',false]]],
+    ['智能分析', [['♧','参数对比分析'],['▧','风险识别报告'],['♧','控标方判定'],['▣','应对建议']]],
+    ['产品与知识', [['♧','产品参数中心'],['▣','竞品参数库'],['▤','讯飞产品库'],['▤','规则与标准']]]
+  ],
+  report: [
+    ['▧','48','条参数','结构化提取的招标参数','#1670ef'],
+    ['▤','8','项负偏离','识别出的真负偏离参数','#7548e8'],
+    ['▤','12','条应对建议','基于AI分析的应对策略','#08a54d']
+  ],
+  work: [
+    ['⚖','参数逐条对比','快速对比招标参数与讯飞规格',true],
+    ['▧','AI分析报告','查看完整的参数分析报告'],
+    ['▰','生成应对话术','AI生成质疑话术与改进建议'],
+    ['●','参数知识库','浏览已沉淀的参数知识库']
+  ],
+  assessment: [['控标方识别','希沃 SEEWO','高','查看详情'],['触控点数要求','竞品独有特征','高','生成质疑话术'],['摄像头像素','讯飞可改说辞','中','查看建议']],
+  capabilities: [['♩','AI语音转写','高准确率语音转写\n支持多语种识别'],['◉','远场语音交互','远距离拾音降噪\n自然语音交互'],['♟','课堂互动评测','多维度课堂评测\n实时反馈效果'],['▥','学情数据分析','学情数据采集分析\n精准教学决策']]
+};
+
+const nav = document.querySelector('#side-nav');
+nav.innerHTML = mockData.nav.map(([title, items]) => `<div class="group-title">${title}</div>${items.map(([icon, label, active]) => `<a href="#" class="${active ? 'active' : ''}"><span class="nav-ico">${icon}</span>${label}</a>`).join('')}`).join('');
+
+document.querySelector('#report-items').innerHTML = mockData.report.map(([icon, number, label, note, color]) => `<div class="report-item"><span class="metric-icon" style="background:${color}">${icon}</span><div class="metric-copy"><strong>${number}</strong><span>${label}</span><small>${note}</small></div></div>`).join('');
+document.querySelector('#work-list').innerHTML = mockData.work.map(([icon, title, note, active]) => `<button class="work-item demo-action ${active ? 'active' : ''}"><span class="work-icon">${icon}</span><span class="work-copy"><strong>${title}</strong><small>${note}</small></span><span class="work-arrow">›</span></button>`).join('');
+document.querySelector('#assessment-body').innerHTML = mockData.assessment.map(([object, verdict, risk, action]) => `<tr><td>${object}</td><td>${verdict}</td><td><span class="badge ${risk === '中' ? 'mid' : ''}">${risk}</span></td><td>${action}</td></tr>`).join('');
+document.querySelector('#capability-list').innerHTML = mockData.capabilities.map(([icon, title, note]) => `<div class="capability"><span class="cap-ico">${icon}</span><strong>${title}</strong><small>${note.replace('\n','<br>')}</small></div>`).join('');
+
+const toast = document.querySelector('#toast');
+let toastTimer;
+document.addEventListener('click', (event) => {
+  const action = event.target.closest('.demo-action');
+  if (!action) return;
+  event.preventDefault();
+  toast.textContent = `功能演示：${action.textContent.trim().replace(/\s+/g, ' ')} 已触发`;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+});
+
+// ── AI 分析加载状态 ──
+(function(){
+  const btn = document.getElementById('startAnalyze');
+  if(!btn) return;
+  const panels = [document.querySelector('.panel.risk'), document.querySelector('.panel.report')];
+  let running = false;
+
+  function setState(state){
+    panels.forEach(panel => {
+      panel.querySelectorAll('[data-state]').forEach(el => {
+        el.style.display = (el.getAttribute('data-state') === state) ? '' : 'none';
+      });
+    });
+  }
+
+  btn.addEventListener('click', () => {
+    if(running) return;
+    running = true;
+    btn.disabled = true;
+    btn.style.opacity = '.6';
+    btn.style.cursor = 'not-allowed';
+    setState('loading');
+    setTimeout(() => {
+      setState('done');
+      running = false;
+      btn.disabled = false;
+      btn.style.opacity = '';
+      btn.style.cursor = '';
+      showToast('功能演示：AI 分析已完成');
+    }, 30000);
+  });
+})();
+
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+// ── 拖拽上传 ──
+(function(){
+  const drop = document.getElementById('uploadDrop');
+  const input = document.getElementById('uploadInput');
+  const result = document.getElementById('uploadResult');
+  if(!drop || !input || !result) return;
+
+  const allowed = ['pdf','doc','docx','xlsx','xls'];
+  const MAX = 50 * 1024 * 1024;
+
+  drop.addEventListener('click', (e) => {
+    if (e.target.closest('.demo-action')) return;
+    input.click();
+  });
+
+  ['dragenter','dragover'].forEach(evt =>
+    drop.addEventListener(evt, (e) => { e.preventDefault(); drop.classList.add('dragover'); })
+  );
+  ['dragleave','drop'].forEach(evt =>
+    drop.addEventListener(evt, (e) => { e.preventDefault(); drop.classList.remove('dragover'); })
+  );
+  drop.addEventListener('drop', (e) => {
+    const file = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file) handleFile(file);
+  });
+  input.addEventListener('change', () => {
+    if (input.files && input.files[0]) handleFile(input.files[0]);
+  });
+
+  function fmtSize(bytes){
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/1048576).toFixed(1) + ' MB';
+  }
+
+  function handleFile(file){
+    const ext = (file.name.split('.').pop() || '').toLowerCase();
+    if (!allowed.includes(ext)) { showToast('功能演示：文件格式不支持，请上传 PDF / DOC / DOCX / XLSX'); return; }
+    if (file.size > MAX) { showToast('功能演示：文件超过 50MB 上限'); return; }
+
+    result.innerHTML =
+      '<div class="upload-file">' +
+        '<span class="uf-ico">⌑<b>' + ext.toUpperCase().slice(0,4) + '</b></span>' +
+        '<div class="uf-meta"><strong>' + file.name + '</strong>' +
+        '<small class="parsing">上传中… ' + fmtSize(file.size) + '</small></div>' +
+        '<button class="uf-remove" type="button" title="移除">×</button>' +
+        '<div class="upload-bar"><i></i></div>' +
+      '</div>';
+
+    const bar = result.querySelector('.upload-bar i');
+    const status = result.querySelector('.uf-meta small');
+    result.querySelector('.uf-remove').addEventListener('click', () => {
+      result.innerHTML = '';
+      input.value = '';
+      showToast('功能演示：已移除文件');
+    });
+
+    let pct = 0;
+    const timer = setInterval(() => {
+      pct = Math.min(100, pct + Math.random() * 22 + 8);
+      bar.style.width = pct + '%';
+      if (pct >= 100) {
+        clearInterval(timer);
+        status.textContent = '解析中 · 结构化提取参数…';
+        setTimeout(() => {
+          status.classList.remove('parsing');
+          status.textContent = '解析完成 · 已写入参数知识库';
+          const wrap = result.querySelector('.upload-bar');
+          if (wrap) wrap.remove();
+          showToast('功能演示：' + file.name + ' 解析完成');
+        }, 900);
+      }
+    }, 260);
+  }
+})();
+  </script>
+</body>
+</html>
