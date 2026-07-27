@@ -9,6 +9,15 @@ const sources = [
 const state = { products: [], params: [], query: '', vendor: '', category: '' };
 const $ = (selector) => document.querySelector(selector);
 const esc = (value = '') => String(value).replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]);
+const softwareCategories = new Set(['软件', '教学软件', 'AI', 'AI能力', '生态', '集控管理']);
+
+function parameterKind(param) {
+  return softwareCategories.has(param.category) ? 0 : 1;
+}
+
+function displayOrder(a, b) {
+  return a.productIndex - b.productIndex || parameterKind(a) - parameterKind(b) || a.paramIndex - b.paramIndex;
+}
 
 async function loadKnowledgeBase() {
   const datasets = await Promise.all(sources.map(async (source) => {
@@ -18,12 +27,14 @@ async function loadKnowledgeBase() {
     return Array.isArray(data) ? data : [data];
   }));
   state.products = datasets.flat();
-  state.params = state.products.flatMap((product) => (product.params || []).map((param) => ({
+  state.params = state.products.flatMap((product, productIndex) => (product.params || []).map((param, paramIndex) => ({
     ...param,
     vendor: product.vendor,
     product: product.product,
     productCategory: product.category,
     updated: product.updated,
+    productIndex,
+    paramIndex,
   })));
   bindControls();
   render();
@@ -58,13 +69,13 @@ function render() {
   const categories = [...new Set(state.params.map((param) => param.category))];
   renderChips($('#vendor-filter'), vendors, state.vendor, '全部厂商', (value) => { state.vendor = value; render(); });
   renderChips($('#category-filter'), categories, state.category, '全部分类', (value) => { state.category = value; render(); });
-  const list = filteredParams();
+  const list = filteredParams().sort(displayOrder);
   $('#result-count').innerHTML = `共 <strong>${list.length}</strong> 条参数 · ${vendors.length} 家厂商`;
   const target = $('#kb-list');
   if (!list.length) { target.innerHTML = '<div class="state-empty">无匹配参数，请调整筛选条件。</div>'; return; }
   target.innerHTML = list.map((param) => {
     const indicators = (param.indicators || []).map((indicator) => `<span class="ind">${esc(displayIndicator(indicator))}</span>`).join('');
-    const tags = `${param.star_mark ? '<span class="tag star">★星标</span>' : ''}${param.cert_required ? '<span class="tag cert">需认证</span>' : ''}`;
+    const tags = param.star_mark ? '<span class="tag star">★星标</span>' : '';
     return `<article class="kb-item">
       <div class="kb-item-head"><strong>${esc(param.name)}</strong><span class="kb-vendor">${esc(param.vendor)}</span><span class="kb-cat">${esc(param.category || param.productCategory)}</span>${tags}</div>
       <p class="kb-product">${esc(param.product)}</p><p class="kb-spec">${esc(param.spec)}</p>
@@ -81,10 +92,13 @@ function showDetails(productName) {
   const dialog = $('#detail-dialog');
   dialog.querySelector('h2').textContent = product.product;
   dialog.querySelector('.dialog-meta').textContent = `${product.vendor} · ${product.category || '教育装备'} · ${product.updated || '已入库'}`;
-  dialog.querySelector('.dialog-list').innerHTML = product.params.map((param) => {
+  dialog.querySelector('.dialog-list').innerHTML = product.params
+    .map((param, paramIndex) => ({ ...param, productIndex: state.products.indexOf(product), paramIndex }))
+    .sort(displayOrder)
+    .map((param) => {
     const tags = (param.indicators || []).map((indicator) => `<span class="ind">${esc(displayIndicator(indicator))}</span>`).join('');
     return `<article class="detail-item"><h3>${esc(param.name)}${param.star_mark ? ' ★' : ''}</h3><p>${esc(param.spec)}</p>${tags ? `<div class="kb-inds">${tags}</div>` : ''}</article>`;
-  }).join('');
+    }).join('');
   dialog.showModal();
 }
 

@@ -1,0 +1,4 @@
+.business-menu{position:relative;display:flex;align-items:center;width:202px;height:40px;margin:0 19px;border:1px solid #d1dce9;border-radius:6px;background:#fff;color:#344159}
+.business-menu:focus-within{border-color:#8db6f7;box-shadow:0 0 0 2px rgba(17,103,237,.1)}
+.business-icon{flex:0 0 auto;margin-left:13px;color:#1167ed;font-size:16px}
+.business-menu select{width:100%;height:100%;padding:0 10px 0 8px;border:0;outline:0;background:transparent;color:#344159;font:600 13px "Microsoft YaHei",Arial,sans-serif;cursor:pointer}
