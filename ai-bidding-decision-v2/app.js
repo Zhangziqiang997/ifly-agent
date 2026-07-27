@@ -100,7 +100,7 @@ function handleUploadFile(file) {
     uploadProgressBar.style.width = '100%';
     uploadStatus.classList.remove('parsing');
     uploadStatus.textContent = '解析完成 · 已写入参数知识库';
-    knowledgeTotal.textContent = '100';
+    knowledgeTotal.textContent = '93';
   }, 3000);
 }
 
@@ -129,7 +129,7 @@ function resetUploadUi() {
   uploadStatus.textContent = '';
   uploadStatus.classList.remove('parsing');
   uploadProgressBar.style.width = '0%';
-  knowledgeTotal.textContent = '99';
+  knowledgeTotal.textContent = '92';
 }
 
 function setAnalysisState(state) {

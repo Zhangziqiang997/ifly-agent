@@ -170,6 +170,40 @@
             color: var(--brand-blue-dark); font-size: 28px; font-weight: 700;
             letter-spacing: 0.08em;
         }
+        .cover-team {
+            position: absolute;
+            top: 304px; right: 148px;
+            width: 340px;
+            padding: 34px 34px 30px;
+            border: 1.5px solid rgba(22,139,234,0.22);
+            border-radius: 24px;
+            background: rgba(255,255,255,0.78);
+            box-shadow: 0 16px 44px rgba(22,139,234,0.10);
+        }
+        .cover-team-label {
+            color: var(--brand-blue-dark);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            margin-bottom: 12px;
+        }
+        .cover-team-leader {
+            color: var(--ink);
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.2;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+        .cover-team-members {
+            display: grid;
+            gap: 12px;
+            color: #334155;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
 
         /* ---------- P2 Demo ---------- */
         .slide-demo { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: linear-gradient(135deg, var(--navy) 0%, #0B4F8A 60%, var(--brand-blue) 100%); }
@@ -523,6 +557,19 @@
         </div>
 
         <div class="team-line">展翼4班 · 第2组</div>
+        <div class="cover-team" aria-label="团队名单">
+            <div class="cover-team-label">组长</div>
+            <div class="cover-team-leader">张子强</div>
+            <div class="cover-team-label">组员</div>
+            <div class="cover-team-members">
+                <div>赵书进</div>
+                <div>陈媛媛</div>
+                <div>李奖</div>
+                <div>王尉丞</div>
+                <div>覃宝洋</div>
+                <div>许文卓</div>
+            </div>
+        </div>
 
     </div>
 
@@ -813,84 +860,7 @@
         </div>
 
         <div class="arch-wrap">
-            <img src="ai-contest-flow-diagram.png" alt="招标文件输入、三层判定引擎与多维度评估建议的技术流程图">
-        </div>
-
-        <!-- 三层架构流程图（保留旧结构，演示时隐藏） -->
-        <div class="arch-diagram">
-            <!-- 输入：MinerU 解析 -->
-            <div class="arch-node arch-input">
-                <div class="arch-node-badge">输入</div>
-                <div class="arch-node-title">招标文件</div>
-                <div class="arch-node-meta">PDF / Word / Excel</div>
-                <div class="arch-node-detail">MinerU 解析 → JSON</div>
-            </div>
-
-            <div class="arch-arrow">→</div>
-
-            <!-- 第一层：数值比对 -->
-            <div class="arch-node arch-layer1">
-                <div class="arch-layer-num">1</div>
-                <div class="arch-node-title">数值比对</div>
-                <div class="arch-node-meta">程序秒判 · 不用大模型</div>
-                <div class="arch-node-list">
-                    <div class="arch-item">单位对齐：4K = 3840×2160</div>
-                    <div class="arch-item">数值比较 · 按要求方向</div>
-                    <div class="arch-item highlight">约 80% 参数直接出结论</div>
-                </div>
-            </div>
-
-            <div class="arch-arrow">→</div>
-
-            <!-- 第二层：控标识别 -->
-            <div class="arch-node arch-layer2">
-                <div class="arch-layer-num">2</div>
-                <div class="arch-node-title"><span class="risk-text">控标</span>识别</div>
-                <div class="arch-node-meta">查表统计 · 不用大模型</div>
-                <div class="arch-node-list">
-                    <div class="arch-item">独有特征：仅1家满足</div>
-                    <div class="arch-item">统计：希沃/鸿合/海康</div>
-                    <div class="arch-item highlight">命中最多 = <span class="risk-text">控标方</span></div>
-                </div>
-            </div>
-
-            <div class="arch-arrow">→</div>
-
-            <!-- 第三层：AI精判 -->
-            <div class="arch-node arch-layer3">
-                <div class="arch-layer-num">3</div>
-                <div class="arch-node-title">AI 精判</div>
-                <div class="arch-node-meta">语义理解 · DeepSeek</div>
-                <div class="arch-node-list">
-                    <div class="arch-item">说法不同 → 改说辞</div>
-                    <div class="arch-item">确实不满足 → 质疑话术</div>
-                    <div class="arch-item highlight">只处理疑难项</div>
-                </div>
-            </div>
-
-            <div class="arch-arrow">→</div>
-
-            <!-- 输出：分析报告 -->
-            <div class="arch-node arch-output">
-                <div class="arch-node-badge">输出</div>
-                <div class="arch-node-title">分析报告</div>
-                <div class="arch-node-list compact">
-                    <div class="arch-item">◆ 控标方判定 + 置信度</div>
-                    <div class="arch-item">◆ 逐条正/负偏离标记</div>
-                    <div class="arch-item">◆ 负偏离应对建议</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="arch-principle">
-            <div class="ap-card ap-1">
-                <div class="ap-label">◈ 程序层（第一、二层）</div>
-                <div class="ap-text"><span class="ap-big">80%</span> 参数纯程序秒判 · 零 AI 成本</div>
-            </div>
-            <div class="ap-card ap-2">
-                <div class="ap-label">◈ AI 层（第三层）</div>
-                <div class="ap-text">仅 <span class="ap-big">20%</span> 疑难项调用大模型 · 一份标书只调一次</div>
-            </div>
+            <img src="fig4.png" alt="输入与解析、数值比对、控标识别、AI语义精判和输出与决策的三层对比架构图">
         </div>
     </div>
 

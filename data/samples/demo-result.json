@@ -1,42 +1,10 @@
 {
-  "generated_at": "2026-07-27 23:30:39",
+  "test_time": "2026-07-27 23:59:32",
   "model": "deepseek-v4-flash",
-  "item_count": 5,
-  "results": [
-    {
-      "seq": 3,
-      "match": false,
-      "deviation": "negative_real",
-      "explanation": "iFLYTEK参数中未涉及防眩钢化玻璃的厚度、硬度、透光率及雾度指标",
-      "suggestion": "建议与厂商确认能否提供该规格或增加防眩玻璃组件，或调整要求以适配iFLYTEK现有屏幕防护规格"
-    },
-    {
-      "seq": 4,
-      "match": false,
-      "deviation": "negative_real",
-      "explanation": "iFLYTEK采用电容触控技术，而非红外触控，技术路线不同",
-      "suggestion": "可强调电容触控更精准、多点触控性能更高（≥50点），若客户坚持红外触控则需协调替换方案"
-    },
-    {
-      "seq": 5,
-      "match": false,
-      "deviation": "negative_real",
-      "explanation": "iFLYTEK摄像头对角视场角为135°，不满足≥145°要求",
-      "suggestion": "建议与客户沟通135°实际覆盖范围是否可接受，或寻找可提供更大视场角的机型"
-    },
-    {
-      "seq": 9,
-      "match": false,
-      "deviation": "negative_real",
-      "explanation": "iFLYTEK Type-C仅标注支持全功能PD充电，未明确支持HDMI输入、调用内置外设及反向触控",
-      "suggestion": "需向厂商确认Type-C是否具备视频输入及扩展能力，若不支持则需调整接口要求或增加转换配件"
-    },
-    {
-      "seq": 12,
-      "match": false,
-      "deviation": "negative_real",
-      "explanation": "iFLYTEK产品参数中无温湿度物联传感器描述",
-      "suggestion": "建议协商外置传感器模块或取消该要求，若非必需可引导客户关注iFLYTEK已具备的AI教学功能"
-    }
-  ]
+  "prompt": "You are a bidding parameter analysis expert. Judge whether the following bidding requirement and iFLYTEK product parameter refer to the same capability.\n\n[Bidding Requirement]\nBuilt-in camera >= 48MP, horizontal FOV >= 120 degrees\n\n[iFLYTEK Parameter]\nBuilt-in 48MP ultra-wide-angle camera, diagonal FOV >= 135 degrees, horizontal FOV >= 120 degrees\n\nReturn pure JSON only (no markdown code block):\n{\n  \"match\": true or false,\n  \"deviation\": \"positive\" or \"negative_wording\" or \"negative_real\",\n  \"explanation\": \"one sentence explanation\"\n}",
+  "result": {
+    "match": true,
+    "deviation": "positive",
+    "explanation": "The iFLYTEK parameter meets or exceeds both the 48MP requirement and the horizontal FOV >= 120° requirement."
+  }
 }

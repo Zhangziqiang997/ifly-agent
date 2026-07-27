@@ -68,6 +68,8 @@
         }
         .slide-tech.template-header-page .arch-wrap { padding: 20px; }
         .slide-tech.template-header-page .arch-wrap img { max-height: 640px; }
+        .slide-tech.template-header-page .arch-wrap.arch-wrap-fig4 { padding: 8px; }
+        .slide-tech.template-header-page .arch-wrap.arch-wrap-fig4 img { max-height: 700px; }
 
         /* ===== 演示模式：一次一页 + 键盘翻页 + 自适应缩放 ===== */
         body.present {
@@ -167,6 +169,40 @@
             border: 1.5px solid rgba(22,139,234,0.28);
             color: var(--brand-blue-dark); font-size: 28px; font-weight: 700;
             letter-spacing: 0.08em;
+        }
+        .cover-team {
+            position: absolute;
+            top: 304px; right: 148px;
+            width: 340px;
+            padding: 34px 34px 30px;
+            border: 1.5px solid rgba(22,139,234,0.22);
+            border-radius: 24px;
+            background: rgba(255,255,255,0.78);
+            box-shadow: 0 16px 44px rgba(22,139,234,0.10);
+        }
+        .cover-team-label {
+            color: var(--brand-blue-dark);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            margin-bottom: 12px;
+        }
+        .cover-team-leader {
+            color: var(--ink);
+            font-size: 28px;
+            font-weight: 800;
+            line-height: 1.2;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+        }
+        .cover-team-members {
+            display: grid;
+            gap: 12px;
+            color: #334155;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.25;
         }
 
         /* ---------- P2 Demo ---------- */
@@ -492,6 +528,19 @@
         </div>
 
         <div class="team-line">展翼4班 · 第2组</div>
+        <div class="cover-team" aria-label="团队名单">
+            <div class="cover-team-label">组长</div>
+            <div class="cover-team-leader">张子强</div>
+            <div class="cover-team-label">组员</div>
+            <div class="cover-team-members">
+                <div>赵书进</div>
+                <div>陈媛媛</div>
+                <div>李奖</div>
+                <div>王尉丞</div>
+                <div>覃宝洋</div>
+                <div>许文卓</div>
+            </div>
+        </div>
 
     </div>
 
@@ -511,19 +560,16 @@
                 <div class="edu-name">招标</div>
                 <div class="edu-desc">学校 / 政府要采购设备，发布招标公告，列出一整套技术参数要求。</div>
             </div>
-            <div class="edu-arrow">→</div>
             <div class="edu-step">
                 <div class="edu-no">2</div>
                 <div class="edu-name">投标</div>
                 <div class="edu-desc">多家厂商竞争，满足参数就得分，不满足就扣分，碰到 ★ 废标项直接出局。</div>
             </div>
-            <div class="edu-arrow">→</div>
             <div class="edu-step hot">
                 <div class="edu-no">3</div>
                 <div class="edu-name">控标</div>
                 <div class="edu-desc">有厂商把参数「量身定做」成自家独有规格，别家根本满足不了，被挡在门外。</div>
             </div>
-            <div class="edu-arrow">→</div>
             <div class="edu-step">
                 <div class="edu-no">4</div>
                 <div class="edu-name">质疑</div>
@@ -781,8 +827,8 @@
             <div class="sec-sub">能用程序算清的，绝不交给大模型 — 又快、又省、又可解释</div>
         </div>
 
-        <div class="arch-wrap">
-            <img src="ai-contest-flow-diagram.png" alt="招标文件输入、三层判定引擎与多维度评估建议的技术流程图">
+        <div class="arch-wrap arch-wrap-fig4">
+            <img src="fig4.png" alt="输入与解析、数值比对、控标识别、AI语义精判和输出与决策的三层对比架构图">
         </div>
     </div>
 
@@ -792,7 +838,7 @@
         <div class="page-tag">05 · 功能规格书</div>
         <div class="sec-head">
             <div class="doc-badge">05 SPEC</div>
-            <div class="sec-title">从招标 JSON 到<span class="grad-text">可验收的分析结果</span></div>
+            <div class="sec-title"><span class="grad-text">可验收的分析结果</span></div>
         </div>
 
         <div class="spec-project-meta">
